@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.findtech.threePomelos.mydevices.activity.RepairActivity">
+
+    <RelativeLayout
+        android:id="@+id/layout_bac_repair"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y254"
+        android:background="@color/text_pink">
+        <ImageView
+            android:layout_width="@dimen/x210"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y50"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pic_repair"/>
+
+    </RelativeLayout>
+
+   <View
+       android:id="@+id/btn_repair_repair"
+       android:layout_width="@dimen/x155"
+       android:layout_height="@dimen/y45"
+       android:layout_centerHorizontal="true"
+       android:layout_below="@+id/layout_bac_repair"
+       android:layout_marginTop="@dimen/y60"
+       android:background="@drawable/btn_repair_back"/>
+    <TextView
+        android:id="@+id/text_state_repair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repair"
+        android:layout_alignTop="@+id/btn_repair_repair"
+        android:layout_marginTop="@dimen/y11"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size"
+     />
+
+
+</RelativeLayout>

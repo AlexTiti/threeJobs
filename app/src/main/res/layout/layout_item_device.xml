@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relayout_pagement"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/y7"
+    android:paddingBottom="@dimen/y4"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_cartype"
+        android:layout_width="@dimen/x60"
+        android:layout_height="@dimen/x60"
+        android:layout_marginBottom="@dimen/y3"
+        android:layout_marginLeft="@dimen/x20"/>
+
+    <TextView
+        android:id="@+id/text_name_bluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/image_cartype"
+        android:layout_marginLeft="@dimen/x17"
+        android:layout_marginTop="@dimen/y3"
+        android:textColor="@color/text_black_color"
+        android:textSize="@dimen/text_size"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:text="A"/>
+
+    <TextView
+        android:id="@+id/text_state_bluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_name_bluetooth"
+        android:layout_below="@+id/text_name_bluetooth"
+        android:text="A"
+        android:layout_marginTop="@dimen/y1"
+        />
+    
+    <ImageView
+        android:id="@+id/image_go"
+        android:layout_width="@dimen/x6"
+        android:layout_height="@dimen/y10"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x16"
+   android:src="@mipmap/personal_arrowright_icon"
+        android:layout_centerVertical="true"/>
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/x1"-->
+       <!--android:layout_below="@+id/image_cartype"-->
+        <!--android:layout_marginTop="@dimen/y7"-->
+        <!--android:layout_alignLeft="@+id/image_cartype"-->
+        <!--android:layout_alignRight="@+id/image_go"-->
+        <!--android:background="@color/six_e"></View>-->
+
+
+</RelativeLayout>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="@dimen/x25"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/y30"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@color/six_e"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_black_color"
+            android:text="@string/devices_link_notice"
+            android:textSize="@dimen/text_size" />
+
+        <View
+            android:layout_width="@dimen/x25"
+            android:layout_height="match_parent"></View>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/image_bluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/hand_bar" />
+
+            <ImageView
+                android:id="@+id/image_gif_bluetooth"
+                android:layout_width="@dimen/x8"
+                android:layout_height="@dimen/x8"
+             android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                 />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.3"
+        android:gravity="center"
+        android:background="@color/six_e"
+        android:paddingRight="@dimen/x30"
+        android:paddingLeft="@dimen/x25"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_black_color"
+            android:text="@string/open_buluetooth"
+            android:textSize="@dimen/text_size" />
+
+        <View
+            android:layout_width="@dimen/x25"
+            android:layout_height="match_parent"></View>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.findtech.threePomelos.view.MyAlarmView
+                android:id="@+id/myAlarmview"
+                android:layout_width="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x79"
+
+
+                />
+
+            <ImageView
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/x80"
+                android:layout_centerHorizontal="true"
+               android:scaleType="centerCrop"
+                android:src="@drawable/nexus"
+                android:layout_alignParentBottom="true"
+              />
+
+
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title_blue_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:layout_marginLeft="@dimen/y10"
+        android:layout_marginBottom="@dimen/y5"
+        android:text="@string/scan_device"/>
+
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="3">
+
+        <RelativeLayout
+            android:id="@+id/linking_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/y13"
+            android:visibility="gone"
+
+            >
+
+            <TextView
+                android:id="@+id/text_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/text_size"
+                android:layout_marginTop="@dimen/y10"
+                android:text="1"/>
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/text_size"
+                android:layout_toRightOf="@+id/text_position"
+                android:layout_marginLeft="@dimen/y13"
+                android:layout_centerVertical="true"
+                android:text="1"/>
+
+            <TextView
+                android:id="@+id/text_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x16"
+                android:textColor="@color/text_green"
+                android:textSize="@dimen/text_size_login"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/y15"
+                android:gravity="center"
+                android:text="@string/view_device"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#f0f0f0"
+                android:layout_below="@+id/text_position"
+                android:layout_marginTop="@dimen/y10"
+                android:layout_alignLeft="@+id/text_name"
+                android:layout_alignRight="@+id/text_state"
+                ></View>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_blue_link"
+            android:layout_below="@+id/linking_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y30">
+            </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/text_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y15"
+            android:layout_below="@+id/recycle_blue_link"
+            android:gravity="center"
+            android:text="AAAAA"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/hint_text"
+            />
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

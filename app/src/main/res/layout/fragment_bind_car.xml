@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/bind_car"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bind_car_button"
+        android:gravity="center"
+        android:text="绑定三个柚子推车"
+        android:textColor="@color/bind_car_red"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/no_bind_car"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/bind_car"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#00000000"
+        android:text="暂不绑定"
+        android:textColor="@color/text_color_btn" />
+
+</RelativeLayout>

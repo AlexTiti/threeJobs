@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:visibility="visible"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"/>
+
+        <EditText
+            android:id="@+id/input_data"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:background="@drawable/input_name_dialog_editview"
+            android:hint="@string/baby_niName"
+            android:textColorHint="@color/text_color_hint"
+            android:textColor="@color/text_color_input"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/show_bind"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:background="#00000000"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/show_notify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/text_color"
+            android:background="#00000000"
+            android:visibility="gone"/>
+
+        <include layout="@layout/select_baby_sex_dialog"
+            android:id="@+id/select_sex_dialog"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="25dp"
+            android:background="#d9d9d9" />
+
+        <LinearLayout
+            android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:id="@+id/negativeButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:gravity="center"
+                android:text="cancel"
+                android:textColor="#999999"/>
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#d9d9d9" />
+
+            <Button
+                android:id="@+id/positiveButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:gravity="center"
+                android:text="ok"
+                android:textColor="@color/text_pink"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

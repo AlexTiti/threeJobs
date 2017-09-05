@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:DoubleWaveView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/floatviewbac"
+    android:gravity="center">
+
+    <com.findtech.threePomelos.view.DoubleWaveView
+        android:id="@+id/waveView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        DoubleWaveView:speedOne="2"
+        DoubleWaveView:speedTwo="1"
+        DoubleWaveView:peakValue="5dp"
+        DoubleWaveView:waveHeight="25dp"
+        android:layout_margin="1dp"
+        android:layout_centerInParent="true"
+        DoubleWaveView:waveColor="@color/white"
+        DoubleWaveView:waveColorTow="@color/white"
+
+        />
+
+
+</RelativeLayout>

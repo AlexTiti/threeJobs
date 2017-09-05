@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/id_rl_height_bar_char" >
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/custom_actionbar"
+        android:visibility="visible"/>
+    <LinearLayout
+        android:id="@+id/no_data_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+
+            android:textSize="18sp"
+            android:textColor="@color/text_color_input"/>
+        </LinearLayout>
+    <!--android:text="没有宝宝的身高，可以手动添加哦！"-->
+
+</RelativeLayout>

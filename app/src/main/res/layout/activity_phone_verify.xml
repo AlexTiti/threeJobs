@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.findtech.threePomelos.login.PhoneVerifyActivity">
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="@dimen/x270"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_below="@id/custom_actionbar">
+
+        <EditText
+            android:id="@+id/input_num"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_phone_text"
+            android:textColorHint="@color/text_color_hint"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@drawable/login_edit_bac"
+            android:paddingLeft="15dp"
+            android:textSize="@dimen/text_size_login"
+            android:phoneNumber="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/y10"
+            android:orientation="horizontal"
+            android:background="@drawable/login_edit_bac"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/identify_num"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.8"
+                android:paddingLeft="15dp"
+                android:background="@null"
+                android:hint="@string/hint_identify_text"
+                android:textColorHint="@color/text_color_hint"
+                android:imeOptions="actionGo"
+                android:phoneNumber="true"
+                android:textSize="@dimen/text_size_login"/>
+
+            <TextView
+                android:id="@+id/send_identify"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.2"
+                android:layout_marginLeft="@dimen/y5"
+                android:layout_marginRight="@dimen/y5"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/login_button_selector"
+                android:text="@string/identify"
+                android:textColor="@color/white"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/custom_actionbar"
+            android:background="@drawable/login_edit_bac"
+            android:layout_marginTop="@dimen/y10"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.8"
+                android:background="@null"
+                android:hint="@string/hint_set_password_text"
+                android:paddingLeft="15dp"
+                android:textColorHint="@color/text_color_hint"
+                android:textSize="@dimen/text_size_login"
+                android:inputType="textPassword" />
+
+            <RelativeLayout
+                android:id="@+id/is_show_password"
+                android:layout_width="0dp"
+                android:layout_marginRight="@dimen/x5"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2">
+
+                <ImageView
+                    android:id="@+id/hide_password"
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/password_show_nor"
+                    android:visibility="visible"/>
+                <ImageView
+                    android:id="@+id/show_password"
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/password_show_pre"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/login_button_selector"
+            android:text="@string/next_step"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/y90"
+            />
+
+    </LinearLayout>
+    
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="autoupdatesdk-release-">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/autoupdatesdk-release/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/autoupdatesdk-release/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

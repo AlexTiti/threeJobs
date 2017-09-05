@@ -1,0 +1,176 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/btn_white_down"
+    android:orientation="vertical"
+  >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y115"
+        android:background="@color/text_pink">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_baby_info"
+            android:layout_width="@dimen/y60"
+            android:layout_height="@dimen/y60"
+            android:layout_marginTop="@dimen/y10"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/page_back"
+            android:padding="1dp"
+            android:scaleType="centerCrop"></de.hdodenhof.circleimageview.CircleImageView>
+
+        <LinearLayout
+            android:id="@+id/input_name"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y30"
+            android:layout_below="@id/image_baby_info"
+            android:layout_marginTop="@dimen/y3"
+            android:gravity="center"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/baby_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/baby_niName"
+                android:singleLine="true"
+                android:maxLength="15"
+                android:ellipsize="end"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+            
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/personal_nameedit_icon" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/mileage_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y50"
+        android:background="@color/text_pink"
+        android:orientation="horizontal"
+        android:weightSum="0.9">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/white_20_alpha"
+            android:padding="@dimen/y3"
+            android:gravity="center"
+            android:layout_weight="0.3">
+
+            <TextView
+                android:id="@+id/mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/km_today"
+                android:textSize="12sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/today_mileage_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mileage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/y5"
+                android:text="1.5km"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white_50_alpha"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/white_20_alpha"
+            android:gravity="center"
+            android:padding="@dimen/y3"
+            android:layout_weight="0.3">
+
+            <TextView
+                android:id="@+id/speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                android:text="@string/averger_speedinfo"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/average_speed_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/speed"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/y5"
+                android:textSize="@dimen/text_size"
+                android:text="3km/h"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white_50_alpha"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/white_20_alpha"
+            android:gravity="center"
+            android:layout_weight="0.3">
+
+            <TextView
+                android:id="@+id/total_mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                android:text="@string/km_total"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/total_mileage_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/total_mileage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/y5"
+                android:textSize="@dimen/text_size"
+                android:text="25km"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/baby_info_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
+
+    </LinearLayout>
+
+</LinearLayout>

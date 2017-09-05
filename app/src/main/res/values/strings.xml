@@ -1,0 +1,464 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Three dad Parenting</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="hint_username_text">Please enter user number</string>
+    <string name="hint_birthdate">Baby birthday</string>
+    <string name="hint_identify_text">Please enter identify</string>
+    <string name="hint_password_text">Please enter password</string>
+    <string name="hint_name">Baby Name</string>
+    <string name="hint_birthday">Birthday</string>
+    <string name="hint_sex">Sex</string>
+    <string name="hint_relationship">What is relationship with my baby</string>
+    <string name="double_click_exit">Press again to exit！</string>
+    <string name="equipment_linked">Connected Device</string>
+
+    <!--forget password -->
+    <string name="hint_register_phone_text">Please enter your register phone number</string>
+    <string name="hint_set_password_text">Please enter password</string>
+
+    <!--Toolbar Title -->
+    <string name="person_info">Person Info</string>
+    <string name="phone_verify">Register</string>
+
+    <string name="next_step">Next step</string>
+    <string name="skip">Skip</string>
+    <string name="login">Login</string>
+    <string name="register">New User Registration</string>
+    <string name="identify">Identify</string>
+    <string name="logout">Logout</string>
+    <string name="find_password">Find Password</string>
+    <string name="save">Save</string>
+
+    <string name="title_activity_set_baby_info">SetBabyInfoActivity</string>
+    <string name="title_activity_device_control">DeviceControlActivity</string>
+    <string name="title_activity_device_scan">DeviceScanActivity</string>
+    <string name="title_activity_set_password">Set password</string>
+    <string name="title_activity_baby_health_tip">Baby Health Tip</string>
+
+    <string name="title_activity_childcare_points">Childcare Points</string>
+    <string name="title_activity_dp_sign">DP Sign</string>
+    <string name="title_activity_science_tip">Science Tip</string>
+    <string name="title_activity_grown_concern">Grown Concern</string>
+    <string name="title_activity_parental_interaction">Parental Interaction</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="weight_info_text"> kg</string>
+    <string name="height_info_text"> cm</string>
+    <string name="milleage_info_text"> km</string>
+    <string name="main_tab_height">HEIGHT</string>
+    <string name="main_tab_weight">WEIGHT</string>
+    <string name="main_tab_mileage">MILEAGE</string>
+
+    <!--Warning -->
+    <string name="input_user_name">Please input user name!</string>
+    <string name="input_phone_number">Please input phone number!</string>
+    <string name="input_legal_phone_number">Please input correct phone number!</string>
+    <string name="input_password">Please input password!</string>
+    <string name="input_identify">Please enter identify</string>
+
+    <!-- more action -->
+
+    <string name="my_device">My Device</string>
+    <string name="my_info">My Info</string>
+    <string name="my_service">Service</string>
+    <string name="my_share">Share</string>
+
+    <!--Bluetooth -->
+
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="label_data">Data:</string>
+    <string name="label_device_address">Device address:</string>
+    <string name="label_state">State:</string>
+    <string name="no_data">No data</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="title_devices">BLE Device Scan</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">Unknown service</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+    <string name="menu_fresh">Fresh</string>
+    <string name="title_activity_user_weight_info">UserWeightInfo</string>
+    <string name="title_activity_test">test</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="weight_line_chart">weight line chart</string>
+    <string name="mileage_line_chart">mileage line chart</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_phone_verify">PhoneVerifyActivity</string>
+
+    <!--PicChooserDialog-->
+    <string name="pic_chooser_title">Choose A pic</string>
+    <string name="pic_chooser_gallery">Gallery</string>
+    <string name="pic_chooser_camera">Camera</string>
+    <string name="pic_chooser_cancel">Cancel</string>
+
+
+    <string name="title_activity_forget_password">Find password</string>
+    <string name="title_activity_input_identify">Input identify</string>
+
+    <!--baby Info-->
+    <string name="label_boy">Cool Prince</string>
+    <string name="label_girl">Lovely Princess</string>
+    <string name="title_baby_sex_info">Baby Sex</string>
+    <string name="title_baby_birthday_info">Baby Birthday</string>
+    <string name="label_baby_birthday">Baby Birthday</string>
+    <string name="btn_baby_datepicker_cancel">Cancel</string>
+    <string name="btn_baby_datepicker_confirm">Confirm</string>
+    <string name="title_activity_input_weight">InputWeightActivity</string>
+    <string name="title_activity_input_height">InputHeightActivity</string>
+    <string name="title_activity_baby_info">BabyInfoActivity</string>
+    <string name="title_activity_get_user_protocol">User Protocol</string>
+
+    <string name="xliff_weight_num"><xliff:g id="weight">%1$3s</xliff:g></string>
+    <string name="xliff_height_num"><xliff:g id="height">%1$3s</xliff:g></string>
+    <string name="xliff_total_mileage_num"><xliff:g id="total_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_today_mileage_num"><xliff:g id="today_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_average_speed_num"><xliff:g id="average_speed">%1$3s</xliff:g> km/h</string>
+    <string name="xliff_total_mileage_fragment_num">Total mileage : <xliff:g id="total_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_today_mileage_fragment_num">Mileage today : <xliff:g id="today_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_average_speed_fragment_num">Average speed : <xliff:g id="average_speed">%1$3s</xliff:g> km/h</string>
+    <string name="xliff_height_health_state">Normal height: <xliff:g id="height_health">%1$3s</xliff:g> cm</string>
+    <string name="xliff_weight_health_state">Normal weight: <xliff:g id="weight_health">%1$3s</xliff:g> kg</string>
+    <string name="xliff_standard_height_num">Standard : <xliff:g id="height">%1$3s</xliff:g> cm</string>
+    <string name="xliff_standard_weight_num">Reference value : <xliff:g id="weight">%1$3s</xliff:g> kg</string>
+    <string name="xliff_weight_service">Baby weight<xliff:g id="weight_service">%1$3s</xliff:g> kg,save？</string>
+
+    <!--date label-->
+    <string name="label_date_year">yrs</string>
+    <string name="label_date__month">mos</string>
+    <string name="label_date_day">day</string>
+
+    <string name="text_popwindow_menu_my_device">My Device</string>
+    <string name="text_activity_title_device">My Device</string>
+    <string name="app_device_text_bind">Bind Car</string>
+    <string name="app_device_text_unbind">Unbind Car</string>
+    <string name="app_device_text_check_firmware_version">Firmware version</string>
+    <string name="app_device_text_current_electric">Current Electric</string>
+
+    <string name="text_popwindow_menu_app_about">About</string>
+    <string name="text_activity_title_app_about">About</string>
+    <string name="app_about_text_check_version">Check Update</string>
+    <string name="app_about_text_user_agreement">User Agreement</string>
+    <string name="app_about_text_log_out">Log out</string>
+    <string name="title_activity_tag_image_edit">TagImageEditActivity</string>
+
+    <string name="text_activity_title_tag_image_edit">Edit Picture</string>
+    <string name="input_tagimage_text">Input Tag Text</string>
+    <string name="btn_tagimage_save">OK</string>
+    <string name="title_activity_tagimage_show">Add Tag View</string>
+    <string name="btn_tagimage_show_next">Next</string>
+    <string name="btn_tagimage_show_share">Share</string>
+    <string name="btn_tagimage_show_save">Save</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="text_toast_null_text">Please Input Text!</string>
+    <string name="text_tag_image">Water Print</string>
+
+    <string name="text_tag_babydata_text1">Baby:</string>
+    <string name="text_tag_babydata_text_day">Day</string>
+    <string name="text_tag_babydata_text_days">Days</string>
+
+    <string name="text_toast_pic_had_been_saved">Save Already！</string>
+    <string name="text_toast_pic_saved_successfully">Saved:</string>
+    <string name="text_toast_pic_saved_failed">Saved Fail!</string>
+    <string name="nodata">No Data</string>
+
+    <string name="text_tag_input_dalog_title">Input Tag Text:</string>
+    <string name="tag_edit_empty_toast_txt">Tag can\'t be null!</string>
+    <string name="tag_edit_pic_handle_progress_txt">Undergonging!</string>
+    <string name="tag_share_pic_handle_progress_txt">Undergoning Hard！</string>
+
+    <string name="tag_edit_dialog_ok_button_txt">Ok</string>
+    <string name="tag_edit_dialog_cancel_button_txt">Cancel</string>
+    <string name="text_toast_no_storage_permission">No Read Storage Permission！</string>
+    <string name="tag_delete_dialog_text">Delete this tag?</string>
+    <string name="tag_delete_dialog_ok">Ok</string>
+    <string name="tag_delete_dialog_cancel">Cancel</string>
+    <string name="title_activity_version_update">VersionUpdateActivity</string>
+
+    <string name="title_dialog_firmware_update">Firmware Update</string>
+    <string name="message_dialog_firmware_update">There is a new firmware version,need to update?</string>
+    <string name="message_dialog_firmware_no_update">It\'s already the latest version in your device,no need to update!</string>
+
+    <string name="ok_button_dialog_firmware_update">Ok</string>
+    <string name="cancel_button_dialog_firmware_update">Cancel</string>
+    <string name="text_activity_firmware_update_string">Firmware is Updating </string>
+    <string name="text_activity_firmware_update_finished_string">Updated Successfully! </string>
+
+
+    <string name="text_share_hegiht_description_text">my little <xliff:g>%s</xliff:g> has been <xliff:g>%s</xliff:g>cm!</string>
+    <string name="text_share_wegiht_description_text">my little <xliff:g>%s</xliff:g> has been <xliff:g>%s</xliff:g>kg!</string>
+    <string name="text_age_description_text">我的<xliff:g>%s</xliff:g>已经<xliff:g>%s</xliff:g>啦！</string>
+    <string name="text_share_info_from_app">From 3Polomes Info</string>
+
+    <!--<string name="mileage_tips_fragment_more_than_10">您的推车出行里程为达人级哦，继续保持吧！天气好，推着宝宝亲近自然，对宝宝的身心发育很有益处哦！</string>-->
+    <!--<string name="mileage_tips_fragment_more_than_5">您的推车出行里程良好哦，再接再厉吧！宝宝需要保持稳定的户外出行哦，科学出行能让宝宝获得更好的成长哦！</string>-->
+    <!--<string name="mileage_tips_fragment_less_than_5">您的推车出行里程偏低，要加油啦！注意宝宝的科学出行哦，适当的户外出行对宝宝的成长发育非常重要哦！</string>-->
+    <string name="text_datepick_show_errortime_set">Date cannot be later than today！</string>
+    <string name="text_share_no_data_description_text">There is no baby data！</string>
+    <string name="music_title">Music Classify</string>
+    <string name="baby_like">Baby Like</string>
+    <string name="local_music">Local Music</string>
+    <string name="host">Popular</string>
+    <string name="recent_play">   Recent play    </string>
+    <string name="story">Child Story</string>
+    <string name="rhyme">Rhyme</string>
+    <string name="poetry">Poetry</string>
+    <string name="three_character">Three Chara</string>
+    <string name="english">Kid English</string>
+    <string name="car_music">Car Music</string>
+    <string name="music_classify">Music Classify</string>
+    <string name="nosd">No SD card available！</string>
+    <string name="toolbar_health">Health Tips</string>
+    <string name="toolbar_music">Music Player</string>
+    <string name="toolbar_user">Personal Homepage</string>
+    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
+    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
+    <string name="essentials">Essentials</string>
+    <string name="signs">Develop Signs</string>
+    <string name="concern">Grow Concern</string>
+    <string name="sciencetips">Science Tips</string>
+    <string name="interaction">Interaction</string>
+    <string name="about_us">About Us</string>
+    <string name="day">Date</string>
+    <string name="finish">Finish</string>
+    <string name="height">Height:<xliff:g id="height">%1$s</xliff:g> cm</string>
+    <string name="height_text">Height</string>
+    <string name="input_day">Input Day</string>
+    <string name="approve">User Approve</string>
+    <string name="update">Update</string>
+    <string name="faceback">User feedback</string>
+    <string name="weight">Weight:  <xliff:g id="weight">%1$3s</xliff:g> kg</string>
+    <string name="weight_text">Weight</string>
+    <string name="loop_play">Loop Play</string>
+    <string name="noFoundUser">No Found User</string>
+    <string name="random_play">Random Play</string>
+    <string name="singles_play">Single Play</string>
+    <string name="smsCodeError"> Invalid SMS authentication code</string>
+    <string name="text_share_description_text">My Baby !</string>
+    <string name="add_car">Add Car</string>
+    <string name="network">Network Unavailable \n Click refresh</string>
+    <string name="network_babylike">All the songs for the baby are here</string>
+    <string name="new_height_num">Latest height </string>
+    <string name="network_recentplay">The latest songs will be here</string>
+    <string name="devices_link_notice">Press the power button to start the device</string>
+    <string name="open_buluetooth">Turn on Bluetooth of phone</string>
+    <string name="link_buluetooth">Connection device </string>
+    <string name="link_notice">Please connect the cart first </string>
+    <string name="kcal">kcal</string>
+    <string name="kcal_today">Calories today </string>
+    <string name="kcal_total">Total calories</string>
+    <string name="km_today">Mileage today </string>
+    <string name="km_total">Total mileage </string>
+    <string name="device_state">Cart Condition </string>
+    <string name="device_running">No brakes </string>
+    <string name="device_isbrake">In the brakes </string>
+    <string name="electricity">Electricity <xliff:g id="ele"> %1$3s</xliff:g> </string>
+    <string name="close_device">SimJet Soft </string>
+    <string name="control_device">Cart Control </string>
+    <string name="control_device_light">Button backlight Regulation </string>
+    <string name="bind_now">Bind Now</string>
+    <string name="view_device">View Deviece</string>
+    <string name="repair">Repair</string>
+    <string name="ubound">Unbound </string>
+    <string name="averger_speed">Average Speed Today </string>
+    <string name="tempurature">Tempurature</string>
+    <string name="anti_theft"> One Key Anti-theft</string>
+    <string name="up_date">Firmware Update</string>
+    <string name="repair_done">Repair Done</string>
+    <string name="back">Back</string>
+    <string name="feedback_notice">Thank you for your valuable comments, we will improve as soon as possible!</string>
+    <string name="send">Send</string>
+    <string name="weight_text_input">Please select your weight</string>
+    <string name="weight_text_notice">In order to accurately calculate your calorie value!</string>
+    <string name="weight_text_hint">please enter a  weight : kg</string>
+    <string name="cancle">Cancle</string>
+    <string name="confirm">Confirm</string>
+    <string name="name_change">Modify device name</string>
+    <string name="name_change_dialog">Give your cart a name</string>
+    <string name="device_linking">The cart is connected</string>
+    <string name="device_nolink">Trolley not connected</string>
+    <string name="getMessage_fromNet">In loading, please wait a moment...</string>
+    <string name="sendMessage_">Sending, please later</string>
+    <string name="upDateMessage_">Check version update, please wait a moment...</string>
+    <string name="upDateNew">The current version is already the latest version!</string>
+    <string name="data_exception">Data exception!</string>
+    <string name="net_exception">Network connection exception!</string>
+    <string name="playback_failed">Playback Failed!</string>
+    <string name="install_qq">Please install the QQ client!</string>
+    <string name="notice">Notice</string>
+    <string name="unbound_message">Please make sure that the release is unbound?</string>
+    <string name="unbound_success">Unbound Success</string>
+    <string name="close_message">Please make sure the power is off！</string>
+    <string name="name_not">Content cannot be empty!</string>
+    <string name="name_change_sucess">Modify successfully！</string>
+    <string name="data_update_sucess">Data synchronization successful！</string>
+    <string name="close_sucess">Shutdown successful !</string>
+    <string name="data_update">In data synchronization, please wait...</string>
+    <string name="pomoles_car">Pomoles Trolley</string>
+    <string name="install_wx">Please install the WeChat client!</string>
+    <string name="send_sucess">Send Success</string>
+    <string name="delete_data_failed">Failed to delete data!</string>
+    <string name="save_data_failed">Failed to save data!</string>
+    <string name="delete_confirm">Please make sure that this data is modified or deleted!</string>
+    <string name="delete">Delete</string>
+    <string name="delete_message">Deleting, please wait a moment...</string>
+    <string name="babay_height">Baby height</string>
+    <string name="baby_info">Baby Info</string>
+    <string name="save_message">Saving, please wait a moment...</string>
+    <string name="input_babay_height">Please enter baby height</string>
+    <string name="input_height">Please enter baby height</string>
+    <string name="blut_notice">You will not be able to search for carts without authorization!</string>
+    <string name="name_useless">User name is unavailable!</string>
+    <string name="login_notice">Please enter the correct user name or password!</string>
+    <string name="change_sd_mode">Switch to SD Mode</string>
+    <string name="change_bluetooth_mode">Switched to Bluetooth mode</string>
+    <string name="open_bluetooth_cancle">Canceling permissions will not make sure that the stroller data is correct</string>
+    <string name="set">Set</string>
+    <string name="open_bluetooth_message">Please open permissions to make sure the data is correct!</string>
+    <string name="not_open_message">The open permissions will not ensure that the stroller data is correct</string>
+    <string name="change">Change</string>
+    <string name="babay_weight">Baby Weight</string>
+    <string name="input_babay_weight">Please enter baby weight</string>
+    <string name="checkNumber_useless">Invalid SMS authentication code, which usually does not match or expires</string>
+    <string name="babay_sex">Is male or female.</string>
+    <string name="princeling">Prince</string>
+    <string name="princess">Princess</string>
+    <string name="regist_sucess">Successful registration!</string>
+    <string name="baby_birth_none">Baby birthday can\'t be empty!</string>
+    <string name="phone_number_useless">The cell phone number has been registered!</string>
+    <string name="pasw_empty">User name or password cannot be empty!</string>
+    <string name="registraing">In registration, please wait a moment...</string>
+    <string name="edit_nikename">Edit nickname</string>
+    <string name="baby_niName">Baby nickname</string>
+    <string name="update_success">Update Success</string>
+    <string name="code">Firmware version :<xliff:g id="ele"> %1$3s</xliff:g> </string>
+    <string name="baby">Baby</string>
+    <string name="input_time_height">Please fill in the time and height</string>
+    <string name="weight_message_confirm">Please confirm whether to add this baby weight</string>
+    <string name="input_time_weight"></string>
+    <string name="input_weight">Please fill in the time and weight</string>
+    <string name="pic_tag_love">Lovely</string>
+    <string name="pic_tag_praise">Praise</string>
+    <string name="edit_down">Edit complete</string>
+    <string name="sex_baby">Sex</string>
+    <string name="birth_baby">Birthday</string>
+    <string name="age_bany">Age</string>
+    <string name="address">Native place</string>
+    <string name="height_baby">Height</string>
+    <string name="weight_baby">Weight</string>
+    <string name="input_birth_baby">Please enter baby\'s birthday</string>
+    <string name="input_birth_notice">Enter your baby\'s birthday before you have age</string>
+    <string name="record_growth">Record Growth</string>
+    <string name="pic_tag_monther">Mom  great!</string>
+    <string name="height_text__">Height :</string>
+    <string name="weight_text__">Weight :</string>
+    <string name="pic_save">Save pictures to album</string>
+    <string name="update_failed">The upgrade failed. Check that the Bluetooth device is properly connected</string>
+    <string name="updateing">Please update later...</string>
+    <string name="down_loading">Download, please wait a moment...</string>
+    <string name="blue_tooth_update">Please select the  3POMELOS_A3  device！</string>
+    <string name="story_notice">The plot of a fairy tale allows children to free their imaginations and help children build the right world outlook</string>
+    <string name="rhyme_notice">In the singing of children\'s songs, beautiful melody, harmonious rhythm and sincere emotion can give children enjoyment and emotion</string>
+    <string name="poetry_notice">The time span of the classical poetry is long, the content is rich, the achievement and influence are great, and it contains ancient prose and traditional culture knowledge, which makes it become one of the most important parts of cultural study</string>
+    <string name="three_character_notice">A little education \n two Xiao morals \n three common sense \n four Xiao ancient books \n five Xiao history \n six Xiao diligence</string>
+    <string name="english_notice">Enlightenment music can develop children\'s listening ability, pronunciation ability and speech sense, which can lay the foundation for contact semantics and continuous learning</string>
+    <string name="car_music_notice">Spread the favorite music onto the cart and play the children\'s favorite music anytime, anywhere</string>
+    <string name="bind_success">Bind Successfully</string>
+    <string name="input_baby_info">Please enter the baby details!</string>
+    <string name="input_sex_baby">Please enter baby gender</string>
+    <string name="averger_speedinfo">Average Speed </string>
+    <string name="electricity_0">Electricity</string>
+    <string name="essentials_op">at different times</string>
+    <string name="essentials_t">Babies need different care </string>
+    <string name="title_activity_dp_sign_t">Learn to look at the baby to </string>
+    <string name="title_activity_dp_sign_b">take care of him better</string>
+    <string name="title_activity_science_tip_t">We are here to provide you</string>
+    <string name="title_activity_science_tip_b"> with the most professional parenting guidance</string>
+    <string name="title_activity_grown_concern_t">Take care of the baby,</string>
+    <string name="title_activity_grown_concern_b"> the point is here</string>
+    <string name="title_activity_parental_interaction_t">Playing helps baby </string>
+    <string name="title_activity_parental_interaction_b">grow, too</string>
+    <string name="just_do">Immediate experience</string>
+    <string name="detail_car">Cart details</string>
+    <string name="listen_tegether">Everyone is listening</string>
+    <string name="checkNum_send">The authentication code has been sent</string>
+    <string name="checkNum_notice">Verification code has been sent, valid for 2 minutes Oh!</string>
+    <string name="logout_confirm">Confirm logout login?</string>
+    <string name="logout_success">Quit successfully</string>
+    <string name="connecting">In connection, please wait a moment...</string>
+    <string name="connecting_fail">Connection failed!</string>
+    <string name="getMessage_fromNet_fail">Load failed!</string>
+    <string name="sendMessage_fail">Send failed!</string>
+    <string name="down_loading_fail">Download failed!</string>
+    <string name="data_update_fail">Data synchronization failed. Please check the power supply for the cart or sleep state！！</string>
+    <string name="repairing">In repair, please wait a moment...</string>
+    <string name="repair_fail">Repair failed</string>
+    <string name="run_action_notice">Remove your hands from the sensor area and re operate!</string>
+    <string name="hint_phone_text">Please enter your phone number</string>
+    <string name="title_activity_forget_password_success">Modify successfully</string>
+    <string name="drop_refresh">Drop refresh</string>
+    <string name="action_more">Action More</string>
+    <string name="checkNumber_send_fail">Send SMS messages beyond the limit of five per day</string>
+    <string name="input_address_baby"></string>
+    <string name="intelligent_brake">Intelligent brake</string>
+    <string name="device_close">Closed</string>
+    <string name="login_empty_notice">Account or password cannot be empty!</string>
+    <string name="loging_state">Login, please wait a moment...</string>
+    <string name="instructions">Instructions</string>
+    <string name="common_problem">Common problem</string>
+    <string name="instruc">Instructions</string>
+    <string name="loging_click">user agreement</string>
+    <string name="loging_notice">Login agreement</string>
+    <string name="edit_done">Edit complete</string>
+    <string name="text_off">OFF</string>
+    <string name="text_on">ON</string>
+    <string name="delete_notice">Sure delete?</string>
+    <string name="label_baby_birthday_health">birthday_baby |</string>
+    <string name="weight_page">Weight | kg</string>
+    <string name="height_page">Height | cm</string>
+    <string name="health_notice">According to the age of your baby to provide you with</string>
+    <string name="label_date_week">week</string>
+    <string name="label_date_d">day</string>
+    <string name="page_tab1">HomePage</string>
+    <string name="page_tab2">Music</string>
+    <string name="page_tab3">Healthy</string>
+    <string name="page_tab4">Mine</string>
+    <string name="add_weight">Add Weight</string>
+    <string name="tips">Parenting tips</string>
+    <string name="text_health">Enter baby\'s birthday to provide you with parenting tips service!</string>
+    <string name="sd_notice">Check SD card, please</string>
+    <string name="wechat">WeChat</string>
+    <string name="friend_circle">Friends</string>
+    <string name="xinlang">Sina </string>
+    <string name="zidingyi">User-defined</string>
+    <string name="lab">Label</string>
+    <string name="save_error">The photograph was kept in error</string>
+    <string name="never_shou">No authorization</string>
+    <string name="network_local">The downloaded song will be stored here </string>
+    <string name="share_defail">Share failure</string>
+    <string name="share_qq">QQ share success ！</string>
+    <string name="share_wei_friend_suc">WeChat circle of friends to share success!</string>
+    <string name="share_wei_suc">WeChat shares success!</string>
+    <string name="share_xinl">Sina micro-blog share success!</string>
+    <string name="height_info"><xliff:g id="height_info">%1$s</xliff:g> cm</string>
+    <string name="weight_info"><xliff:g id="weight_info">%1$s</xliff:g> </string>
+    <string name="scan_device">Search device</string>
+
+
+</resources>

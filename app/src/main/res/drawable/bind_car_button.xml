@@ -1,0 +1,24 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 连框颜色值 -->
+    <item>
+        <shape>
+            <solid android:color="@color/bind_car_red" />
+            <corners android:radius="30dp" />
+
+        </shape>
+    </item>
+    <!-- 主体背景颜色值 -->
+    <item
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <shape>
+            <gradient
+                android:centerColor="@color/white"
+                android:endColor="@color/white"
+                android:startColor="@color/white" />
+            <corners android:radius="30dp" />
+        </shape>
+    </item>
+</layer-list>

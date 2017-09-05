@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/baby_data_tag_layout"
+    android:layout_width="@dimen/x100"
+    android:layout_height="@dimen/y90"
+    android:background="@drawable/iconbaby_info_bac"
+    >
+
+        <LinearLayout
+            android:id="@+id/baby_days_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y16"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_tag_babydata_text1"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/txt_baby_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="@dimen/text_size_small"  />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dp"
+                android:text="@string/text_tag_babydata_text_days"
+                android:textSize="@dimen/text_size_small"  />
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_iii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/baby_days_layout"
+        android:layout_alignLeft="@+id/baby_days_layout"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/y9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/height_text__"
+            android:textColor="@color/text_grey"/>
+
+
+        <TextView
+            android:id="@+id/tag_text_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            android:textColor="@color/text_pink"
+            android:textSize="@dimen/text_size_little" />
+
+    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_iii"
+                android:layout_alignLeft="@+id/baby_days_layout"
+                android:layout_marginTop="@dimen/y9">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weight_text__"
+                    android:textColor="@color/text_grey"/>
+
+                <TextView
+                    android:id="@+id/tag_text_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:textColor="@color/text_pink"
+                    android:textSize="@dimen/text_size_little" />
+            </LinearLayout>
+
+
+
+
+</RelativeLayout>

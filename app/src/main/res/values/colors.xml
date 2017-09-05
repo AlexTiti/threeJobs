@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_red_80_color">#cdff6862</color>
+    <color name="bind_car_red">#f7453e</color>
+    <color name="red_color">#e60012</color>
+    <color name="grey_color">#333333</color>
+    <color name="white">#ffffff</color>
+    <color name="white_00_alpha">#00ffffff</color>
+    <color name="white_20_alpha">#33ffffff</color>
+    <color name="white_50_alpha">#7dffffff</color>
+    <color name="black_alpha">#44000000</color>
+    <color name="black_20_alpha">#33000000</color>
+    <color name="gray_background">#ededed</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="light_green">#d0f8ce</color>
+    <color name="green_primary">#43A047</color>
+    <color name="light_green_primary">#43A047</color>
+    <color name="edit_text_color">#ff7a70</color>
+    <color name="colorMidTransParent">#66000000</color>
+    <!--button-->
+    <color name="btn_register_color">#ff6862</color>
+    <color name="btn_cyan">#53d9d7</color>
+    <color name="btn_cyan_down">#22bfbd</color>
+    <color name="btn_white">#ffffff</color>
+    <color name="btn_white_down">#f4f4f4</color>
+    <!--text-->
+    <color name="text_color_btn">#888888</color>
+    <color name="text_color_hint">#bbbbbb</color>
+    <color name="text_color_input">#555555</color>
+    <color name="text_color">#000000</color>
+    <color name="home_text_black">#333333</color>
+    <color name="home_text_grey">#c3c7c9</color>
+    <color name="list_divider_color">#dddddd</color>
+    <color name="text_pink">#f47686</color>
+    <color name="text_grey">#666666</color>
+    <!--mydatepicker-->
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="board_line">#DDDDDD</color>
+    <color name="min_text">#bbbbbb</color>
+    <color name="midle_text">#999999</color>
+    <color name="max_text">#ff6862</color>
+
+    <!--pic chooser-->
+    <color name="text_red_color">#ff6862</color>
+    <color name="text_gray_color">#555555</color>
+    <color name="text_black_color">#333333</color>
+    <color name="dialog_background_color">#ededed</color>
+    <color name="update_version_activty_background">#53d9d7</color>
+
+    <!--<color name="share_background_color">#f47686</color>-->
+    <color name="black">#000</color>
+    <color name="divider_color">#aaaaaa</color>
+    <color name="divider_color_d5">#d5d5d5</color>
+    <color name="music_divider_color">#edf0f3</color>
+
+    <color name="music_divider_story">#9d3d2d</color>
+    <color name="music_divider_car">#bbafb3</color>
+    <color name="music_divider_poetry">#7c7c7c</color>
+    <color name="music_divider_rhyme">#3c5b79</color>
+    <color name="music_divider_english">#948f8b</color>
+    <color name="music_divider_three">#4b4e3b</color>
+    <color name="see">#00000000</color>
+    <color name="hint_text">#cccccc</color>
+    <color name="six_e">#eeeeee</color>
+    <color name="text_green">#37b559</color>
+    <color name="ececece">#ececec</color>
+
+    <color name="edit_text">#F58492</color>
+
+</resources>

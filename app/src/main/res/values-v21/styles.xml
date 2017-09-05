@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@style/AppBaseTheme">
+        <!-- 底部导航栏颜色
+        <item name="android:navigationBarColor">#4876FF</item>-->
+        <item name="colorPrimaryDark">@color/text_pink</item>
+        <item name="colorPrimary">@color/text_pink</item>
+
+    </style>
+
+    <style name="AppTheme_lantch" parent="@style/AppBaseTheme">
+
+        <item name="android:navigationBarColor">#00000000</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/dian</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="searchViewStyle">@style/MySearchViewStyle</item>
+    </style>
+
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+
+    </style>
+
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="CardView.Content" parent="android:Widget">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <!--开启时的颜色-->
+        <item name="colorControlActivated">@color/text_pink</item>
+        <!--关闭时的颜色-->
+        <item name="colorSwitchThumbNormal">@color/divider_color</item>
+        <!--关闭时的轨迹颜色取30%的颜色-->
+        <item name="android:colorForeground">@color/divider_color</item>
+
+
+    </style>
+    <style name="textStytle_SwitchCompat" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+
+</resources>

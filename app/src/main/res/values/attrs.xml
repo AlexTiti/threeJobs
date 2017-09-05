@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
+
+    <attr name="peakValue" format="dimension"/>
+    <attr name="waveColor" format="color" />
+    <attr name="waveColorTow" format="color" />
+    <attr name="speedOne" format="integer" />
+    <attr name="speedTwo" format="integer" />
+    <attr name="waveHeight" format="dimension" />
+
+    <declare-styleable name="DoubleWaveView">
+        <attr name="peakValue" />
+        <attr name="waveColor" />
+        <attr name="waveColorTow" />
+        <attr name="speedOne" />
+        <attr name="speedTwo" />
+        <attr name="waveHeight" />
+
+    </declare-styleable>
+
+</resources>

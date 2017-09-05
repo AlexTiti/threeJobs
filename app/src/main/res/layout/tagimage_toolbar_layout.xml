@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black_alpha"
+    android:gravity="center_vertical"
+    >
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="Three Grapefruit"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="right"
+        android:gravity="center_horizontal"
+        >
+
+        <Button
+            android:id="@+id/btn_tagimage_edit_next"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/red_button_selector"
+            android:text="@string/btn_tagimage_show_next"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:id="@+id/share_button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:gravity="right|center_vertical"
+
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <Button
+                android:id="@+id/btn_tagimage_text_share"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/red_button_selector"
+                android:text="@string/btn_tagimage_show_share"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/btn_tagimage_save"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/red_button_selector"
+                android:text="@string/btn_tagimage_show_save"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

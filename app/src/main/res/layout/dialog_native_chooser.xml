@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_myinfo_changenative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:gravity="bottom"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ly_myinfo_changenative_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dip"
+        android:layout_marginRight="0dip"
+        android:paddingBottom="2dp"
+        android:background="@drawable/bg_dialog_selector"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/board_line" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btn_myinfo_sure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dip"
+                android:text="确定"
+                android:background="@drawable/white_button_shapes"
+                android:textColor="@color/text_color_btn"
+                android:gravity="center"
+                android:textSize="20sp" />
+            <Button
+                android:id="@+id/btn_myinfo_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/white_button_shapes"
+                android:textColor="@color/text_color_btn"
+                android:text="取消"
+                android:gravity="center"
+                android:textSize="20sp" />
+        </RelativeLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/board_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="0dip"
+            android:layout_marginRight="0dip"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_vertical">
+            <com.findtech.threePomelos.view.datepicker.wheel.widget.views.WheelView
+                android:id="@+id/blank0"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                />
+            <com.findtech.threePomelos.view.datepicker.wheel.widget.views.WheelView
+                android:id="@+id/wv_province"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                />
+            <com.findtech.threePomelos.view.datepicker.wheel.widget.views.WheelView
+                android:id="@+id/wv_city"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                />
+            <com.findtech.threePomelos.view.datepicker.wheel.widget.views.WheelView
+                android:id="@+id/wv_county"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                />
+            <com.findtech.threePomelos.view.datepicker.wheel.widget.views.WheelView
+                android:id="@+id/blank1"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

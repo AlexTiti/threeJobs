@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/y13"
+    >
+
+    <TextView
+        android:id="@+id/text_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/text_size"
+        android:layout_marginTop="@dimen/y10"
+        android:text="1"/>
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/text_size"
+
+        android:layout_toRightOf="@+id/text_position"
+        android:layout_marginLeft="@dimen/y13"
+        android:layout_centerVertical="true"
+        android:text="1"/>
+
+
+    <TextView
+        android:id="@+id/text_state"
+        android:layout_width="@dimen/x52"
+        android:layout_height="@dimen/x17"
+        android:textColor="@color/text_pink"
+        android:textSize="@dimen/text_size_small"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/y15"
+        android:gravity="center"
+        android:background="@drawable/bluetooth_state_bg"
+        android:text="@string/bind_now"/>
+
+    <TextView
+        android:id="@+id/text_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x16"
+        android:textColor="@color/text_green"
+        android:textSize="@dimen/text_size_login"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/y15"
+        android:gravity="center"
+        android:text="@string/view_device"
+        android:visibility="gone"/>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#f0f0f0"
+        android:layout_below="@+id/text_position"
+        android:layout_marginTop="@dimen/y10"
+        android:layout_alignLeft="@+id/text_name"
+        android:layout_alignRight="@+id/text_state"
+        ></View>
+
+
+</RelativeLayout>

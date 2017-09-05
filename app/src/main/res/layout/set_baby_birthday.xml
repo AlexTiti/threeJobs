@@ -1,0 +1,190 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+
+    <!--<include-->
+        <!--android:id="@+id/custom_actionbar"-->
+        <!--layout="@layout/toolbar_layout" />-->
+
+    <!-- 内容界面 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/custom_actionbar"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/etxt_birthdate_layout"
+            android:layout_width="@dimen/x270"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y50"
+            android:background="@drawable/login_edit_bac"
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_horizontal">
+
+
+                <TextView
+                    android:id="@+id/label_baby_birthday"
+                    android:layout_width="@dimen/x120"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/y5"
+                    android:gravity="center"
+                    android:text="@string/label_baby_birthday"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt_birthdate"
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/y5"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/hint_birthdate"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/text_pink"
+                    android:textColorHint="@color/text_color_hint"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/inputnum"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/hint_birthdate"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/text_pink"
+                    android:textColorHint="@color/text_color_hint"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_next_linearLayout"
+            android:layout_width="@dimen/x270"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etxt_birthdate_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="60dp">
+
+            <Button
+                android:id="@+id/btn_birthdate_next"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/login_button_selector"
+                android:text="@string/finish"
+                android:textColor="@color/btn_white"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/datapicker_birthday_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/btn_next_linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <View
+                    android:id="@+id/panelDivider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/gray_background"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/panel_btn_datepicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/panelDivider1"
+                    android:layout_marginTop="10dp">
+
+                    <Button
+                        android:id="@+id/btn_datepicker_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/white_button_selector"
+                        android:text="@string/btn_baby_datepicker_cancel"
+                        android:textColor="@color/text_color_btn"
+                        android:textSize="15dp" />
+
+                    <Button
+                        android:id="@+id/btn_datepicker_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/white_button_selector"
+                        android:text="@string/btn_baby_datepicker_confirm"
+                        android:textColor="@color/text_color_btn"
+                        android:textSize="15dp" />
+
+                </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/panelDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@id/panel_btn_datepicker"
+                    android:background="@color/gray_background"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_datepicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/panelDivider"
+                    android:gravity="center_horizontal">
+
+                    <DatePicker
+                        android:id="@+id/datePicker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:calendarViewShown="false"
+                        android:endYear="2050"
+                        android:spinnersShown="true"
+                        android:startYear="2000" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.findtech.threePomelos">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
+    <application
+        android:name=".base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcherp"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="56d6a589e0f55aff9400035a" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" />
+        <meta-data
+            android:name="BDAPPID"
+            android:value="7838509" />
+        <meta-data
+            android:name="BDAPPKEY"
+            android:value="SyxzyVCFE9OKwe6daHD2G1NukZ9plitG" />
+
+        <activity
+            android:name=".activity.LaunchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_lantch">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".login.SetBabySexActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_baby_sex_info"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".login.SetBabyBirthdayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_baby_birthday_info"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.BabyDataDetailActivity"
+            android:label="@string/title_activity_user_weight_info"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".login.PhoneVerifyActivity"
+            android:label="@string/title_activity_phone_verify"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.ForgetPasswordActivity"
+            android:label="@string/title_activity_forget_password"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.InputIdentifyActivity"
+            android:label="@string/title_activity_input_identify"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.SetPasswordActivity"
+            android:label="@string/title_activity_set_password"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".bluetooth.ReceivedataActivity"
+            android:label="@string/title_activity_set_password"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.InputWeightActivity"
+            android:label="@string/title_activity_input_weight"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.InputHeightActivity"
+            android:label="@string/title_activity_input_height"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BabyHealthTipsContentActivity"
+            android:label="@string/title_activity_baby_health_tip"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BabyInfoActivity"
+            android:label="@string/title_activity_input_height"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GetUserProtocolActivity"
+            android:label="@string/title_activity_get_user_protocol"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".service.RFStarBLEService" />
+        <service android:name=".service.ReceiveWeightShowDialogService" />
+
+        <provider
+            android:name=".database.MyContentProvider"
+            android:authorities="com.findtech.threePomelos.database.MyContentProvider"
+            android:exported="false" />
+
+        <!-- umeng start -->
+        <activity
+            android:name="com.umeng.socialize.view.ShareActivity"
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <!-- wei xin -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- wei xin -->
+
+
+        <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 100424468，如果你使用的公用账号，则不需要修改；否则修改成你在QQ开放平台申请的 APP ID -->
+                <data android:scheme="tencent1105227558" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities=".fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/bdp_update_filepaths" />
+        </provider>
+        <!-- <activity -->
+        <!-- android:name="com.baidu.autoupdatesdk.ConfirmDialoigActivity" -->
+        <!-- android:exported="false" -->
+        <!-- android:screenOrientation="sensor" -->
+        <!-- android:theme="@style/bdp_update_dialog_style_fullscreen" /> -->
+
+        <receiver
+            android:name="com.baidu.autoupdatesdk.receiver.BDBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.baidu.autoupdatesdk.ACTION_NEW_UPDATE" />
+                <action android:name="com.baidu.autoupdatesdk.ACTION_DOWNLOAD_COMPLETE" />
+                <action android:name="com.baidu.autoupdatesdk.ACTION_NEW_AS" />
+                <action android:name="com.baidu.autoupdatesdk.ACTION_AS_DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activity.TagImageEditActivity"
+            android:label="@string/title_activity_tag_image_edit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TagImageShareActivity"
+            android:label="@string/title_activity_tag_image_edit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FirmwareUpdateActivity"
+            android:label="@string/title_activity_version_update"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.MainHomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".music.activity.MusicLocalActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".music.activity.MusicBabyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <service
+            android:name=".musicserver.MediaService"
+            android:process=":main"/>
+
+
+
+        <service android:name=".musicserver.FloatingService" />
+
+        <receiver android:name=".receiver.MediaButtonIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".music.activity.SixItemMusicActivity" />
+        <activity
+            android:name=".music.activity.PlayDetailActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="com.findtech.three.LAUNCH_NOW_PLAYING_ACTION" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".music.activity.RencentMusicActivity" />
+        <activity android:name=".mydevices.activity.BluetoothlinkActivity" />
+        <activity android:name=".music.activity.CarMusicActivity" />
+        <activity android:name=".mydevices.activity.DeviceDetailActivity" />
+        <activity android:name=".mydevices.activity.RepairActivity" />
+        <activity android:name=".activity.FeedBack" />
+        <activity android:name=".activity.AboutUSActivity" />
+        <activity android:name=".mydevices.activity.DeviceUpdateActivity" />
+        <activity android:name=".music.activity.HotRecommenActivity" />
+        <activity android:name=".activity.GuideActivity" />
+
+        <service android:name="com.avos.avoscloud.PushService" />
+
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activity.InstructionsMainActivity" />
+
+    </application>
+
+</manifest>

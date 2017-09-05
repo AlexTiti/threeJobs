@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#00000000"
+    android:gravity="bottom"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x20"
+        android:background="@color/white"
+        android:paddingTop="@dimen/y20"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_color"
+        android:textSize="@dimen/text_size"
+        android:text="@string/weight_text_input"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:textSize="@dimen/text_size_little"
+            android:text="@string/weight_text_notice"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_myinfo_changebirth_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dip"
+        android:layout_marginRight="0dip"
+        android:paddingBottom="2dp"
+        android:paddingTop="@dimen/y7"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+            <com.findtech.threePomelos.view.datepicker.wheel.widget.views.WheelView
+                android:id="@+id/blank_wheight"
+                android:layout_width="@dimen/x80"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/wv_birth_year"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_title"
+                android:textColor="@color/text_pink"
+                android:text="kg"
+                />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/six_e"></View>
+    <Button
+        android:id="@+id/confirm_button_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y40"
+        android:background="@color/white"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/grey_color"
+        android:text="@string/confirm"/>
+
+</LinearLayout>

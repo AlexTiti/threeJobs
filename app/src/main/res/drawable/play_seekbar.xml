@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <nine-patch android:src="@drawable/play_plybar_ready" />
+
+    </item>
+    <item android:id="@android:id/secondaryProgress">
+        <scale android:scaleWidth="100%"
+           >
+            <nine-patch android:src="@drawable/play_plybar_ready" />
+        </scale>
+    </item>
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%"
+           >
+            <nine-patch android:src="@drawable/rrr" />
+        </scale>
+        <!--<clip>-->
+            <!--<shape>-->
+                <!--<gradient-->
+                    <!--android:angle="0"-->
+                    <!--android:startColor="@color/text_pink"-->
+                    <!--android:endColor="@color/text_pink"/>-->
+            <!--</shape>-->
+        <!--</clip>-->
+    </item>
+</layer-list>

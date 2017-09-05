@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_launch_content"
+        android:visibility="gone"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_point"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/y13"
+        android:orientation="horizontal" />
+
+    <Button
+        android:id="@+id/bt_goto_main"
+        android:layout_width="@dimen/x184"
+        android:layout_height="@dimen/y35"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/launch_bac"
+        android:text="@string/just_do"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y40"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size"
+        android:visibility="gone"
+
+         />
+
+
+</RelativeLayout>

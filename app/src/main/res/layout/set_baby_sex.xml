@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <!--<include-->
+        <!--android:id="@+id/custom_actionbar"-->
+        <!--layout="@layout/toolbar_layout" />-->
+
+    <!-- 内容界面 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_below="@+id/custom_actionbar"
+        android:layout_alignParentStart="true"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/boy_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+
+                android:gravity="center"
+
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/boy"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/boy2x" />
+
+                <TextView
+                    android:id="@+id/label_boy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="18dp"
+                    android:text="@string/label_boy"
+                    android:textColor="@color/text_color_btn"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/girl_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/boy_layout"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="vertical"
+
+                >
+
+                <ImageView
+                    android:id="@+id/girl"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_below="@id/boy"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/girl2x" />
+
+                <TextView
+                    android:id="@+id/label_girl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_girl"
+                    android:textColor="@color/text_color_btn" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:hint="@string/hint_name"
+            android:imeOptions="actionNext"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/input_birthday"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="@string/hint_birthday"
+            android:imeOptions="actionNext"
+
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="@dimen/x270"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="30dp"
+            android:gravity="bottom">
+
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/linearLayout"
+            android:background="@drawable/login_button_selector"
+            android:textColor="@color/btn_white"
+            android:text="@string/next_step" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

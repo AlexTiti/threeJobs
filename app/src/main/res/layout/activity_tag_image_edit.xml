@@ -1,0 +1,174 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    >
+
+        <com.findtech.threePomelos.view.TagImageView
+            android:id="@+id/image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/y40"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/main_image_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop" />
+
+            <include
+                android:id="@+id/baby_data_tag"
+                layout="@layout/baby_data_tag_layout"
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/y90"
+                android:layout_marginTop="@dimen/y18"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_alignParentRight="true"
+                />
+
+
+        </com.findtech.threePomelos.view.TagImageView>
+
+    <LinearLayout
+        android:id="@+id/layout_tgg_bottom"
+        android:background="#312325"
+        android:alpha="0.85"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y40"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/y5"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/btn_tag_1_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/btn_tag_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_tag_babyinfo"
+            />
+
+            <TextView
+                android:id="@+id/text_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/baby_info"
+                android:textColor="@drawable/edit_textbac"
+                android:textSize="@dimen/x10"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/btn_tag_layout_layout"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/btn_tag_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_edit_tag"
+            />
+
+        <TextView
+            android:id="@+id/text_lable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab"
+            android:textColor="@drawable/edit_textbac"
+            android:textSize="@dimen/x10"
+            android:gravity="center"/>
+    </LinearLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+                android:id="@+id/tag_choose_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y45"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15"
+               android:layout_above="@+id/layout_tgg_bottom"
+                android:background="#1F1F1F"
+                android:alpha="0.85"
+                android:gravity="center_horizontal|center_vertical">
+
+                <TextView
+                    android:id="@+id/btn_tag_0"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/pic_tag_monther"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/btn_tag_2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/pic_tag_love"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/btn_tag_3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="@string/pic_tag_praise"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#606060"
+                    android:layout_marginBottom="@dimen/y9"
+                    android:layout_marginTop="@dimen/y9"></View>
+
+                <TextView
+                    android:id="@+id/btn_tag_custom"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/zidingyi"
+                    android:textColor="@color/text_pink"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+
+
+
+</RelativeLayout>

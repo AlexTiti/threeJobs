@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.findtech.threePomelos.music.activity.PlayDetailActivity">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        ></View>
+
+    <RelativeLayout
+        android:id="@+id/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y35"
+        android:layout_below="@+id/view"
+       >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y23"
+            android:paddingTop="@dimen/y5"
+            android:paddingBottom="@dimen/y5"
+            android:paddingLeft="@dimen/x5"
+            android:paddingRight="@dimen/x5"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x10"
+           android:src="@drawable/back_play_detail"
+            />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/share_playDetail"-->
+            <!--android:layout_width="@dimen/y25"-->
+            <!--android:layout_height="@dimen/y25"-->
+            <!--android:paddingTop="@dimen/y5"-->
+            <!--android:paddingBottom="@dimen/y5"-->
+            <!--android:paddingLeft="@dimen/x5"-->
+            <!--android:paddingRight="@dimen/x5"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="@dimen/x15"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/icon_share"-->
+            <!--android:background="@drawable/bac_play_next"-->
+            <!--/>-->
+
+
+    </RelativeLayout>
+
+<RelativeLayout
+    android:id="@+id/Rela_round_play"
+    android:layout_width="@dimen/x210"
+    android:layout_height="@dimen/x210"
+    android:layout_marginTop="@dimen/y10"
+    android:layout_below="@+id/layout_toolbar"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/play_sit">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/x4"
+        android:layout_marginLeft="@dimen/x4"
+        android:layout_marginTop="@dimen/x4"
+        android:layout_marginBottom="@dimen/x4"
+
+        android:layout_centerInParent="true"
+        android:src="@drawable/play_flash"
+        android:scaleType="centerCrop"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_round_detail"
+        android:layout_width="@dimen/x130"
+        android:layout_height="@dimen/x130"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/face_music_car_a"
+        />
+    <ImageView
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginTop="@dimen/x5"
+        android:layout_marginBottom="@dimen/x5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/play_card_detail"/>
+
+</RelativeLayout>
+
+    <TextView
+        android:id="@+id/music_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y18"
+        android:layout_below="@id/Rela_round_play"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/text_size_small" />
+
+    <SeekBar
+        android:id="@+id/voice_seekbar"
+        android:layout_width="@dimen/x280"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Rela_round_play"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y18"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:maxHeight="@dimen/x1"
+        android:minHeight="@dimen/x1"
+        android:progressDrawable="@drawable/play_seekbar"
+        android:secondaryProgress="0"
+        android:thumb="@drawable/play_plybar_btn"
+        android:visibility="gone"
+
+        />
+
+
+    <LinearLayout
+        android:id="@+id/linear_middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/music_name"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginTop="@dimen/y35"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y18"
+            android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/play_mode"
+            android:layout_width="@dimen/y18"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:background="@drawable/bac_play_next"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_playorder"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/y18">
+            <ImageView
+                android:id="@+id/image_down"
+                android:layout_width="@dimen/y18"
+                android:layout_centerInParent="true"
+                android:layout_height="match_parent"
+                android:background="@drawable/bac_play_next"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_down_play"/>
+            <TextView
+                android:id="@+id/text_progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/red_color"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:textSize="@dimen/text_size"
+                />
+            <ImageView
+                android:id="@+id/img_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_downed"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/x8"
+                android:visibility="gone"
+                android:alpha="0.3"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y18"
+            android:layout_weight="1">
+        <ImageView
+            android:id="@+id/image_collection"
+            android:layout_width="@dimen/y18"
+            android:layout_height="@dimen/y18"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bac_play_next"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_baby_like"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y18"
+            android:layout_weight="1">
+        <ImageView
+            android:id="@+id/image_voice"
+            android:layout_width="@dimen/y18"
+            android:layout_height="@dimen/y18"
+            android:layout_centerInParent="true"
+            android:scaleType="fitCenter"
+            android:background="@drawable/bac_play_next"
+            android:src="@drawable/icon_voice"/>
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <ImageButton
+        android:id="@+id/image_line_divier"
+        android:layout_width="@dimen/x258"
+        android:layout_height="@dimen/x1"
+        android:src="#e5e5e5"
+        android:layout_below="@+id/linear_middle"
+        android:layout_marginTop="@dimen/y14"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
+
+
+
+
+    <com.findtech.threePomelos.view.PlayerSeekBar
+        android:id="@+id/play_seek"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="@dimen/x240"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_middle"
+        android:layout_marginTop="@dimen/y30"
+        android:layout_centerHorizontal="true"
+        android:maxHeight="@dimen/x1"
+        android:minHeight="@dimen/x1"
+        android:progressDrawable="@drawable/play_seekbar"
+        android:secondaryProgress="0"
+        android:thumb="@drawable/play_plybar_btn" />
+
+    <TextView
+        android:id="@+id/time_play"
+        android:layout_toLeftOf="@+id/play_seek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/play_seek"
+        android:layout_alignTop="@+id/play_seek"
+        android:gravity="center"
+       />
+
+    <TextView
+        android:id="@+id/mduration"
+        android:layout_toRightOf="@+id/play_seek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/play_seek"
+        android:layout_alignTop="@+id/play_seek"
+        android:gravity="center"
+
+   />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/play_seek"
+        android:layout_alignParentBottom="true"
+        >
+
+
+        <ImageView
+            android:id="@+id/image_control"
+            android:layout_width="@dimen/x52"
+            android:layout_height="@dimen/x52"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/button_play"/>
+        
+        <ImageView
+            android:id="@+id/image_next"
+            android:layout_width="@dimen/y20"
+            android:layout_height="@dimen/y20"
+            android:padding="@dimen/y3"
+            android:src="@drawable/button_next"
+            android:background="@drawable/bac_play_next"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/image_control"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="@dimen/x35"
+            />
+
+        <ImageView
+            android:id="@+id/image_prev"
+            android:layout_width="@dimen/y20"
+            android:layout_height="@dimen/y20"
+            android:padding="@dimen/y3"
+            android:src="@drawable/button_pre"
+            android:background="@drawable/bac_play_next"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/image_control"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="@dimen/x35"
+            />
+
+
+        
+        
+    </RelativeLayout>
+
+
+</RelativeLayout>

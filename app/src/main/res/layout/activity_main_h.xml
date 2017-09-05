@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+
+<com.findtech.threePomelos.view.HeadZoomScrollView
+    android:id="@+id/dzsv"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_below="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y190"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+            />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/baby_image"
+                android:layout_width="@dimen/y60"
+                android:layout_height="@dimen/y60"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/page_back"
+                android:padding="1dp"
+                android:scaleType="centerCrop"
+                android:layout_alignBottom="@+id/iv"
+                android:layout_marginBottom="@dimen/y60"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/baby_name"
+                android:layout_alignTop="@+id/baby_image"
+                android:textSize="@dimen/text_size_title"
+                android:layout_marginTop="@dimen/y63"
+                android:maxLength="15"
+                android:text="@string/baby_niName"
+                android:ellipsize="end"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/text_id_below"
+                android:layout_below="@+id/baby_name"
+                android:layout_marginTop="@dimen/y3"
+                android:singleLine="true"
+                android:ellipsize="end"
+              />
+
+         <View
+             android:id="@+id/viwe"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/x3"
+             android:background="@color/music_divider_color"
+             android:layout_below="@+id/iv">
+         </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/viwe"
+            android:orientation="vertical"
+
+            >
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/y120"
+               android:orientation="horizontal">
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:orientation="vertical"
+                   >
+
+                   <LinearLayout
+                       android:id="@+id/height_layout"
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:layout_gravity="center"
+                       android:gravity="center_horizontal"
+                       android:orientation="vertical">
+                       <ImageView
+                           android:layout_width="@dimen/x36"
+                           android:layout_height="@dimen/y25"
+                           android:scaleType="centerCrop"
+                           android:src="@drawable/icon_height_page"
+                           android:layout_gravity="center_horizontal"
+                           android:layout_marginTop="@dimen/y11"
+                           />
+                       <TextView
+                           android:id="@+id/height_num"
+                           android:layout_width="match_parent"
+                           android:layout_height="@dimen/y29"
+                           android:layout_marginTop="@dimen/y5"
+                           android:textSize="@dimen/x25"
+                           android:layout_gravity="center_horizontal"
+                           android:textColor="#cb6a84"
+                           android:gravity="center"
+                           android:textStyle="normal"
+                           android:fontFamily="sans-serif-light"
+                           android:text="0"
+                           />
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="@dimen/y15"
+                           android:layout_marginTop="@dimen/y10"
+                           android:layout_gravity="center_horizontal"
+                           android:text="@string/height_page"
+                           android:textColor="@color/grey_color"
+                           android:textSize="@dimen/x13"
+                           />
+
+                       <TextView
+                           android:id="@+id/height_health_state"
+                           android:layout_width="wrap_content"
+                           android:layout_marginLeft="@dimen/x1"
+                           android:layout_height="@dimen/y13"
+                           android:layout_marginTop="@dimen/y5"
+                           android:layout_gravity="center_horizontal"
+                           android:singleLine="true"
+                           android:textSize="@dimen/x11"
+                           />
+
+                   </LinearLayout>
+               </LinearLayout>
+
+               <View
+                   android:layout_width="@dimen/x1"
+                   android:layout_height="@dimen/y66"
+                   android:layout_gravity="center_vertical"
+                   android:background="@color/music_divider_color"></View>
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:orientation="vertical">
+
+                   <LinearLayout
+                       android:id="@+id/weight_layout"
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:layout_gravity="center"
+                       android:gravity="center_horizontal"
+                       android:orientation="vertical">
+                       <ImageView
+                           android:layout_width="@dimen/x36"
+                           android:layout_height="@dimen/y25"
+                           android:scaleType="centerCrop"
+                           android:src="@drawable/icon_weight_page"
+                           android:layout_gravity="center_horizontal"
+                           android:layout_marginTop="@dimen/y11"
+
+                           />
+                       <TextView
+                           android:id="@+id/weight_num"
+                           android:layout_width="wrap_content"
+                           android:layout_marginTop="@dimen/y5"
+                           android:layout_height="@dimen/y29"
+                           android:textSize="@dimen/x25"
+                           android:layout_gravity="center_horizontal"
+                           android:textColor="#cb6a84"
+                           android:gravity="center"
+                           android:typeface="monospace"
+                           android:textStyle="normal"
+                           android:fontFamily="sans-serif-light"
+                           android:text="0"
+
+                           />
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="@dimen/y15"
+                           android:layout_marginTop="@dimen/y10"
+                           android:layout_gravity="center_horizontal"
+                           android:text="@string/weight_page"
+                           android:textColor="@color/grey_color"
+                           android:layout_marginLeft="@dimen/x1"
+                           android:singleLine="true"
+                           android:textSize="@dimen/x13"
+                           />
+
+                       <TextView
+                           android:id="@+id/weight_health_state"
+                           android:layout_width="wrap_content"
+                           android:layout_height="@dimen/y13"
+                           android:layout_marginTop="@dimen/y5"
+                           android:layout_gravity="center_horizontal"
+
+                           android:textSize="@dimen/x11"
+                           />
+                   </LinearLayout>
+
+
+               </LinearLayout>
+
+           </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x3"
+            android:background="@color/music_divider_color">
+
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:layout_marginLeft="@dimen/x18"
+                android:layout_marginRight="@dimen/x18">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_device"
+                    android:textColor="@color/grey_color"
+                    android:textSize="@dimen/text_size_title_seven"/>
+
+                <ImageView
+                    android:id="@+id/image_searchcar"
+                    android:layout_width="@dimen/x25"
+                    android:padding="@dimen/x5"
+                    android:layout_height="@dimen/x25"
+                    android:background="@drawable/bac_play_next"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/icon_add_device"
+                    />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_add_car_page"
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/y50"
+                android:layout_marginTop="@dimen/y10"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_add_divice"
+                android:text="@string/add_car"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:paddingBottom="@dimen/y5"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <com.findtech.threePomelos.view.MyListView
+                android:id="@+id/mylist_showcar_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/y8"
+                >
+            </com.findtech.threePomelos.view.MyListView>
+            </RelativeLayout>
+        </LinearLayout>
+        </LinearLayout>
+        </RelativeLayout>
+    </com.findtech.threePomelos.view.HeadZoomScrollView>
+
+
+
+    <RelativeLayout
+        android:id="@+id/layout_top_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fitsSystemWindows="true"
+      >
+        <View
+            android:id="@+id/view_test"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></View>
+
+        <RelativeLayout
+            android:layout_below="@+id/view_test"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y36">
+            <ImageView
+                android:id="@+id/btn_image_choose_pic"
+                android:layout_width="@dimen/x30"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_take_photo"
+                android:layout_alignParentRight="true"
+                android:scaleType="fitCenter"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x12"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_title"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>
