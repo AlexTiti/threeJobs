@@ -354,8 +354,14 @@
     <string name="weight_text_hint">请输入体重:kg</string>
     <string name="cancle">取消</string>
     <string name="confirm">确定</string>
+    <string name="go_link">去连接</string>
     <string name="notice">提示</string>
     <string name="unbound_message">请确认是否解除绑定？</string>
+    <string name="music_link_bluetooth">请打开蓝牙  并连接3Pomelos_A3</string>
+    <string name="music_link_bluetooth_open">请到蓝牙列表连接3Pomelos_A3</string>
+    <string name="bluetooth_unopen">蓝牙未开启</string>
+
+    <string name="link_icon">连接音箱</string>
     <string name="close_message">请确认是否关机？</string>
     <string name="unbound_success">解绑成功</string>
     <string name="name_change">修改设备名称</string>
@@ -363,8 +369,6 @@
     <string name="device_nolink">推车未连接</string>
     <string name="device_linking">推车已连接</string>
     <string name="delete_notice">确定删除吗？</string>
-
-
 
     <!--Loading Dialog-->
     <string name="getMessage_fromNet">加载中，请稍后...</string>
@@ -461,6 +465,7 @@
     <string name="btn_baby_datepicker_confirm">确定</string>
     <string name="btn_baby_datepicker_cancel">取消</string>
     <string name="scan_device">搜索的设备</string>
+    <string name="app_device_text_unbind"></string>
 
 
 </resources>

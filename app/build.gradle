@@ -3,7 +3,7 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.findtech.threePomelos"
@@ -22,6 +22,7 @@ android {
             storePassword "threePomelos"
             keyAlias "threePomelos"
             keyPassword "threePomelos"
+            v2SigningEnabled false
         }
     }
 
@@ -84,11 +85,11 @@ dependencies {
     compile(name: 'autoupdatesdk-release',ext: 'aar')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:support-v4:24.2.0'
-    compile 'com.android.support:recyclerview-v7:24.2.0'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:palette-v7:24.2.0'
-    compile 'com.android.support:cardview-v7:24.2.0'
+    compile 'com.android.support:palette-v7:24.2.1'
+    compile 'com.android.support:cardview-v7:24.2.1'
     compile files('libs/avoscloud-sdk-v3.12.3.jar')
     compile files('libs/avoscloud-statistics-v3.12.3.jar')
     compile files('libs/mpandroidchartlibrary-2-1-6.jar')

@@ -2,368 +2,211 @@
 <items version="2" >
 
     <item
+        is-multidex="true"
         jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_1.jar"
         jumboMode="true"
-        revision="24.0.2"
+        optimize="true"
+        revision="25.0.0"
         sha1="c184c69f43b1fe46390f7123717c65bd844bccb6">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_QQZone_1_93158736338c24915b3c38de914c5ea3fb038114\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_QQZone_1_93158736338c24915b3c38de914c5ea3fb038114\classes.dex" />
     </item>
     <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Administrator\.android\build-cache\f20c66b499b1947cfc4124aecc1dd5f924e2be4c\output\jars\classes.jar"
         jumboMode="true"
-        revision="24.0.2"
-        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\de.hdodenhof-circleimageview-2.1.0_423ca21acc85afb9c6173741ebb8459c337b003f\classes.dex" />
+        optimize="true"
+        revision="25.0.0"
+        sha1="3b7105277df9a8013468215c451ddefac2499d3a">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10\classes_5b1ac3a073f4db1a9621016360cd8341d759cc57\classes.dex" />
     </item>
     <item
-        jar="D:\Project\threeGrapefruit\app\libs\okhttp-3.8.0.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="5a11f020cce2d11eb71ba916700600e18c4547e7">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\okhttp-3.8.0_6cc4e52045b9334e8ca7187aeb9d563825e02276\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="757b29d6fc1eb941ff25c70890d08755d48cb513">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_e2d695d731274d37249375144b8caa2975216212\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_3.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="7c8d33705d4e43b476dd2d2ec3b692f1894f33e7">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_QQZone_3_e48c29ca065a3b14ce9abeecb779585f668d63ef\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_9d0be1b77f61dea6a154c7066ff439902f7f926e\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\httpmime-4.1.3.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\httpmime-4.1.3_cdb2cb45ef01408d725699e1492a87415fec8fca\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="feaaa715fd7e3167823cb2fb642ab620cb3f2b74">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_cc823fcb76ba125cca04ced25a255f2bc24e9475\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\0.9.0\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="3158c15bb0ae97575debdb40cfcd8f0f9f244526">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.facebook.fresco-drawee-0.9.0_15d5efd6016bbaeeb9e7ecabda7ed3d33b4d00f4\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-push-v4.4.2.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="a2223ea0bd1ac06efc4d472c64b83be5e9df9e58">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\avoscloud-push-v4.4.2_7f2c9eade424fb34ec57f4549d5b33c799393220\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_75a59fbb341dbe4067a381768b299ffaadb61573\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\0.9.0\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="39bd9f893c75eac9e76559cc4e96af6e417afdc5">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.facebook.fresco-imagepipeline-base-0.9.0_f4efc54552a34035b6a0c7c6bca000c2f90a3ddf\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_Sina.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="53b82f26557a31409d06207ff844aee7425a4e22">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_Sina_2c782b6b863eef1176aefce979d56e9e3d8907be\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_1acee83a1bbe947a157b7677f77e885d185a932e\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_WeiXin_2.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="52817908728a9be3fd40d9ee7f46009b1b4fba57">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_WeiXin_2_80eb9e106ec5c69d5b7cd8c2c60a66ccac5d68d2\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_94a786844606c840371299a6b702e91503ab314c\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_b3ec941987668b41e11196bb63262eb345991018\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.promeg\tinypinyin\1.0.0\a48301534bbc8eea481f61fa8fbdee80eca49d15\tinypinyin-1.0.0.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="a48301534bbc8eea481f61fa8fbdee80eca49d15">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\tinypinyin-1.0.0_770c699beaa8c196ecc67ee04a6d8c48c307ad09\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.6.2\f1bc476cc167b18e66c297df599b2377131a8947\gson-2.6.2.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.6.2_002b7fbf7a0de167c934ae8280ecce1c989b18df\classes.dex" />
-    </item>
-    <item
-        jar="D:\ProgramFils\android-sdk_r24.1.2-windows\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_f0e6f61f9cc57ecd7c9a919ca5b50882710c1078\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-sdk-v4.4.2.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="2200d265b824ce7d943f870408346300bd00b31a">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\avoscloud-sdk-v4.4.2_54376919b6bd81708de95f2a96b7f87cdaf61958\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\fastjson-1.2.30.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="8087c3a893d21d0a3ae1d5efa6ee1aec23f3c3da">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\fastjson-1.2.30_d882835016cf6b046b455353bba42558ef2ac94d\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.0\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="96e33a7aaee00ab64270e2a9887b8f9ef32c8b73">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-24.2.0_86ef85791d78f79e68a7a2bc4c9c21797d28f44e\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_3db0cc2648013d47a80b68cb1f47bdb94626b76f\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_37b72adf4fde9834ebd03e5df1a2bd1588442794\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_d382de6a7d60e59830601bb46ae9511f69be9c2a\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\library-2.4.0_dd460f45d27a359687729c3c169358b1eda3100b\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\okio-1.13.0.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\okio-1.13.0_96696bc5e8c4c2939828932092c57b3e5e292ad4\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_WeiXin_1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="47f4993168154fa73377d7470b9f6887d48a8023">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_WeiXin_1_a17175c23793dcb0acb84fda6e792184fa00ad33\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_fbfceae6672b30ab8cf37894732f247a8e2466be\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_002c886af3b88d83f22d80b14ea7a21e76b88009\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\protobuf-java-2.6.1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="d9521f2aecb909835746b7a5facf612af5e890e8">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\protobuf-java-2.6.1_ddc96cb12d606062590d13b96d401cebd1708909\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_2.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="4a69b33758dcba3ef519cbd4b6c8af5f41603c4f">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_QQZone_2_7ea1903d68fae04d22e5d88ef70d298a4a48f208\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\0.9.0\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="ca51025f4a58fc7fb6cfaa85e7d09b7ae47e6187">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.facebook.fresco-fresco-0.9.0_d05c8f3fa579b13251db11a07b5b9a2f9e6925b5\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\0.9.0\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="57528b5deee77bfa2188fc279fd45066366f17f5">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.facebook.fresco-imagepipeline-0.9.0_e2df83688e67e5cb64db8a82a5608429fdb6adff\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\palette-v7\24.2.0\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="1ac5b6d36ed6d2e0b6b6e6909bc4e1fb86cf1923">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-palette-v7-24.2.0_ecaa0aecb13f5e33161531b343c5d3242174f0e7\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_0ed552fdd5974654348380560bc76bec6822984b\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\autoupdatesdk-release\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="74e96c230971402ec5d00cc4f265436707eb146e">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\intermediates-exploded-aar-autoupdatesdk-release_1c3b0d35a6954b9e885f8a124efe4440e608b2c7\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_ec81c77c7879824e38bdb247caac5c6f9beef592\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\mpandroidchartlibrary-2-1-6.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="3f8beaf2f9b5357717e0b1ef9f6820e517784ea1">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\mpandroidchartlibrary-2-1-6_ca7ab383c1425673494f5bc0b984fe78a06851af\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\libs\Java-WebSocket-1.3.2-leancloud.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="169fd461930335df8099bcbac99c0f206912ced1">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\Java-WebSocket-1.3.2-leancloud_2df50061c7b6f63f174093ae8a4281cbd1155e1a\classes.dex" />
-    </item>
-    <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        revision="24.0.2"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_ca621c09976d8bec943a76a0158051dc27f264bd\classes.dex" />
-    </item>
-    <item
+        is-multidex="true"
         jar="D:\Project\threeGrapefruit\app\libs\patchupdate.jar"
         jumboMode="true"
-        revision="24.0.2"
+        optimize="true"
+        revision="25.0.0"
         sha1="311e10769e9bf8db15f166b8196e8c18b6238c27">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\patchupdate_6573fdce1aad15184f2760a396535c53691be9e3\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\patchupdate_6573fdce1aad15184f2760a396535c53691be9e3\classes.dex" />
     </item>
     <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\fastjson-1.2.30.jar"
         jumboMode="true"
-        revision="24.0.2"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_83f34fc8268aabcc7811838684ee11314032e740\classes.dex" />
+        optimize="true"
+        revision="25.0.0"
+        sha1="8087c3a893d21d0a3ae1d5efa6ee1aec23f3c3da">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\fastjson-1.2.30_d882835016cf6b046b455353bba42558ef2ac94d\classes.dex" />
     </item>
     <item
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-android\1.1.4\129874135e6081269ace2312092031558865de12\bolts-android-1.1.4.jar"
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_2.jar"
         jumboMode="true"
-        revision="24.0.2"
-        sha1="129874135e6081269ace2312092031558865de12">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\bolts-android-1.1.4_a27a8f82ac0b46c0541b7fd779ecc0cc456b9053\classes.dex" />
+        optimize="true"
+        revision="25.0.0"
+        sha1="4a69b33758dcba3ef519cbd4b6c8af5f41603c4f">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_QQZone_2_7ea1903d68fae04d22e5d88ef70d298a4a48f208\classes.dex" />
     </item>
     <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\Java-WebSocket-1.3.2-leancloud.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="169fd461930335df8099bcbac99c0f206912ced1">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\Java-WebSocket-1.3.2-leancloud_2df50061c7b6f63f174093ae8a4281cbd1155e1a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\okhttp-3.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5a11f020cce2d11eb71ba916700600e18c4547e7">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\okhttp-3.8.0_6cc4e52045b9334e8ca7187aeb9d563825e02276\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-push-v4.4.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a2223ea0bd1ac06efc4d472c64b83be5e9df9e58">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\avoscloud-push-v4.4.2_7f2c9eade424fb34ec57f4549d5b33c799393220\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="D:\Project\threeGrapefruit\app\libs\umeng_social_sdk.jar"
         jumboMode="true"
-        revision="24.0.2"
+        optimize="true"
+        revision="25.0.0"
         sha1="38c1f37e256f912f926a587ef006ffb44b584437">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\umeng_social_sdk_e8e5ffc7cf249ddcd0b0e8b51578e1218f47f514\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\umeng_social_sdk_e8e5ffc7cf249ddcd0b0e8b51578e1218f47f514\classes.dex" />
     </item>
     <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-classes\baidu\debug\instant-run-bootstrap.jar"
         jumboMode="true"
-        revision="24.0.2"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_caaeda930f0c394fb289bf3d1f809c51849241e5\classes.dex" />
+        optimize="true"
+        revision="25.0.0"
+        sha1="c16571ba686056443a64e2887a176e9ccde09e72">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10000\instant-run-bootstrap_df406cd6307eea3f62148a8b3a574c87649f8e0a\classes.dex" />
     </item>
     <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\0.9.0\jars\classes.jar"
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_3.jar"
         jumboMode="true"
-        revision="24.0.2"
-        sha1="4ee95617ab850030c51486d02bc9d207b14419c6">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.facebook.fresco-fbcore-0.9.0_b269bb3a059383bdd3fc85705ee528b01c37e2bf\classes.dex" />
+        optimize="true"
+        revision="25.0.0"
+        sha1="7c8d33705d4e43b476dd2d2ec3b692f1894f33e7">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_QQZone_3_e48c29ca065a3b14ce9abeecb779585f668d63ef\classes.dex" />
     </item>
     <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_Sina.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="53b82f26557a31409d06207ff844aee7425a4e22">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_Sina_2c782b6b863eef1176aefce979d56e9e3d8907be\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\okio-1.13.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\okio-1.13.0_96696bc5e8c4c2939828932092c57b3e5e292ad4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\protobuf-java-2.6.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d9521f2aecb909835746b7a5facf612af5e890e8">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\protobuf-java-2.6.1_ddc96cb12d606062590d13b96d401cebd1708909\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="D:\Project\threeGrapefruit\app\libs\need_lib.jar"
         jumboMode="true"
-        revision="24.0.2"
+        optimize="true"
+        revision="25.0.0"
         sha1="58de9ecfba229dbb2c3eb3f45dbe284ba58100ea">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\need_lib_804361082b3dfe57ed440f4e3a4b759bc01db2c8\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\need_lib_804361082b3dfe57ed440f4e3a4b759bc01db2c8\classes.dex" />
     </item>
     <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-sdk-v4.4.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2200d265b824ce7d943f870408346300bd00b31a">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\avoscloud-sdk-v4.4.2_54376919b6bd81708de95f2a96b7f87cdaf61958\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-runtime-classes\baidu\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10000\instant-run_91dc9290c03bf9eb950088ee415b1c22d86db378\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_WeiXin_2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="52817908728a9be3fd40d9ee7f46009b1b4fba57">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_WeiXin_2_80eb9e106ec5c69d5b7cd8c2c60a66ccac5d68d2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\mpandroidchartlibrary-2-1-6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3f8beaf2f9b5357717e0b1ef9f6820e517784ea1">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\mpandroidchartlibrary-2-1-6_ca7ab383c1425673494f5bc0b984fe78a06851af\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="D:\Project\threeGrapefruit\app\libs\avoscloud-statistics-v4.4.2.jar"
         jumboMode="true"
-        revision="24.0.2"
+        optimize="true"
+        revision="25.0.0"
         sha1="e8cebae10f6e4662d2ef7e1e2a194bb6740155fb">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\avoscloud-statistics-v4.4.2_cada95f3f4d4a2c3f768e56233bbc5cdcfd87ac0\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\avoscloud-statistics-v4.4.2_cada95f3f4d4a2c3f768e56233bbc5cdcfd87ac0\classes.dex" />
     </item>
     <item
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.5.2\ecf534dba3a8446ce84cbb797d314763be212a68\glide-3.5.2.jar"
+        is-multidex="true"
+        jar="C:\Users\Administrator\.android\build-cache\c0b70f610126ab3ddee1c316f20bfc5659e5384d\output\jars\classes.jar"
         jumboMode="true"
-        revision="24.0.2"
-        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.5.2_ea43fa33689a18fd8d7307d472bff1ec5c77700e\classes.dex" />
+        optimize="true"
+        revision="25.0.0"
+        sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10\classes_0febeb7df7c15ad0920ac6ef141c4da49c1403f1\classes.dex" />
     </item>
     <item
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_WeiXin_1.jar"
         jumboMode="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_bc1a74832bc08932f52421fac21c4f463940f359\classes.dex" />
+        optimize="true"
+        revision="25.0.0"
+        sha1="47f4993168154fa73377d7470b9f6887d48a8023">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_WeiXin_1_a17175c23793dcb0acb84fda6e792184fa00ad33\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\httpmime-4.1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\httpmime-4.1.3_cdb2cb45ef01408d725699e1492a87415fec8fca\classes.dex" />
     </item>
 
 </items>

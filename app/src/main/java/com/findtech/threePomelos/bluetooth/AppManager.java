@@ -101,6 +101,7 @@ public class AppManager {
         }
     }
 
+
     /**
      * 扫描蓝牙设备
      */

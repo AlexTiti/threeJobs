@@ -32,22 +32,36 @@
            android:src="@drawable/back_play_detail"
             />
 
-        <!--<ImageView-->
-            <!--android:id="@+id/share_playDetail"-->
-            <!--android:layout_width="@dimen/y25"-->
-            <!--android:layout_height="@dimen/y25"-->
-            <!--android:paddingTop="@dimen/y5"-->
-            <!--android:paddingBottom="@dimen/y5"-->
-            <!--android:paddingLeft="@dimen/x5"-->
-            <!--android:paddingRight="@dimen/x5"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="@dimen/x15"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:src="@drawable/icon_share"-->
-            <!--android:background="@drawable/bac_play_next"-->
-            <!--/>-->
+        <RelativeLayout
+            android:id="@+id/music_link_layout"
+            android:layout_width="@dimen/y32"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:background="@drawable/bac_play_next"
+            android:layout_marginRight="@dimen/x10">
 
+        <ImageView
+            android:id="@+id/share_playDetail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y18"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/bluth_car"
 
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/link_icon"
+            android:textColor="@color/text_pink"
+            android:textSize="@dimen/text_size_little"
+            android:layout_below="@+id/share_playDetail"/>
+
+        </RelativeLayout>
     </RelativeLayout>
 
 <RelativeLayout
