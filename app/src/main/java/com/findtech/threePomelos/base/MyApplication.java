@@ -31,8 +31,8 @@ public class MyApplication extends Application {
     public static final String TAG = "_TAG";
     private List<Activity> activitys = null;
     private static MyApplication instance;
-    private static final String APPID = "RKjBfjFgBBJBDqUo4vpoC1AW-MdYXbMMI";
-    private static final String APPKEY = "6w86b1igW43dti0shMSiUJX3";
+    private static final String APPID = "1R2oS0W0U9dJGveftbxOHGy3-gzGzoHsz";
+    private static final String APPKEY = "Pf2Gper3lCPI0neKo0EKWdLN";
     public static final boolean DEBUG = false;
     public static String passwordStr;
     private ArrayList<PersonDataEntity> timeHeightDataArray = new ArrayList<>();
@@ -47,10 +47,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//启用美国节点
-
-        AVOSCloud.useAVCloudUS();
-        AVOSCloud.setDebugLogEnabled(true);
         AVOSCloud.initialize(this, APPID, APPKEY);
         manager = new AppManager(getApplicationContext());
 //        //微信 appid appsecret
