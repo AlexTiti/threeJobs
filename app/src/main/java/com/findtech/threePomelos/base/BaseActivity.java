@@ -360,7 +360,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             } else {
                 startService(intent);
             }
-
         }
     }
 
