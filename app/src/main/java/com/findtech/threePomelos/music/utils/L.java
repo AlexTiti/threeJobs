@@ -11,7 +11,7 @@ import org.json.JSONObject;
  */
 public class L {
 
-    private  static boolean isDebug = true;
+    private  static boolean isDebug = false;
     private static String tags = "TAG";
 
   public static void e(String tag ,String msg){

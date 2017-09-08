@@ -25,12 +25,15 @@ import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
 import com.findtech.threePomelos.MediaAidlInterface;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.activity.GetUserProtocolActivity;
 import com.findtech.threePomelos.bluetooth.BLEDevice;
 import com.findtech.threePomelos.entity.TravelInfoEntity;
+import com.findtech.threePomelos.home.MainHomeActivity;
+import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
 import com.findtech.threePomelos.music.activity.PlayDetailActivity;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.utils.IConstants;
@@ -604,5 +607,8 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
   public   interface MusicInterface{
         void musicReciver(Intent intent);
     }
+
+
+
 
 }

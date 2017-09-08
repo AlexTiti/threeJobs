@@ -22,6 +22,7 @@ android {
             storePassword "threePomelos"
             keyAlias "threePomelos"
             keyPassword "threePomelos"
+            v2SigningEnabled false
         }
     }
 

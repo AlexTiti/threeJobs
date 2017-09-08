@@ -46,6 +46,7 @@ import com.findtech.threePomelos.music.utils.DownMusicBean;
 import com.findtech.threePomelos.music.utils.IConstants;
 import com.findtech.threePomelos.music.utils.MusicComparator;
 import com.findtech.threePomelos.music.utils.MusicUtils;
+import com.findtech.threePomelos.music.utils.PreferencesUtility;
 import com.findtech.threePomelos.music.utils.SortOrder;
 import com.findtech.threePomelos.musicserver.Nammu;
 import com.findtech.threePomelos.net.NetWorkRequest;
@@ -74,7 +75,6 @@ import java.util.List;
 
 
 public class SixItemMusicActivity extends BaseActivity implements ItemClickListtener, BounceScrollView.ScrollingListenering, BounceScrollView.LoadListenering, MusicAdapter.downClick {
-
 
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -225,7 +225,6 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
 
                         listView.addHeaderView(view);
                     }
-                    ;
                 }
             }
         });

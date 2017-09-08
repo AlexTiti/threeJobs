@@ -38,6 +38,7 @@ public class CustomDialog extends Dialog {
     public static class Builder {
         private Context context;
         private String title;
+        private int color;
         private String message;
         private String positiveButtonText;
         private String negativeButtonText;
@@ -94,6 +95,11 @@ public class CustomDialog extends Dialog {
 
         public Builder setTitle(String title) {
             this.title = title;
+            return this;
+        }
+
+        public Builder setTextColor(int color) {
+            this.color = color;
             return this;
         }
 
@@ -189,6 +195,7 @@ public class CustomDialog extends Dialog {
             setWindowSize(dialog);
             // set the dialog title
             ((TextView) layout.findViewById(R.id.title)).setText(title);
+
             // set the confirm button
             if (positiveButtonText != null) {
                 ((Button) layout.findViewById(R.id.positiveButton))
@@ -233,6 +240,7 @@ public class CustomDialog extends Dialog {
             }
 
             textView = (TextView) layout.findViewById(R.id.show_bind);
+
             if (!TextUtils.isEmpty(bindInfoStr)) {
                 textView.setVisibility(View.VISIBLE);
                 textView.setText(bindInfoStr);

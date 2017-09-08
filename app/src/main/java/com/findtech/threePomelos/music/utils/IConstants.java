@@ -29,6 +29,4 @@ public interface IConstants {
     int START_FROM_FOLDER = 4;
     int FAV_PLAYLIST = 10;
 
-
-
 }

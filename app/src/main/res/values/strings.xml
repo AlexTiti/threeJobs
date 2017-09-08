@@ -459,6 +459,11 @@
     <string name="height_info"><xliff:g id="height_info">%1$s</xliff:g> cm</string>
     <string name="weight_info"><xliff:g id="weight_info">%1$s</xliff:g> </string>
     <string name="scan_device">Search device</string>
+    <string name="go_link">Go Connect</string>
+    <string name="link_icon">Connect speaker</string>
+    <string name="music_link_bluetooth">Please open Bluetooth and connect to 3Pomelos_A3</string>
+    <string name="music_link_bluetooth_open">Please connect to Bluetooth list 3Pomelos_A3</string>
+    <string name="bluetooth_unopen">Bluetooth not open</string>
 
 
 </resources>
