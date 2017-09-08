@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="autoupdatesdk-release-">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/autoupdatesdk-release/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/autoupdatesdk-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/7dfb007eff5e94d2fb21fc34ec2fb66916e4e10f/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/7dfb007eff5e94d2fb21fc34ec2fb66916e4e10f/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
