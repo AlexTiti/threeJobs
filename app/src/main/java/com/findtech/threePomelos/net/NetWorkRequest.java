@@ -1032,4 +1032,63 @@ public class NetWorkRequest {
     }
 
 
+    /**
+     * 优化统计接口
+     */
+    private static  final  String MUSIC_USER = "Music_relate_user";
+
+
+    public void  sendMusicDown( final String musicName, final SaveCallback saveCallback){
+        AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
+        query.whereEqualTo("post_user",AVUser.getCurrentUser());
+        query.whereEqualTo("musicName",musicName);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null){
+                    if (list != null && list.size() > 0){
+                        AVObject avObject = list.get(0);
+                        avObject.put("is_down","1");
+                        avObject.saveInBackground(saveCallback);
+                    }else {
+                        AVObject avObject = new AVObject(MUSIC_USER);
+                        avObject.put("musicName",musicName);
+                        avObject.put("post_user",AVUser.getCurrentUser());
+                        avObject.put("is_down","1");
+                        avObject.saveInBackground(saveCallback);
+                    }
+                }
+            }
+        });
+    }
+    public void sendMusicCollecting(final String musicName, final SaveCallback saveCallback){
+
+        AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
+        query.whereEqualTo("post_user",AVUser.getCurrentUser());
+        query.whereEqualTo("musicName",musicName);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null){
+
+                    if (list != null && list.size() > 0){
+
+                        AVObject avObject = list.get(0);
+                        avObject.put("is_collected","1");
+                        avObject.saveInBackground(saveCallback);
+                    }else {
+
+                        AVObject avObject = new AVObject(MUSIC_USER);
+                        avObject.put("musicName",musicName);
+                        avObject.put("post_user",AVUser.getCurrentUser());
+                        avObject.put("is_collected","1");
+                        avObject.saveInBackground(saveCallback);
+                    }
+                }
+            }
+        });
+
+    }
+
+
 }

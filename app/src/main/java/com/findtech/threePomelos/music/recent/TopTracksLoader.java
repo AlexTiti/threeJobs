@@ -55,10 +55,10 @@ public class TopTracksLoader extends SongLoader {
     public static Cursor getCursor() {
         SortedCursor retCursor = null;
         if (mQueryType == QueryType.TopTracks) {
-            retCursor = makeTopTracksCursor(mContext);
+            //retCursor = makeTopTracksCursor(mContext);
         } else if (mQueryType == QueryType.RecentSongs) {
             retCursor = makeRecentTracksCursor(mContext);
-            L.e("===================","retCursor.getCount()=================="+retCursor.getCount());
+
         }
 
         if (retCursor != null) {
@@ -66,7 +66,7 @@ public class TopTracksLoader extends SongLoader {
             if (missingIds != null && missingIds.size() > 0) {
                 for (long id : missingIds) {
                     if (mQueryType == QueryType.TopTracks) {
-                        SongPlayCount.getInstance(mContext).removeItem(id);
+                        //SongPlayCount.getInstance(mContext).removeItem(id);
                     } else if (mQueryType == QueryType.RecentSongs) {
                         RecentStore.getInstance(mContext).removeItem(id);
                     }
@@ -77,28 +77,27 @@ public class TopTracksLoader extends SongLoader {
         return retCursor;
     }
 
-    public static final SortedCursor makeTopTracksCursor(final Context context) {
-
-        Cursor songs = SongPlayCount.getInstance(context).getTopPlayedResults(NUMBER_OF_SONGS);
-
-        try {
-            return makeSortedCursor(context, songs,
-                    songs.getColumnIndex(SongPlayCount.SongPlayCountColumns.ID));
-        } finally {
-            if (songs != null) {
-                songs.close();
-            }
-        }
-    }
+//    public static final SortedCursor makeTopTracksCursor(final Context context) {
+//
+//        Cursor songs = SongPlayCount.getInstance(context).getTopPlayedResults(NUMBER_OF_SONGS);
+//
+//        try {
+//            return makeSortedCursor(context, songs,
+//                    songs.getColumnIndex(SongPlayCount.SongPlayCountColumns.ID));
+//        } finally {
+//            if (songs != null) {
+//                songs.close();
+//            }
+//        }
+//    }
 
     public static final SortedCursor makeRecentTracksCursor(final Context context) {
 
         Cursor songs = RecentStore.getInstance(context).queryRecentIds(null);
-        L.e("==============","makeRecentTracksCursor+=================="+songs.getCount());
 
         try {
             return makeSortedCursor(context, songs,
-                    songs.getColumnIndex(SongPlayCount.SongPlayCountColumns.ID));
+                    songs.getColumnIndex(RecentStore.RecentStoreColumns.ID));
         } finally {
             if (songs != null) {
                 songs.close();
@@ -116,27 +115,22 @@ public class TopTracksLoader extends SongLoader {
 
             long[] order = new long[cursor.getCount()];
             long id = cursor.getLong(idColumn);
-            L.e("=====================",cursor.getPosition()+"makeSortedCursor"+cursor.getCount()+"==========================="+id);
             selection.append(id);
             order[cursor.getPosition()] = id;
 
             while (cursor.moveToNext()) {
                 selection.append(",");
                 id = cursor.getLong(idColumn);
-                L.e("=====================",cursor.getPosition()+"while (cursor.moveToNext())==========================="+id);
                 order[cursor.getPosition()] = id;
                 selection.append(String.valueOf(id));
             }
             selection.append(")");
-            L.e("=====================","while (cursor.moveToNext())==========================="+selection.toString());
             Cursor songCursor = makeSongCursor(context, selection.toString(), null);
-            L.e("=====================","while (cursor.moveToNext())==========================="+songCursor.getCount());
             if (songCursor != null) {
                 /**
                  *
                  */
                 SortedCursor sortedCursor = new SortedCursor(songCursor, order, BaseColumns._ID, null);
-                L.e("=====================","while (cursor.moveToNext())==========================="+sortedCursor.getCount());
                 return  sortedCursor ;
             }
         }

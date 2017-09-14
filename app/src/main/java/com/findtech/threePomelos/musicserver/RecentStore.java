@@ -49,6 +49,9 @@ public class RecentStore {
     }
 
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+
+
+
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -95,11 +98,7 @@ public class RecentStore {
                     database.delete(RecentStoreColumns.NAME,
                             RecentStoreColumns.TIMEPLAYED + " < ?",
                             new String[]{String.valueOf(timeOfRecordToKeep)});
-
-
                 }
-
-
             } finally {
                 if (oldest != null) {
                     oldest.close();
@@ -140,6 +139,7 @@ public class RecentStore {
 
         /* Album IDs column */
         String ID = "songid";
+
 
         /* Time played column */
         String TIMEPLAYED = "timeplayed";

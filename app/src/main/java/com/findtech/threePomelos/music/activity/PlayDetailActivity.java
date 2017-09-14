@@ -90,6 +90,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     Animation animation;
     BluetoothAdapter bleAdapter;
     BluetoothManager manager;
+    private   NetWorkRequest netWorkRequest;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,8 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
 
         manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bleAdapter = manager.getAdapter();
+
+        netWorkRequest = new NetWorkRequest(this);
 
 
 
@@ -378,7 +381,22 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
 
         } else {
             L.e(Log_TAG, info.musicName + info.islocal + "---------------------------" + info.lrc + info.data + info.albumData);
-            NetWorkRequest.sendMusicCollect(info, new SaveCallback() {
+//            NetWorkRequest.sendMusicCollect(info, new SaveCallback() {
+//                @Override
+//                public void done(AVException e) {
+//                    if (e == null){
+//                        mPlaylistsManager.insertMusic(PlayDetailActivity.this, IConstants.FAV_PLAYLIST, info);
+//                        image_collection.setImageResource(R.drawable.icon_baby_like_seclected);
+//                        IContent.getInstacne().collection_array.add(new DownMusicBean(info.musicName,info.type));
+//                    }else{
+//                        L.e("======",e.toString());
+//                        checkNetWork();
+//                    }
+//                }
+//            });
+
+
+            netWorkRequest.sendMusicCollecting(info.musicName, new SaveCallback() {
                 @Override
                 public void done(AVException e) {
                     if (e == null){
@@ -415,7 +433,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                     image_download.setEnabled(false);
                     image_download.setImageResource(R.drawable.icon_downloaded);
                     image_download.setVisibility(View.VISIBLE);
-                    NetWorkRequest.sendMusicDownLoad(info, new SaveCallback() {
+                    netWorkRequest.sendMusicDown(info.musicName, new SaveCallback() {
                         @Override
                         public void done(AVException e) {
                             if (e == null){
@@ -425,6 +443,17 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                             }
                         }
                     });
+
+//                    NetWorkRequest.sendMusicDownLoad(info, new SaveCallback() {
+//                        @Override
+//                        public void done(AVException e) {
+//                            if (e == null){
+//                                IContent.getInstacne(). downList.add( new DownMusicBean(info.musicName,info.type) );
+//                            }else{
+//                                checkNetWork();
+//                            }
+//                        }
+//                    });
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//如果是4.4及以上版本
 

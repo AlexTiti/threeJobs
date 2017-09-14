@@ -75,10 +75,9 @@ import com.findtech.threePomelos.MediaAidlInterface;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.music.info.MusicInfo;
-import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.music.proxy.utils.MediaPlayerProxy;
+import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.receiver.MediaButtonIntentReceiver;
-import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.Tools;
 import com.google.gson.reflect.TypeToken;
 
@@ -221,7 +220,6 @@ public class MediaService extends Service {
     private BroadcastReceiver mUnmountReceiver = null;
     private MusicPlaybackState mPlaybackStateStore;
     private boolean mShowAlbumArtOnLockscreen;
-//    private SongPlayCount mSongPlayCount;
     private RecentStore mRecentStore;
     private int mNotificationId = 1000;
 
@@ -236,6 +234,7 @@ public class MediaService extends Service {
     private boolean mIsLocked;
     private Bitmap mNoBit;
     private Notification mNotification;
+
 
     private Thread mLrcThread = new Thread(new Runnable() {
         @Override
@@ -268,8 +267,6 @@ public class MediaService extends Service {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final String command = intent.getStringExtra(CMDNAME);
-
-            Log.d(TAG, "onreceive" + intent.toURI());
             handleCommandIntent(intent);
 
         }
@@ -277,7 +274,7 @@ public class MediaService extends Service {
 
     @Override
     public IBinder onBind(final Intent intent) {
-        if (D) Log.d(TAG, "Service bound, intent = " + intent);
+
         cancelShutdown();
         mServiceInUse = true;
         return mBinder;
@@ -285,7 +282,7 @@ public class MediaService extends Service {
 
     @Override
     public boolean onUnbind(final Intent intent) {
-        if (D) Log.d(TAG, "Service unbound");
+
         mServiceInUse = false;
         saveQueue(true);
 
@@ -310,7 +307,7 @@ public class MediaService extends Service {
 
     @Override
     public void onCreate() {
-        if (D) Log.d(TAG, "Creating service");
+
         super.onCreate();
         mGetUrlThread.start();
         mLrcThread.start();
@@ -323,7 +320,7 @@ public class MediaService extends Service {
         //创建保存playbacklist、playbackhistory的数据库
         mPlaybackStateStore = MusicPlaybackState.getInstance(this);
 
-      // mSongPlayCount = SongPlayCount.getInstance(this);
+
         //创建最近播放历史数据库
         mRecentStore = RecentStore.getInstance(this);
 
@@ -1237,6 +1234,8 @@ public class MediaService extends Service {
         if (what.equals(META_CHANGED)) {
 
             mRecentStore.addSongId(getAudioId());
+
+         //  mSongPlayCount.bumpSongCount(getAudioId());
 
        } else if (what.equals(QUEUE_CHANGED)) {
             Intent intent1 = new Intent("com.findtech.three.emptyplaylist");

@@ -1,22 +1,15 @@
 package com.findtech.threePomelos.music.activity;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.annotation.MainThread;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
@@ -39,37 +32,25 @@ import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.MyApplication;
-import com.findtech.threePomelos.bluetooth.BLEDevice;
-import com.findtech.threePomelos.entity.TravelInfoEntity;
-import com.findtech.threePomelos.music.utils.DownFileUtils;
-import com.findtech.threePomelos.music.utils.DownMusicBean;
-import com.findtech.threePomelos.music.utils.IConstants;
-import com.findtech.threePomelos.music.utils.MusicComparator;
-import com.findtech.threePomelos.music.utils.MusicUtils;
-import com.findtech.threePomelos.music.utils.PreferencesUtility;
-import com.findtech.threePomelos.music.utils.SortOrder;
-import com.findtech.threePomelos.musicserver.Nammu;
-import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.service.RFStarBLEService;
-import com.findtech.threePomelos.utils.IContent;
-import com.findtech.threePomelos.home.musicbean.MusicNetBean;
 import com.findtech.threePomelos.music.adapter.MusicAdapter;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
+import com.findtech.threePomelos.music.utils.DownFileUtils;
+import com.findtech.threePomelos.music.utils.DownMusicBean;
 import com.findtech.threePomelos.music.utils.HandlerUtil;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.musicserver.MusicPlayer;
+import com.findtech.threePomelos.musicserver.Nammu;
+import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.utils.BitmapUtil;
+import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.NetUtils;
 import com.findtech.threePomelos.utils.ScreenUtils;
-import com.findtech.threePomelos.utils.ToastUtil;
-import com.findtech.threePomelos.utils.Tools;
 import com.findtech.threePomelos.view.BounceScrollView;
 import com.findtech.threePomelos.view.MyListView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -347,7 +328,8 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
         musicInfos.get(down_position).artist = "downing";
         musicAdapter.setAvObjectList(musicInfos);
         musicAdapter.notifyDataSetChanged();
-        L.e("AAAAA","======================");
+
+        final NetWorkRequest netWorkRequest = new NetWorkRequest(this);
         NetWorkRequest.downMusicFromNet(this, info, new ProgressCallback() {
             @Override
             public void done(Integer integer) {
@@ -356,17 +338,30 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
                     musicInfos.get(down_position).artist = "downed";
                     musicAdapter.setAvObjectList(musicInfos);
                     musicAdapter.notifyDataSetChanged();
-                    NetWorkRequest.sendMusicDownLoad(info, new SaveCallback() {
+
+                    netWorkRequest.sendMusicDown(info.musicName, new SaveCallback() {
                         @Override
                         public void done(AVException e) {
                             if (e==null){
-                                IContent.getInstacne(). downList.add( new DownMusicBean(info.musicName,info.type) );
-                                L.e("============","==================="+info.musicName);
-                            }else {
+                                IContent.getInstacne().downList.add(new DownMusicBean(info.musicName, info.type));
+                                L.e("============", "===================" + info.musicName);
+                            } else {
                                 checkNetWork();
                             }
                         }
                     });
+
+//                    NetWorkRequest.sendMusicDownLoad(info, new SaveCallback() {
+//                        @Override
+//                        public void done(AVException e) {
+//                            if (e==null){
+//                                IContent.getInstacne(). downList.add( new DownMusicBean(info.musicName,info.type) );
+//                                L.e("============","==================="+info.musicName);
+//                            }else {
+//                                checkNetWork();
+//                            }
+//                        }
+//                    });
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//如果是4.4及以上版本
                         Intent mediaScanIntent = new Intent(

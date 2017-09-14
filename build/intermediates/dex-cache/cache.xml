@@ -3,156 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c184c69f43b1fe46390f7123717c65bd844bccb6">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_QQZone_1_93158736338c24915b3c38de914c5ea3fb038114\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Administrator\.android\build-cache\f20c66b499b1947cfc4124aecc1dd5f924e2be4c\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3b7105277df9a8013468215c451ddefac2499d3a">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10\classes_5b1ac3a073f4db1a9621016360cd8341d759cc57\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\patchupdate.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="311e10769e9bf8db15f166b8196e8c18b6238c27">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\patchupdate_6573fdce1aad15184f2760a396535c53691be9e3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="D:\Project\threeGrapefruit\app\libs\fastjson-1.2.30.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="8087c3a893d21d0a3ae1d5efa6ee1aec23f3c3da">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\fastjson-1.2.30_d882835016cf6b046b455353bba42558ef2ac94d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4a69b33758dcba3ef519cbd4b6c8af5f41603c4f">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_QQZone_2_7ea1903d68fae04d22e5d88ef70d298a4a48f208\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\Java-WebSocket-1.3.2-leancloud.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="169fd461930335df8099bcbac99c0f206912ced1">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\Java-WebSocket-1.3.2-leancloud_2df50061c7b6f63f174093ae8a4281cbd1155e1a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\okhttp-3.8.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5a11f020cce2d11eb71ba916700600e18c4547e7">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\okhttp-3.8.0_6cc4e52045b9334e8ca7187aeb9d563825e02276\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-push-v4.4.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a2223ea0bd1ac06efc4d472c64b83be5e9df9e58">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\avoscloud-push-v4.4.2_7f2c9eade424fb34ec57f4549d5b33c799393220\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\umeng_social_sdk.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="38c1f37e256f912f926a587ef006ffb44b584437">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\umeng_social_sdk_e8e5ffc7cf249ddcd0b0e8b51578e1218f47f514\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-classes\baidu\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c16571ba686056443a64e2887a176e9ccde09e72">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10000\instant-run-bootstrap_df406cd6307eea3f62148a8b3a574c87649f8e0a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_3.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="7c8d33705d4e43b476dd2d2ec3b692f1894f33e7">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_QQZone_3_e48c29ca065a3b14ce9abeecb779585f668d63ef\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_Sina.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="53b82f26557a31409d06207ff844aee7425a4e22">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_Sina_2c782b6b863eef1176aefce979d56e9e3d8907be\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\okio-1.13.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\okio-1.13.0_96696bc5e8c4c2939828932092c57b3e5e292ad4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\protobuf-java-2.6.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d9521f2aecb909835746b7a5facf612af5e890e8">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\protobuf-java-2.6.1_ddc96cb12d606062590d13b96d401cebd1708909\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\need_lib.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="58de9ecfba229dbb2c3eb3f45dbe284ba58100ea">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\need_lib_804361082b3dfe57ed440f4e3a4b759bc01db2c8\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-sdk-v4.4.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2200d265b824ce7d943f870408346300bd00b31a">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\avoscloud-sdk-v4.4.2_54376919b6bd81708de95f2a96b7f87cdaf61958\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-runtime-classes\baidu\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10000\instant-run_91dc9290c03bf9eb950088ee415b1c22d86db378\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\fastjson-1.2.30_d882835016cf6b046b455353bba42558ef2ac94d\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -161,7 +17,88 @@
         optimize="true"
         revision="25.0.0"
         sha1="52817908728a9be3fd40d9ee7f46009b1b4fba57">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_WeiXin_2_80eb9e106ec5c69d5b7cd8c2c60a66ccac5d68d2\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_WeiXin_2_80eb9e106ec5c69d5b7cd8c2c60a66ccac5d68d2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="586e3ef00cc65906958b64af4271c4802ae93088">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_e2d695d731274d37249375144b8caa2975216212\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c184c69f43b1fe46390f7123717c65bd844bccb6">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_QQZone_1_93158736338c24915b3c38de914c5ea3fb038114\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4a69b33758dcba3ef519cbd4b6c8af5f41603c4f">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_QQZone_2_7ea1903d68fae04d22e5d88ef70d298a4a48f208\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_Sina.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="53b82f26557a31409d06207ff844aee7425a4e22">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_Sina_2c782b6b863eef1176aefce979d56e9e3d8907be\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\okhttp-3.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5a11f020cce2d11eb71ba916700600e18c4547e7">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\okhttp-3.8.0_6cc4e52045b9334e8ca7187aeb9d563825e02276\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\SocialSDK_QQZone_3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7c8d33705d4e43b476dd2d2ec3b692f1894f33e7">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_QQZone_3_e48c29ca065a3b14ce9abeecb779585f668d63ef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-push-v4.4.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a2223ea0bd1ac06efc4d472c64b83be5e9df9e58">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\avoscloud-push-v4.4.2_7f2c9eade424fb34ec57f4549d5b33c799393220\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\patchupdate.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="311e10769e9bf8db15f166b8196e8c18b6238c27">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\patchupdate_6573fdce1aad15184f2760a396535c53691be9e3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\umeng_social_sdk.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="38c1f37e256f912f926a587ef006ffb44b584437">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\umeng_social_sdk_e8e5ffc7cf249ddcd0b0e8b51578e1218f47f514\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -170,7 +107,7 @@
         optimize="true"
         revision="25.0.0"
         sha1="3f8beaf2f9b5357717e0b1ef9f6820e517784ea1">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\mpandroidchartlibrary-2-1-6_ca7ab383c1425673494f5bc0b984fe78a06851af\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\mpandroidchartlibrary-2-1-6_ca7ab383c1425673494f5bc0b984fe78a06851af\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -179,16 +116,7 @@
         optimize="true"
         revision="25.0.0"
         sha1="e8cebae10f6e4662d2ef7e1e2a194bb6740155fb">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\avoscloud-statistics-v4.4.2_cada95f3f4d4a2c3f768e56233bbc5cdcfd87ac0\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Administrator\.android\build-cache\c0b70f610126ab3ddee1c316f20bfc5659e5384d\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\10\classes_0febeb7df7c15ad0920ac6ef141c4da49c1403f1\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\avoscloud-statistics-v4.4.2_cada95f3f4d4a2c3f768e56233bbc5cdcfd87ac0\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -197,7 +125,52 @@
         optimize="true"
         revision="25.0.0"
         sha1="47f4993168154fa73377d7470b9f6887d48a8023">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\SocialSDK_WeiXin_1_a17175c23793dcb0acb84fda6e792184fa00ad33\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\SocialSDK_WeiXin_1_a17175c23793dcb0acb84fda6e792184fa00ad33\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\okio-1.13.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\okio-1.13.0_96696bc5e8c4c2939828932092c57b3e5e292ad4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\protobuf-java-2.6.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d9521f2aecb909835746b7a5facf612af5e890e8">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\protobuf-java-2.6.1_ddc96cb12d606062590d13b96d401cebd1708909\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\Java-WebSocket-1.3.2-leancloud.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="169fd461930335df8099bcbac99c0f206912ced1">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\Java-WebSocket-1.3.2-leancloud_2df50061c7b6f63f174093ae8a4281cbd1155e1a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\need_lib.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="58de9ecfba229dbb2c3eb3f45dbe284ba58100ea">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\need_lib_804361082b3dfe57ed440f4e3a4b759bc01db2c8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_cc823fcb76ba125cca04ced25a255f2bc24e9475\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -206,7 +179,16 @@
         optimize="true"
         revision="25.0.0"
         sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
-        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\baidu\debug\folders\1000\2\httpmime-4.1.3_cdb2cb45ef01408d725699e1492a87415fec8fca\classes.dex" />
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\httpmime-4.1.3_cdb2cb45ef01408d725699e1492a87415fec8fca\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Project\threeGrapefruit\app\libs\avoscloud-sdk-v4.4.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2200d265b824ce7d943f870408346300bd00b31a">
+        <dex dex="D:\Project\threeGrapefruit\app\build\intermediates\transforms\dex\debug\folders\1000\2\avoscloud-sdk-v4.4.2_54376919b6bd81708de95f2a96b7f87cdaf61958\classes.dex" />
     </item>
 
 </items>
