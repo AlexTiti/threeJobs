@@ -73,15 +73,12 @@ public class MusicBabyActivity extends MyActionBarActivity implements ItemClickL
         }
             goMusic();
     }
-
     @Override
     public void successful(ArrayList<MusicInfo> musicInfos) {
         this.musicInfos = musicInfos;
         showMusicAdapter.setMusicInfos(musicInfos);
         showMusicAdapter.notifyDataSetChanged();
-
     }
-
     @Override
     public void onError() {
         nodata_layout.setVisibility(View.VISIBLE);

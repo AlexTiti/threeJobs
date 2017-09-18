@@ -39,12 +39,12 @@ import com.findtech.threePomelos.view.dialog.CustomDialog;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RencentMusicActivity extends MyActionBarActivity implements ItemClickListtener, MusicViewIn<Song> {
+public class RencentMusicActivity extends MyActionBarActivity implements ItemClickListtener, MusicViewIn<MusicInfo> {
 
     private RecyclerView recyclerView;
     private RecenetMusicAdapter showMusicAdapter;
     private RecentMusicPresent recnetMusicPresent;
-    private ArrayList<Song> songs = new ArrayList<>();
+    private ArrayList<MusicInfo> songs = new ArrayList<>();
     PlayMusic playMusic;
     Handler handler;
     private LinearLayout nodata_layout;
@@ -90,7 +90,7 @@ public class RencentMusicActivity extends MyActionBarActivity implements ItemCli
     }
 
     @Override
-    public void successful(ArrayList<Song> musicInfos) {
+    public void successful(ArrayList<MusicInfo> musicInfos) {
         songs = musicInfos;
         showMusicAdapter.setMusicInfos(musicInfos);
         showMusicAdapter.notifyDataSetChanged();
@@ -122,10 +122,9 @@ public class RencentMusicActivity extends MyActionBarActivity implements ItemCli
             long[] list = new long[songs.size()];
             HashMap<Long, MusicInfo> infos = new HashMap();
             for (int i = 0; i < songs.size(); i++) {
-                MusicInfo info = MusicUtils.getMusicInfo(RencentMusicActivity.this, songs.get(i).id);
+
+                MusicInfo info = songs.get(i);
                 list[i] = info.songId;
-                info.islocal = true;
-                info.albumData = MusicUtils.getAlbumArtUri(info.albumId) + "";
                 infos.put(list[i], info);
             }
             if (position > -1)

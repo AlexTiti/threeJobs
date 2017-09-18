@@ -172,12 +172,14 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
      */
     public void updateQueue() {
 
+
     }
 
     /**
      * 更新歌曲状态信息
      */
     public void updateTrackInfo() {
+
         for (final MusicStateListener listener : mMusicListener) {
             if (listener != null) {
                 listener.reloadAdapter();
@@ -200,6 +202,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     }
 
     public void updateTime() {
+
         for (final MusicStateListener listener : mMusicListener) {
             if (listener != null) {
                 listener.updateTime();
@@ -212,10 +215,12 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
      */
     public void updateTrack() {
 
+
     }
 
 
     public void updateLrc() {
+
 
     }
 

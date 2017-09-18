@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.findtech.threePomelos.R;
+import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.musicserver.MusicPlayer;
@@ -27,11 +28,11 @@ import java.util.ArrayList;
 public class RecenetMusicAdapter extends RecyclerView.Adapter<RecenetMusicAdapter.RecenetMusicViewHolder> {
 
 
-    private ArrayList<Song> songs;
+    private ArrayList<MusicInfo> songs;
     private ItemClickListtener itemCliclListener;
 
 
-    public void setMusicInfos(ArrayList<Song> songs) {
+    public void setMusicInfos(ArrayList<MusicInfo> songs) {
         this.songs = songs;
     }
 
@@ -47,8 +48,8 @@ public class RecenetMusicAdapter extends RecyclerView.Adapter<RecenetMusicAdapte
     @Override
     public void onBindViewHolder(RecenetMusicViewHolder holder,final   int position) {
         holder.image_down.setVisibility(View.INVISIBLE);
-        Song song = songs.get(position);
-        holder.text_name.setText(song.title);
+        MusicInfo song = songs.get(position);
+        holder.text_name.setText(song.musicName);
         holder.text_number.setText(String.valueOf(position+1));
 
         holder.text_name.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +58,8 @@ public class RecenetMusicAdapter extends RecyclerView.Adapter<RecenetMusicAdapte
                 itemCliclListener.click(position);
             }
         });
-        L.e("=============",MusicPlayer.getCurrentAudioId()+"======="+song.id);
-        if (MusicPlayer.getCurrentAudioId() == song.id) {
+
+        if (MusicPlayer.getCurrentAudioId() == song.songId) {
             holder.text_number.setVisibility(View.INVISIBLE);
             holder.imageView.setVisibility(View.VISIBLE);
             holder.imageView.setImageResource(R.drawable.song_play_icon);

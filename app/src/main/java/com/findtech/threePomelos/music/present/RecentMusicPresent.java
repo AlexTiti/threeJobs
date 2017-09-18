@@ -2,6 +2,7 @@ package com.findtech.threePomelos.music.present;
 
 import android.content.Context;
 
+import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.CollectModel;
 import com.findtech.threePomelos.music.model.PresentIn;
 import com.findtech.threePomelos.music.model.RencentModelImp;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  *   desc     :
  *   version  :   V 1.0.5
  */
-public class RecentMusicPresent implements PresentIn<Song> {
+public class RecentMusicPresent implements PresentIn<MusicInfo> {
 
     private CollectModel collectModel;
     private MusicViewIn musicViewIn;
@@ -36,7 +37,7 @@ public class RecentMusicPresent implements PresentIn<Song> {
 
 
     @Override
-    public void setData(ArrayList<Song> arrayList) {
+    public void setData(ArrayList<MusicInfo> arrayList) {
         musicViewIn.successful(arrayList);
     }
 

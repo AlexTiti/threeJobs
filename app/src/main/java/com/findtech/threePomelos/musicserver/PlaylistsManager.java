@@ -35,6 +35,7 @@ public class PlaylistsManager {
 
     //建立播放列表表设置播放列表id和歌曲id为复合主键
     public void onCreate(final SQLiteDatabase db) {
+
         db.execSQL("CREATE TABLE IF NOT EXISTS " + PlaylistsColumns.NAME + " ("
                 + PlaylistsColumns.PLAYLIST_ID + " LONG NOT NULL," + PlaylistsColumns.TRACK_ID + " LONG NOT NULL,"
                 + PlaylistsColumns.TRACK_NAME + " CHAR NOT NULL," + PlaylistsColumns.ALBUM_ID + " LONG,"
@@ -43,6 +44,7 @@ public class PlaylistsManager {
                 + PlaylistsColumns.IS_LOCAL + " BOOLEAN ," + PlaylistsColumns.PATH + " CHAR," + PlaylistsColumns.LRC + " CHAR,"
                 + PlaylistsColumns.TRACK_ORDER + " LONG NOT NULL, primary key ( " + PlaylistsColumns.PLAYLIST_ID
                 + ", " + PlaylistsColumns.TRACK_ID + "));");
+
     }
 
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {

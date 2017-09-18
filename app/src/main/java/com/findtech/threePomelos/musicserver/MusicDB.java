@@ -23,7 +23,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MusicDB extends SQLiteOpenHelper {
 
     public static final String DATABASENAME = "musicdb.db";
-    private static final int VERSION = 4;
+    private static final int VERSION = 5;
     private static MusicDB sInstance = null;
 
     private final Context mContext;
@@ -52,22 +52,19 @@ public class MusicDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        MusicPlaybackState.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
-        RecentStore.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
-       // SongPlayCount.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
-        PlaylistInfo.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
-        PlaylistsManager.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
+        switch (newVersion){
+            case 5 :
+                RecentStore.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
+                break;
+        }
+
+
 
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        MusicPlaybackState.getInstance(mContext).onDowngrade(db, oldVersion, newVersion);
-        RecentStore.getInstance(mContext).onDowngrade(db, oldVersion, newVersion);
-        //SongPlayCount.getInstance(mContext).onDowngrade(db, oldVersion, newVersion);
 
-        PlaylistInfo.getInstance(mContext).onDowngrade(db, oldVersion, newVersion);
-        PlaylistsManager.getInstance(mContext).onDowngrade(db, oldVersion, newVersion);
 
     }
 }

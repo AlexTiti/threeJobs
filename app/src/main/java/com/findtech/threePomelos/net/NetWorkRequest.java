@@ -1090,5 +1090,31 @@ public class NetWorkRequest {
 
     }
 
+    public static void setPlayCount(final String musicName ,final int count){
+        AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
+        query.whereEqualTo("post_user",AVUser.getCurrentUser());
+        query.whereEqualTo("musicName",musicName);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null){
+
+                    if (list != null && list.size() > 0){
+                        AVObject avObject = list.get(0);
+                        avObject.put("play_count",String.valueOf(count));
+                        avObject.saveInBackground();
+                    }else {
+
+                        AVObject avObject = new AVObject(MUSIC_USER);
+                        avObject.put("musicName",musicName);
+                        avObject.put("post_user",AVUser.getCurrentUser());
+                        avObject.put("play_count",String.valueOf(count));
+                        avObject.saveInBackground();
+                    }
+                }
+            }
+        });
+    }
+
 
 }
