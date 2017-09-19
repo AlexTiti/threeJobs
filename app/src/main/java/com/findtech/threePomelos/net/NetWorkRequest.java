@@ -1072,7 +1072,6 @@ public class NetWorkRequest {
                 if (e == null){
 
                     if (list != null && list.size() > 0){
-
                         AVObject avObject = list.get(0);
                         avObject.put("is_collected","1");
                         avObject.saveInBackground(saveCallback);
@@ -1087,10 +1086,35 @@ public class NetWorkRequest {
                 }
             }
         });
-
     }
 
+    public void deleteMusicCollecting(final String musicName, final SaveCallback saveCallback){
+
+        AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
+        query.whereEqualTo("post_user",AVUser.getCurrentUser());
+        query.whereEqualTo("musicName",musicName);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null){
+                    if (list != null && list.size() > 0){
+                        AVObject avObject = list.get(0);
+                        avObject.put("is_collected","0");
+                        avObject.saveInBackground(saveCallback);
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
     public static void setPlayCount(final String musicName ,final int count){
+        L.e("setPlayCount","==================================="+musicName);
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
         query.whereEqualTo("post_user",AVUser.getCurrentUser());
         query.whereEqualTo("musicName",musicName);

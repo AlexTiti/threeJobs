@@ -65,7 +65,7 @@ public class RecentStore {
                 + PlaylistsManager.PlaylistsColumns.PATH + " CHAR,"
                 + PlaylistsManager.PlaylistsColumns.LRC + " CHAR,"
                 + PlaylistsManager.PlaylistsColumns.TRACK_ORDER + " LONG , primary key ( "
-                + PlaylistsManager.PlaylistsColumns.TRACK_ID + "));");
+                + PlaylistsManager.PlaylistsColumns.TRACK_NAME + "));");
 
 
 //        db.execSQL("CREATE TABLE IF NOT EXISTS " + RecentStoreColumns.NAME + " ("
@@ -146,6 +146,7 @@ public class RecentStore {
                 values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
                 values.put(RecentStoreColumns.PLAYCOUNT, count_pre);
                 database.update(RecentStoreColumns.NAME, values, WHERE_ID_EQUALS, new String[]{info.musicName});
+
                 NetWorkRequest.setPlayCount(info.musicName,count_pre);
 
             } else {
@@ -206,7 +207,7 @@ public class RecentStore {
     public synchronized Cursor queryRecentIds(final String limit) {
         final SQLiteDatabase database = mMusicDatabase.getReadableDatabase();
         Cursor cursor = database.query(RecentStoreColumns.NAME,
-                new String[]{RecentStoreColumns.ID}, null, null, null, null,
+                new String[]{RecentStoreColumns.ID,RecentStoreColumns.PLAYCOUNT}, null, null, null, null,
                 RecentStoreColumns.TIMEPLAYED + " DESC", limit);
         return cursor;
     }

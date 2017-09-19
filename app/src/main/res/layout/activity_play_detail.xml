@@ -199,10 +199,11 @@
             android:id="@+id/image_collection"
             android:layout_width="@dimen/y18"
             android:layout_height="@dimen/y18"
-            android:layout_centerInParent="true"
             android:background="@drawable/bac_play_next"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_baby_like"/>
+            android:src="@drawable/icon_baby_like"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 

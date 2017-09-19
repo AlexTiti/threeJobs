@@ -154,19 +154,26 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
     @Override
     public void collect(int position) {
         final MusicInfo info = musicInfos.get(position);
-        NetWorkRequest.sendMusicCollect(info, new SaveCallback() {
+//        NetWorkRequest.sendMusicCollect(info, new SaveCallback() {
+//            @Override
+//            public void done(AVException e) {
+//
+//            }
+//        });
+        netWorkRequest.sendMusicCollecting(info.musicName, new SaveCallback() {
             @Override
             public void done(AVException e) {
                 if (e == null){
-                    L.e("=================","==================deleteCollect"+IContent.getInstacne().collection_array);
+
                     mPlaylistsManager.insertMusic(HotRecommenActivity.this, IConstants.FAV_PLAYLIST, info);
                     IContent.getInstacne().collection_array.add(new DownMusicBean(info.musicName,info.type));
-                    L.e("=================","==================deleteCollect"+IContent.getInstacne().collection_array);
+
                     adapter.notifyDataSetChanged();
                 }else{
-                    L.e("=================","==================deleteCollect");
+
                     checkNetWork();
                 }
+
             }
         });
     }
@@ -175,36 +182,44 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
     @Override
     public void deleteCollect(int position) {
         final MusicInfo info = musicInfos.get(position);
-        L.e("=================","==================deleteCollect");
+
         for ( int i=0;i<IContent.getInstacne().collection_array.size();i++){
              bean = IContent.getInstacne().collection_array.get(i);
             if (info.musicName.equals(bean.getMusicName())) {
-                L.e("=================","=================="+IContent.getInstacne().collection_array.size());
-
-                netWorkRequest.deleteMusicCollect(info.musicName, new FindCallback<AVObject>() {
+                netWorkRequest.deleteMusicCollecting(info.musicName, new SaveCallback() {
                     @Override
-                    public void done(List<AVObject> list, AVException e) {
-                        if (e == null) {
-                            for (AVObject avObject : list){
-                                avObject.deleteInBackground(new DeleteCallback() {
-                                    @Override
-                                    public void done(AVException e) {
-                                        if (e==null){
-                                            IContent.getInstacne().collection_array.remove(bean);
-                                            mPlaylistsManager.removeItem(HotRecommenActivity.this, IConstants.FAV_PLAYLIST,
-                                                    info.songId);
-                                            L.e("=================","=================="+IContent.getInstacne().collection_array.size());
-                                            adapter.notifyDataSetChanged();
-                                        }
-                                    }
-                                });
+                    public void done(AVException e) {
+                        if (e == null){
+                            IContent.getInstacne().collection_array.remove(bean);
+                            mPlaylistsManager.removeItem(HotRecommenActivity.this, IConstants.FAV_PLAYLIST,
+                                    info.songId);
 
-                            }
+                            adapter.notifyDataSetChanged();
                         }else {
                             checkNetWork();
                         }
                     }
                 });
+//                netWorkRequest.deleteMusicCollect(info.musicName, new FindCallback<AVObject>() {
+//                    @Override
+//                    public void done(List<AVObject> list, AVException e) {
+//                        if (e == null) {
+//                            for (AVObject avObject : list){
+//                                avObject.deleteInBackground(new DeleteCallback() {
+//                                    @Override
+//                                    public void done(AVException e) {
+//                                        if (e==null){
+//
+//                                        }
+//                                    }
+//                                });
+//
+//                            }
+//                        }else {
+//                            checkNetWork();
+//                        }
+//                    }
+//                });
 
             }
         }

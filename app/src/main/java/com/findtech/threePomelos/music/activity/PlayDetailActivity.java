@@ -27,6 +27,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
@@ -57,6 +59,7 @@ import com.findtech.threePomelos.view.dialog.CustomDialog;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -361,7 +364,6 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         image_voice.setImageResource(R.drawable.icon_voice);
     }
 
-
     /**
      * to collect music for baby like
      */
@@ -373,11 +375,18 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                     MusicPlayer.getCurrentAudioId());
 
 
-            for (int i=0;i<IContent.getInstacne().collection_array.size();i++){
-                DownMusicBean bean = IContent.getInstacne().collection_array.get(i);
-                if (info.musicName.equals(bean.getMusicName()) )
-                    IContent.getInstacne().collection_array.remove(i);
-            }
+            netWorkRequest.deleteMusicCollecting(info.musicName, new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    for (int i=0;i<IContent.getInstacne().collection_array.size();i++){
+                        DownMusicBean bean = IContent.getInstacne().collection_array.get(i);
+                        if (info.musicName.equals(bean.getMusicName()) )
+                            IContent.getInstacne().collection_array.remove(i);
+                    }
+                }
+            });
+
+
 
         } else {
             L.e(Log_TAG, info.musicName + info.islocal + "---------------------------" + info.lrc + info.data + info.albumData);
