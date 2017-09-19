@@ -223,8 +223,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <service
-            android:name=".musicserver.MediaService"/>
-            <!--android:process=":main"-->
+            android:name=".musicserver.MediaService"
+            android:process=":main"
             />
 
 
