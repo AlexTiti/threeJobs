@@ -450,6 +450,16 @@ public class MusicPlayer {
         }
     }
 
+    public static void timing(int time) {
+        if (mService == null) {
+            return;
+        }
+        try {
+            mService.timing(time);
+        } catch (Exception e) {
+
+        }
+    }
 
     public static final class ServiceBinder implements ServiceConnection {
         private final ServiceConnection mCallback;

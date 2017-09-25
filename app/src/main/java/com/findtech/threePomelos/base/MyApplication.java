@@ -31,11 +31,11 @@ public class MyApplication extends Application {
     public static final String TAG = "_TAG";
     private List<Activity> activitys = null;
     private static MyApplication instance;
-    private static final String APPID = "1R2oS0W0U9dJGveftbxOHGy3-gzGzoHsz";
-    private static final String APPKEY = "Pf2Gper3lCPI0neKo0EKWdLN";
+    //private static final String APPID = "1R2oS0W0U9dJGveftbxOHGy3-gzGzoHsz";
+    //private static final String APPKEY = "Pf2Gper3lCPI0neKo0EKWdLN";
 
-    private static final String APPID_TEST = "prnPRaln6v5xwNqUkQu5sFUA-gzGzoHsz";
-    private static final String APPKEY_TEST  = "zQodN3qR7OOVjizMfqTI3LXE";
+   private static final String APPID_TEST = "prnPRaln6v5xwNqUkQu5sFUA-gzGzoHsz";
+  private static final String APPKEY_TEST  = "zQodN3qR7OOVjizMfqTI3LXE";
     public static final boolean DEBUG = false;
     public static String passwordStr;
     private ArrayList<PersonDataEntity> timeHeightDataArray = new ArrayList<>();
