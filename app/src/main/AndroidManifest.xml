@@ -224,6 +224,7 @@
 
         <service
             android:name=".musicserver.MediaService"
+            android:process=":main"
             />
 
         <service android:name=".musicserver.FloatingService" />

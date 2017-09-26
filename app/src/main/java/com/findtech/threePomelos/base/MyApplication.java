@@ -31,7 +31,7 @@ public class MyApplication extends Application {
     public static final String TAG = "_TAG";
     private List<Activity> activitys = null;
     private static MyApplication instance;
-    //private static final String APPID = "1R2oS0W0U9dJGveftbxOHGy3-gzGzoHsz";
+  // private static final String APPID = "1R2oS0W0U9dJGveftbxOHGy3-gzGzoHsz";
     //private static final String APPKEY = "Pf2Gper3lCPI0neKo0EKWdLN";
 
    private static final String APPID_TEST = "prnPRaln6v5xwNqUkQu5sFUA-gzGzoHsz";

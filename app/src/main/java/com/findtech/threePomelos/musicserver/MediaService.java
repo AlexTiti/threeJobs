@@ -1226,16 +1226,12 @@ public class MediaService extends Service {
         musicIntent.setAction(what.replace(TIMBER_PACKAGE_NAME, MUSIC_PACKAGE_NAME));
         sendStickyBroadcast(musicIntent);
 
-
 //        if (what.equals(MUSIC_CHANGED)){
 //            L.e("CCCCCCCCCCDDDD",getAudioId()+"==========================="+what);
 //            mRecentStore.addSongId(getAudioId());
 //        }
         if (what.equals(META_CHANGED)) {
-
-            mRecentStore.addSongId(getAudioId());
-
-         //  mSongPlayCount.bumpSongCount(getAudioId());
+           // mRecentStore.addSongId(getAudioId());
 
        } else if (what.equals(QUEUE_CHANGED)) {
             Intent intent1 = new Intent("com.findtech.three.emptyplaylist");
