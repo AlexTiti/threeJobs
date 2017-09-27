@@ -187,6 +187,9 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             }
         }
 
+
+
+
     }
 
     /**

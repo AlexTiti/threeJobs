@@ -392,7 +392,10 @@ public class MediaService extends Service {
 
       //  reloadQueueAfterPermissionCheck();
         notifyChange(QUEUE_CHANGED);
-        notifyChange(META_CHANGED);
+        /**
+         * 修改这里了
+         */
+       // notifyChange(META_CHANGED);
     }
 
     private void setUpMediaSession() {
@@ -1233,9 +1236,10 @@ public class MediaService extends Service {
 //        }
         if (what.equals(META_CHANGED)) {
 
-            mRecentStore.addSongId(getAudioId());
 
-         //  mSongPlayCount.bumpSongCount(getAudioId());
+
+            mRecentStore.addSongId(getAudioId());
+            //mSongPlayCount.bumpSongCount(getAudioId());
 
        } else if (what.equals(QUEUE_CHANGED)) {
             Intent intent1 = new Intent("com.findtech.three.emptyplaylist");

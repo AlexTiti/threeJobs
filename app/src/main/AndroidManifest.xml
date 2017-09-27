@@ -224,9 +224,11 @@
 
         <service
             android:name=".musicserver.MediaService"
-            android:process=":main"
+
             />
 
+        <!--android:process=":main"-->
+        <!--RecentStore addSong()-->
 
 
         <service android:name=".musicserver.FloatingService" />

@@ -89,6 +89,7 @@ public class IContent {
     public ArrayList<DeviceCarBean> addressList = new ArrayList<>();
     public static boolean isModePlay = true;
     public static  final String ACTION_PLAY_OR_PAUSE = "ACTION_PLAY_OR_PAUSE";
+    public static String MUSIC_NAME = null;
 
 
 }

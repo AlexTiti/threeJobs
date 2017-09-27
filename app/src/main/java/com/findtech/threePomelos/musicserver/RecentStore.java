@@ -24,8 +24,10 @@ import android.database.sqlite.SQLiteDatabase;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
+import com.findtech.threePomelos.utils.IContent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RecentStore {
 
@@ -105,10 +107,93 @@ public class RecentStore {
         }
     }
 
+//    public synchronized void addSongId(final long songId) {
+//
+//
+//        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
+//        database.beginTransaction();
+//
+//        try {
+//            Cursor mostRecentItem = null;
+//            try {
+//                mostRecentItem = queryRecentIds("1");
+//                if (mostRecentItem != null && mostRecentItem.moveToFirst()) {
+//                    if (songId == mostRecentItem.getLong(0)) {
+//                        return;
+//                    }
+//                }
+//            } finally {
+//                if (mostRecentItem != null) {
+//                    mostRecentItem.close();
+//                    mostRecentItem = null;
+//                }
+//            }
+//
+//            /**
+//             *  网络歌曲添加进最近播放
+//             */
+//
+//           L.e("=====",songId+"====");
+//
+//
+//            if (songId >=0  && MusicPlayer.getPlayinfos() != null) {
+//                MusicInfo info = MusicPlayer.getPlayinfos().get(songId);
+//                L.e("=====",info.musicName);
+//                final ContentValues values = new ContentValues();
+//                values.put(RecentStoreColumns.ID, songId);
+//                values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
+//                values.put(PlaylistsManager.PlaylistsColumns.TRACK_ID, songId);
+//                //values.put(PlaylistsManager.PlaylistsColumns.TRACK_ID, info.songId);
+//                values.put(PlaylistsManager.PlaylistsColumns.TRACK_NAME, info.musicName);
+//                values.put(PlaylistsManager.PlaylistsColumns.ALBUM_ID, info.albumId);
+//                values.put(PlaylistsManager.PlaylistsColumns.ALBUM_NAME, info.albumName);
+//                values.put(PlaylistsManager.PlaylistsColumns.ALBUM_ART, info.albumData);
+//                values.put(PlaylistsManager.PlaylistsColumns.ARTIST_NAME, info.artist);
+//                values.put(PlaylistsManager.PlaylistsColumns.ARTIST_ID, info.artistId);
+//                values.put(PlaylistsManager.PlaylistsColumns.PATH, info.data);
+//                values.put(PlaylistsManager.PlaylistsColumns.IS_LOCAL, info.islocal);
+//                values.put(PlaylistsManager.PlaylistsColumns.LRC, info.lrc);
+//                database.insert(RecentStoreColumns.NAME, null, values);
+//            }
+//
+//
+//            Cursor oldest = null;
+//            try {
+//                oldest = database.query(RecentStoreColumns.NAME,
+//                        new String[]{RecentStoreColumns.TIMEPLAYED}, null, null, null, null,
+//                        RecentStoreColumns.TIMEPLAYED + " ASC");
+//
+//                if (oldest != null && oldest.getCount() > MAX_ITEMS_IN_DB) {
+//                    oldest.moveToPosition(oldest.getCount() - MAX_ITEMS_IN_DB);
+//                    long timeOfRecordToKeep = oldest.getLong(0);
+//
+//                    database.delete(RecentStoreColumns.NAME,
+//                            RecentStoreColumns.TIMEPLAYED + " < ?",
+//                            new String[]{String.valueOf(timeOfRecordToKeep)});
+//
+//                }
+//            } finally {
+//                if (oldest != null) {
+//                    oldest.close();
+//                    oldest = null;
+//                }
+//            }
+//        } finally {
+//            database.setTransactionSuccessful();
+//            database.endTransaction();
+//        }
+//    }
+
+    /**
+     * 将歌曲统计和最近播放放在一起,因为无法获取MusicPlayer实例；进程通信会闪退
+     *
+     * @param songId
+     */
+
     public synchronized void addSongId(final long songId) {
-        if (songId < 0)
-            return;
-        MusicInfo info = MusicPlayer.getPlayinfos().get(songId);
+
+
+        L.e("count_pre","addSongId");
 
         final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         database.beginTransaction();
@@ -119,10 +204,17 @@ public class RecentStore {
                 if (mostRecentItem != null && mostRecentItem.moveToFirst()) {
                     if (songId == mostRecentItem.getLong(0)) {
                         if (mostRecentItem != null) {
-                            mostRecentItem.getColumnIndex(RecentStoreColumns.PLAYCOUNT);
-                            int count_first = mostRecentItem.getInt(mostRecentItem.getColumnIndex(RecentStoreColumns.PLAYCOUNT));
-                            count_first++;
-                            update(count_first, info.musicName);
+                            if (songId >=0  && MusicPlayer.getPlayinfos() != null) {
+                                MusicInfo info = MusicPlayer.getPlayinfos().get(songId);
+                                if (IContent.MUSIC_NAME != info.musicName) {
+                                    IContent.MUSIC_NAME = info.musicName;
+                                    mostRecentItem.getColumnIndex(RecentStoreColumns.PLAYCOUNT);
+                                    int count_first = mostRecentItem.getInt(mostRecentItem.getColumnIndex(RecentStoreColumns.PLAYCOUNT));
+                                    count_first++;
+                                    L.e("count_pre", count_first + "====" + info.musicName);
+                                    update(count_first, info.musicName);
+                                }
+                            }
                         }
                         return;
                     }
@@ -132,40 +224,41 @@ public class RecentStore {
                     mostRecentItem.close();
                 }
             }
-
-            final Cursor cursor = database.query(RecentStoreColumns.NAME, null, WHERE_ID_EQUALS,
-                    new String[]{info.musicName}, null, null, null);
-            int count_pre = 0;
-            if (cursor != null && cursor.moveToFirst()) {
-              L.e("count_pre", cursor.getLong(0)+"="+cursor.getLong(1)+"="+cursor.getInt(2)+"="+cursor.getLong(3)+"="+cursor.getString(4)) ;
-                count_pre = cursor.getInt(cursor.getColumnIndex(RecentStoreColumns.PLAYCOUNT));
-                count_pre++;
-                L.e("count_pre","count_pre = "+count_pre);
-                ContentValues values = new ContentValues(3);
-                values.put(RecentStoreColumns.ID, songId);
-                values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
-                values.put(RecentStoreColumns.PLAYCOUNT, count_pre);
-                database.update(RecentStoreColumns.NAME, values, WHERE_ID_EQUALS, new String[]{info.musicName});
-
-                NetWorkRequest.setPlayCount(info.musicName,count_pre);
-
-            } else {
-                final ContentValues values = new ContentValues(12);
-                values.put(RecentStoreColumns.ID, songId);
-                values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
-                values.put(RecentStoreColumns.PLAYCOUNT, 1);
-                values.put(PlaylistsManager.PlaylistsColumns.TRACK_ID, info.songId);
-                values.put(PlaylistsManager.PlaylistsColumns.TRACK_NAME, info.musicName);
-                values.put(PlaylistsManager.PlaylistsColumns.ALBUM_ID, info.albumId);
-                values.put(PlaylistsManager.PlaylistsColumns.ALBUM_NAME, info.albumName);
-                values.put(PlaylistsManager.PlaylistsColumns.ALBUM_ART, info.albumData);
-                values.put(PlaylistsManager.PlaylistsColumns.ARTIST_NAME, info.artist);
-                values.put(PlaylistsManager.PlaylistsColumns.ARTIST_ID, info.artistId);
-                values.put(PlaylistsManager.PlaylistsColumns.PATH, info.data);
-                values.put(PlaylistsManager.PlaylistsColumns.IS_LOCAL, info.islocal);
-                values.put(PlaylistsManager.PlaylistsColumns.LRC, info.lrc);
-                database.insert(RecentStoreColumns.NAME, null, values);
-                NetWorkRequest.setPlayCount(info.musicName,1);
+            if (songId >= 0  && MusicPlayer.getPlayinfos() != null) {
+                MusicInfo info = MusicPlayer.getPlayinfos().get(songId);
+                final Cursor cursor = database.query(RecentStoreColumns.NAME, null, WHERE_ID_EQUALS,
+                        new String[]{info.musicName}, null, null, null);
+                int count_pre = 0;
+                if (cursor != null && cursor.moveToFirst()) {
+                    L.e("count_pre", cursor.getLong(0) + "=" + cursor.getLong(1) + "=" + cursor.getInt(2) + "=" + cursor.getLong(3) + "=" + cursor.getString(4));
+                    count_pre = cursor.getInt(cursor.getColumnIndex(RecentStoreColumns.PLAYCOUNT));
+//                    count_pre++;
+                    L.e("count_pre", "count_pre = " + count_pre);
+                    ContentValues values = new ContentValues(3);
+                    values.put(RecentStoreColumns.ID, songId);
+                    values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
+                    values.put(RecentStoreColumns.PLAYCOUNT, count_pre);
+                    L.e("count_pre", "count_pre = " + count_pre);
+                    database.update(RecentStoreColumns.NAME, values, WHERE_ID_EQUALS, new String[]{info.musicName});
+                    NetWorkRequest.setPlayCount(info.musicName, count_pre);
+                } else {
+                    final ContentValues values = new ContentValues(12);
+                    values.put(RecentStoreColumns.ID, songId);
+                    values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
+                    values.put(RecentStoreColumns.PLAYCOUNT, 1);
+                    values.put(PlaylistsManager.PlaylistsColumns.TRACK_ID, info.songId);
+                    values.put(PlaylistsManager.PlaylistsColumns.TRACK_NAME, info.musicName);
+                    values.put(PlaylistsManager.PlaylistsColumns.ALBUM_ID, info.albumId);
+                    values.put(PlaylistsManager.PlaylistsColumns.ALBUM_NAME, info.albumName);
+                    values.put(PlaylistsManager.PlaylistsColumns.ALBUM_ART, info.albumData);
+                    values.put(PlaylistsManager.PlaylistsColumns.ARTIST_NAME, info.artist);
+                    values.put(PlaylistsManager.PlaylistsColumns.ARTIST_ID, info.artistId);
+                    values.put(PlaylistsManager.PlaylistsColumns.PATH, info.data);
+                    values.put(PlaylistsManager.PlaylistsColumns.IS_LOCAL, info.islocal);
+                    values.put(PlaylistsManager.PlaylistsColumns.LRC, info.lrc);
+                    database.insert(RecentStoreColumns.NAME, null, values);
+                    NetWorkRequest.setPlayCount(info.musicName, 1);
+                }
             }
             Cursor oldest = null;
             try {
@@ -195,7 +288,6 @@ public class RecentStore {
             database.endTransaction();
         }
     }
-
     public synchronized void removeItem(final long songId) {
         final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         database.delete(RecentStoreColumns.NAME, RecentStoreColumns.ID + " = ?", new String[]{
@@ -218,10 +310,10 @@ public class RecentStore {
         Cursor cursor = null;
         try {
             cursor = mMusicDatabase.getReadableDatabase().query(RecentStoreColumns.NAME, null,
-                    null, null, null, null,  RecentStoreColumns.TIMEPLAYED + " DESC ", null);
+                    null, null, null, null, RecentStoreColumns.TIMEPLAYED + " DESC ", null);
             if (cursor != null && cursor.moveToFirst()) {
                 results.ensureCapacity(cursor.getCount());
-                L.e("SixItem",cursor.getLong(1)+"=="+cursor.getString(2)+"=="+cursor.getInt(3)+"=="+cursor.getInt(4)+"=="+cursor.getString(5)+"=="+cursor.getInt(6)+"=="+cursor.getInt(7) );
+                L.e("SixItem", cursor.getLong(1) + "==" + cursor.getString(2) + "==" + cursor.getInt(3) + "==" + cursor.getInt(4) + "==" + cursor.getString(5) + "==" + cursor.getInt(6) + "==" + cursor.getInt(7));
                 do {
                     MusicInfo info = new MusicInfo();
                     info.songId = cursor.getLong(3);
@@ -246,10 +338,6 @@ public class RecentStore {
             }
         }
     }
-
-
-
-
 
 
     public interface RecentStoreColumns {
