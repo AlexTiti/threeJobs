@@ -67,7 +67,6 @@ public class BabyHealthTipsContentActivity extends MyActionBarActivity implement
     boolean date = false;
     boolean data_b = false;
     private int click_position;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
