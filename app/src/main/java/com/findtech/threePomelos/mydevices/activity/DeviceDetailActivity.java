@@ -189,13 +189,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         });
 
 
-
-
-
-
-
-
-
         mSeekBar.setMax(6);
         mSeekBar.setProgress(0);
        // back = (ImageView) findViewById(R.id.back);

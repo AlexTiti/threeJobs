@@ -252,8 +252,10 @@ public class MusicPlayer {
     public static final HashMap<Long, MusicInfo> getPlayinfos() {
         try {
             if (mService != null) {
+
                 return (HashMap<Long, MusicInfo>) mService.getPlayinfos();
             } else {
+
             }
         } catch (final RemoteException ignored) {
         }

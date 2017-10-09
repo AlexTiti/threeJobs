@@ -224,8 +224,12 @@
 
         <service
             android:name=".musicserver.MediaService"
-            android:process=":main"
+
             />
+
+        <!--android:process=":main"-->
+        <!--RecentStore addSong()-->
+
 
         <service android:name=".musicserver.FloatingService" />
 
@@ -245,7 +249,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".music.activity.RencentMusicActivity" />
-        <activity android:name=".mydevices.activity.BluetoothlinkActivity" />
+        <activity android:name=".mydevices.activity.BluetoothlinkActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".music.activity.CarMusicActivity" />
         <activity android:name=".mydevices.activity.DeviceDetailActivity" />
         <activity android:name=".mydevices.activity.RepairActivity" />

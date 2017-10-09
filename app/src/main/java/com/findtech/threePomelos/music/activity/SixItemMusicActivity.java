@@ -182,6 +182,7 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
                             }
                         }
                         AVFile avFile = avObject.getAVFile("musicFiles");
+
                         musicInfo.lrc = avFile.getUrl();
                         musicInfo.avObject = avObject.toString();
                         musicInfo.islocal = false;

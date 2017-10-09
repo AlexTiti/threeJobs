@@ -1,6 +1,7 @@
 package com.findtech.threePomelos.mydevices.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,9 @@ public class BluetoothLinkAdapter extends BaseAdapter {
     private Context context;
     private String number_0 = "0";
     private String number_1 = "1";
+
+
+
 
     public BluetoothLinkAdapter(Context context) {
         this.context = context;

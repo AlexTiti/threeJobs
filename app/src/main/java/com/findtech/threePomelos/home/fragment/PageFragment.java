@@ -492,9 +492,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                         bean.setType(avObject.getString(NetWorkRequest.FUNCTION_TYPE));
                         bean.setCompany(avObject.getString(NetWorkRequest.COMPANY));
                         content.bluetoothLinkBeen.add(bean);
-                        L.e("==============", bean.getType() + "====" + bean.getName() + "====" + bean.getDeviceIndentifier());
                     }
-                    L.e("=======", "====" + content.bluetoothLinkBeen.size());
                     startActivity(new Intent(mContext, BluetoothlinkActivity.class));
                 } else {
                     ((MainHomeActivity) getActivity()).checkNetWork();

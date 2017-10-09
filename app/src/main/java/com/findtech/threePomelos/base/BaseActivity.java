@@ -187,6 +187,9 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             }
         }
 
+
+
+
     }
 
     /**
@@ -286,7 +289,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         mPlayThread.start();
         builder = new CustomDialog.Builder(this);
 
-
     }
 
 
@@ -346,8 +348,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             }
         });
     }
-
-
 
     @TargetApi(Build.VERSION_CODES.M)
     public void askForPermission() {
@@ -612,8 +612,4 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
   public   interface MusicInterface{
         void musicReciver(Intent intent);
     }
-
-
-
-
 }
