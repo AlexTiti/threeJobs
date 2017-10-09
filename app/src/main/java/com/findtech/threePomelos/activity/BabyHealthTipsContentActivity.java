@@ -92,6 +92,7 @@ public class BabyHealthTipsContentActivity extends MyActionBarActivity implement
         netWorkRequest = new NetWorkRequest(this);
         requestBabyHealthDate();
         String currentDate = Tools.getSystemTimeInChina("yyyy-MM-dd");
+
         String birthday = babyInfoEntity.getBirthday().replace("年", "-").replace("月", "-").replace("日", "");
         babyInfoEntity.setBabyTotalDay(this, birthday, "0");
         try {
