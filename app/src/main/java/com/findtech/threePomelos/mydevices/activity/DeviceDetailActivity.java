@@ -114,6 +114,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     private int progres;
     int elec;
     private OperateDBUtils operateDBUtils;
+    private boolean car_protect_state;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -448,6 +449,11 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             case R.id.layout_repair_popwindow:
                 if (isRun) {
                     ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.run_action_notice));
+                    return;
+                }
+                if (car_protect_state){
+                    ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.pro_action_notice));
+                    mPicChooserDialog.dismiss();
                     return;
                 }
                 mPicChooserDialog.dismiss();
@@ -969,11 +975,12 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     mSwitchCompat.setChecked(true);
                     switch_brake_close.setEnabled(false);
                     switch_brake_close.setThumbResource(R.drawable.seek_button_close);
-
+                    car_protect_state = true;
                 } else {
                     mSwitchCompat.setChecked(false);
                     switch_brake_close.setEnabled(true);
                     switch_brake_close.setThumbResource(R.drawable.play_plybar_btn);
+                    car_protect_state = false;
                 }
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x09) {
@@ -1023,6 +1030,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     mSwitchCompat.setChecked(true);
                     switch_brake_close.setEnabled(false);
                     switch_brake_close.setThumbResource(R.drawable.seek_button_close);
+                    car_protect_state = true;
                 }
 //                if (animation != null)
 //                    image_wheel_detail.clearAnimation();
@@ -1035,6 +1043,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     mSwitchCompat.setChecked(false);
                     switch_brake_close.setEnabled(true);
                     switch_brake_close.setThumbResource(R.drawable.play_plybar_btn);
+                    car_protect_state = false;
                 }
 //                if (animation != null)
 //                    animation.start();

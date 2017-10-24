@@ -176,9 +176,10 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
                         musicInfo.type = avObject.getNumber("typeNumber");
                         for (int i =0;i<IContent.getInstacne().downList.size();i++){
                             DownMusicBean musicBean = IContent.getInstacne().downList.get(i);
+                            L.e("downed", musicInfo.musicName + "============" + musicBean.getMusicName());
                             if (  musicBean.getMusicName().equals( musicInfo.musicName) ) {
                                 musicInfo.artist = "downed";
-                                L.e("===============", musicInfo.musicName + "============" + number);
+                                L.e("downed", musicInfo.musicName + "============" + number);
                             }
                         }
                         AVFile avFile = avObject.getAVFile("musicFiles");

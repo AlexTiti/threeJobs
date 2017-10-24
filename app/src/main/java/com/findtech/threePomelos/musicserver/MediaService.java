@@ -344,7 +344,6 @@ public class MediaService extends Service {
         mPreferences = getSharedPreferences("Service", 0);
         Nammu.init(this);
         mCardId = getCardId();
-        L.e("QQQID","mCardId ="+mCardId);
 
         registerExternalStorageListener();
 
@@ -1231,7 +1230,7 @@ public class MediaService extends Service {
 //            mRecentStore.addSongId(getAudioId());
 //        }
         if (what.equals(META_CHANGED)) {
-           // mRecentStore.addSongId(getAudioId());
+            mRecentStore.addSongId(getAudioId());
 
        } else if (what.equals(QUEUE_CHANGED)) {
             Intent intent1 = new Intent("com.findtech.three.emptyplaylist");

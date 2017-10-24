@@ -192,9 +192,6 @@ public class RecentStore {
 
     public synchronized void addSongId(final long songId) {
 
-
-        L.e("count_pre","addSongId");
-
         final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         database.beginTransaction();
         try {

@@ -38,7 +38,6 @@ public class IContent {
     public static final int[]  healthImageIds = new int[]{R.drawable.developmentalessentials,R.drawable.developmentalsigns,R.drawable.sciencetips,R.drawable.growingconcern,R.drawable.parent_childinteraction};
     public static final int[]  healthMessIds = new int[]{R.string.title_activity_childcare_points,R.string.title_activity_dp_sign,R.string.title_activity_science_tip,R.string.title_activity_grown_concern,R.string.title_activity_parental_interaction};
 
-
     public static final String TITLE = "title";
     public static final String CONTENT = "content";
     public static final String NUMBER = "number";
@@ -90,6 +89,5 @@ public class IContent {
     public static boolean isModePlay = true;
     public static  final String ACTION_PLAY_OR_PAUSE = "ACTION_PLAY_OR_PAUSE";
     public static String MUSIC_NAME = null;
-
 
 }

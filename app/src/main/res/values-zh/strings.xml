@@ -439,6 +439,7 @@
     <string name="checkNum_notice">验证码已经发送,有效期2分钟哦!</string>
     <string name="logout_success">退出成功</string>
     <string name="run_action_notice">请将手移除感应区域再操作！</string>
+    <string name="pro_action_notice">请关闭一键防盗再修复！</string>
     <string name="drop_refresh">下拉刷新</string>
 
     <string name="page_tab1">首页</string>

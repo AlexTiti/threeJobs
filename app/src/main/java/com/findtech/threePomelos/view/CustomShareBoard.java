@@ -30,8 +30,6 @@ import com.umeng.socialize.media.UMusic;
 public class CustomShareBoard extends Dialog {
     private Context mContext;
 
-
-
     public CustomShareBoard(Context context) {
         super(context);
     }

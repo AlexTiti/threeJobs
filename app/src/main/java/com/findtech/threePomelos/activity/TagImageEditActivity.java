@@ -187,7 +187,7 @@ public class TagImageEditActivity extends MyActionBarActivity implements View.On
                 tagImageView.addTextTag(getString(R.string.pic_tag_monther), 200, 200);
                 break;
             case R.id.btn_tag_2:
-                tagImageView.addTextTag(getString(R.string.pic_tag_love), 200, 200);
+                tagImageView.addTextTag(getString(R.string.pic_tag_love), 250, 250);
                 break;
             case R.id.btn_tag_3:
                 tagImageView.addTextTag(getString(R.string.pic_tag_praise), 300, 300);

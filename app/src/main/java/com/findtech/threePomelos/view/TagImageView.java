@@ -59,7 +59,6 @@ public class TagImageView extends RelativeLayout {
             int endy = 0;
             long downTime = 0;
             long upTime = 0;
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -112,7 +111,6 @@ public class TagImageView extends RelativeLayout {
         setPosition(layout, x, y);
         tagViewList.add(layout);
     }
-
     public void removeTextTag(int index) {
         RelativeLayout layout = null;
         for (int i = 0; i < tagViewList.size(); i++) {
@@ -122,9 +120,7 @@ public class TagImageView extends RelativeLayout {
             }
         }
     }
-
     private void setPosition(View v, int dx, int dy) {
-
         int parentWidth = this.getWidth();
         int parentHeight = this.getHeight();
         int l = v.getLeft() + dx;
@@ -147,7 +143,6 @@ public class TagImageView extends RelativeLayout {
         params.topMargin = t;
         v.setLayoutParams(params);
     }
-
     private void showEditTagViewDialog(RelativeLayout layout) {
         final TextView tv = (TextView) layout.findViewById(R.id.tag_text);
         final String oringnalText = tv.getText().toString();

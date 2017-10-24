@@ -164,13 +164,10 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
             @Override
             public void done(AVException e) {
                 if (e == null){
-
                     mPlaylistsManager.insertMusic(HotRecommenActivity.this, IConstants.FAV_PLAYLIST, info);
                     IContent.getInstacne().collection_array.add(new DownMusicBean(info.musicName,info.type));
-
                     adapter.notifyDataSetChanged();
                 }else{
-
                     checkNetWork();
                 }
 

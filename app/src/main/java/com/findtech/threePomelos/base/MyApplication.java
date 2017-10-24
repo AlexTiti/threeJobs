@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.avos.avoscloud.AVCloud;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVUser;
 import com.findtech.threePomelos.R;
@@ -31,8 +32,8 @@ public class MyApplication extends Application {
     public static final String TAG = "_TAG";
     private List<Activity> activitys = null;
     private static MyApplication instance;
-  // private static final String APPID = "1R2oS0W0U9dJGveftbxOHGy3-gzGzoHsz";
-    //private static final String APPKEY = "Pf2Gper3lCPI0neKo0EKWdLN";
+   private static final String APPID = "1R2oS0W0U9dJGveftbxOHGy3-gzGzoHsz";
+    private static final String APPKEY = "Pf2Gper3lCPI0neKo0EKWdLN";
 
    private static final String APPID_TEST = "prnPRaln6v5xwNqUkQu5sFUA-gzGzoHsz";
   private static final String APPKEY_TEST  = "zQodN3qR7OOVjizMfqTI3LXE";
@@ -45,12 +46,11 @@ public class MyApplication extends Application {
     public MyApplication() {
         activitys = new LinkedList<>();
     }
-
     //APP Sign : 32d061e3034c6bb083095beacf1894b4
     @Override
     public void onCreate() {
         super.onCreate();
-        AVOSCloud.initialize(this, APPID, APPKEY);
+        AVOSCloud.initialize(this, APPID_TEST, APPKEY_TEST);
         manager = new AppManager(getApplicationContext());
 //        //微信 appid appsecret
 //        PlatformConfig.setWeixin("wx897cd02216ae4253", "dbd4985c48250cb8fedda58b338c00f8");
@@ -64,8 +64,6 @@ public class MyApplication extends Application {
                     0, "res:/" + null, "local");
             PreferencesUtility.getInstance(this).setFavriateMusicPlaylist(true);
         }
-
-
     }
     private static Gson gson;
 

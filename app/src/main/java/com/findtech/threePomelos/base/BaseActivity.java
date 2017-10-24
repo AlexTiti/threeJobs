@@ -120,10 +120,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                 }
             }
         },time);
-
-
     }
-
 
     public void dismissProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing())
@@ -165,13 +162,10 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         }
     }
 
-
-
     /**
      * 更新播放队列
      */
     public void updateQueue() {
-
 
     }
 
@@ -186,10 +180,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                 listener.updateTrackInfo();
             }
         }
-
-
-
-
     }
 
     /**
@@ -220,7 +210,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
 
 
     }
-
 
     public void updateLrc() {
 
@@ -486,7 +475,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             }
         }
     }
-
     private class FloatViewReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent0) {
@@ -499,9 +487,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
 
         }
     }
-
-
-
 
         public   interface DialogClick{
         void configClick();
@@ -568,7 +553,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             });
         }
     }
-
 
     public  void doMusic(byte data[]){
         L.e("====================BaseActivity","============="+ Tools.byte2Hex(data));

@@ -369,12 +369,11 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
      */
     private void collectionForBaby() {
         final MusicInfo info = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
+        L.e("====",isCollection+"");
         if (isCollection) {
             image_collection.setImageResource(R.drawable.icon_baby_like);
             mPlaylistsManager.removeItem(PlayDetailActivity.this, IConstants.FAV_PLAYLIST,
                     MusicPlayer.getCurrentAudioId());
-
-
             netWorkRequest.deleteMusicCollecting(info.musicName, new SaveCallback() {
                 @Override
                 public void done(AVException e) {

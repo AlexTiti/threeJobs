@@ -28,6 +28,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.home.MainHomeActivity;
@@ -98,7 +99,6 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
                         int i = positionMap.get(s);
                         ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(i + 1, 0);
                     }
-
                 }
             });
             reloadAdapter();
@@ -181,15 +181,15 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
                     file.delete();
 
 
-                netWorkRequest.sendDeleteDownMusic(info.musicName, new DeleteCallback() {
+                netWorkRequest.sendDeleteDownMusic(info.musicName, new SaveCallback() {
                     @Override
                     public void done(AVException e) {
                         if (e==null){
-                           for (int i=0;i<IContent.getInstacne().downList.size();i++){
-                               DownMusicBean bean = IContent.getInstacne().downList.get(i);
-                               if (bean.getMusicName()!= null && bean.getMusicName().equals(info.musicName))
-                                   IContent.getInstacne().downList.remove(i);
-                           }
+                            for (int i=0;i<IContent.getInstacne().downList.size();i++){
+                                DownMusicBean bean = IContent.getInstacne().downList.get(i);
+                                if (bean.getMusicName()!= null && bean.getMusicName().equals(info.musicName))
+                                    IContent.getInstacne().downList.remove(i);
+                            }
                         }
                     }
                 });
@@ -299,7 +299,7 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
                         L.e("Synchronousdata=======","================"+name);
                         if (!isInDownList(name)){
                             L.e("Synchronousdata=======","================"+name);
-                            netWorkRequest.sendDeleteDownMusic(name, new DeleteCallback() {
+                            netWorkRequest.sendDeleteDownMusic(name, new SaveCallback() {
                                 @Override
                                 public void done(AVException e) {
                                     if (e==null){

@@ -277,8 +277,9 @@ public class NetWorkRequest {
     }
 
     public void getMusicDownList(FindCallback findCallback) {
-        AVQuery<AVObject> query = new AVQuery<>("MusicDownLoad");
-        query.whereEqualTo("user", AVUser.getCurrentUser());
+        AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
+        query.whereEqualTo("post_user", AVUser.getCurrentUser());
+        query.whereEqualTo("is_down","1");
         query.findInBackground(findCallback);
     }
 
@@ -307,23 +308,22 @@ public class NetWorkRequest {
         });
     }
 
-    public void sendDeleteDownMusic(final String name , final DeleteCallback deleteCallback){
-        AVQuery<AVObject> query = new AVQuery<>("MusicDownLoad");
-        query.whereEqualTo("user", AVUser.getCurrentUser());
-        query.whereEqualTo("musicName", name);
+    public void sendDeleteDownMusic(final String name , final SaveCallback saveCallback){
+        AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
+        query.whereEqualTo("post_user",AVUser.getCurrentUser());
+        query.whereEqualTo("musicName",name);
+        query.whereEqualTo("is_down","1");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (e==null && list.size() != 0){
                     for (AVObject avObject : list){
-                        avObject.deleteInBackground(deleteCallback);
+                        avObject.put("is_down","0");
+                        avObject.saveInBackground(saveCallback);
                     }
                 }
             }
         });
-
-
-
     }
 
 
@@ -803,31 +803,32 @@ public class NetWorkRequest {
         avObject.put("userName", name);
         avObject.put("feedBackContent", content);
         avObject.put("date", date);
+        avObject.put("user", AVUser.getCurrentUser());
         avObject.saveInBackground(saveCallback);
 
     }
 
-    public static void sendMusicCollect(MusicInfo info, SaveCallback saveCallback) {
-        AVObject avObject = new AVObject("MusicPrefer");
-        try {
-//            AVObject avObject_info = AVObject.parseAVObject(info.avObject);
-//            AVFile avFile_info = avObject_info.getAVFile("musicFiles");
-            avObject.put("musicName", info.musicName);
-            avObject.put("typeNumber", info.type);
-            // avObject.put("musicFiles", avFile_info);
-            avObject.put("user", AVUser.getCurrentUser());
-            avObject.saveInBackground(saveCallback);
-        } catch (Exception e) {
-            e.printStackTrace();
-            L.e("======", e.toString());
-        }
-    }
+//    public static void sendMusicCollect(MusicInfo info, SaveCallback saveCallback) {
+//        AVObject avObject = new AVObject("MusicPrefer");
+//        try {
+////            AVObject avObject_info = AVObject.parseAVObject(info.avObject);
+////            AVFile avFile_info = avObject_info.getAVFile("musicFiles");
+//            avObject.put("musicName", info.musicName);
+//            avObject.put("typeNumber", info.type);
+//            // avObject.put("musicFiles", avFile_info);
+//            avObject.put("user", AVUser.getCurrentUser());
+//            avObject.saveInBackground(saveCallback);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            L.e("======", e.toString());
+//        }
+//    }
 
     public void getMusicCollect(final FindCallback<AVObject> findCallback) {
-        AVQuery<AVObject> query = new AVQuery<>("MusicPrefer");
-        query.whereEqualTo("user", AVUser.getCurrentUser());
+        AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
+        query.whereEqualTo("post_user", AVUser.getCurrentUser());
+        query.whereEqualTo("is_collected","1");
         query.findInBackground(findCallback);
-
     }
 
     public void deleteMusicCollect(final String name, final FindCallback<AVObject> findCallback) {
@@ -1070,7 +1071,6 @@ public class NetWorkRequest {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (e == null){
-
                     if (list != null && list.size() > 0){
                         AVObject avObject = list.get(0);
                         avObject.put("is_collected","1");
@@ -1089,7 +1089,6 @@ public class NetWorkRequest {
     }
 
     public void deleteMusicCollecting(final String musicName, final SaveCallback saveCallback){
-
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
         query.whereEqualTo("post_user",AVUser.getCurrentUser());
         query.whereEqualTo("musicName",musicName);
@@ -1107,7 +1106,6 @@ public class NetWorkRequest {
         });
     }
 
-
     public static void setPlayCount(final String musicName ,final int count){
         L.e("count_pre",count+"==================================="+musicName);
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
@@ -1122,7 +1120,6 @@ public class NetWorkRequest {
                         avObject.put("play_count",count);
                         avObject.saveInBackground();
                     }else {
-
                         AVObject avObject = new AVObject(MUSIC_USER);
                         avObject.put("musicName",musicName);
                         avObject.put("post_user",AVUser.getCurrentUser());
@@ -1133,6 +1130,5 @@ public class NetWorkRequest {
             }
         });
     }
-
 
 }

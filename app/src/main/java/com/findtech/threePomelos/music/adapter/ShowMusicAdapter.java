@@ -66,6 +66,7 @@ public class ShowMusicAdapter extends RecyclerView.Adapter<ShowMusicAdapter.Show
         holder.text_name.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                if (longClickListener != null)
                 longClickListener.longClick(position);
                 return true;
             }

@@ -98,9 +98,10 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
                     for (int i=0;i<list.size();i++) {
                         AVObject avObject = list.get(i);
                         IContent.getInstacne(). downList.add( new DownMusicBean(avObject.getString("musicName"),avObject.getNumber("typeNumber")) );
+                        L.e("downed", avObject.getString("musicName")+"=="+ avObject.getNumber("typeNumber"));
                     }
-                    L.e("MusicFragment===========","================="+IContent.getInstacne(). downList.size());
                 }
+
             }
         });
         if (IContent.getInstacne().collection_array.size() == 0){
