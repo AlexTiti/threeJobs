@@ -465,6 +465,7 @@
     <string name="music_link_bluetooth_open">Please connect to Bluetooth list 3Pomelos_A3</string>
     <string name="bluetooth_unopen">Bluetooth not open</string>
     <string name="pro_action_notice">Please close a key to prevent theft and repair!</string>
+    <string name="xliff_current_code">Current Code</string>
 
 
 </resources>

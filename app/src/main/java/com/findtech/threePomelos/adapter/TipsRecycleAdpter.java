@@ -1,6 +1,9 @@
 package com.findtech.threePomelos.adapter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,8 +89,6 @@ public class TipsRecycleAdpter extends RecyclerView.Adapter<TipsRecycleAdpter.Vi
 
             }
         });
-
-
     }
 
     @Override

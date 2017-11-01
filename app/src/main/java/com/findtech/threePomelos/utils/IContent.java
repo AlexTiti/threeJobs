@@ -73,6 +73,7 @@ public class IContent {
     public String functionType = null;
     public String company = null;
 
+
     public ArrayList<DownMusicBean> downList = new ArrayList<>();
     public ArrayList<DownMusicBean> collection_array = new ArrayList<>();
     public ArrayList<BluetoothLinkBean> bluetoothLinkBeen = new ArrayList<>();

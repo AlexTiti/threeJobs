@@ -71,7 +71,7 @@
             android:layout_toRightOf="@id/circleImage"
             android:singleLine="true"
             android:gravity="center_vertical"
-            android:text="呵呵"
+
             android:textColor="@color/text_grey"
             android:textSize="@dimen/text_size_small" />
 
@@ -231,7 +231,6 @@
         android:id="@+id/approve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <ImageView
             android:id="@+id/icon_03"
             android:layout_width="@dimen/x14"

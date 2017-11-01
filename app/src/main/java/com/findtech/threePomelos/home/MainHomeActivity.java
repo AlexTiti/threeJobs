@@ -2,39 +2,34 @@ package com.findtech.threePomelos.home;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVInstallation;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.PushService;
 import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
-import com.findtech.threePomelos.home.fragment.HealthTipsFragment;
 import com.findtech.threePomelos.home.presenter.HomePresenter;
 import com.findtech.threePomelos.home.view.IViewMainHome;
-import com.findtech.threePomelos.music.activity.HotRecommenActivity;
-import com.findtech.threePomelos.music.activity.PlayDetailActivity;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.musicserver.Nammu;
 import com.findtech.threePomelos.utils.ToastUtil;
 
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainHomeActivity extends MyActionBarActivity implements IViewMainHome,ViewPager.OnPageChangeListener{
 
@@ -60,22 +55,31 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
         homePresenter = new HomePresenter(this);
         homePresenter.installModelData();
         Nammu.init(this);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermission();
         }
-
         PushService.setDefaultPushCallback(this, MainHomeActivity.class);
         AVInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
+            @Override
             public void done(AVException e) {
                 if (e == null) {
                     // 保存成功
-                    String installationId = AVInstallation.getCurrentInstallation().getInstallationId();
+                    final String installationId = AVInstallation.getCurrentInstallation().getInstallationId();
+                    L.e("_Installation",installationId);
+                    AVUser user = AVUser.getCurrentUser();
+                    user.put("installationId",installationId);
+                    user.put("deviceType","Android");
+                    user.saveInBackground();
                 } else {
-                    // 保存失败，输出错误信息
                 }
             }
         });
+
+//        DisplayMetrics metrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//        int width = metrics.widthPixels;
+//        int height = metrics.heightPixels;
+//        L.e("current设像素",width +"=="+height);
 
     }
     @TargetApi(Build.VERSION_CODES.M)
@@ -87,15 +91,14 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
             );
         }
     }
-
     @Override
     public void refreshUI(ArrayList<Fragment> fragments) {
-        if (fragments == null)
+        if (fragments == null) {
             return;
+        }
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(),this,fragments);
         viewpager_home.setAdapter(fragmentAdapter);
         viewpager_home.setOffscreenPageLimit(1);
-
         tab_home_layout.setupWithViewPager(viewpager_home);
         for (int i=0 ;i<fragments.size();i++){
             TabLayout.Tab tab = tab_home_layout.getTabAt(i);
@@ -103,8 +106,6 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
 
             if (i == 0) {
                 tab.getCustomView().setSelected(true);
-//              TextView textView = (TextView) tab.getCustomView().findViewById(R.id.text_tab);
-//                textView.setTextColor(getResources().getColor(R.color.black));
             }
 
 
@@ -127,28 +128,18 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
         return super.onKeyDown(keyCode, event);
     }
 
-
-
-
-
-
-
-
     @Override
     protected void onResume() {
         super.onResume();
         registerMusicBroadcast();
     }
 
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
     public void onPageSelected(int position) {
-
 //        View view = fragmentAdapter.getView(position);
 //        TextView textView = (TextView) view.findViewById(R.id.text_tab);
 //        textView.setTextColor(getResources().getColor(R.color.black));

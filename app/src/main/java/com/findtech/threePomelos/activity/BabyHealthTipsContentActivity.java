@@ -30,6 +30,7 @@ import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.adapter.TipsRecycleAdpter;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
+import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
 import com.findtech.threePomelos.entity.Datebean;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
@@ -47,7 +48,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by zhi.zhang on 5/3/16.
+ *
+ * @author zhi.zhang
+ * @date 5/3/16
  */
 public class BabyHealthTipsContentActivity extends MyActionBarActivity implements TipsRecycleAdpter.ItemClick {
 
@@ -91,8 +94,16 @@ public class BabyHealthTipsContentActivity extends MyActionBarActivity implement
         netWorkRequest = new NetWorkRequest(this);
         requestBabyHealthDate();
         String currentDate = Tools.getSystemTimeInChina("yyyy-MM-dd");
-
-        String birthday = babyInfoEntity.getBirthday().replace("年", "-").replace("月", "-").replace("日", "");
+        String birthday = null;
+        if (TextUtils.isEmpty(babyInfoEntity.getBirthday())){
+            String birthdayBady ;
+            OperateDBUtils utils = new OperateDBUtils(this);
+            utils.queryBabyInfoDataFromDB();
+            birthdayBady = currentDate;
+            birthday = birthdayBady.replace("年", "-").replace("月", "-").replace("日", "");
+        }else {
+            birthday = babyInfoEntity.getBirthday().replace("年", "-").replace("月", "-").replace("日", "");
+        }
         babyInfoEntity.setBabyTotalDay(this, birthday, "0");
         try {
             myCalendar = new MyCalendar(birthday, currentDate,this);
@@ -103,7 +114,6 @@ public class BabyHealthTipsContentActivity extends MyActionBarActivity implement
             requestBabyHealthDataAndUpdateUI(tipType,"0-0-1");
         }else {
             baby_date = myCalendar.getDateForHealthTips();
-            L.e("============",baby_date);
             requestBabyHealthDataAndUpdateUI(tipType, baby_date);
         }
     }
@@ -126,8 +136,9 @@ public class BabyHealthTipsContentActivity extends MyActionBarActivity implement
                     refershUI();
                     tipsRecycleAdpter.setArrayList(dates);
                     tipsRecycleAdpter.notifyDataSetChanged();
-                    if (position - 3 >= 0)
+                    if (position - 3 >= 0) {
                         position -= 3;
+                    }
                     recycle_view_tips.scrollToPosition(position);
                 }else{
 
@@ -145,20 +156,11 @@ public class BabyHealthTipsContentActivity extends MyActionBarActivity implement
         super.onResume();
     }
 
-//    Handler mHandle = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            if (msg.what == 0x77) {
-//                bodyHealthContent.setText(Html.fromHtml((String) msg.obj));
-//            }
-//        }
-//    };
+
 
     private void refershUI(){
 
-
 if (date && data_b) {
-    L.e("=============","============refershUIwai");
     layout_baby_content.setVisibility(View.GONE);
     dismissProgressDialog();
     bodyHealthContent.setText(Html.fromHtml(body));
@@ -177,6 +179,7 @@ if (date && data_b) {
             query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
             query.setMaxCacheAge(24 * 3600 * 7 * 1000);
             query.findInBackground(new FindCallback<AVObject>() {
+                @Override
                 public void done(List<AVObject> avObjects, AVException e) {
                     if (e == null) {
                         layout_baby_content.setVisibility(View.GONE);
@@ -187,6 +190,7 @@ if (date && data_b) {
                                 return;
                             }
                             avFile.getDataInBackground(new GetDataCallback() {
+                                @Override
                                 public void done(byte[] data, AVException e) {
                                     if (e == null) {
                                        body = new String(data);
@@ -224,9 +228,9 @@ if (date && data_b) {
                 if (myCalendar == null){
                     requestBabyHealthDataAndUpdateUI(tipType,"0-0-1");
                 }else {
-                    L.e("============",dates.get(click_position));
-                    if (click_position!= -1 &&dates!= null )
+                    if (click_position!= -1 &&dates!= null ) {
                         requestBabyHealthDataAndUpdateUI(tipType, dates.get(click_position));
+                    }
                 }
                 // requestBabyHealthDate();
             }

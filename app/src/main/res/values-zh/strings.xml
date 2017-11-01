@@ -184,6 +184,7 @@
     <string name="xliff_standard_height_num">参考值 : <xliff:g id="height">%1$3s</xliff:g> cm</string>
     <string name="xliff_standard_weight_num">参考值 : <xliff:g id="weight">%1$3s</xliff:g> kg</string>
     <string name="xliff_weight_service">宝宝体重为<xliff:g id= "weight_service">%1$3s</xliff:g> kg,是否保存？</string>
+    <string name="xliff_current_code">当前版本</string>
 
     <!--date label-->
     <string name="label_date_year">年</string>

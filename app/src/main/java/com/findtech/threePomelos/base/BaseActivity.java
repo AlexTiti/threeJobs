@@ -81,8 +81,41 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     private PlayMusic mPlayThread;
     private MusicInterface musicInterface;
     public static String DEVICE_CLOSE_ONPAGE = "android.receive.device.close";
+    private String noTimeNotice = null;
+    private String hasTimeNotice = null;
+    private final static int NOTIME = 100;
+    private final static int HASTIME = 101;
+
+    Handler myHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case  NOTIME:
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                        if (!TextUtils.isEmpty(noTimeNotice)) {
+                            ToastUtil.showToast(BaseActivity.this, noTimeNotice);
+                        }
+                    }
+                    break;
+                case  HASTIME:
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                        if (!TextUtils.isEmpty(hasTimeNotice)) {
+                            ToastUtil.showToast(BaseActivity.this, hasTimeNotice);
+                        }
+                    }
+                    break;
+
+            }
+
+
+        }
+    };
 
     public void showProgressDialog(String message , final String notice) {
+        this.noTimeNotice = notice;
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage(message);
@@ -93,16 +126,15 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                    if (!TextUtils.isEmpty(notice))
-                        ToastUtil.showToast(BaseActivity.this,notice);
-                }
+                Message msg = new Message();
+                msg.what = NOTIME;
+                myHandler.sendMessage(msg);
             }
         },10000);
     }
 
     public void showProgressDialog(String message, final long time, final String notice) {
+        this.hasTimeNotice = notice;
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage(message);
@@ -113,18 +145,17 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                    if (notice != null)
-                    ToastUtil.showToast(BaseActivity.this,notice);
-                }
+                Message msg = new Message();
+                msg.what = HASTIME;
+                myHandler.sendMessage(msg);
             }
         },time);
     }
 
     public void dismissProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing())
-        progressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 
     public void setMusicInterface(MusicInterface musicInterface){
@@ -140,6 +171,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         builder.setShowBindInfo(message);
         builder.setShowButton(true);
         builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(final DialogInterface dialog, int which) {
                 dialog.dismiss();
                 dialogClick.configClick();
@@ -147,6 +179,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         });
         builder.setNegativeButton(getString(R.string.cancle),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         dialogClick.cancleClick();
@@ -348,6 +381,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             startService(intent);
         }
     }
+    @Override
     @TargetApi(Build.VERSION_CODES.M)
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -379,8 +413,9 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     @Override
     protected void onStop() {
         super.onStop();
-        if (activityNumber > 0)
+        if (activityNumber > 0) {
             activityNumber--;
+        }
         if (activityNumber == 0) {
             stopService(intent);
         }
@@ -446,9 +481,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                 //
                 if (action.equals(MediaService.META_CHANGED)) {
                     baseActivity.updateTrackInfo();
-
                 } else if (action.equals(MediaService.PLAYSTATE_CHANGED)) {
-
                 } else if (action.equals(MediaService.TRACK_PREPARED)) {
                     baseActivity.updateTime();
                 } else if (action.equals(MediaService.BUFFER_UP)) {
@@ -494,9 +527,11 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     }
 
     public class PlayMusic extends Thread {
+        @Override
         public void run() {
-            if (Looper.myLooper() == null)
+            if (Looper.myLooper() == null) {
                 Looper.prepare();
+            }
             mPlayHandler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
@@ -534,14 +569,13 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                     }
 
                     if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE)) {
-
                         byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
-
+                        if (data.length<5){
+                            return;
+                        }
                         if (data[3] == (byte) 0x8B && data[4] == (byte) 0xAA) {
-
                             Intent intent_close = new Intent(DEVICE_CLOSE_ONPAGE);
                             sendBroadcast(intent_close);
-
                             return;
                         }
                         doMusic(data);

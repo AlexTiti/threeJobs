@@ -2165,9 +2165,6 @@ public class MediaService extends Service {
         L.e("SixItem","play");
         int status = mAudioManager.requestAudioFocus(mAudioFocusListener,
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
-
-        if (D) Log.d(TAG, "Starting playback: audio focus request status = " + status);
-
         if (status != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             return;
         }
@@ -2179,17 +2176,16 @@ public class MediaService extends Service {
 
         mAudioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
                 MediaButtonIntentReceiver.class.getName()));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mSession.setActive(true);
+        }
         if (createNewNextTrack) {
             /**
              * 这里的
              */
            setNextTrack();
-            L.e("SixItem","setNextTrack()这里的");
         } else {
             setNextTrack(mNextPlayPos);
-            L.e("SixItem","setNextTrack()"+mNextPlayPos);
         }
         if (mPlayer.isTrackPrepared()) {
             final long duration = mPlayer.duration();
@@ -2199,7 +2195,6 @@ public class MediaService extends Service {
             }
         }
         mPlayer.start();
-        L.e("SixItem","mPlayer.start()");
         mPlayerHandler.removeMessages(FADEDOWN);
         mPlayerHandler.sendEmptyMessage(FADEUP);
         setIsSupposedToBePlaying(true, true);
@@ -2209,7 +2204,6 @@ public class MediaService extends Service {
     }
 
     public void pause() {
-        if (D) Log.d(TAG, "Pausing playback");
         synchronized (this) {
             mPlayerHandler.removeMessages(FADEUP);
             if (mIsSupposedToBePlaying) {
@@ -2218,9 +2212,7 @@ public class MediaService extends Service {
                 intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
                 intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
                 sendBroadcast(intent);
-
                 mPlayer.pause();
-
                 setIsSupposedToBePlaying(false, true);
                 notifyChange(META_CHANGED);
             }
@@ -2228,11 +2220,8 @@ public class MediaService extends Service {
     }
 
     public void gotoNext(final boolean force) {
-        L.e("SixItem","gotoNext==getNextPosition");
-        if (D) Log.d(TAG, "Going to next track");
         synchronized (this) {
             if (mPlaylist.size() <= 0) {
-                if (D) Log.d(TAG, "No play queue");
                 scheduleDelayedShutdown();
                 return;
             }
@@ -2278,7 +2267,6 @@ public class MediaService extends Service {
                     (position() < REWIND_INSTEAD_PREVIOUS_THRESHOLD || forcePrevious);
 
             if (goPrevious) {
-                if (D) Log.d(TAG, "Going to previous track");
                 int pos = getPreviousPlayPosition(true);
 
                 if (pos < 0) {
@@ -2292,7 +2280,6 @@ public class MediaService extends Service {
                 notifyChange(META_CHANGED);
                 notifyChange(MUSIC_CHANGED);
             } else {
-                if (D) Log.d(TAG, "Going to beginning of track");
                 seek(0);
                 play(false);
             }
@@ -2597,7 +2584,8 @@ public class MediaService extends Service {
     }
 
     private static final class MultiPlayer implements MediaPlayer.OnErrorListener,
-            MediaPlayer.OnCompletionListener {
+            MediaPlayer.OnCompletionListener
+    {
 
         private final WeakReference<MediaService> mService;
         private MediaPlayer mCurrentMediaPlayer = new MediaPlayer();
@@ -2701,7 +2689,7 @@ public class MediaService extends Service {
             } catch (final IllegalStateException todo){
                 todo.printStackTrace();
                 if(!mIllegalState){
-                    L.e("SixItem");
+
                     mCurrentMediaPlayer = null;
                     mCurrentMediaPlayer = new MediaPlayer();
                     mCurrentMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
@@ -2768,7 +2756,6 @@ public class MediaService extends Service {
 
 
         public void start() {
-            if (D) Log.d(TAG, "mIsTrackNet, " + mIsTrackNet);
             if (!mIsTrackNet) {
                 mService.get().sendUpdateBuffer(100);
                 sencondaryPosition = 100;
@@ -2786,7 +2773,6 @@ public class MediaService extends Service {
             public void onPrepared(MediaPlayer mp) {
                 if(isFirstLoad){
                     long seekpos = mService.get().mLastSeekPos;
-                    Log.e(TAG,"seekpos = " + seekpos);
                     seek(seekpos >= 0 ? seekpos : 0);
                     isFirstLoad = false;
                 }
@@ -2807,8 +2793,9 @@ public class MediaService extends Service {
 
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                if (sencondaryPosition != 100)
+                if (sencondaryPosition != 100) {
                     mService.get().sendUpdateBuffer(percent);
+                }
                 sencondaryPosition = percent;
             }
         };
@@ -2830,14 +2817,12 @@ public class MediaService extends Service {
 
             @Override
             public void run() {
-                if (D) Log.d(TAG, "mIsTrackPrepared, " + mIsTrackPrepared);
                 if (mIsTrackPrepared) {
                     mCurrentMediaPlayer.start();
                     final long duration = duration();
                     if (mService.get().mRepeatMode != REPEAT_CURRENT && duration > 2000
                             && position() >= duration - 2000) {
                         mService.get().gotoNext(true);
-                        Log.e("play to go", "");
                     }
                     mService.get().loading(false);
                 } else {

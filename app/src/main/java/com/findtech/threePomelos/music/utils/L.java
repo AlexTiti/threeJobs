@@ -6,33 +6,37 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 /**
- * Created by JRD on 2017/2/27.
+ * @author Alex
  */
 public class L {
 
-    private  static boolean isDebug = true;
+    private  static boolean isDebug = false;
     private static String tags = "TAG";
 
   public static void e(String tag ,String msg){
-      if (!isDebug)return;
+      if (!isDebug) {
+          return;
+      }
       tag = getTag(tag);
       StackTraceElement stackTraceElement = getTargetStackTraceElement();
       Log.e(tag,"("+stackTraceElement.getFileName()+":"+stackTraceElement.getLineNumber()+")");
       Log.e(tag,msg);
   }
-
     public static void e(String msg){
-        if (!isDebug)return;
+        if (!isDebug) {
+            return;
+        }
         StackTraceElement stackTraceElement = getTargetStackTraceElement();
         Log.e(tags,"("+stackTraceElement.getFileName()+":"+stackTraceElement.getLineNumber()+")");
         Log.e(tags,msg);
-
     }
 
-
     public static void d(String tag ,String msg){
-        if (!isDebug)return;
+        if (!isDebug) {
+            return;
+        }
         tag = getTag(tag);
         StackTraceElement stackTraceElement = getTargetStackTraceElement();
         Log.d(tag,"("+stackTraceElement.getFileName()+":"+stackTraceElement.getLineNumber()+")");
@@ -41,7 +45,9 @@ public class L {
     }
 
     public static void i(String tag ,String msg){
-        if (!isDebug)return;
+        if (!isDebug) {
+            return;
+        }
         tag = getTag(tag);
         StackTraceElement stackTraceElement = getTargetStackTraceElement();
         Log.i(tag,"("+stackTraceElement.getFileName()+":"+stackTraceElement.getLineNumber()+")");
@@ -50,8 +56,9 @@ public class L {
 
     private static String getTag(String tag){
 
-        if (TextUtils.isEmpty(tag))
+        if (TextUtils.isEmpty(tag)) {
             return tags;
+        }
         return tag;
     }
 

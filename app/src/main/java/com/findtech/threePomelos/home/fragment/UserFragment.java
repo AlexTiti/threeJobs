@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +36,7 @@ import com.findtech.threePomelos.entity.BabyInfoEntity;
 import com.findtech.threePomelos.home.MainHomeActivity;
 import com.findtech.threePomelos.login.LoginActivity;
 import com.findtech.threePomelos.login.ThirdPartyController;
+import com.findtech.threePomelos.music.utils.HandlerUtil;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.utils.MyCalendar;
@@ -59,7 +63,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  *     desc    ：
  *     version ： 1.0
  */
-public class UserFragment  extends BaseLazyFragment implements View.OnClickListener{
+public class UserFragment extends BaseLazyFragment implements View.OnClickListener {
     private RelativeLayout faceback;
     private RelativeLayout update;
     private RelativeLayout approve;
@@ -68,12 +72,26 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
     private Button text_out;
     private ThirdPartyController mThirdPartyController;
     private RelativeLayout relativeLayout;
-    private TextView text_weight_user,text_height_user;
+    private TextView text_weight_user, text_height_user,app_info_arrow_right00;
     private CircleImageView circleImage;
     private Bitmap bitmap;
-    private TextView text_id,text_age_user;
+    private TextView text_id, text_age_user;
     private BabyInfoEntity babyInfoEntity = BabyInfoEntity.getInstance();
     public final static String CHANGE = "CHANGE";
+    public final int TOAST_NUMB = 1001;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case TOAST_NUMB:
+                    Toast.makeText(mContext, getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected int getContentViewLayoutID() {
@@ -87,6 +105,7 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
         circleImage = (CircleImageView) view.findViewById(R.id.circleImage);
         faceback = (RelativeLayout) view.findViewById(R.id.faceback);
         update = (RelativeLayout) view.findViewById(R.id.update);
+
         approve = (RelativeLayout) view.findViewById(R.id.approve);
         about_us = (RelativeLayout) view.findViewById(R.id.about_us);
         text_out = (Button) view.findViewById(R.id.text_out);
@@ -99,11 +118,13 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
         view1.setLayoutParams(layoutParams);
         view1.setBackgroundColor(Color.TRANSPARENT);
         setCircleImage();
-        if (babyInfoEntity.getBabyName()!= null)
-        text_id.setText(babyInfoEntity.getBabyName());
+        if (babyInfoEntity.getBabyName() != null) {
+            text_id.setText(babyInfoEntity.getBabyName());
+        }
         text_age_user.setText(getBabyDate());
         faceback.setOnClickListener(this);
         update.setOnClickListener(this);
+
         approve.setOnClickListener(this);
         about_us.setOnClickListener(this);
         text_out.setOnClickListener(this);
@@ -111,25 +132,26 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
         initProgressDialog();
     }
 
-    private String getBabyDate(){
-        if (babyInfoEntity.getBirthday() == null)
-            return "0"+getString(R.string.text_tag_babydata_text_day);
-       String currentDate = Tools.getSystemTimeInChina("yyyy-MM-dd");
+    private String getBabyDate() {
+        if (babyInfoEntity.getBirthday() == null) {
+            return "0" + getString(R.string.text_tag_babydata_text_day);
+        }
+        String currentDate = Tools.getSystemTimeInChina("yyyy-MM-dd");
         String birthday = babyInfoEntity.getBirthday().replace("年", "-").replace("月", "-").replace("日", "");
         try {
-            MyCalendar myCalendar = new MyCalendar(birthday, currentDate,getActivity());
+            MyCalendar myCalendar = new MyCalendar(birthday, currentDate, getActivity());
             return myCalendar.getDate();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return  "0";
+        return "0";
     }
 
     @Override
     protected void onFirstUserVisible() {
     }
 
-    private void setCircleImage(){
+    private void setCircleImage() {
         bitmap = PicOperator.getIconFromData(getActivity());
         if (bitmap != null)
             circleImage.setImageBitmap(bitmap);
@@ -140,13 +162,14 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
     @Override
     protected void onUserVisible() {
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.faceback :
+        switch (v.getId()) {
+            case R.id.faceback:
                 startActivity(new Intent(mContext, FeedBack.class));
                 break;
-            case R.id.update :
+            case R.id.update:
                 progressDialog.setMessage(getActivity().getResources().getString(R.string.upDateMessage_));
                 progressDialog.show();
 
@@ -164,20 +187,21 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
                     }
                 });
                 break;
-            case R.id.approve :
-                ((MainHomeActivity)getActivity()).toGoGetProtectActivity(getActivity());
+            case R.id.approve:
+                ((MainHomeActivity) getActivity()).toGoGetProtectActivity(getActivity());
                 break;
-            case R.id.about_us :
-               startActivity(new Intent(mContext, AboutUSActivity.class));
+            case R.id.about_us:
+                startActivity(new Intent(mContext, AboutUSActivity.class));
                 break;
-            case R.id.text_out :
+            case R.id.text_out:
                 showVerifyLogoutDialog();
                 break;
-            case R.id.relativeLayout :
-                startActivityForResult(new Intent(mContext, BabyInfoActivity.class),1000);
+            case R.id.relativeLayout:
+                startActivityForResult(new Intent(mContext, BabyInfoActivity.class), 1000);
                 break;
         }
     }
+
     private void showVerifyLogoutDialog() {
         final CustomDialog.Builder builder = new CustomDialog.Builder(mContext);
         builder.setTitle(getString(R.string.notice));
@@ -206,7 +230,7 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
         mThirdPartyController = new ThirdPartyController(mContext);
         String weight = RequestUtils.getSharepreference(mContext).getString(RequestUtils.WEIGHT, "");
         String height = RequestUtils.getSharepreference(mContext).getString(RequestUtils.HEIGHT, "");
-        text_height_user.setText( getResources().getString(R.string.height, height));
+        text_height_user.setText(getResources().getString(R.string.height, height));
         text_weight_user.setText(getResources().getString(R.string.weight, weight));
         AVAnalytics.onFragmentStart("UserFragment");
     }
@@ -216,10 +240,11 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
         progressDialog.setIndeterminate(true);
     }
 
-    private class MyUICheckUpdateCallback implements UICheckUpdateCallback  {
+    private class MyUICheckUpdateCallback implements UICheckUpdateCallback {
         @Override
         public void onNoUpdateFound() {
         }
+
         @Override
         public void onCheckComplete() {
         }
@@ -233,6 +258,7 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
                         @Override
                         public void onStart() {
                         }
+
                         @Override
                         public void onComplete(int status, SocializeEntity entity) {
                             if (status == 200) {
@@ -245,11 +271,11 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
 
                                             @Override
                                             public void onComplete(int status, SocializeEntity entity) {
-
                                                 if (status == 200) {
-                                                    Toast.makeText(mContext, getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
-                                                } else {
-
+                                                    //  Toast.makeText(mContext, getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
+                                                    Message message = new Message();
+                                                    message.what = TOAST_NUMB;
+                                                    handler.sendMessage(message);
                                                 }
                                             }
                                         }
@@ -263,10 +289,14 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
                         @Override
                         public void onStart() {
                         }
+
                         @Override
                         public void onComplete(int status, SocializeEntity entity) {
                             if (status == 200) {
-                                Toast.makeText(mContext, getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
+                                //
+                                Message message = new Message();
+                                message.what = TOAST_NUMB;
+                                handler.sendMessage(message);
                             } else {
 
                             }
@@ -287,12 +317,12 @@ public class UserFragment  extends BaseLazyFragment implements View.OnClickListe
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1000){
-            L.e("======","requestCode == 1000====="+resultCode);
+        if (requestCode == 1000) {
+            L.e("======", "requestCode == 1000=====" + resultCode);
             text_id.setText(babyInfoEntity.getBabyName());
             text_age_user.setText(getBabyDate());
-            if (data != null  && CHANGE.equals(data.getStringExtra("intent")) ){
-               setCircleImage();
+            if (data != null && CHANGE.equals(data.getStringExtra("intent"))) {
+                setCircleImage();
 
             }
         }

@@ -168,7 +168,6 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
             public void done(List<AVObject> list, AVException e) {
                 dismissProgressDialog();
                 if (e == null) {
-                    L.e("AAAAA", "list" + list.size());
                     for (AVObject avObject : list) {
                         MusicInfo musicInfo = new MusicInfo();
                         musicInfo.musicName = avObject.getString("musicName");
@@ -176,10 +175,8 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
                         musicInfo.type = avObject.getNumber("typeNumber");
                         for (int i =0;i<IContent.getInstacne().downList.size();i++){
                             DownMusicBean musicBean = IContent.getInstacne().downList.get(i);
-                            L.e("downed", musicInfo.musicName + "============" + musicBean.getMusicName());
                             if (  musicBean.getMusicName().equals( musicInfo.musicName) ) {
                                 musicInfo.artist = "downed";
-                                L.e("downed", musicInfo.musicName + "============" + number);
                             }
                         }
                         AVFile avFile = avObject.getAVFile("musicFiles");
@@ -336,7 +333,7 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
             @Override
             public void done(Integer integer) {
                 if (integer == 100) {
-                    dismissProgressDialog();
+
                     musicInfos.get(down_position).artist = "downed";
                     musicAdapter.setAvObjectList(musicInfos);
                     musicAdapter.notifyDataSetChanged();

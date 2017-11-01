@@ -1,7 +1,9 @@
 package com.findtech.threePomelos.bluetooth;
 
 import com.findtech.threePomelos.base.MyApplication;
+import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.utils.IContent;
+import com.findtech.threePomelos.utils.Tools;
 
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothDevice;
@@ -67,6 +69,7 @@ public class CubicBLEDevice extends BLEDevice {
 				if (gattServiceUUID.equals(serviceUUID)
 						&& characteristicUUID.equals(characterUUID)) {
 					IContent.getInstacne().WRITEVALUE = value;
+
 					bluetoothGattCharacteristic.setValue(value);
 					this.writeValue(bluetoothGattCharacteristic);
 				}
@@ -151,6 +154,7 @@ public class CubicBLEDevice extends BLEDevice {
 	}
 
 
+	@Override
 	public void setNotification(
 			boolean enable) {
 		super.setNotification(enable);

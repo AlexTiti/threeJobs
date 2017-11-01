@@ -54,6 +54,9 @@ import com.findtech.threePomelos.view.MyAlarmView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Alex
+ */
 public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDevice.RFStarBLEBroadcastReceiver, AppManager.RFStarManageListener, ItemClickListtener {
 
     private ImageView image_gif_bluetooth;
@@ -162,7 +165,6 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
         try {
             String action = intent.getAction();
             if (RFStarBLEService.ACTION_GATT_CONNECTED.equals(action)) {
-
             } else if (RFStarBLEService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 IContent.getInstacne().address = null;
                 IContent.getInstacne().isBind = false;
@@ -178,6 +180,8 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
                     if (deviceName != null && deviceName.equals(bean.getName())) {
                         bluetoothLinkBean = bean;
                         deviceIndentifier = bean.getDeviceIndentifier();
+                        IContent.getInstacne().clickPositionType = deviceIndentifier;
+                        IContent.getInstacne().address = deviceNum;
                         functionType = bean.getType();
                         company = bean.getCompany();
                     }
@@ -185,6 +189,7 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
                 if (deviceIndentifier != null && functionType != null ) {
                                IContent.getInstacne().functionType = functionType;
                                IContent.getInstacne().company =company;
+
                                netWorkRequest.thisBlueToothIsBinded(deviceNum, new FindCallback<AVObject>() {
                                     @Override
                                     public void done(List<AVObject> list, AVException e) {
@@ -194,7 +199,6 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
                                                 netWorkRequest.addBlueTooth(true, deviceNum, deviceName, functionType, deviceIndentifier, company,new SaveCallback() {
                                                     @Override
                                                     public void done(AVException e) {
-
                                                         if (e == null) {
                                                             dismissProgressDialog();
                                                             bindSuccess(deviceNum);
@@ -229,7 +233,6 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
                                                         });
                                                     }
                                                 }
-
                                             }
                                         } else {
                                             dismissProgressDialog();
@@ -237,7 +240,6 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
                                         }
                                     }
                                 });
-
                            }
                         } else {
                             dismissProgressDialog();
@@ -250,9 +252,9 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
     public void bindSuccess(String deviceNum) {
         IContent.getInstacne().address = deviceNum;
         IContent.getInstacne().deviceName = arraySource.get(position).getName();
+
         IContent.getInstacne().isBind = true;
         dismissProgressDialog();
-
         blueSearchAdapter.setLinking(false);
         blueSearchAdapter.notifyDataSetChanged();
         mOperateDBUtils.saveBlueToothIsBindToDB(true, deviceNum);
@@ -271,7 +273,6 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
                             IContent.getInstacne().addressList.add(new DeviceCarBean(name, address, deviceType, functionType,company));
                         }
                     }
-                    L.e("==============","================"+ IContent.getInstacne().addressList.size());
                 } else {
                     checkNetWork();
                 }
@@ -290,8 +291,9 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
     public void RFstarBLEManageListener(BluetoothDevice device, int rssi, byte[] scanRecord) {
 
         for (BluetoothLinkBean bean : IContent.getInstacne().bluetoothLinkBeen){
-            if (bean.getName().equals(device.getName()) && !arraySource.contains(device))
+            if (bean.getName().equals(device.getName()) && !arraySource.contains(device)) {
                 arraySource.add(device);
+            }
         }
 
         swipeRefreshLayout.setRefreshing(false);
@@ -337,14 +339,14 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
         if (!bluetoothDevice.getAddress().equals(IContent.getInstacne().address)) {
             IContent.isSended = false;
             showProgressDialog(getString(R.string.connecting), 25000, null);
-            if (app.manager.cubicBLEDevice != null)
+            if (app.manager.cubicBLEDevice != null) {
                 app.manager.cubicBLEDevice.disconnectedDevice();
+            }
             app.manager.bluetoothDevice = bleAdapter.getRemoteDevice(bluetoothDevice.getAddress());
             app.manager.isEnabled(this);
             app.manager.cubicBLEDevice = new CubicBLEDevice(
                     getApplicationContext(), app.manager.bluetoothDevice);
             app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
-
         }
         if (IContent.getInstacne().isBind && bluetoothDevice.getAddress().equals(IContent.getInstacne().address)) {
             Intent intent = new Intent(this, DeviceDetailActivity.class);

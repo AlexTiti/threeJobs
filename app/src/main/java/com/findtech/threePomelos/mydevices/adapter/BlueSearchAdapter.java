@@ -78,10 +78,11 @@ public class BlueSearchAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (holder instanceof ReViewHolder ) {
         BluetoothDevice device = arrayList.get(position);
         String name = device.getName();
-            if (isLinking)
-            ((ReViewHolder) holder).text_position.setText(String.valueOf(position+2 ));
-            else
-                ((ReViewHolder) holder).text_position.setText(String.valueOf(position+1 ));
+            if (isLinking) {
+                ((ReViewHolder) holder).text_position.setText(String.valueOf(position + 2));
+            } else {
+                ((ReViewHolder) holder).text_position.setText(String.valueOf(position + 1));
+            }
             ((ReViewHolder) holder).text_name.setText(name);
 
             if ( device.getAddress().equals(IContent.getInstacne().address) ) {
@@ -94,15 +95,6 @@ public class BlueSearchAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
         }
 
-//        else if (holder instanceof LastViewHolder){
-//            if (position == 0){
-//                ((LastViewHolder)holder).title_blue_search.setVisibility(View.VISIBLE);
-//                ((LastViewHolder)holder).text_notice.setVisibility(View.GONE);
-//            }else {
-//                ((LastViewHolder)holder).title_blue_search.setVisibility(View.GONE);
-//                ((LastViewHolder)holder).text_notice.setVisibility(View.VISIBLE);
-//            }
-//        }
     }
 
     @Override

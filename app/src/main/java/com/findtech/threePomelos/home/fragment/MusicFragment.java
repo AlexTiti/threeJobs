@@ -90,20 +90,21 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
         relayout_musiclocal = (RelativeLayout) view.findViewById(R.id.relayout_musiclocal);
         relayout_popular =(RelativeLayout) view.findViewById(R.id.relayout_popular);
         netWorkRequest = new NetWorkRequest(getActivity());
-        if (IContent.getInstacne(). downList.size() == 0)
-        netWorkRequest.getMusicDownList(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (e == null){
-                    for (int i=0;i<list.size();i++) {
-                        AVObject avObject = list.get(i);
-                        IContent.getInstacne(). downList.add( new DownMusicBean(avObject.getString("musicName"),avObject.getNumber("typeNumber")) );
-                        L.e("downed", avObject.getString("musicName")+"=="+ avObject.getNumber("typeNumber"));
+        if (IContent.getInstacne(). downList.size() == 0) {
+            netWorkRequest.getMusicDownList(new FindCallback<AVObject>() {
+                @Override
+                public void done(List<AVObject> list, AVException e) {
+                    if (e == null) {
+                        for (int i = 0; i < list.size(); i++) {
+                            AVObject avObject = list.get(i);
+                            IContent.getInstacne().downList.add(new DownMusicBean(avObject.getString("musicName"), avObject.getNumber("typeNumber")));
+                            L.e("downed", avObject.getString("musicName") + "==" + avObject.getNumber("typeNumber"));
+                        }
                     }
-                }
 
-            }
-        });
+                }
+            });
+        }
         if (IContent.getInstacne().collection_array.size() == 0){
             netWorkRequest.getMusicCollect(new FindCallback<AVObject>() {
                 @Override
@@ -114,7 +115,6 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
                             Number type = avObject.getNumber("typeNumber");
                             DownMusicBean bean = new DownMusicBean(musicName,type);
                             IContent.getInstacne().collection_array.add(bean);
-                            L.e("===================",musicName+"=================");
                         }
                     }
                 }
@@ -207,8 +207,9 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
                     app.manager.cubicBLEDevice.registerReceiver();
                     app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
                     app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE,IContent.WRITEUUID_BLE,IContent.READMODE);
-                } else
-                    ToastUtil.showToast(mContext,getResources().getString(R.string.link_notice));
+                } else {
+                    ToastUtil.showToast(mContext, getResources().getString(R.string.link_notice));
+                }
 
                 break;
             case  R.id.relayout_musiclocal:
@@ -230,13 +231,15 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
     @Override
     public void onReceive(Context context, Intent intent, String macData, String uuid) {
         String action = intent.getAction();
-        if (action == null)
+        if (action == null) {
             return;
+        }
         byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
         if (intent.getAction().equals(RFStarBLEService.ACTION_WRITE_DONE)){
             L.e("===========================","====================="+RFStarBLEService.ACTION_WRITE_DONE);
-            if (IContent.getInstacne().WRITEVALUE != null)
-                app.manager.cubicBLEDevice.readValue(IContent.SERVERUUID_BLE,IContent.READUUID_BLE,IContent.getInstacne().WRITEVALUE);
+            if (IContent.getInstacne().WRITEVALUE != null) {
+                app.manager.cubicBLEDevice.readValue(IContent.SERVERUUID_BLE, IContent.READUUID_BLE, IContent.getInstacne().WRITEVALUE);
+            }
 
         }else if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE_READ)){
             if ( data[3] == (byte)0x81 &&  data[4] == 0x03 ){

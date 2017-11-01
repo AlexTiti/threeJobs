@@ -32,28 +32,29 @@ public class DownFileUtils {
             File file = new File(Environment.getExternalStorageDirectory(),"threepomelos"+File.separator+path);
             return file;
         }
-        else
-            ToastUtil.showToast(context.getApplicationContext(),context.getResources().getString(R.string.nosd));
+        else {
+            ToastUtil.showToast(context.getApplicationContext(), context.getResources().getString(R.string.nosd));
+        }
         return null;
 
     }
 
     private static File creatCacheDir(Context context,String path){
         String disFilePath ;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable())
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable()) {
             disFilePath = context.getExternalCacheDir().getPath();
-        else
+        } else {
             disFilePath = context.getCacheDir().getPath();
+        }
 
         return new File(disFilePath+File.separator+path);
     }
 
     public static  File creatFile(Context context ,String path,String name){
         File fileDir = creatFileDir(context,path);
-//       L.e("WWWW=",fileDir.getAbsolutePath()+"=="+Environment.getExternalStorageDirectory().getAbsolutePath());
-//        for (int i=0 ;i<fileDir.listFiles().length;i++) {
-//            L.e("AAAA", fileDir.exists() + "=" + fileDir.length() + "=" + fileDir.listFiles()[i].getAbsolutePath());
-//        }
+        if (fileDir == null){
+            return null;
+        }
         if (!fileDir.exists()){
             fileDir.mkdirs();
         }

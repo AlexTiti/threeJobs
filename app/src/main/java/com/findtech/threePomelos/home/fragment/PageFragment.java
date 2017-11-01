@@ -18,9 +18,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -38,18 +36,14 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
-import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.activity.BabyDataDetailActivity;
 import com.findtech.threePomelos.activity.BabyInfoActivity;
 import com.findtech.threePomelos.activity.TagImageEditActivity;
 import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.BaseLazyFragment;
-import com.findtech.threePomelos.bluetooth.BLEDevice;
-import com.findtech.threePomelos.bluetooth.CubicBLEDevice;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
-import com.findtech.threePomelos.entity.TravelInfoEntity;
 import com.findtech.threePomelos.home.MainHomeActivity;
 import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
 import com.findtech.threePomelos.login.ThirdPartyController;
@@ -60,7 +54,6 @@ import com.findtech.threePomelos.mydevices.activity.DeviceDetailActivity;
 import com.findtech.threePomelos.mydevices.adapter.BluetoothLinkAdapter;
 import com.findtech.threePomelos.mydevices.bean.BluetoothLinkBean;
 import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.service.RFStarBLEService;
 import com.findtech.threePomelos.utils.FileUtils;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.MyCalendar;
@@ -77,7 +70,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -145,7 +137,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         netWorkRequest = new NetWorkRequest(mContext);
         content = IContent.getInstacne();
         refreshdata();
-        if (IContent.getInstacne().newCode == null)
+        if (IContent.getInstacne().newCode == null) {
             netWorkRequest.downUpDateOr(new FindCallback<AVObject>() {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
@@ -153,12 +145,14 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                         if (list.size() != 0) {
                             AVObject avObject = list.get(0);
                             String code = avObject.getString("fileVersion");
-                            if (code != null)
+                            if (code != null) {
                                 IContent.getInstacne().newCode = code;
+                            }
                         }
                     }
                 }
             });
+        }
 
         text_add_car_page = (TextView) view.findViewById(R.id.text_add_car_page);
         heightLayout = (LinearLayout) view.findViewById(R.id.height_layout);
@@ -232,9 +226,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                         if (address != null) {
                             IContent.getInstacne().addressList.add(new DeviceCarBean(name, address, deviceType, functionType, company));
                         }
-                        L.e("=========getInstacne().addressList", company+"================" + functionType);
                     }
-                    L.e("=========getInstacne().addressList", "================" + IContent.getInstacne().addressList.size());
                     toRefreshAdapter();
                 } else {
                     ((MainHomeActivity) getActivity()).checkNetWork();
@@ -266,10 +258,10 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
             mBabyInfoView.setImageResource(R.mipmap.homepage_headdata_bg_nor);
         }
 
-        if (babyInfoEntity.getBabyName() != null)
+        if (babyInfoEntity.getBabyName() != null) {
             babyName.setText(babyInfoEntity.getBabyName());
-        heightHealthState.setText(mContext.getResources().getString(R.string.xliff_height_health_state,
-                RequestUtils.getSharepreference(mContext).getString(RequestUtils.HEIGHT_HEALTH_STATE, "0~0")));
+        }
+        heightHealthState.setText(mContext.getResources().getString(R.string.xliff_height_health_state, RequestUtils.getSharepreference(mContext).getString(RequestUtils.HEIGHT_HEALTH_STATE, "0~0")));
         weightHealthState.setText(mContext.getResources().getString(R.string.xliff_weight_health_state,
                 RequestUtils.getSharepreference(mContext).getString(RequestUtils.WEIGHT_HEALTH_STATE, "0~0")));
         if (babyInfoEntity.getBirthday() != null) {
@@ -378,12 +370,14 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         builder.setNotifyInfo(getString(R.string.input_baby_info));
         builder.setShowButton(true);
         builder.setPositiveButton(getString(R.string.set), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 startActivity(new Intent(mContext, BabyInfoActivity.class));
             }
         });
         builder.setNegativeButton(getString(R.string.cancle), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
@@ -484,7 +478,6 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
             public void done(List<AVObject> list, AVException e) {
                 if (e == null) {
                     content.bluetoothLinkBeen.clear();
-                    L.e("=======", "====" + content.bluetoothLinkBeen.size());
                     for (AVObject avObject : list) {
                         BluetoothLinkBean bean = new BluetoothLinkBean();
                         bean.setDeviceIndentifier(avObject.getString(NetWorkRequest.DEVICEIDENTIFITER));
@@ -658,8 +651,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         super.onPause();
         AVAnalytics.onFragmentEnd("PageFragment");
     }
-
-
+    
     @Override
     public void longClick(final int position) {
         final CustomDialog.Builder builder = new CustomDialog.Builder(getActivity());
@@ -667,6 +659,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         builder.setShowBindInfo(getResources().getString(R.string.unbound_message));
         builder.setShowButton(true);
         builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(final DialogInterface dialog, int which) {
                 final DeviceCarBean deviceCarBean = IContent.getInstacne().addressList.get(position);
                 final String deviceNumAddress = deviceCarBean.getDeviceaAddress();
@@ -713,10 +706,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                 });
         builder.create().show();
     }
-
-
     class  CloseReceiver extends BroadcastReceiver{
-
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent != null ) {

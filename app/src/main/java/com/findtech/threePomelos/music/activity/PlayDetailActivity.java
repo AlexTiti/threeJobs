@@ -1,6 +1,7 @@
 package com.findtech.threePomelos.music.activity;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
@@ -94,6 +95,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     BluetoothAdapter bleAdapter;
     BluetoothManager manager;
     private   NetWorkRequest netWorkRequest;
+    private boolean isRound = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,14 +106,14 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         img_down = (ImageView) findViewById(R.id.img_down);
         animatorWeakReference = new WeakReference(ObjectAnimator.ofFloat(Rela_round_play, "rotation", new float[]{0.0F, 360.0F}));
         animator = animatorWeakReference.get();
-        animator.setRepeatCount(Integer.MAX_VALUE);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setDuration(25000L);
         animator.setInterpolator(new LinearInterpolator());
         mPlaylistsManager = PlaylistsManager.getInstance(this);
-        if (app.manager.cubicBLEDevice != null) {
-//            app.manager.cubicBLEDevice.registerReceiver();
-//            app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
-        }
+//        if (app.manager.cubicBLEDevice != null) {
+////            app.manager.cubicBLEDevice.registerReceiver();
+////            app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
+//        }
         animation = new ScaleAnimation(0.5f,1.3f,0.5f,1.3f,Animation.RELATIVE_TO_SELF, 0.5f,Animation.RELATIVE_TO_SELF, 0.5f);
         animation.setDuration(800);
         animation.setInterpolator(new LinearInterpolator());
@@ -121,14 +123,9 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         setMusicInterface(this);
         mHandler = HandlerUtil.getInstance(this);
         utility = PreferencesUtility.getInstance(this);
-
         manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bleAdapter = manager.getAdapter();
-
         netWorkRequest = new NetWorkRequest(this);
-
-
-
     }
     private void init() {
         View view1 = findViewById(R.id.view);
@@ -190,18 +187,19 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         } else {
             music_link_layout.setAlpha(1f);
             music_link_layout.setEnabled(true);
-            MusicInfo info = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
-
-            if (info.islocal) {
-                image_download.setAlpha(0.3f);
-                image_collection.setAlpha(1f);
-                image_collection.setEnabled(true);
-                image_download.setEnabled(false);
-                image_download.setImageResource(R.drawable.icon_downloaded);
-                img_round_detail.setImageResource(R.drawable.face_music_car_a);
-            } else {
-                changeUI();
-                upImageView(info.songId);
+            if (MusicPlayer.getPlayinfos() != null) {
+                MusicInfo info = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
+                if (info.islocal) {
+                    image_download.setAlpha(0.3f);
+                    image_collection.setAlpha(1f);
+                    image_collection.setEnabled(true);
+                    image_download.setEnabled(false);
+                    image_download.setImageResource(R.drawable.icon_downloaded);
+                    img_round_detail.setImageResource(R.drawable.face_music_car_a);
+                } else {
+                    changeUI();
+                    upImageView(info.songId);
+                }
             }
             if (!NetUtils.isConnectInternet(this)) {
                 image_download.setAlpha(0.3f);
@@ -222,7 +220,6 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     private void setModeView() {
         if (MusicPlayer.getShuffleMode() == MediaService.SHUFFLE_NORMAL) {
             play_mode.setImageResource(R.drawable.icon_random_play);
-
         } else {
             switch (MusicPlayer.getRepeatMode()) {
                 case MediaService.REPEAT_ALL:
@@ -238,8 +235,9 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
 
     private void changeUI(){
         MusicInfo mode = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
-        if (mode == null)
+        if (mode == null) {
             return;
+        }
 
         if (mode.islocal) {
             image_download.setAlpha(0.3f);
@@ -379,8 +377,9 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                 public void done(AVException e) {
                     for (int i=0;i<IContent.getInstacne().collection_array.size();i++){
                         DownMusicBean bean = IContent.getInstacne().collection_array.get(i);
-                        if (info.musicName.equals(bean.getMusicName()) )
+                        if (info.musicName.equals(bean.getMusicName()) ) {
                             IContent.getInstacne().collection_array.remove(i);
+                        }
                     }
                 }
             });
@@ -489,7 +488,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     }
 
     private void setSeekBarListener() {
-        if (playerSeekBar != null)
+        if (playerSeekBar != null) {
             playerSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 int progress = 0;
 
@@ -510,6 +509,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                 public void onStopTrackingTouch(SeekBar seekBar) {
                 }
             });
+        }
     }
 
 
@@ -801,11 +801,13 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         textView_music.setText(MusicPlayer.getTrackName());
         playerSeekBar.setVisibility(View.VISIBLE);
 
-        if (MusicPlayer.isPlaying()) {
+        if (MusicPlayer.isPlaying() ) {
             playerSeekBar.removeCallbacks(mUpdateProgress);
             playerSeekBar.postDelayed(mUpdateProgress, 200);
             imageView_control.setImageResource(R.drawable.button_pause);
-            if (animator != null && !animator.isRunning()) {
+            if (  animator != null && !animator.isRunning()) {
+                L.e("animator","animator.start();");
+
                 animator.start();
             }
             Intent intent = new Intent(IContent.ACTION_PLAY_OR_PAUSE);
@@ -816,6 +818,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             imageView_control.setImageResource(R.drawable.button_play);
             if (animator != null && animator.isRunning()) {
                 animator.cancel();
+
                 float valueAvatar = (float) animator.getAnimatedValue();
                 animator.setFloatValues(valueAvatar, 360f + valueAvatar);
             }

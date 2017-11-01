@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/text_tab"
         android:layout_width="@dimen/x30"
-        android:layout_height="@dimen/y10"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="@dimen/x10"
         android:textColor="@drawable/page_text"

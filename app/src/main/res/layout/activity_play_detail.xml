@@ -109,7 +109,7 @@
         android:layout_marginTop="@dimen/y18"
         android:layout_below="@id/Rela_round_play"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/text_size_music" />
 
     <SeekBar
         android:id="@+id/voice_seekbar"

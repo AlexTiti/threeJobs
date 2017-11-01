@@ -19,6 +19,7 @@ import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.database.OperateDBUtils;
+import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.utils.RequestUtils;
 import com.findtech.threePomelos.utils.Tools;
@@ -53,6 +54,7 @@ public class ReceiveWeightShowDialogService extends Service {
         super.onCreate();
         netWorkRequest = new NetWorkRequest(getApplicationContext());
         operateDBUtils = new OperateDBUtils(getApplicationContext());
+
         initProgressDialog();
     }
 
@@ -68,12 +70,14 @@ public class ReceiveWeightShowDialogService extends Service {
             startTimer();
             final String weight = intent.getExtras().getString("weight");
             String currentTime = intent.getExtras().getString("date");
+            L.e("currentTime==",weight+"==="+currentTime);
             final Date currentDate = Tools.getDateFromTimeStr(currentTime);
             final CustomDialog.Builder builder = new CustomDialog.Builder(getApplicationContext());
             builder.setTitle(getString(R.string.app_name));
             builder.setShowBindInfo(getString(R.string.xliff_weight_service, weight) );
             builder.setShowButton(true);
             builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(final DialogInterface dialog, int which) {
                     saveWeightDataToServer(weight, currentDate);
                     stopTimer();

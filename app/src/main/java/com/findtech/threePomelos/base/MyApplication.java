@@ -50,7 +50,9 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AVOSCloud.initialize(this, APPID_TEST, APPKEY_TEST);
+        AVOSCloud.initialize(this, APPID, APPKEY);
+        //AVOSCloud.setDebugLogEnabled(true);
+        //AVCloud.setProductionMode(false);
         manager = new AppManager(getApplicationContext());
 //        //微信 appid appsecret
 //        PlatformConfig.setWeixin("wx897cd02216ae4253", "dbd4985c48250cb8fedda58b338c00f8");
