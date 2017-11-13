@@ -8,17 +8,23 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.Albums;
 import android.provider.MediaStore.Audio.Media;
 import android.provider.MediaStore.Files.FileColumns;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.music.info.MusicInfo;
+import com.findtech.threePomelos.utils.IContent;
 import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -128,41 +134,26 @@ public class MusicUtils implements IConstants {
 
     public static ArrayList<MusicInfo> queryMusic(Context context, String id, int from) {
 
-       // if (uri_set == null)
         Uri uri = Media.EXTERNAL_CONTENT_URI;
-        L.e("================== Uri uri",uri.toString()+"============");
-      // else
-           // uri = uri_set;
         ContentResolver cr = context.getContentResolver();
         final String songSortOrder = PreferencesUtility.getInstance(context).getSongSortOrder();
-
-
         switch (from) {
             case START_FROM_LOCAL:
                 ArrayList<MusicInfo> list3 = getMusicListCursor(cr.query(uri, proj_music,
                         null, null,
                         songSortOrder));
-
                 return list3;
-//            case START_FROM_ARTIST:
-//                select.append(" and " + Media.ARTIST_ID + " = " + id);
-//                return getMusicListCursor(cr.query(uri, proj_music, select.toString(), null,
-//                        PreferencesUtility.getInstance(context).getArtistSongSortOrder()));
-//            case START_FROM_ALBUM:
-//                select.append(" and " + Media.ALBUM_ID + " = " + id);
-//                return getMusicListCursor(cr.query(uri, proj_music,
-//                        select.toString(), null,
-//                        PreferencesUtility.getInstance(context).getAlbumSongSortOrder()));
+
             case START_FROM_FOLDER:
                 ArrayList<MusicInfo> list1 = new ArrayList<>();
                 ArrayList<MusicInfo> list = getMusicListCursor(cr.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj_music,
                         null, null,
                         null));
+                IContent.getInstacne().map.clear();
                 for (MusicInfo music : list) {
-                    L.e("WWWW",music.data.substring(0, music.data.lastIndexOf(File.separator)) +"== "+ id+"=="+music.musicName);
                     if (music.data.substring(0, music.data.lastIndexOf(File.separator)).equals(id)) {
-                        L.e("WWWW",music.data+ "== "+ id);
                         list1.add(music);
+                        IContent.getInstacne().map.put(music.musicName,music);
                     }
                 }
                 return list1;
@@ -173,67 +164,67 @@ public class MusicUtils implements IConstants {
     }
 
 
-    public static ArrayList<MusicInfo> getMusicLists(Context context, long[] id) {
-        final StringBuilder selection = new StringBuilder();
-        selection.append(MediaStore.Audio.Media._ID + " IN (");
-        for (int i = 0; i < id.length; i++) {
-            selection.append(id[i]);
-            if (i < id.length - 1) {
-                selection.append(",");
-            }
-        }
-        selection.append(")");
-
-        //sqlite 不支持decode
-
-//        final StringBuilder order = new StringBuilder();
-//        order.append("DECODE(" +MediaStore.Audio.Media._ID +",");
+//    public static ArrayList<MusicInfo> getMusicLists(Context context, long[] id) {
+//        final StringBuilder selection = new StringBuilder();
+//        selection.append(MediaStore.Audio.Media._ID + " IN (");
 //        for (int i = 0; i < id.length; i++) {
-//            order.append(id[i]);
-//            order.append(",");
-//            order.append(i);
+//            selection.append(id[i]);
 //            if (i < id.length - 1) {
-//                order.append(",");
+//                selection.append(",");
 //            }
 //        }
-//        order.append(")");
-
-        Cursor cursor = (context.getContentResolver().query(Media.EXTERNAL_CONTENT_URI, proj_music,
-                selection.toString(),
-                null, null));
-        if (cursor == null) {
-            return null;
-        }
-        ArrayList<MusicInfo> musicList = new ArrayList<>();
-        musicList.ensureCapacity(id.length);
-        for (int i = 0; i < id.length; i++) {
-            musicList.add(null);
-        }
-
-        while (cursor.moveToNext()) {
-            MusicInfo music = new MusicInfo();
-            music.songId = cursor.getInt(cursor
-                    .getColumnIndex(Media._ID));
-            music.albumId = cursor.getInt(cursor
-                    .getColumnIndex(Media.ALBUM_ID));
-            music.albumName = cursor.getString(cursor
-                    .getColumnIndex(Albums.ALBUM));
-            music.albumData = getAlbumArtUri(music.albumId) + "";
-            music.musicName = cursor.getString(cursor
-                    .getColumnIndex(Media.TITLE));
-            music.artist = cursor.getString(cursor
-                    .getColumnIndex(Media.ARTIST));
-            music.artistId = cursor.getLong(cursor.getColumnIndex(Media.ARTIST_ID));
-            music.islocal = true;
-            for (int i = 0; i < id.length; i++) {
-                if (id[i] == music.songId) {
-                    musicList.set(i, music);
-                }
-            }
-        }
-        cursor.close();
-        return musicList;
-    }
+//        selection.append(")");
+//
+//        //sqlite 不支持decode
+//
+////        final StringBuilder order = new StringBuilder();
+////        order.append("DECODE(" +MediaStore.Audio.Media._ID +",");
+////        for (int i = 0; i < id.length; i++) {
+////            order.append(id[i]);
+////            order.append(",");
+////            order.append(i);
+////            if (i < id.length - 1) {
+////                order.append(",");
+////            }
+////        }
+////        order.append(")");
+//
+//        Cursor cursor = (context.getContentResolver().query(Media.EXTERNAL_CONTENT_URI, proj_music,
+//                selection.toString(),
+//                null, null));
+//        if (cursor == null) {
+//            return null;
+//        }
+//        ArrayList<MusicInfo> musicList = new ArrayList<>();
+//        musicList.ensureCapacity(id.length);
+//        for (int i = 0; i < id.length; i++) {
+//            musicList.add(null);
+//        }
+//
+//        while (cursor.moveToNext()) {
+//            MusicInfo music = new MusicInfo();
+//            music.songId = cursor.getInt(cursor
+//                    .getColumnIndex(Media._ID));
+//            music.albumId = cursor.getInt(cursor
+//                    .getColumnIndex(Media.ALBUM_ID));
+//            music.albumName = cursor.getString(cursor
+//                    .getColumnIndex(Albums.ALBUM));
+//            music.albumData = getAlbumArtUri(music.albumId) + "";
+//            music.musicName = cursor.getString(cursor
+//                    .getColumnIndex(Media.TITLE));
+//            music.artist = cursor.getString(cursor
+//                    .getColumnIndex(Media.ARTIST));
+//            music.artistId = cursor.getLong(cursor.getColumnIndex(Media.ARTIST_ID));
+//            music.islocal = true;
+//            for (int i = 0; i < id.length; i++) {
+//                if (id[i] == music.songId) {
+//                    musicList.set(i, music);
+//                }
+//            }
+//        }
+//        cursor.close();
+//        return musicList;
+//    }
 
 
     public static ArrayList<MusicInfo> getMusicListCursor(Cursor cursor) {
@@ -246,7 +237,6 @@ public class MusicUtils implements IConstants {
         ArrayList<MusicInfo> musicList = new ArrayList<>();
         while (cursor.moveToNext()) {
             url = cursor.getString(cursor.getColumnIndexOrThrow(Media.DATA));
-
             MusicInfo music = new MusicInfo();
             music.songId = cursor.getInt(cursor
                     .getColumnIndex(Media._ID));
@@ -293,20 +283,20 @@ public class MusicUtils implements IConstants {
         return ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), albumId);
     }
 
-    public static Uri getAlbumUri(Context context, long musicId) {
-        ContentResolver cr = context.getContentResolver();
-        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id =" + String.valueOf(musicId), null, null);
-        long id = -3;
-        if (cursor == null) {
-            return null;
-        }
-        if (cursor.moveToFirst()) {
-            id = cursor.getInt(cursor.getColumnIndex(Media.ALBUM_ID));
-        }
-
-        cursor.close();
-        return getAlbumArtUri(id);
-    }
+//    public static Uri getAlbumUri(Context context, long musicId) {
+//        ContentResolver cr = context.getContentResolver();
+//        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id =" + String.valueOf(musicId), null, null);
+//        long id = -3;
+//        if (cursor == null) {
+//            return null;
+//        }
+//        if (cursor.moveToFirst()) {
+//            id = cursor.getInt(cursor.getColumnIndex(Media.ALBUM_ID));
+//        }
+//
+//        cursor.close();
+//        return getAlbumArtUri(id);
+//    }
 
     public static String getAlbumdata(Context context, long musicid) {
         ContentResolver cr = context.getContentResolver();
@@ -338,40 +328,43 @@ public class MusicUtils implements IConstants {
 
 
 
-    public static MusicInfo getMusicInfo(Context context, long id) {
-        ContentResolver cr = context.getContentResolver();
-        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id = " + String.valueOf(id), null, null);
-        if (cursor == null) {
-            return null;
-        }
-        MusicInfo music = new MusicInfo();
-        while (cursor.moveToNext()) {
-            music.songId = cursor.getInt(cursor
-                    .getColumnIndex(Media._ID));
-            music.albumId = cursor.getInt(cursor
-                    .getColumnIndex(Media.ALBUM_ID));
-            music.albumName = cursor.getString(cursor
-                    .getColumnIndex(Albums.ALBUM));
-            music.albumData = getAlbumArtUri(music.albumId) + "";
-            music.duration = cursor.getInt(cursor
-                    .getColumnIndex(Media.DURATION));
-            music.musicName = cursor.getString(cursor
-                    .getColumnIndex(Media.TITLE));
-            music.size = cursor.getInt(cursor.getColumnIndex(Media.SIZE));
-            music.artist = cursor.getString(cursor
-                    .getColumnIndex(Media.ARTIST));
-            music.artistId = cursor.getLong(cursor.getColumnIndex(Media.ARTIST_ID));
-            String filePath = cursor.getString(cursor
-                    .getColumnIndex(Media.DATA));
-            music.data = filePath;
-            String folderPath = filePath.substring(0,
-                    filePath.lastIndexOf(File.separator));
-            music.folder = folderPath;
-            music.sort = Pinyin.toPinyin(music.musicName.charAt(0)).substring(0, 1).toUpperCase();
-        }
-        cursor.close();
-        return music;
-    }
+//    public static MusicInfo getMusicInfo(Context context, long id) {
+//        ContentResolver cr = context.getContentResolver();
+//        Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, proj_music, "_id = " + String.valueOf(id), null, null);
+//        if (cursor == null) {
+//            return null;
+//        }
+//        MusicInfo music = new MusicInfo();
+//        while (cursor.moveToNext()) {
+//            music.songId = cursor.getInt(cursor
+//                    .getColumnIndex(Media._ID));
+//            music.albumId = cursor.getInt(cursor
+//                    .getColumnIndex(Media.ALBUM_ID));
+//            music.albumName = cursor.getString(cursor
+//                    .getColumnIndex(Albums.ALBUM));
+//            music.albumData = getAlbumArtUri(music.albumId) + "";
+//            music.duration = cursor.getInt(cursor
+//                    .getColumnIndex(Media.DURATION));
+//            music.musicName = cursor.getString(cursor
+//                    .getColumnIndex(Media.TITLE));
+//            music.size = cursor.getInt(cursor.getColumnIndex(Media.SIZE));
+//            music.artist = cursor.getString(cursor
+//                    .getColumnIndex(Media.ARTIST));
+//            music.artistId = cursor.getLong(cursor.getColumnIndex(Media.ARTIST_ID));
+//            String filePath = cursor.getString(cursor
+//                    .getColumnIndex(Media.DATA));
+//            music.data = filePath;
+//            String folderPath = filePath.substring(0,
+//                    filePath.lastIndexOf(File.separator));
+//            music.folder = folderPath;
+//            music.sort = Pinyin.toPinyin(music.musicName.charAt(0)).substring(0, 1).toUpperCase();
+//        }
+//        cursor.close();
+//        return music;
+//    }
+
+
+
 
 
     public static String makeShortTimeString(final Context context, long secs) {

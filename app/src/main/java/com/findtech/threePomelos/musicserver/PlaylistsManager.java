@@ -10,6 +10,7 @@ import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.utils.IConstants;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.music.utils.MusicUtils;
+import com.findtech.threePomelos.utils.IContent;
 
 import java.util.ArrayList;
 
@@ -223,8 +224,8 @@ public class PlaylistsManager {
                     PlaylistsColumns.PLAYLIST_ID + " = " + String.valueOf(playlistid), null, null, null, PlaylistsColumns.TRACK_ORDER + " ASC ", null);
             if (cursor != null && cursor.moveToFirst()) {
                 results.ensureCapacity(cursor.getCount());
-                L.e("SixItem",cursor.getLong(1)+"=="+cursor.getString(2)+"=="+cursor.getInt(3)+"=="+cursor.getInt(4)+"=="+cursor.getString(5)+"=="+cursor.getInt(6)+"=="+cursor.getInt(7) );
 
+                IContent.getInstacne().collectedList.clear();
                 do {
                     MusicInfo info = new MusicInfo();
                     info.songId = cursor.getLong(1);
@@ -237,7 +238,8 @@ public class PlaylistsManager {
                     info.islocal = cursor.getInt(8) > 0;
                     info.lrc = cursor.getString(cursor.getColumnIndex(PlaylistsColumns.LRC));
                     results.add(info);
-                    L.e("SixItem",cursor.getString(2)+cursor.getString(10)+cursor.getInt(3)+"=="+cursor.getInt(4)+"=="+cursor.getString(5)+cursor.getInt(6)+cursor.getInt(7) +"==="+info.lrc);
+                    IContent.getInstacne().collectedList.add(info.musicName);
+
                 } while (cursor.moveToNext());
             }
 

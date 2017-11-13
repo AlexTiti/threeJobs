@@ -134,8 +134,8 @@
         android:id="@+id/faceback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y4"
-        >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/icon_01"
@@ -152,10 +152,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y10"
             android:layout_toRightOf="@+id/icon_01"
             android:gravity="center"
             android:text="@string/faceback"
-            android:layout_marginTop="@dimen/y10"
             android:textColor="@color/home_text_black"
             android:textSize="@dimen/text_size" />
 
@@ -163,8 +163,8 @@
             android:id="@+id/image_line"
             android:layout_width="wrap_content"
             android:layout_height="0.5dp"
-            android:layout_alignParentRight="true"
             android:layout_alignLeft="@+id/app_info_title"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/app_info_title"
             android:layout_marginRight="@dimen/x20"
             android:layout_marginTop="@dimen/y10"
@@ -179,10 +179,13 @@
             android:background="@mipmap/personal_arrowright_icon" />
     </RelativeLayout>
 
+
+
     <RelativeLayout
         android:id="@+id/update"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <ImageView
             android:id="@+id/icon_02"
@@ -228,55 +231,58 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/approve"
+        android:id="@+id/relay_common_problem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
+
+
         <ImageView
-            android:id="@+id/icon_03"
+            android:id="@+id/icon_common"
             android:layout_width="@dimen/x14"
             android:layout_height="@dimen/x14"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x15"
             android:scaleType="centerCrop"
-            android:src="@drawable/icon_protocal" />
-
+            android:src="@drawable/icon_update" />
         <TextView
-            android:id="@+id/app_info_title3"
+            android:id="@+id/title2_common"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x15"
-            android:layout_toRightOf="@+id/icon_03"
             android:layout_marginTop="@dimen/y10"
             android:gravity="center"
-            android:text="@string/approve"
+            android:layout_toRightOf="@+id/icon_common"
+            android:text="@string/common_problem"
             android:textColor="@color/home_text_black"
             android:textSize="@dimen/text_size" />
 
         <ImageView
-            android:id="@+id/image_line3"
+            android:id="@+id/image_line2_common"
             android:layout_width="wrap_content"
             android:layout_height="0.5dp"
+            android:layout_alignLeft="@+id/title2_common"
             android:layout_alignParentRight="true"
-            android:layout_alignLeft="@+id/app_info_title3"
-            android:layout_below="@+id/app_info_title3"
+            android:layout_below="@+id/title2_common"
             android:layout_marginRight="@dimen/x20"
-            android:layout_marginTop="@dimen/x10"
+            android:layout_marginTop="@dimen/y10"
             android:background="#eeeeee" />
 
         <ImageView
-            android:id="@+id/app_info_arrow_right3"
+            android:id="@+id/app_info_arrow_right2_common"
             android:layout_width="wrap_content"
             android:layout_height="13dp"
-            android:layout_alignRight="@+id/image_line3"
+            android:layout_alignRight="@+id/image_line2_common"
             android:layout_centerVertical="true"
             android:background="@mipmap/personal_arrowright_icon" />
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/about_us"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/icon_04"
@@ -293,10 +299,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y10"
             android:layout_toRightOf="@+id/icon_04"
             android:gravity="center"
             android:text="@string/about_us"
-            android:layout_marginTop="@dimen/y10"
             android:textColor="@color/home_text_black"
             android:textSize="@dimen/text_size" />
 
@@ -304,8 +310,8 @@
             android:id="@+id/image_line4"
             android:layout_width="wrap_content"
             android:layout_height="0.5dp"
-            android:layout_alignParentRight="true"
             android:layout_alignLeft="@+id/app_info_title4"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/app_info_title4"
             android:layout_marginRight="@dimen/x20"
             android:layout_marginTop="@dimen/x10"
@@ -319,7 +325,7 @@
             android:layout_centerVertical="true"
             android:background="@mipmap/personal_arrowright_icon" />
     </RelativeLayout>
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

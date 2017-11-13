@@ -28,6 +28,9 @@ import com.findtech.threePomelos.net.NetWorkRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+/**
+ * @author Alex
+ */
 public class InstructionsMainActivity extends MyActionBarActivity implements View.OnClickListener{
 
     NetWorkRequest netWorkRequest;
@@ -54,7 +57,7 @@ public class InstructionsMainActivity extends MyActionBarActivity implements Vie
             instructions = intent.getStringExtra("url0");
             url = intent.getStringExtra("url1");
         }
-        L.e("============",instructions+"==="+url);
+
         webView = (WebView) findViewById(R.id.webView);
         webView.loadUrl(instructions);
         webView.setWebViewClient(new WebViewClient(){
@@ -71,9 +74,9 @@ public class InstructionsMainActivity extends MyActionBarActivity implements Vie
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
 
-                if (newProgress == 100)
+                if (newProgress == 100) {
                     progressBar.setVisibility(View.GONE);
-                else{
+                } else{
                     progressBar.setVisibility(View.VISIBLE);
                     progressBar.setProgress(newProgress);
                 }

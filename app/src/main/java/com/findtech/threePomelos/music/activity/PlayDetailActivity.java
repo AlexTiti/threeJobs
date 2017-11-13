@@ -4,19 +4,22 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -28,18 +31,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.ProgressCallback;
 import com.avos.avoscloud.SaveCallback;
+import com.bumptech.glide.Glide;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.bluetooth.BLEDevice;
-import com.findtech.threePomelos.entity.TravelInfoEntity;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.utils.DownFileUtils;
-import com.findtech.threePomelos.music.utils.DownMusicBean;
 import com.findtech.threePomelos.music.utils.HandlerUtil;
 import com.findtech.threePomelos.music.utils.IConstants;
 import com.findtech.threePomelos.music.utils.L;
@@ -60,7 +59,8 @@ import com.findtech.threePomelos.view.dialog.CustomDialog;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -87,15 +87,22 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     private AudioManager mAudiomanger;
     private int maxVoice, currentVoice;
     private boolean isVoice = false;
-    private ImageView back ,share_playDetail;
-    private ImageView img_down;
+    private ImageView back ;
     private CircleImageView img_round_detail;
     PreferencesUtility utility ;
     Animation animation;
     BluetoothAdapter bleAdapter;
     BluetoothManager manager;
     private   NetWorkRequest netWorkRequest;
-    private boolean isRound = false;
+    private ImageView img_down;
+    IContent content = IContent.getInstacne();
+
+
+    private  String[] proj_music = new String[]{
+            MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.ALBUM_ID,
+            MediaStore.Audio.Media.ALBUM, MediaStore.Audio.Media.ARTIST,
+            MediaStore.Audio.Media.ARTIST_ID, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.SIZE};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -189,7 +196,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             music_link_layout.setEnabled(true);
             if (MusicPlayer.getPlayinfos() != null) {
                 MusicInfo info = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
-                if (info.islocal) {
+                if (info != null && info.islocal) {
                     image_download.setAlpha(0.3f);
                     image_collection.setAlpha(1f);
                     image_collection.setEnabled(true);
@@ -198,7 +205,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                     img_round_detail.setImageResource(R.drawable.face_music_car_a);
                 } else {
                     changeUI();
-                    upImageView(info.songId);
+                    upImageView(info);
                 }
             }
             if (!NetUtils.isConnectInternet(this)) {
@@ -239,6 +246,8 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             return;
         }
 
+
+
         if (mode.islocal) {
             image_download.setAlpha(0.3f);
             image_download.setEnabled(false);
@@ -246,17 +255,14 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             return;
         }
 
-        for ( int i=0;i<IContent.getInstacne().downList.size();i++){
-            DownMusicBean bean = IContent.getInstacne().downList.get(i);
-            if (bean.getMusicName().equals(mode.musicName)){
-                L.e("=============","============"+mode.musicName);
+        Map map = IContent.getInstacne().map;
+        if (map.containsKey(mode.musicName)){
                 image_download.setAlpha(0.3f);
                 image_download.setEnabled(false);
                 image_download.setImageResource(R.drawable.icon_downloaded);
                 return;
-            }
         }
-        L.e("=============","============"+mode.musicName);
+
         if ("downed".equals(mode.artist)) {
             image_download.setAlpha(0.3f);
             image_download.setEnabled(false);
@@ -367,56 +373,30 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
      */
     private void collectionForBaby() {
         final MusicInfo info = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
-        L.e("====",isCollection+"");
+
         if (isCollection) {
             image_collection.setImageResource(R.drawable.icon_baby_like);
-            mPlaylistsManager.removeItem(PlayDetailActivity.this, IConstants.FAV_PLAYLIST,
-                    MusicPlayer.getCurrentAudioId());
             netWorkRequest.deleteMusicCollecting(info.musicName, new SaveCallback() {
                 @Override
                 public void done(AVException e) {
-                    for (int i=0;i<IContent.getInstacne().collection_array.size();i++){
-                        DownMusicBean bean = IContent.getInstacne().collection_array.get(i);
-                        if (info.musicName.equals(bean.getMusicName()) ) {
-                            IContent.getInstacne().collection_array.remove(i);
-                        }
-                    }
+                    mPlaylistsManager.removeItem(PlayDetailActivity.this, IConstants.FAV_PLAYLIST,
+                            MusicPlayer.getCurrentAudioId());
+                    content.collectedList.remove(info.musicName);
                 }
             });
-
-
-
         } else {
-            L.e(Log_TAG, info.musicName + info.islocal + "---------------------------" + info.lrc + info.data + info.albumData);
-//            NetWorkRequest.sendMusicCollect(info, new SaveCallback() {
-//                @Override
-//                public void done(AVException e) {
-//                    if (e == null){
-//                        mPlaylistsManager.insertMusic(PlayDetailActivity.this, IConstants.FAV_PLAYLIST, info);
-//                        image_collection.setImageResource(R.drawable.icon_baby_like_seclected);
-//                        IContent.getInstacne().collection_array.add(new DownMusicBean(info.musicName,info.type));
-//                    }else{
-//                        L.e("======",e.toString());
-//                        checkNetWork();
-//                    }
-//                }
-//            });
-
-
             netWorkRequest.sendMusicCollecting(info.musicName, new SaveCallback() {
                 @Override
                 public void done(AVException e) {
                     if (e == null){
                         mPlaylistsManager.insertMusic(PlayDetailActivity.this, IConstants.FAV_PLAYLIST, info);
                         image_collection.setImageResource(R.drawable.icon_baby_like_seclected);
-                        IContent.getInstacne().collection_array.add(new DownMusicBean(info.musicName,info.type));
+                        content.collectedList.add(info.musicName);
                     }else{
-                        L.e("======",e.toString());
                         checkNetWork();
                     }
                 }
             });
-
         }
         Intent intent = new Intent(IConstants.PLAYLIST_COUNT_CHANGED);
         sendBroadcast(intent);
@@ -440,28 +420,16 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                     image_download.setEnabled(false);
                     image_download.setImageResource(R.drawable.icon_downloaded);
                     image_download.setVisibility(View.VISIBLE);
+
                     netWorkRequest.sendMusicDown(info.musicName, new SaveCallback() {
                         @Override
                         public void done(AVException e) {
                             if (e == null){
-                                IContent.getInstacne(). downList.add( new DownMusicBean(info.musicName,info.type) );
                             }else{
                                 checkNetWork();
                             }
                         }
                     });
-
-//                    NetWorkRequest.sendMusicDownLoad(info, new SaveCallback() {
-//                        @Override
-//                        public void done(AVException e) {
-//                            if (e == null){
-//                                IContent.getInstacne(). downList.add( new DownMusicBean(info.musicName,info.type) );
-//                            }else{
-//                                checkNetWork();
-//                            }
-//                        }
-//                    });
-
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//如果是4.4及以上版本
 
                         Intent mediaScanIntent = new Intent(
@@ -479,6 +447,33 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
                                         + Environment.getExternalStorageDirectory())));
 
                     }
+
+                    CountDownTimer timer = new CountDownTimer(1000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+
+                            File fileca = DownFileUtils.creatFileDir(PlayDetailActivity.this, IContent.FILEM_USIC);
+                            if (!fileca.exists()) {
+                                return;
+                            }
+                            ContentResolver cr = PlayDetailActivity.this.getContentResolver();
+                            Cursor cursor = cr.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj_music,
+                                    MediaStore.Audio.Media.TITLE + "=?", new String[]{info.musicName},
+                                    null);
+                            ArrayList<MusicInfo> infos = MusicUtils.getMusicListCursor(cursor);
+                            if (infos.size() > 0) {
+                                for (MusicInfo info1 : infos) {
+                                    IContent.getInstacne().map.put(info1.musicName, info1);
+                                }
+                            }
+                        }
+                    };
+                    timer.start();
 
 
                 }
@@ -522,9 +517,9 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     public void onResume() {
         super.onResume();
         setModeView();
-        if (MusicPlayer.isTrackLocal())
+        if (MusicPlayer.isTrackLocal()) {
             updateBuffer(100);
-        else {
+        } else {
             updateBuffer(MusicPlayer.secondPosition());
         }
         mHandler.postDelayed(mUpdateProgress, 0);
@@ -536,10 +531,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             image_download.setEnabled(false);
             play_mode.setEnabled(false);
             mDuration.setText(null);
-            playerSeekBar.setVisibility(View.INVISIBLE);
             textView_music.setText(getString(R.string.car_music));
-        }else {
-            playerSeekBar.setVisibility(View.VISIBLE);
         }
 
         if (!NetUtils.isConnectInternet(this)) {
@@ -650,6 +642,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             }
         builder.setShowButton(true);
         builder.setPositiveButton(getResources().getString(R.string.go_link), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(final DialogInterface dialog, int which) {
                 Intent intent =  new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
                 startActivityForResult(intent,111);
@@ -658,6 +651,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         });
         builder.setNegativeButton(getResources().getString(R.string.cancle),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
@@ -668,11 +662,13 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     @Override
     public void musicReciver( Intent intent) {
         String action = intent.getAction();
-        if (action == null)
+        if (action == null) {
             return;
+        }
         if (action.equals(RFStarBLEService.ACTION_WRITE_DONE)) {
-            if (IContent.getInstacne().WRITEVALUE != null)
+            if (IContent.getInstacne().WRITEVALUE != null) {
                 app.manager.cubicBLEDevice.readValue(IContent.SERVERUUID_BLE, IContent.READUUID_BLE, IContent.getInstacne().WRITEVALUE);
+            }
         } else if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE)) {
             byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
 
@@ -788,7 +784,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         if (IContent.getInstacne().SD_Mode) {
             mDuration.setText(null);
             mTimePlayed.setText(null);
-            playerSeekBar.setVisibility(View.INVISIBLE);
+
             playerSeekBar.removeCallbacks(mUpdateProgress);
             playerSeekBar.setEnabled(false);
             playerSeekBar.setProgress(0);
@@ -799,7 +795,6 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             return;
         }
         textView_music.setText(MusicPlayer.getTrackName());
-        playerSeekBar.setVisibility(View.VISIBLE);
 
         if (MusicPlayer.isPlaying() ) {
             playerSeekBar.removeCallbacks(mUpdateProgress);
@@ -858,8 +853,9 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     @Override
     public void updateTrack() {
         super.updateTrack();
-        if (IContent.getInstacne().SD_Mode)
+        if (IContent.getInstacne().SD_Mode) {
             return;
+        }
         isCollection = false;
         long[] favlists = mPlaylistsManager.getPlaylistIds(IConstants.FAV_PLAYLIST);
         long currentid = MusicPlayer.getCurrentAudioId();
@@ -871,11 +867,8 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         }
         MusicInfo mode = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
         if (!isCollection) {
-            for (int i = 0; i < IContent.getInstacne().collection_array.size(); i++) {
-                if (mode.musicName.equals(IContent.getInstacne().collection_array.get(i).getMusicName() )) {
-                    isCollection = true;
-                    break;
-                }
+            if (content.collectedList.contains(mode.musicName)){
+                isCollection = true;
             }
         }
         changeUI();
@@ -885,31 +878,14 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             image_collection.setAlpha(0.3f);
             image_collection.setEnabled(false);
         }
-        upImageView(mode.songId);
+        upImageView(mode);
         updateFav(isCollection);
     }
-        private void upImageView(long songId ){
-
-            switch ((int) (songId/1000)){
-                case 0 :
-                    img_round_detail.setImageResource(R.drawable.face_image_rhyme_a);
-                    break;
-                case 1 :
-                    img_round_detail.setImageResource(R.drawable.face_image_poetry_a);
-                    break;
-                case 2 :
-                    img_round_detail.setImageResource(R.drawable.face_child_story_a);
-                    break;
-                case 3 :
-                    img_round_detail.setImageResource(R.drawable.face_english_a);
-                    break;
-                case 4 :
-                    img_round_detail.setImageResource(R.drawable.face_image_three_character_a);
-                    break;
-                default:
-                    img_round_detail.setImageResource(R.drawable.face_music_car_a);
-                    break;
+        private void upImageView(MusicInfo info ){
+            if (info.faceImage != null){
+                Glide.with(PlayDetailActivity.this).load(info.faceImage).error(R.drawable.face_music_car_a).into(img_round_detail);
             }
+
     }
     private void updateFav(boolean b) {
         if (b) {
@@ -923,8 +899,9 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
       if (requestCode == 111){
-          if (!bleAdapter.isEnabled())
-              ToastUtil.showToast(this,getString(R.string.bluetooth_unopen));
+          if (!bleAdapter.isEnabled()) {
+              ToastUtil.showToast(this, getString(R.string.bluetooth_unopen));
+          }
 
       }
     }

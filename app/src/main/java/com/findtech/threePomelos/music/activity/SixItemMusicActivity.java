@@ -1,15 +1,19 @@
 package com.findtech.threePomelos.music.activity;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.MainThread;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
@@ -36,9 +40,9 @@ import com.findtech.threePomelos.music.adapter.MusicAdapter;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
 import com.findtech.threePomelos.music.utils.DownFileUtils;
-import com.findtech.threePomelos.music.utils.DownMusicBean;
 import com.findtech.threePomelos.music.utils.HandlerUtil;
 import com.findtech.threePomelos.music.utils.L;
+import com.findtech.threePomelos.music.utils.MusicUtils;
 import com.findtech.threePomelos.musicserver.MusicPlayer;
 import com.findtech.threePomelos.musicserver.Nammu;
 import com.findtech.threePomelos.net.NetWorkRequest;
@@ -92,12 +96,20 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     private int position;
     int down_position;
     private String content;
+    private IContent icontent = IContent.getInstacne();
+
+    private  String[] proj_music = new String[]{
+            MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.ALBUM_ID,
+            MediaStore.Audio.Media.ALBUM, MediaStore.Audio.Media.ARTIST,
+            MediaStore.Audio.Media.ARTIST_ID, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.SIZE};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baby_story);
         Intent intent = getIntent();
@@ -154,7 +166,7 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     }
 
     private void refreshData() {
-        showProgressDialog(getResources().getString(R.string.getMessage_fromNet),getString(R.string.getMessage_fromNet_fail));
+        showProgressDialog(getResources().getString(R.string.getMessage_fromNet), getString(R.string.getMessage_fromNet_fail));
         listView.removeHeaderView(view);
         AVQuery<AVObject> query = new AVQuery<>("MusicList");
         query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
@@ -169,24 +181,26 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
                 dismissProgressDialog();
                 if (e == null) {
                     for (AVObject avObject : list) {
-                        MusicInfo musicInfo = new MusicInfo();
-                        musicInfo.musicName = avObject.getString("musicName");
-                        musicInfo.artist = null;
-                        musicInfo.type = avObject.getNumber("typeNumber");
-                        for (int i =0;i<IContent.getInstacne().downList.size();i++){
-                            DownMusicBean musicBean = IContent.getInstacne().downList.get(i);
-                            if (  musicBean.getMusicName().equals( musicInfo.musicName) ) {
-                                musicInfo.artist = "downed";
-                            }
-                        }
-                        AVFile avFile = avObject.getAVFile("musicFiles");
 
-                        musicInfo.lrc = avFile.getUrl();
-                        musicInfo.avObject = avObject.toString();
-                        musicInfo.islocal = false;
-                        musicInfo.songId = number * 1000 + i;
-                        L.e("===============mode.songId",musicInfo.songId+"==========");
-                        musicInfos.add(musicInfo);
+                        String musicName = avObject.getString("musicName");
+                        if (icontent.map.containsKey(musicName)) {
+                            AVFile imageFile = avObject.getAVFile("musicImage");
+                            icontent.map.get(musicName).faceImage = imageFile.getUrl();
+                            musicInfos.add(icontent.map.get(musicName));
+                        } else {
+                            MusicInfo musicInfo = new MusicInfo();
+                            musicInfo.musicName = musicName;
+                            musicInfo.artist = null;
+                            musicInfo.type = avObject.getNumber("typeNumber");
+                            AVFile avFile = avObject.getAVFile("musicFiles");
+                            musicInfo.lrc = avFile.getUrl();
+                            AVFile imageFile = avObject.getAVFile("musicImage");
+                            musicInfo.faceImage = imageFile.getUrl();
+                            musicInfo.avObject = avObject.toString();
+                            musicInfo.islocal = false;
+                            musicInfo.songId = number * 1000 + i;
+                            musicInfos.add(musicInfo);
+                        }
                         i++;
                     }
                     musicAdapter.setAvObjectList(musicInfos);
@@ -231,8 +245,9 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
 
     @MainThread
     public void goMusic() {
-        if (playMusic != null)
+        if (playMusic != null) {
             handler.removeCallbacks(playMusic);
+        }
         if (position > -1) {
             playMusic = new PlayMusic(position);
             handler.postDelayed(playMusic, 70);
@@ -297,7 +312,6 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
             for (int i = 0; i < musicInfos.size(); i++) {
                 MusicInfo info = musicInfos.get(i);
                 list[i] = info.songId;
-                info.islocal = false;
                 infos.put(list[i], musicInfos.get(i));
             }
             if (position > -1) {
@@ -333,52 +347,64 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
             @Override
             public void done(Integer integer) {
                 if (integer == 100) {
-
-                    musicInfos.get(down_position).artist = "downed";
-                    musicAdapter.setAvObjectList(musicInfos);
-                    musicAdapter.notifyDataSetChanged();
-
+                    File file = DownFileUtils.creatFile(SixItemMusicActivity.this, IContent.FILEM_USIC, info.musicName + ".mp3");
+                    if (!file.exists()) {
+                        return;
+                    }
                     netWorkRequest.sendMusicDown(info.musicName, new SaveCallback() {
                         @Override
                         public void done(AVException e) {
                             if (e==null){
-                                IContent.getInstacne().downList.add(new DownMusicBean(info.musicName, info.type));
-                                L.e("============", "===================" + info.musicName);
                             } else {
                                 checkNetWork();
                             }
                         }
                     });
 
-//                    NetWorkRequest.sendMusicDownLoad(info, new SaveCallback() {
-//                        @Override
-//                        public void done(AVException e) {
-//                            if (e==null){
-//                                IContent.getInstacne(). downList.add( new DownMusicBean(info.musicName,info.type) );
-//                                L.e("============","==================="+info.musicName);
-//                            }else {
-//                                checkNetWork();
-//                            }
-//                        }
-//                    });
-
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//如果是4.4及以上版本
                         Intent mediaScanIntent = new Intent(
                                 Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                        File file = DownFileUtils.creatFile(SixItemMusicActivity.this, IContent.FILEM_USIC, info.musicName + ".mp3");
                         Uri contentUri = Uri.fromFile(file); //指定SD卡路径
                         mediaScanIntent.setData(contentUri);
-                        L.e("=============","===========contentUri"+contentUri);
                         SixItemMusicActivity.this.sendBroadcast(mediaScanIntent);
                     } else {
                         sendBroadcast(new Intent(
                                 Intent.ACTION_MEDIA_MOUNTED,
                                 Uri.parse("file://"
                                         + Environment.getExternalStorageDirectory())));
-                        L.e("QQQ", "CODES.KITKAT!!!=" + integer);
                     }
+                    CountDownTimer timer = new CountDownTimer(1000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
 
+                        }
 
+                        @Override
+                        public void onFinish() {
+
+                            File fileca = DownFileUtils.creatFileDir(SixItemMusicActivity.this, IContent.FILEM_USIC);
+                            if (!fileca.exists()) {
+                                return;
+                            }
+                            MusicInfo info = musicInfos.get(down_position);
+                            ContentResolver cr = SixItemMusicActivity.this.getContentResolver();
+                            Cursor cursor = cr.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj_music,
+                                    MediaStore.Audio.Media.TITLE + "=?", new String[]{info.musicName},
+                                    null);
+                            L.e("===========", info.musicName + icontent.map.size());
+                            ArrayList<MusicInfo> infos = MusicUtils.getMusicListCursor(cursor);
+                            if (infos.size() > 0) {
+                                for (MusicInfo info1 : infos) {
+                                    icontent.map.put(info1.musicName, info1);
+                                }
+                                musicInfos.set(down_position, icontent.map.get(info.musicName));
+                            }
+                            musicAdapter.setAvObjectList(musicInfos);
+                            musicAdapter.notifyDataSetChanged();
+
+                        }
+                    };
+                    timer.start();
                 }
 
             }
@@ -388,21 +414,19 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     @Override
     protected void onResume() {
         super.onResume();
-
-        for (int i=0;i<musicInfos.size();i++){
-            for (int j = 0 ;j< IContent.getInstacne().downList.size();j++){
-                DownMusicBean musicBean = IContent.getInstacne().downList.get(j);
-                MusicInfo musicInfo = musicInfos.get(i);
-                if (  musicBean.getMusicName().equals( musicInfo.musicName) &&  musicBean.getMusicType() != null &&  musicBean.getMusicType().equals(musicInfo.type)) {
-                    musicInfo.artist = "downed";
-                }
-
+        for (int i = 0;i<musicInfos.size();i++){
+            MusicInfo info = musicInfos.get(i);
+            if (icontent.map.containsKey(info.musicName)){
+                musicInfos.set(i,icontent.map.get(info.musicName));
             }
         }
         musicAdapter.setAvObjectList(musicInfos);
         musicAdapter.notifyDataSetChanged();
-
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        L.e("onActivityResult");
+    }
 }

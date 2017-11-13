@@ -95,11 +95,13 @@ public class MusicAdapter extends BaseAdapter {
         viewHolder.text_number.setText(String.valueOf(position+1));
 
         if ("downing".equals(mode.artist)) {
+            L.e("downing",mode.musicName);
             viewHolder.image_down.setEnabled(false);
             viewHolder.image_down.setImageResource(R.drawable.iconload);
             viewHolder.image_down.setAnimation(animation);
             animation.start();
-        }else if ("downed".equals(mode.artist)) {
+        }else if (mode.islocal) {
+            L.e("downing",mode.musicName);
             if (animation != null)
                 viewHolder.image_down.clearAnimation();
              viewHolder.image_down.setEnabled(false);

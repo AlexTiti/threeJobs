@@ -3,6 +3,7 @@ package com.findtech.threePomelos.mydevices.activity;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
@@ -10,12 +11,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -30,9 +34,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
@@ -73,7 +79,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     private ImageView image_brake_detail;
     private TextView textView_toolbar;
     private ImageView img_is_tempurature;
-    private RelativeLayout idBle_device;
+    private RelativeLayout idBle_device,layout;
     private RelativeLayout is_tempurature;
     private LinearLayout layout_ble_detail;
     private LinearLayout is_notBledevice;
@@ -117,6 +123,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     int elec;
     private OperateDBUtils operateDBUtils;
     private boolean car_protect_state;
+    boolean low_elec  = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,13 +133,13 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             selectAddress = intent.getStringExtra(IContent.getInstacne().clickPositionAddress);
             selectName = intent.getStringExtra(IContent.getInstacne().clickPositionName);
             deviceFunction =  intent.getStringExtra(IContent.getInstacne().clickPositionFunction);
-            L.e("=============deviceFunction","============deviceFunction=========="+deviceFunction);
         }
         if (selectName == null) {
             setToolbar(getString(R.string.detail_car), true, null);
         } else {
             setToolbar(selectName, true, null);
         }
+        layout = (RelativeLayout) findViewById(R.id.layout);
         mImage = (ImageView) findViewById(R.id.image_electricity_bac);
         image_edit_detail = (ImageView) findViewById(R.id.image_edit_detail);
         image_wheel_detail = (ImageView) findViewById(R.id.image_wheel_detail);
@@ -160,6 +167,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         isnot_ble_car = (ImageView) findViewById(R.id.isnot_ble_car);
         protect_layout = (RelativeLayout) findViewById(R.id.protect_layout);
         mSeekBar = (SeekBar) findViewById(R.id.voice_seekbar);
+        mSeekBar.setEnabled(false);
         layout_seekbar_detail = (RelativeLayout) findViewById(R.id.layout_seekbar_detail);
         layout_ble_detail = (LinearLayout) findViewById(R.id.layout_ble_detail);
         is_notBledevice = (LinearLayout) findViewById(R.id.is_notBledevice);
@@ -170,29 +178,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         animator.setRepeatCount(ObjectAnimator.INFINITE);
         animator.setDuration(3000L);
         animator.setInterpolator(new LinearInterpolator());
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                L.e("============onAnimationStart","==============");
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                L.e("============onAnimationEnd","==============");
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-                L.e("============onAnimationCancel","==============");
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-                L.e("============onAnimationRepeat","==============");
-            }
-        });
-
-
         mSeekBar.setMax(6);
         mSeekBar.setProgress(0);
         for (int i = 0; i < imageView.length; i++) {
@@ -221,7 +206,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             } else {
                 app.manager.cubicBLEDevice.registerReceiver();
                 app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
-                refresh_opne();
+                refreshOpne();
             }
         } else {
             showProgressDialog(getResources().getString(R.string.data_update), 25000 ,getString(R.string.data_update_fail));
@@ -236,8 +221,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         if ( travelInfoEntity.getAdultWeight().equals("0")){
             showNameBlueToothDialog();
         }
-
-
     }
 
     /**
@@ -305,8 +288,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     }
 
     private void initToolBar() {
-//        textView_toolbar = (TextView) findViewById(R.id.toolbar_title_detail);
-//        textView_toolbar.setText(getResources().getString(R.string.pomoles_car));
+
         btn_menu_more.setVisibility(View.VISIBLE);
         btn_menu_more.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -317,7 +299,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     }
 
     private ObjectAnimator animator;
-   // private WeakReference<ObjectAnimator> animatorWeakReference;
     Animation a;
     Animation y;
     AnimationSet animationSet;
@@ -336,20 +317,12 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         if (isRun) {
             text_brake_state.setText(getResources().getString(R.string.device_running));
             iamge_bac__.setVisibility(View.VISIBLE);
-            L.e("=================="," animator.start();");
             animator.start();
             animationSet.start();
         } else {
             text_brake_state.setText(getResources().getString(R.string.device_isbrake));
             iamge_bac__.setVisibility(View.GONE);
-            L.e("===================","=================="+String.valueOf(animator == null));
            animator.cancel();
-           // animator.end();
-
-           // image_wheel_detail.clearAnimation();
-           // animator.cancel();
-           // animator.end();
-
            image_wheel_detail.clearAnimation();
             image_brake_detail.clearAnimation();
         }
@@ -377,20 +350,29 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         int color[] = new int[2];
         image_elec_relayout.setPadding(0, height * (100 - i) / 100, 0, 0);
         if (i <= 20) {
+            low_elec = true;
             electricity_layout.setImageResource(R.drawable.elec_bac_low);
             color[0] = RED_COLOR_LOW;
             color[1] = RED_COLOR_HIGH;
         } else if (i > 20 && i <= 60) {
+            low_elec = false;
             electricity_layout.setImageResource(R.drawable.elec_back);
             color[0] = YELLO_COLOR_LOW;
             color[1] = YELLO_COLOR_HIGH;
         } else if (i > 60 && i <= 100) {
+            low_elec = false;
             electricity_layout.setImageResource(R.drawable.elec_bac_high);
             color[0] = GREEN_COLOR_LOW;
             color[1] = GREEN_COLOR_HIGH;
         }
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, color);
         mImage.setImageDrawable(bg);
+        if (IContent.isBLE){
+            if (app.manager.cubicBLEDevice != null) {
+            byte bytes[] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x0B, (byte) 0xEA};
+            app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
+        }
+        }
     }
 
     private void initView() {
@@ -415,7 +397,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         if (app.manager.cubicBLEDevice != null) {
-
                         byte b[] =  {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0x0E, (byte) 0xE7};
                            app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE,b);
                         }
@@ -425,7 +406,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                             app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, b);
                         }
                     }
-
                 }
             });
         }
@@ -439,7 +419,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.image_edit_detail:
                 showNameBlueToothDialog();
                 break;
@@ -447,10 +426,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 closeDevice();
                 break;
             case R.id.layout_repair_popwindow:
-                if (isRun) {
-                    ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.run_action_notice));
-                    return;
-                }
                 if (car_protect_state){
                     ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.pro_action_notice));
                     mPicChooserDialog.dismiss();
@@ -461,48 +436,15 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 break;
             case R.id.layout_update_popwindow:
                 mPicChooserDialog.dismiss();
+                if (low_elec){
+                    ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.update_low_elec));
+                    return;
+                }
                 startActivityForResult(new Intent(DeviceDetailActivity.this, DeviceUpdateActivity.class),100);
                 break;
             case R.id.layout_changeName_popwindow:
                 mPicChooserDialog.dismiss();
                 showTextDialog();
-                break;
-            case R.id.layout_Instructions_popwindow:
-                mPicChooserDialog.dismiss();
-                netWorkRequest.getInstruction(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (e==null){
-                    if (list ==null || list.size() == 0)
-                        return;
-                    String url0 = null;
-                    String url1 = null;
-                    for (AVObject avObject : list){
-                        L.e("============",avObject.getString(NetWorkRequest.COMPANY)+"============="+avObject.getString(NetWorkRequest.DEVICEIDENTIFITER));
-                        if ( avObject.getString(NetWorkRequest.COMPANY).equals(IContent.getInstacne().company) && avObject.getString(NetWorkRequest.DEVICEIDENTIFITER).equals(IContent.getInstacne().clickPositionType)){
-                            if (avObject.getString("function").equals("C")){
-                                AVFile avFile =avObject.getAVFile("instruction_File");
-                                url0  = avFile.getUrl();
-                                L.e("url0================="+url0);
-                            }else {
-                                AVFile avFile1 = avObject.getAVFile("instruction_File");
-                                 url1 = avFile1.getUrl();
-                                L.e("url1================="+url1);
-                            }
-
-                        }
-                    }
-                    Intent intent = new Intent(DeviceDetailActivity.this, InstructionsMainActivity.class);
-                    intent.putExtra("url0",url0);
-                    intent.putExtra("url1",url1);
-                    startActivity(intent);
-
-                }else {
-                    checkNetWork();
-                }
-
-            }
-        });
                 break;
             case R.id.cancle_button:
                 mPopupdialog.dismiss();
@@ -519,10 +461,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                         if (app.manager.cubicBLEDevice != null) {
                             app.manager.cubicBLEDevice.disconnectedDevice();
                         }
-
                         final String deviceNum = RequestUtils.getSharepreference(DeviceDetailActivity.this).getString(RequestUtils.DEVICE, "");
-
-
                         netWorkRequest.deleteBlueToothIsBind(deviceNum, new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
@@ -554,6 +493,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 });
                 builder.setNegativeButton(getResources().getString(R.string.cancle),
                         new android.content.DialogInterface.OnClickListener() {
+                            @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
@@ -561,9 +501,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 builder.create().show();
                 break;
         }
-
     }
-
     private void removeIContent(String address) {
 
         for (int i = 0; i < IContent.getInstacne().addressList.size(); i++) {
@@ -572,7 +510,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
         }
     }
-
     private void closeDevice() {
         final CustomDialog.Builder builder = new CustomDialog.Builder(DeviceDetailActivity.this);
         builder.setTitle(getResources().getString(R.string.notice));
@@ -687,37 +624,49 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     Button text_update_notice;
 
     private void showPopWindow() {
-        if (app.manager.cubicBLEDevice != null) {
-            byte bytes[] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x0B, (byte) 0xEA};
-            app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
-        }
-
+//        if (app.manager.cubicBLEDevice != null) {
+//            byte bytes[] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x0B, (byte) 0xEA};
+//            app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
+//        }
         View viewDialog = getLayoutInflater().inflate(R.layout.popwindow_item, null);
         LinearLayout layout_repair_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_repair_popwindow);
+        TextView textV_repaire = (TextView) viewDialog.findViewById(R.id.textV_repaire);
+        if (car_protect_state){
+            textV_repaire.setTextColor(getResources().getColor(R.color.hint_text));
+        }else {
+            textV_repaire.setTextColor(getResources().getColor(R.color.grey_color));
+        }
         LinearLayout layout_unbind_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_unbind_popwindow);
         LinearLayout layout_update_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_update_popwindow);
+        TextView textV_more = (TextView) viewDialog.findViewById(R.id.textV_more);
+        if (low_elec){
+            textV_more.setTextColor(getResources().getColor(R.color.hint_text));
+        }else {
+            textV_more.setTextColor(getResources().getColor(R.color.grey_color));
+        }
         LinearLayout layout_code_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_code_popwindow);
         LinearLayout layout_nameChange_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_changeName_popwindow);
-        LinearLayout layout_Instructions_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_Instructions_popwindow);
         text_update_notice = (Button) viewDialog.findViewById(R.id.text_update_notice);
         layout_nameChange_popwindow.setOnClickListener(this);
         layout_update_popwindow.setOnClickListener(this);
         layout_repair_popwindow.setOnClickListener(this);
         layout_unbind_popwindow.setOnClickListener(this);
-        layout_Instructions_popwindow.setOnClickListener(this);
         TextView textView = (TextView) viewDialog.findViewById(R.id.code_text);
         text_code = (TextView) viewDialog.findViewById(R.id.text_update_code);
-
+        text_code.setText(IContent.getInstacne().code);
+        if (IContent.getInstacne().newCode != null && IContent.getInstacne().newCode.compareToIgnoreCase(IContent.getInstacne().code) == 1) {
+            //int code_cur = String.valueOf()
+            text_update_notice.setVisibility(View.VISIBLE);
+        } else {
+            text_update_notice.setVisibility(View.INVISIBLE);
+        }
         if (IContent.isBLE &&deviceFunction != null&& deviceFunction.equals("1")) {
             layout_update_popwindow.setVisibility(View.VISIBLE);
             layout_repair_popwindow.setVisibility(View.VISIBLE);
-            layout_Instructions_popwindow.setVisibility(View.VISIBLE);
             layout_code_popwindow.setVisibility(View.GONE);
-            L.e("==================",IContent.getInstacne().newCode+"======================="+IContent.getInstacne().code);
         } else {
             layout_update_popwindow.setVisibility(View.GONE);
             layout_repair_popwindow.setVisibility(View.GONE);
-            layout_Instructions_popwindow.setVisibility(View.GONE);
             layout_code_popwindow.setVisibility(View.VISIBLE);
             textView.setText(getResources().getString(R.string.code, "V 1.0.1"));
         }
@@ -771,6 +720,8 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
 
     public void refresh_close() {
         if (IContent.isBLE) {
+
+
             image_wheel_detail.setVisibility(View.GONE);
             image_brake_detail.setVisibility(View.GONE);
             iamge_bac__.setVisibility(View.GONE);
@@ -810,18 +761,22 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         }
     }
 
-    public void refresh_opne() {
+    public void refreshOpne() {
         if (IContent.isBLE) {
             electricity_layout.setImageResource(R.drawable.elec_back);
             image_back_speed.setImageResource(R.drawable.brake_bac);
             mButton.setBackgroundResource(R.drawable.button_close);
+            mButton.setEnabled(true);
             mSwitchCompat.setThumbResource(R.drawable.play_plybar_btn);
+            mSwitchCompat.setEnabled(true);
             switch_brake_close.setThumbResource(R.drawable.play_plybar_btn);
+            switch_brake_close.setEnabled(true);
             if ( !isRun || !isopen_Auto_brake) {
                 L.e("==============",isRun+"=========="+isopen_Auto_brake);
                 mSeekBar.setEnabled(true);
             }
             mSeekBar.setThumb(getResources().getDrawable(R.drawable.play_plybar_btn));
+           // mSeekBar.setEnabled(true);
             image_elec_relayout.setVisibility(View.VISIBLE);
             layout_hhh.setVisibility(View.VISIBLE);
             electric_rate.setText(getResources().getString(R.string.electricity, 00 + "%"));
@@ -945,7 +900,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 double total_mileage = (total_mileage0 + total_mileage1) * 1.0 / 10;
                 double averageSpeed = (averageSpeed0 + averageSpeed1) * 1.0 / 10;
 
-
                 travelInfoEntity.setTodayMileage(String.valueOf(today_mileage));
                 travelInfoEntity.setTotalMileage(String.valueOf(total_mileage));
                 travelInfoEntity.setAverageSpeed(String.valueOf(averageSpeed));
@@ -953,15 +907,14 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x07) {
                 elec = data[5] & 0xff;
-                refresh_opne();
+                refreshOpne();
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x04) {
                 if (data[05] == 0x00) {
                     isRun = true;
                    if (isopen_Auto_brake) {
-                    L.e("======================","=====================================");
                         mSeekBar.setEnabled(false);
-                       layout_seekbar_detail.setEnabled(true);
+                        layout_seekbar_detail.setEnabled(true);
                         layout_seekbar_detail.setFocusable(true);
                         layout_seekbar_detail.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -1010,6 +963,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 protect_layout.setAlpha(0.3f);
                 mSwitchCompat.setThumbResource(R.drawable.seek_button_close);
                 mSwitchCompat.setEnabled(false);
+
                 refresh_wheel_close();
             }
             if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0E){
@@ -1019,12 +973,10 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 mSwitchCompat.setEnabled(true);
                 refresh_wheel_open();
             }
-
             if (data[3] == (byte) 0x83 ) {
                 L.e("=========doMusic(data)==========",Tools.byte2Hex(data));
                 doMusic(data);
             }
-
 
         } else if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE_READ)) {
             byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
@@ -1044,10 +996,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     switch_brake_close.setThumbResource(R.drawable.seek_button_close);
                     car_protect_state = true;
                 }
-//                if (animation != null)
-//                    image_wheel_detail.clearAnimation();
-//                if (a != null)
-//                    image_brake_detail.clearAnimation();
                 return;
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x06) {
@@ -1057,10 +1005,6 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     switch_brake_close.setThumbResource(R.drawable.play_plybar_btn);
                     car_protect_state = false;
                 }
-//                if (animation != null)
-//                    animation.start();
-//                if (a != null)
-//                    a.start();
                 return;
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x09) {
@@ -1069,17 +1013,12 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
             if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0B) {
                 String str = "V" + data[5] + "." + data[6] + "." + data[7];
+                IContent.getInstacne().code = "V1.0.1";
 
-                IContent.getInstacne().code = str;
-                text_code.setText(str);
-                L.e("===============",IContent.getInstacne().newCode+"================"+IContent.getInstacne().code);
-                if (IContent.getInstacne().newCode != null && !IContent.getInstacne().newCode.equals(IContent.getInstacne().code)) {
-                    text_update_notice.setVisibility(View.VISIBLE);
-                } else {
-                    text_update_notice.setVisibility(View.INVISIBLE);
+                if (IContent.getInstacne().code.equals("V1.0.3")){
+                    showPopWindowTest();
+
                 }
-                L.e("===============","================"+text_code.getText()+"====");
-
                 return;
             }
             if (data[3] == (byte) 0x8B && data[4] == (byte)0x0D) {
@@ -1087,6 +1026,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 protect_layout.setAlpha(0.3f);
                 mSwitchCompat.setThumbResource(R.drawable.seek_button_close);
                 mSwitchCompat.setEnabled(false);
+                ToastUtil.showToast(DeviceDetailActivity.this,getResources().getString(R.string.close_shake), Toast.LENGTH_SHORT);
                 refresh_wheel_close();
                 return;
             }
@@ -1100,6 +1040,26 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
         }
     }
+
+    private void showPopWindowTest() {
+        View view = LayoutInflater.from(this).inflate(R.layout.popwindowtest,null);
+        Dialog dialog = new Dialog(this, R.style.MyDialogStyleBottom);
+        dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        DisplayMetrics dm = new DisplayMetrics();
+        Window dialogWindow = dialog.getWindow();
+        WindowManager m = dialogWindow.getWindowManager();
+        m.getDefaultDisplay().getMetrics(dm);
+        WindowManager.LayoutParams p = dialogWindow.getAttributes();
+        p.width = dm.widthPixels;
+        p.alpha = 1.0f;
+        p.dimAmount = 0.6f;
+        p.gravity = Gravity.CENTER;
+        dialogWindow.setAttributes(p);
+        dialog.show();
+
+    }
+
     private void toSendData(byte b[]){
       String data_message =  Tools.byte2Hex(b);
         netWorkRequest.sendDataMessage(data_message, Tools.getCurrentDateHour(), selectAddress,IContent.getInstacne().clickPositionType  , new SaveCallback() {
@@ -1113,11 +1073,9 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     }
     private void refresh_wheel_close(){
         mSeekBar.setEnabled(true);
-
         layout_seekbar_detail.setEnabled(false);
         layout_seekbar_detail.setFocusable(false);
         layout_seekbar_detail.setOnClickListener(null);
-
         text_brake_state.setText(getResources().getString(R.string.device_close));
         isopen_Auto_brake = false;
         image_wheel_detail.setVisibility(View.GONE);
@@ -1128,20 +1086,14 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
 
     private void refresh_wheel_open(){
         isopen_Auto_brake = true;
-       // if (isRun) {
-            L.e("===============","===================="+isRun);
+           if (!isRun){
             mSeekBar.setEnabled(true);
             layout_seekbar_detail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ToastUtil.showToast(DeviceDetailActivity.this,getString(R.string.run_action_notice));
                 }
-            });
-        //}else {
-            L.e("===============","===================="+isRun);
-//            mSeekBar.setEnabled(true);
-//            layout_seekbar_detail.setOnClickListener(null);
-       // }
+            });}
         image_wheel_detail.setVisibility(View.VISIBLE);
         image_brake_detail.setVisibility(View.VISIBLE);
         if (isRun) {
@@ -1173,12 +1125,10 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                L.e("=====","onStartTrackingTouch");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
                 byte bytes[] = {0x55, (byte) 0xAA, 0x01, 0x0B, 0x09, (byte) progres, (byte) (0 - (0x01 + 0x0B + 0x09 + (byte) progres))};
                 app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
             }
@@ -1227,7 +1177,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     text_tempurature.setText(temperature + " ℃");
                     travelInfoEntity.setElectric_rate(electric);
                     travelInfoEntity.setText_tempurature(temperature);
-                    refresh_opne();
+                    refreshOpne();
                     onResume();
                 }
             }
@@ -1256,5 +1206,35 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
             }
         }
+
+        if (requestCode == 100  && resultCode == RESULT_OK){
+            String s = data.getStringExtra("updateDone");
+            if (!TextUtils.isEmpty(s) && s.equals("updateDone")){
+                restartProgress();
+            }
+        }
     }
+
+    ProgressDialog pd;
+    protected void restartProgress() {
+        pd = new  ProgressDialog(this);
+        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pd.setCanceledOnTouchOutside(false);
+        pd.setMax(15);
+        pd.setMessage(getString(R.string.restarting));
+        timer.start();
+        pd.show();
+    }
+
+    CountDownTimer timer = new CountDownTimer(15000,1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            pd.setProgress(15-(int) (millisUntilFinished/1000));
+        }
+
+        @Override
+        public void onFinish() {
+            pd.dismiss();
+        }
+    };
 }

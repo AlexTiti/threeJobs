@@ -1,23 +1,18 @@
 package com.findtech.threePomelos.music.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
-import com.findtech.threePomelos.music.utils.DownMusicBean;
-import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.utils.IContent;
-
 
 import java.util.ArrayList;
 
@@ -97,22 +92,15 @@ public class HostMusicAdapter  extends BaseAdapter{
             viewHolder.icon_number.setBackgroundColor(mContext.getResources().getColor(R.color.white));
             viewHolder.icon_number.setText( String.valueOf(position+1 ));
         }
-        L.e("============","===="+IContent.getInstacne().collection_array.size());
         viewHolder.img_like.setImageResource(R.drawable.icon_like_host);
-        for (DownMusicBean bean : IContent.getInstacne().collection_array){
-            L.e("============",bean.getMusicName()+"===="+bean.getMusicType());
-            if ( bean.getMusicName().equals(musicInfo.musicName)){
-                L.e("============",bean.getMusicName()+"===="+bean.getMusicType());
-                viewHolder.isCollect = true;
-                viewHolder.img_like.setImageResource(R.drawable.icon_like_host_selected);
-                break;
-            }
+        if (IContent.getInstacne().collectedList.contains(musicInfo.musicName)){
+            viewHolder.isCollect = true;
+              viewHolder.img_like.setImageResource(R.drawable.icon_like_host_selected);
         }
 
         if (!viewHolder.isCollect){
             viewHolder.img_like.setImageResource(R.drawable.icon_like_host);
         }
-
         viewHolder.img_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

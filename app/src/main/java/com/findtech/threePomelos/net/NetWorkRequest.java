@@ -820,8 +820,9 @@ public class NetWorkRequest {
 
         final File file = DownFileUtils.creatFile(context, IContent.FILEM_USIC, info.musicName + ".mp3");
 
-        if (file.exists())
+        if (file.exists()) {
             file.delete();
+        }
 
         try {
             file.createNewFile();
@@ -914,6 +915,7 @@ public class NetWorkRequest {
     public void downUpDateOr(FindCallback<AVObject> findCallback) {
         AVQuery<AVObject> query = new AVQuery<>("DeviceUpdate");
         query.orderByDescending("createdAt");
+        query.limit(1);
         query.findInBackground(findCallback);
     }
 

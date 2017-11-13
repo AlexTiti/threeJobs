@@ -676,12 +676,13 @@ public class CarMusicActivity extends BaseActivity implements AdapterView.OnItem
 
     private void selectSong() {
         byte folderByte[] = _folderNumArray.get(0);
-        byte fileByte[] = _fileNum.get(cellRowCount - (_folderArray.size() + 1));
+        byte fileByte[] = _fileNum.get(cellRowCount - (_folderArray.size() ));
+
         byte checkSum = (byte) (0 - (20 + folderByte[0] + folderByte[1] + fileByte[0] + fileByte[1]));
         byte bytes[] = {0x55, (byte) 0xaa, 0x04, 0x03, 0x0d, folderByte[0], folderByte[1], fileByte[0], fileByte[1], checkSum};
-        L.e("AAAAAA", Arrays.toString(bytes) + "================" + Tools.byte2Hex(folderByte) + cellRowCount + "==" + _folderNumArray.size() + "==" + Arrays.toString(folderByte));
-        if (app.manager.cubicBLEDevice != null)
+        if (app.manager.cubicBLEDevice != null) {
             app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
+        }
     }
 
     public static String unicode2string(String s) {

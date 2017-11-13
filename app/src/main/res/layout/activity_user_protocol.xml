@@ -4,9 +4,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <!--<include-->
-        <!--android:id="@+id/custom_actionbar"-->
-        <!--layout="@layout/toolbar_layout" />-->
     <ProgressBar
         android:id="@+id/pb_user_protect"
         android:layout_width="match_parent"
@@ -19,19 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></WebView>
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/tv_body"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:layout_marginRight="5dp"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:textSize="15sp"/>-->
-
-    <!--</ScrollView>-->
 
 </LinearLayout>

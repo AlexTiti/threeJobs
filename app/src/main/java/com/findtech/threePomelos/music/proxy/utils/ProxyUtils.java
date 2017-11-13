@@ -20,6 +20,7 @@ public class ProxyUtils {
      */
     static protected void asynRemoveBufferFile(final int maximun) {
         new Thread() {
+            @Override
             public void run() {
                 List<File> lstBufferFile = getFilesSortByDate(Constants.DOWNLOAD_PATH);
                 L.e("ProxyUtils"+lstBufferFile.size()+"maximun");
@@ -57,8 +58,9 @@ public class ProxyUtils {
 
         File[] files = dir.listFiles();
         L.e("ProxyUtils",dir.list().length+"=="+dir.listFiles().length);
-        if (files == null || files.length == 0)
+        if (files == null || files.length == 0) {
             return result;
+        }
 
         Arrays.sort(files, new Comparator<File>() {
             public int compare(File f1, File f2) {

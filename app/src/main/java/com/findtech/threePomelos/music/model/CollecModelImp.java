@@ -49,8 +49,9 @@ public class CollecModelImp implements CollectModel {
 
     @Override
     public void toGetDAta() {
-        if (playlists.size() >0)
-        playlist = (Playlist) playlists.get(0);
+        if (playlists.size() >0) {
+            playlist = (Playlist) playlists.get(0);
+        }
 
         if (playlist != null) {
             LoadLocalPlaylistInfo loadLocalPlaylistInfo = new LoadLocalPlaylistInfo();
@@ -60,43 +61,8 @@ public class CollecModelImp implements CollectModel {
         }
 
 
-//        AVQuery<AVObject> query = new AVQuery<>("MusicPrefer");
-//        query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
-//        query.setMaxCacheAge(24 * 3600);
-//        query.limit(10);
-//        query.findInBackground(new FindCallback<AVObject>() {
-//            @Override
-//            public void done(List<AVObject> list, AVException e) {
-//                if (e == null) {
-//                    for (AVObject avObject : list) {
-//                        L.e("AAA",list.toString());
-//                        MusicInfo musicInfo = new MusicInfo();
-//                        musicInfo.musicName = avObject.getString("musicName");
-//                        AVFile avFile = avObject.getAVFile("musicFiles");
-//                        musicInfo.lrc = avFile.getUrl();
-//                        musicInfo.avObject = avObject.toString();
-//                        musicInfo.type = avObject.getNumber("typeNumber");
-//                        musicInfo.islocal = false;
-//                        number =Integer.valueOf(musicInfo.type.toString());
-//                        musicInfo.songId = number*1000+i;
-//                        musicInfos.add(musicInfo);
-//                        i++;
-//                    }
-////                    L.e(Log_TAG,musicInfos.toString());
-////                    musicAdapter.setAvObjectList(musicInfos);
-////                    musicAdapter.notifyDataSetChanged();
-//                    presentIn.setData(musicInfos);
-//                } else {
-//                    presentIn.onError();
-//                   // ToastUtil.showToast(SixItemMusicActivity.this, e.toString());
-//                }
-//            }
-//        });
 
     }
-
-    //
-
     public class LoadLocalPlaylistInfo extends AsyncTask<Void, Void, ArrayList<MusicInfo>> {
         @Override
         protected ArrayList<MusicInfo> doInBackground(Void... params) {
@@ -106,10 +72,11 @@ public class CollecModelImp implements CollectModel {
         @Override
         protected void onPostExecute(ArrayList<MusicInfo> musicInfos) {
             super.onPostExecute(musicInfos);
-            if (musicInfos != null && musicInfos.size() > 0)
+            if (musicInfos != null && musicInfos.size() > 0) {
                 presentIn.setData(musicInfos);
-            else
+            } else {
                 presentIn.onError();
+            }
         }
     }
 

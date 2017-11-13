@@ -78,7 +78,6 @@
         android:layout_marginLeft="@dimen/x4"
         android:layout_marginTop="@dimen/x4"
         android:layout_marginBottom="@dimen/x4"
-
         android:layout_centerInParent="true"
         android:src="@drawable/play_flash"
         android:scaleType="centerCrop"/>
@@ -89,7 +88,7 @@
         android:layout_height="@dimen/x130"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/face_music_car_a"
+        android:background="@drawable/face_music_car_a"
         />
     <ImageView
         android:layout_marginRight="@dimen/x5"
@@ -258,6 +257,7 @@
         android:layout_alignBottom="@+id/play_seek"
         android:layout_alignTop="@+id/play_seek"
         android:gravity="center"
+        android:text="00:00"
        />
 
     <TextView

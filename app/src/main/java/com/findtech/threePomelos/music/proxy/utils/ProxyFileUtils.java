@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.URI;
 
+/**
+ * @author Administrator
+ */
 public class ProxyFileUtils {
     private static final String LOG_TAG = ProxyFileUtils.class.getSimpleName();
     private static ProxyFileUtils fileUtilsByMediaPlayer;
@@ -94,12 +97,13 @@ public class ProxyFileUtils {
 
         try {
             File dir = new File(Constants.DOWNLOAD_PATH);
-            if (!dir.exists())
-               dir.mkdirs();
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             file = new File(dir, name);
             if (!file.exists()) {
                 file.createNewFile();
-                L.e("ProxyUtils",dir.list().length+"=="+dir.listFiles().length+"=="+file.getAbsolutePath()+"=="+file.getName());
+
             }
         L.e("=======================DDDDDDDD","========================"+file.getAbsolutePath());
 

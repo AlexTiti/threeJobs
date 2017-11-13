@@ -91,12 +91,10 @@ public class RequestDealThread extends Thread {
         if (request == null) {
             return;
         }
-
         try {
             byte[] audioCache = null;
             // 得到MediaPlayer原始请求Range起始
             originRangeStart = getRangeStart(request);
-
             // 缓存的文件大小
             int cacheFileSize = cacheDao.getFileSize(fileUtils.getFileName());
             L.e(LOG_TAG, "原始请求Range起始值：" + originRangeStart + " 本地缓存长度：" + fileUtils.getLength()+"=="+cacheFileSize);

@@ -92,7 +92,6 @@ public class BluetoothLinkAdapter extends BaseAdapter {
         String name = device.getDeviceName();
         viewHolder.text_name.setText(name);
         String address = device.getDeviceaAddress();
-        L.e("==============","==="+address+"====="+position);
         if (address!= null && address.equals(IContent.getInstacne().address)) {
             viewHolder.text_number.setText(context.getResources().getString(R.string.device_linking));
             viewHolder.text_number.setTextColor(context.getResources().getColor(R.color.text_green));
@@ -101,10 +100,12 @@ public class BluetoothLinkAdapter extends BaseAdapter {
             viewHolder.text_number.setTextColor(context.getResources().getColor(R.color.divider_color));
         }
 
-        if(number_0.equals(device.getFunctionType()) )
-        viewHolder.imageView.setImageResource(R.drawable.face_page_high);
-        if (number_1.equals(device.getFunctionType()))
+        if(number_0.equals(device.getFunctionType()) ) {
+            viewHolder.imageView.setImageResource(R.drawable.face_page_high);
+        }
+        if (number_1.equals(device.getFunctionType())) {
             viewHolder.imageView.setImageResource(R.drawable.face_page);
+        }
 
         viewHolder.relayout_pagement.setOnClickListener(new View.OnClickListener() {
             @Override

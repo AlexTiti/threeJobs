@@ -77,7 +77,7 @@
     <string name="my_service">服务</string>
     <string name="my_share">分享</string>
     <string name="pic_save">图片以保存到相册</string>
-    <string name= "save_error">照片保存有误</string>
+    <string name="save_error">照片保存有误</string>
 
     <!--Bluetooth -->
 
@@ -183,8 +183,8 @@
     <string name="xliff_weight_health_state">参考范围 : <xliff:g id="weight_health">%1$3s</xliff:g> kg</string>
     <string name="xliff_standard_height_num">参考值 : <xliff:g id="height">%1$3s</xliff:g> cm</string>
     <string name="xliff_standard_weight_num">参考值 : <xliff:g id="weight">%1$3s</xliff:g> kg</string>
-    <string name="xliff_weight_service">宝宝体重为<xliff:g id= "weight_service">%1$3s</xliff:g> kg,是否保存？</string>
-    <string name="xliff_current_code">当前版本</string>
+    <string name="xliff_weight_service">宝宝体重为<xliff:g id="weight_service">%1$3s</xliff:g> kg,是否保存？</string>
+    <string name="xliff_current_code">当前版本 <xliff:g id="current_code">%1$2s</xliff:g></string>
 
     <!--date label-->
     <string name="label_date_year">年</string>
@@ -247,7 +247,7 @@
     <string name="text_activity_firmware_update_string">固件升级中</string>
     <string name="text_activity_firmware_update_finished_string">固件更新成功! </string>
     <string name="text_share_description_text">我的小宝贝！</string>
-    <string name="baby" >宝贝</string>
+    <string name="baby">宝贝</string>
     <string name="pic_tag_love">卡哇伊</string>
     <string name="pic_tag_praise">赞赞赞</string>
     <string name="pic_tag_monther">妈妈真棒</string>
@@ -292,12 +292,13 @@
     <string name="approve">用户协议</string>
     <string name="update">检查更新</string>
     <string name="faceback">用户反馈</string>
+    <string name="function_introduce">功能介绍</string>
+    <string name="company_introduce">公司简介</string>
     <string name="network">暂时与母星失去联络\n点击刷新</string>
     <string name="network_babylike">为宝宝收藏的歌曲\n都放在这儿</string>
     <string name="network_recentplay">最近听过的歌曲\n都会出现在这儿</string>
     <string name="network_local">下载的歌曲\n都会存放在这</string>
     <string name="bind_success">绑定成功</string>
-
 
     <!--MusicInfo-->
     <string name="random_play">随机播放</string>
@@ -305,9 +306,9 @@
     <string name="singles_play">单曲播放</string>
     <string name="nosd">无SD卡可用</string>
     <string name="add_car">添加设备</string>
-    
+
     <!--Devices Link-->
-    <string name="devices_link_notice" >长按电源键\n启动设备</string>
+    <string name="devices_link_notice">长按电源键\n启动设备</string>
     <string name="open_buluetooth">打开手机蓝牙</string>
     <string name="link_buluetooth">连接设备</string>
     <string name="link_notice">请先连接推车</string>
@@ -355,6 +356,7 @@
     <string name="weight_text_hint">请输入体重:kg</string>
     <string name="cancle">取消</string>
     <string name="confirm">确定</string>
+    <string name="update_Hardware">升级</string>
     <string name="go_link">去连接</string>
     <string name="notice">提示</string>
     <string name="unbound_message">请确认是否解除绑定？</string>
@@ -363,7 +365,9 @@
     <string name="bluetooth_unopen">蓝牙未开启</string>
 
     <string name="link_icon">连接音箱</string>
-    <string name="close_message">请确认是否关机？</string>
+    <string name="close_message">关机前请确认推车处于安全状态!</string>
+    <!--<string name="close_shake">智能刹车已关闭推车处于刹车状态，手握感应区域即可解除！</string>-->
+    <string name="close_shake">智能刹车已关闭</string>
     <string name="unbound_success">解绑成功</string>
     <string name="name_change">修改设备名称</string>
     <string name="name_change_dialog">给你的推车起个名字吧</string>
@@ -428,10 +432,12 @@
     <string name="update_success">升级成功,推车即将重新启动！</string>
     <string name="update_failed">升级失败，请检查连接蓝牙设备是否正确！</string>
     <string name="updateing">更新中，请稍后...</string>
+    <string name="gujian_shengji">固件升级过程耗时约15s,请稍后...</string>
     <string name="registraing">注册中，请稍后...</string>
     <string name="input_time_height">请填写时间和身高</string>
     <string name="input_time_weight">请填写时间和体重</string>
     <string name="down_loading">下载中，请稍后...</string>
+    <string name="restarting">推车重启中，请稍后...</string>
     <string name="down_loading_fail">下载失败！</string>
     <string name="just_do">立即体验</string>
     <string name="detail_car">推车详情</string>
@@ -441,6 +447,7 @@
     <string name="logout_success">退出成功</string>
     <string name="run_action_notice">请将手移除感应区域再操作！</string>
     <string name="pro_action_notice">请关闭一键防盗再修复！</string>
+    <string name="update_low_elec">电量过低，请先充满电后再升级！</string>
     <string name="drop_refresh">下拉刷新</string>
 
     <string name="page_tab1">首页</string>
@@ -468,6 +475,18 @@
     <string name="btn_baby_datepicker_cancel">取消</string>
     <string name="scan_device">搜索的设备</string>
     <string name="app_device_text_unbind"></string>
+
+    <string name="bluetooth_common">绑定设备方法</string>
+    <string name="bluetooth_common_deal">打开“三爸育儿”APP，点击首页【添加设备】或【+】跳转搜索界面，绑定名称为“3POMELOS_A3_BLE”的设备</string>
+    <string name="bluetooth_scan_common">蓝牙搜索不到</string>
+    <string name="bluetooth_scan_common_deal"> 每辆推车同时只能连接一部手机，且连接后其他手机后无法搜索到此推车蓝牙，所以请检查是否该推车与其他手机连接或者将推车电源重启，然后重新搜索蓝牙</string>
+    <string name="bluetooth_fail_common">绑定设备失败</string>
+    <string name="bluetooth_fail_common_deal">  绑定推车时需要与系统后台服务器进行网络连接，因此请您保持网络顺畅，用4G信号会可能更好哦。</string>
+
+    <string name="bluetooth_data_common">同步数据失败</string>
+    <string name="bluetooth_data_common_deal">请依次排查：电源是否开启、蓝牙是否进入睡眠模式（若进入请触碰相关区域唤醒）、蓝牙是否开启时间过长（重新开启蓝牙）</string>
+
+    <string name="update_noticeText"> 固件升级内容：\n\n "1\t新版本智能刹车默认为关闭状态，若需要开启，请使用APP连接推车开启智能刹车 \n 2\t为方便推行，升级成功的推车，在正常关机后智能刹车直接解除 \n 3\t为保证安全，低电量关机后智能刹车会默认刹住，踩一次脚刹即可解除刹车\n  4\t提高初始音量和音量调节速度\n  5\t提高感应区灵敏度，防止误刹车"</string>
 
 
 </resources>

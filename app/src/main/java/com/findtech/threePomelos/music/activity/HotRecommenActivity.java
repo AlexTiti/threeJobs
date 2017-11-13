@@ -1,15 +1,9 @@
 package com.findtech.threePomelos.music.activity;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.MainThread;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,16 +12,13 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.music.adapter.HostMusicAdapter;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
-import com.findtech.threePomelos.music.utils.DownMusicBean;
 import com.findtech.threePomelos.music.utils.HandlerUtil;
 import com.findtech.threePomelos.music.utils.IConstants;
 import com.findtech.threePomelos.music.utils.L;
@@ -54,6 +45,7 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
     private int position;
     Handler handler;
     private NetWorkRequest netWorkRequest;
+    private IContent iContent = IContent.getInstacne();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,24 +90,25 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
                 dismissProgressDialog();
                 if (e == null) {
                     for (AVObject avObject : list) {
-                        MusicInfo musicInfo = new MusicInfo();
-                        musicInfo.musicName = avObject.getString("musicName");
-                        AVFile avFile = avObject.getAVFile("musicFiles");
-                        musicInfo.lrc = avFile.getUrl();
-                        musicInfo.avObject = avObject.toString();
-                        musicInfo.typeName = avObject.getString("typeName");
-                        musicInfo.type = avObject.getNumber("typeNumber");
-                        for (int i =0;i<IContent.getInstacne().downList.size();i++){
-                            DownMusicBean musicBean = IContent.getInstacne().downList.get(i);
-                            if (  musicBean.getMusicName().equals( musicInfo.musicName) &&  musicBean.getMusicType() != null &&  musicBean.getMusicType().equals(musicInfo.type)) {
-                                musicInfo.artist = "downed";
-                            }
+                        String musicName = avObject.getString("musicName");
+                        if (iContent.map.containsKey(musicName)) {
+                            AVFile file = avObject.getAVFile("musicImage");
+                            iContent.map.get(musicName).faceImage = file.getUrl();
+                            musicInfos.add(iContent.map.get(musicName));
+                        }else {
+                            MusicInfo musicInfo = new MusicInfo();
+                            musicInfo.musicName = avObject.getString("musicName");
+                            AVFile avFile = avObject.getAVFile("musicFiles");
+                            musicInfo.lrc = avFile.getUrl();
+                            musicInfo.avObject = avObject.toString();
+                            musicInfo.typeName = avObject.getString("typeName");
+                            musicInfo.type = avObject.getNumber("typeNumber");
+                            musicInfo.islocal = false;
+                            musicInfo.songId = 9 * 1000 + i;
+                            AVFile file = avObject.getAVFile("musicImage");
+                            musicInfo.faceImage = file.getUrl();
+                            musicInfos.add(musicInfo);
                         }
-                        musicInfo.islocal = false;
-                        musicInfo.songId = 9 * 1000 + i;
-                        AVFile file = avObject.getAVFile("musicImage");
-                        musicInfo.faceImage = file.getUrl();
-                        musicInfos.add(musicInfo);
                         i++;
                     }
                     adapter.setMusicInfos(musicInfos);
@@ -154,18 +147,13 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
     @Override
     public void collect(int position) {
         final MusicInfo info = musicInfos.get(position);
-//        NetWorkRequest.sendMusicCollect(info, new SaveCallback() {
-//            @Override
-//            public void done(AVException e) {
-//
-//            }
-//        });
+
         netWorkRequest.sendMusicCollecting(info.musicName, new SaveCallback() {
             @Override
             public void done(AVException e) {
                 if (e == null){
                     mPlaylistsManager.insertMusic(HotRecommenActivity.this, IConstants.FAV_PLAYLIST, info);
-                    IContent.getInstacne().collection_array.add(new DownMusicBean(info.musicName,info.type));
+                    IContent.getInstacne().collectedList.add(info.musicName);
                     adapter.notifyDataSetChanged();
                 }else{
                     checkNetWork();
@@ -175,52 +163,22 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
         });
     }
 
-    DownMusicBean bean ;
     @Override
     public void deleteCollect(int position) {
         final MusicInfo info = musicInfos.get(position);
-
-        for ( int i=0;i<IContent.getInstacne().collection_array.size();i++){
-             bean = IContent.getInstacne().collection_array.get(i);
-            if (info.musicName.equals(bean.getMusicName())) {
-                netWorkRequest.deleteMusicCollecting(info.musicName, new SaveCallback() {
-                    @Override
-                    public void done(AVException e) {
-                        if (e == null){
-                            IContent.getInstacne().collection_array.remove(bean);
-                            mPlaylistsManager.removeItem(HotRecommenActivity.this, IConstants.FAV_PLAYLIST,
-                                    info.songId);
-
-                            adapter.notifyDataSetChanged();
-                        }else {
-                            checkNetWork();
-                        }
-                    }
-                });
-//                netWorkRequest.deleteMusicCollect(info.musicName, new FindCallback<AVObject>() {
-//                    @Override
-//                    public void done(List<AVObject> list, AVException e) {
-//                        if (e == null) {
-//                            for (AVObject avObject : list){
-//                                avObject.deleteInBackground(new DeleteCallback() {
-//                                    @Override
-//                                    public void done(AVException e) {
-//                                        if (e==null){
-//
-//                                        }
-//                                    }
-//                                });
-//
-//                            }
-//                        }else {
-//                            checkNetWork();
-//                        }
-//                    }
-//                });
-
+        netWorkRequest.deleteMusicCollecting(info.musicName, new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null){
+                    mPlaylistsManager.removeItem(HotRecommenActivity.this, IConstants.FAV_PLAYLIST,
+                            info.songId);
+                    IContent.getInstacne().collectedList.remove(info.musicName);
+                    adapter.notifyDataSetChanged();
+                }else {
+                    checkNetWork();
+                }
             }
-        }
-
+        });
 
     }
 
@@ -245,7 +203,6 @@ public class HotRecommenActivity extends MyActionBarActivity implements ItemClic
             for (int i = 0; i < musicInfos.size(); i++) {
                 MusicInfo info = musicInfos.get(i);
                 list[i] = info.songId;
-                info.islocal = false;
                 infos.put(list[i], musicInfos.get(i));
             }
             if (position > -1) {

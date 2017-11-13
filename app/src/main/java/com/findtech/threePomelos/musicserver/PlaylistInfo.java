@@ -110,9 +110,10 @@ public class PlaylistInfo {
                 L.e("QQQQQQ==",cursor.getCount()+"");
                 do {
                     L.e("===========","0="+cursor.getLong(0)+"1="+cursor.getString(1)+"2="+cursor.getInt(2)+"3="+cursor.getString(3)+"4="+cursor.getString(4));
-                    if (cursor.getString(4).equals("local"))
+                    if (cursor.getString(4).equals("local")) {
                         results.add(new Playlist(cursor.getLong(0), cursor.getString(1), cursor.getInt(2),
                                 cursor.getString(3), cursor.getString(4)));
+                    }
                 } while (cursor.moveToNext());
             }
 

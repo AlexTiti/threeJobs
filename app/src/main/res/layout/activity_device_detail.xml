@@ -4,59 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout"
     tools:context="com.findtech.threePomelos.mydevices.activity.DeviceDetailActivity">
 
     <View
         android:id="@+id/view_top"
         android:layout_width="match_parent"
         android:layout_height="0dp"></View>
-
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/layout_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/y35"-->
-        <!--android:background="@color/text_pink"-->
-        <!--android:visibility="gone">-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/back"-->
-            <!--android:layout_width="@dimen/x18"-->
-            <!--android:layout_height="@dimen/y23"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginLeft="@dimen/x10"-->
-            <!--android:paddingBottom="@dimen/y5"-->
-            <!--android:paddingLeft="@dimen/x5"-->
-            <!--android:paddingRight="@dimen/x5"-->
-            <!--android:paddingTop="@dimen/y5"-->
-            <!--android:src="@drawable/icon_back" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/toolbar_title_detail"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:singleLine="true"-->
-            <!--android:ellipsize="end"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:textSize="@dimen/text_size_title" />-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/btn_menu_more"-->
-            <!--android:layout_width="@dimen/x25"-->
-            <!--android:layout_height="@dimen/y25"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_marginRight="@dimen/x15"-->
-            <!--android:paddingBottom="@dimen/y5"-->
-            <!--android:paddingLeft="@dimen/x5"-->
-            <!--android:paddingRight="@dimen/x5"-->
-            <!--android:paddingTop="@dimen/y5"-->
-            <!--android:src="@drawable/icon_more_action" />-->
-
-
-    <!--</RelativeLayout>-->
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -575,14 +529,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:maxHeight="@dimen/x1"
-                        android:minHeight="@dimen/x1"
+                        android:maxHeight="@dimen/y2"
+                        android:minHeight="@dimen/y1"
                         android:progressDrawable="@drawable/play_seekbar"
                         android:secondaryProgress="0"
+                        android:enabled="false"
                         android:thumb="@drawable/seek_button_close" />
-
-
-
 
                 </RelativeLayout>
 
@@ -620,6 +572,7 @@
                         app:showText="true"
                         android:textOff="@string/text_off"
                         android:textOn="@string/text_on"
+                        android:enabled="false"
                         app:switchTextAppearance="@style/textStytle_SwitchCompat"
                         android:thumb="@drawable/seek_button_close"
                         app:theme="@style/MySwitch" />
@@ -659,6 +612,7 @@
                         app:showText="true"
                         android:textOff="@string/text_off"
                         android:textOn="@string/text_on"
+                        android:enabled="false"
                         app:switchTextAppearance="@style/textStytle_SwitchCompat"
                         android:thumb="@drawable/seek_button_close"
                         app:theme="@style/MySwitch" />
@@ -672,6 +626,7 @@
                     android:layout_height="@dimen/y50"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/y40"
+                    android:enabled="false"
                     android:background="@drawable/btn_bac_close" />
 
                 <TextView

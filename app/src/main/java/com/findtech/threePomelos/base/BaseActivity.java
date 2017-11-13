@@ -338,17 +338,10 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             askForPermission();
         }else {
-//            String packname = getPackageName();
-//            PackageManager pm = getPackageManager();
-//            boolean permission = (PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.SYSTEM_ALERT_WINDOW", packname));
-//            L.e("KKKKKKK","=============="+permission);
-//            if ( !permission)
-//                ToastUtil.showToast(this,"未开启悬浮窗权限");
             startService(intent);
 
         }
     }
-
 
     public void toGoGetProtectActivity(final Context activity){
         NetWorkRequest netWorkRequest = new NetWorkRequest(this);
@@ -366,6 +359,8 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                         intent1.putExtra("protect_url",avFile.getUrl());
                         startActivity(intent1);
                     }
+                }else{
+                    checkNetWork();
                 }
             }
         });
@@ -555,7 +550,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     public void registerMusicBroadcast(){
 
         if (app.manager.cubicBLEDevice != null) {
-
             app.manager.cubicBLEDevice.registerReceiver();
             app.manager.cubicBLEDevice.setBLEBroadcastDelegate(new BLEDevice.RFStarBLEBroadcastReceiver() {
                 @Override

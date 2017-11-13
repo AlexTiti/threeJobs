@@ -66,12 +66,13 @@ public class ShowMusicAdapter extends RecyclerView.Adapter<ShowMusicAdapter.Show
         holder.text_name.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (longClickListener != null)
-                longClickListener.longClick(position);
+                if (longClickListener != null) {
+                    longClickListener.longClick(position);
+                }
                 return true;
             }
         });
-        L.e("=============",mode.musicName+"======="+mode.songId+"====="+mode.islocal+"==="+mode.lrc);
+
         if (MusicPlayer.getCurrentAudioId() == mode.songId) {
             holder.text_number.setVisibility(View.INVISIBLE);
             holder.imageView.setVisibility(View.VISIBLE);

@@ -29,6 +29,7 @@ import com.baidu.autoupdatesdk.UICheckUpdateCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.activity.AboutUSActivity;
 import com.findtech.threePomelos.activity.BabyInfoActivity;
+import com.findtech.threePomelos.activity.CommendProblemActivity;
 import com.findtech.threePomelos.activity.FeedBack;
 import com.findtech.threePomelos.activity.GetUserProtocolActivity;
 import com.findtech.threePomelos.base.BaseLazyFragment;
@@ -57,16 +58,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by Alex on 2017/5/5.
  * <pre>
- *     author  ： Alex
- *     e-mail  ： 18238818283@sina.cn
- *     time    ： 2017/05/05
- *     desc    ：
- *     version ： 1.0
+ *     @author  ： Alex
+ *     @e-mail  ： 18238818283@sina.cn
+ *     @time    ： 2017/05/05
+ *     @desc    ：
+ *     @version ： 1.0
  */
 public class UserFragment extends BaseLazyFragment implements View.OnClickListener {
-    private RelativeLayout faceback;
+    private RelativeLayout faceback,relay_common_problem;
     private RelativeLayout update;
-    private RelativeLayout approve;
     private RelativeLayout about_us;
     private ProgressDialog progressDialog;
     private Button text_out;
@@ -79,6 +79,7 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
     private BabyInfoEntity babyInfoEntity = BabyInfoEntity.getInstance();
     public final static String CHANGE = "CHANGE";
     public final int TOAST_NUMB = 1001;
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -87,6 +88,7 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
                 case TOAST_NUMB:
                     Toast.makeText(mContext, getString(R.string.logout_success), Toast.LENGTH_SHORT).show();
                     break;
+
                 default:
                     break;
             }
@@ -105,11 +107,10 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
         circleImage = (CircleImageView) view.findViewById(R.id.circleImage);
         faceback = (RelativeLayout) view.findViewById(R.id.faceback);
         update = (RelativeLayout) view.findViewById(R.id.update);
-
-        approve = (RelativeLayout) view.findViewById(R.id.approve);
         about_us = (RelativeLayout) view.findViewById(R.id.about_us);
         text_out = (Button) view.findViewById(R.id.text_out);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
+        relay_common_problem = (RelativeLayout) view.findViewById(R.id.relay_common_problem);
         text_weight_user = (TextView) view.findViewById(R.id.text_weight_user);
         text_height_user = (TextView) view.findViewById(R.id.text_height_user);
         View view1 = view.findViewById(R.id.view);
@@ -124,11 +125,10 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
         text_age_user.setText(getBabyDate());
         faceback.setOnClickListener(this);
         update.setOnClickListener(this);
-
-        approve.setOnClickListener(this);
         about_us.setOnClickListener(this);
         text_out.setOnClickListener(this);
         relativeLayout.setOnClickListener(this);
+        relay_common_problem.setOnClickListener(this);
         initProgressDialog();
     }
 
@@ -153,10 +153,11 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
 
     private void setCircleImage() {
         bitmap = PicOperator.getIconFromData(getActivity());
-        if (bitmap != null)
+        if (bitmap != null) {
             circleImage.setImageBitmap(bitmap);
-        else
+        } else {
             circleImage.setImageResource(R.mipmap.homepage_headdata_bg_nor);
+        }
     }
 
     @Override
@@ -172,7 +173,6 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
             case R.id.update:
                 progressDialog.setMessage(getActivity().getResources().getString(R.string.upDateMessage_));
                 progressDialog.show();
-
                 BDAutoUpdateSDK.cpUpdateCheck(mContext, new CPCheckUpdateCallback() {
                     @Override
                     public void onCheckUpdateCallback(AppUpdateInfo appUpdateInfo, AppUpdateInfoForInstall appUpdateInfoForInstall) {
@@ -187,9 +187,6 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
                     }
                 });
                 break;
-            case R.id.approve:
-                ((MainHomeActivity) getActivity()).toGoGetProtectActivity(getActivity());
-                break;
             case R.id.about_us:
                 startActivity(new Intent(mContext, AboutUSActivity.class));
                 break;
@@ -199,6 +196,11 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
             case R.id.relativeLayout:
                 startActivityForResult(new Intent(mContext, BabyInfoActivity.class), 1000);
                 break;
+            case R.id.relay_common_problem:
+                startActivity(new Intent(mContext, CommendProblemActivity.class));
+                break;
+                default:
+                    break;
         }
     }
 
@@ -208,6 +210,7 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
         builder.setNotifyInfo(getString(R.string.logout_confirm));
         builder.setShowButton(true);
         builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 logOut();
                 dialog.dismiss();
@@ -217,6 +220,7 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
         });
 
         builder.setNegativeButton(getString(R.string.cancle), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }

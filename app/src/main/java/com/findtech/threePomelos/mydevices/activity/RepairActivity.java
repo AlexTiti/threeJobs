@@ -71,8 +71,9 @@ public class RepairActivity extends MyActionBarActivity implements BLEDevice.RFS
     @Override
     public void onReceive(Context context, Intent intent, String macData, String uuid) {
         String action = intent.getAction();
-        if (action == null)
+        if (action == null) {
             return;
+        }
        if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE)) {
             byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
            if (data[3] == (byte) 0x83 ) {

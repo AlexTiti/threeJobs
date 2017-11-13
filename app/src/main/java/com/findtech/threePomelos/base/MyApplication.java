@@ -51,7 +51,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AVOSCloud.initialize(this, APPID, APPKEY);
-        //AVOSCloud.setDebugLogEnabled(true);
+        AVOSCloud.setDebugLogEnabled(true);
         //AVCloud.setProductionMode(false);
         manager = new AppManager(getApplicationContext());
 //        //微信 appid appsecret

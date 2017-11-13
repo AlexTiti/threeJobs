@@ -1,48 +1,24 @@
 package com.findtech.threePomelos.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.Html;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVFile;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.FindCallback;
-import com.avos.avoscloud.GetDataCallback;
-import com.avos.avoscloud.ProgressCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.base.MyApplication;
-import com.findtech.threePomelos.entity.BabyInfoEntity;
-import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.utils.MyCalendar;
-import com.findtech.threePomelos.utils.ToastUtil;
-import com.findtech.threePomelos.utils.Tools;
-
-import java.text.ParseException;
-import java.util.List;
 
 /**
- * Created by zhi.zhang on 5/3/16.
+ *
+ * @author zhi.zhang
+ * @date 5/3/16
  */
 public class GetUserProtocolActivity extends MyActionBarActivity {
 
-    //  private TextView userProtocolContent;
     private WebView webView_user_protect;
-    private ProgressDialog progressDialog;
     private String protect_url;
     private ProgressBar progressBar;
 
@@ -54,8 +30,9 @@ public class GetUserProtocolActivity extends MyActionBarActivity {
 
         setToolbar(getResources().getString(R.string.title_activity_get_user_protocol), true, null);
         Intent intent = getIntent();
-        if (intent != null)
+        if (intent != null) {
             protect_url = intent.getStringExtra("protect_url");
+        }
         progressBar = (ProgressBar) findViewById(R.id.pb_user_protect);
         progressBar.setBackgroundColor(getResources().getColor(R.color.white));
         progressBar.setMax(100);
@@ -74,19 +51,15 @@ public class GetUserProtocolActivity extends MyActionBarActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-
-                if (newProgress == 100)
+                if (newProgress == 100) {
                     progressBar.setVisibility(View.GONE);
-                else {
+                } else {
                     progressBar.setVisibility(View.VISIBLE);
                     progressBar.setProgress(newProgress);
                 }
             }
         });
-
         registerMusicBroadcast();
-
-
     }
 
     @Override

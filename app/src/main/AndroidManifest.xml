@@ -77,14 +77,12 @@
         <activity
             android:name=".activity.BabyDataDetailActivity"
             android:label="@string/title_activity_user_weight_info"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/title_activity_login"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.PhoneVerifyActivity"
             android:label="@string/title_activity_phone_verify"
@@ -120,8 +118,8 @@
         <activity
             android:name=".activity.BabyInfoActivity"
             android:label="@string/title_activity_input_height"
-            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
         <activity
             android:name=".activity.GetUserProtocolActivity"
             android:label="@string/title_activity_get_user_protocol"
@@ -222,13 +220,10 @@
             android:name=".music.activity.MusicBabyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
 
-        <service
-            android:name=".musicserver.MediaService"
-            />
+        <service android:name=".musicserver.MediaService" />
 
-        <!--android:process=":main"-->
-        <!--RecentStore addSong()-->
-
+        <!-- android:process=":main" -->
+        <!-- RecentStore addSong() -->
 
         <service android:name=".musicserver.FloatingService" />
 
@@ -248,8 +243,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".music.activity.RencentMusicActivity" />
-        <activity android:name=".mydevices.activity.BluetoothlinkActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".mydevices.activity.BluetoothlinkActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".music.activity.CarMusicActivity" />
         <activity android:name=".mydevices.activity.DeviceDetailActivity" />
         <activity android:name=".mydevices.activity.RepairActivity" />
@@ -259,8 +255,9 @@
         <activity android:name=".music.activity.HotRecommenActivity" />
         <activity android:name=".activity.GuideActivity" />
 
-        <service android:name="com.avos.avoscloud.PushService"
-            android:exported="true"/>
+        <service
+            android:name="com.avos.avoscloud.PushService"
+            android:exported="true" />
 
         <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
             <intent-filter>
@@ -271,7 +268,9 @@
         </receiver>
 
         <activity android:name=".activity.InstructionsMainActivity" />
-
+        <activity android:name=".activity.CompanyActivity" />
+        <activity android:name=".activity.FunctionDescActivity" />
+        <activity android:name=".activity.CommendProblemActivity"></activity>
     </application>
 
 </manifest>

@@ -1,15 +1,14 @@
 package com.findtech.threePomelos.utils;
 
-import android.bluetooth.BluetoothDevice;
-import android.content.Context;
-
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
-import com.findtech.threePomelos.music.utils.DownMusicBean;
+import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.mydevices.bean.BluetoothLinkBean;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Alex on 2017/5/3.
@@ -73,9 +72,8 @@ public class IContent {
     public String functionType = null;
     public String company = null;
 
-
-    public ArrayList<DownMusicBean> downList = new ArrayList<>();
-    public ArrayList<DownMusicBean> collection_array = new ArrayList<>();
+    public Map<String,MusicInfo> map = new HashMap<>();
+    public List<String> collectedList =  new ArrayList<>();
     public ArrayList<BluetoothLinkBean> bluetoothLinkBeen = new ArrayList<>();
     public String clickPositionAddress = "clickPositionAddress";
     public String clickPositionName = "clickPositionName";

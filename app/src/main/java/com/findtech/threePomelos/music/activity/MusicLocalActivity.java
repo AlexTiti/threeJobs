@@ -1,41 +1,24 @@
 package com.findtech.threePomelos.music.activity;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewStub;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.DeleteCallback;
-import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.home.MainHomeActivity;
-import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
-import com.findtech.threePomelos.music.utils.DownMusicBean;
-import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.music.adapter.ShowMusicAdapter;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
@@ -49,16 +32,17 @@ import com.findtech.threePomelos.music.utils.PreferencesUtility;
 import com.findtech.threePomelos.music.utils.SideBar;
 import com.findtech.threePomelos.music.utils.SortOrder;
 import com.findtech.threePomelos.musicserver.MusicPlayer;
+import com.findtech.threePomelos.net.NetWorkRequest;
+import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.NetUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.view.dialog.CustomDialog;
-import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class MusicLocalActivity extends MyActionBarActivity implements ItemClickListtener ,ShowMusicAdapter.LongClickListener {
 
@@ -154,8 +138,9 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
     }
 
     public void goMusic(){
-        if (playMusic != null)
+        if (playMusic != null) {
             handler.removeCallbacks(playMusic);
+        }
         if (position > -1) {
             playMusic = new PlayMusic(position);
             handler.postDelayed(playMusic, 70);
@@ -171,30 +156,27 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
         builder.setShowBindInfo(getResources().getString(R.string.delete_notice));
         builder.setShowButton(true);
         builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(final DialogInterface dialog, int which) {
                   final  MusicInfo info = songList.get(position);
                 Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, info.songId);
                 mContext.getContentResolver().delete(uri, null, null);
                 final File file = DownFileUtils.creatFile(MusicLocalActivity.this, IContent.FILEM_USIC, info.musicName + ".mp3");
                 L.e("=============",info.musicName+"==============="+file.getAbsolutePath());
-                if (file.exists())
+                if (file.exists()) {
                     file.delete();
-
-
+                }
                 netWorkRequest.sendDeleteDownMusic(info.musicName, new SaveCallback() {
                     @Override
                     public void done(AVException e) {
                         if (e==null){
-                            for (int i=0;i<IContent.getInstacne().downList.size();i++){
-                                DownMusicBean bean = IContent.getInstacne().downList.get(i);
-                                if (bean.getMusicName()!= null && bean.getMusicName().equals(info.musicName))
-                                    IContent.getInstacne().downList.remove(i);
+                            Map map = IContent.getInstacne().map;
+                            if (map.containsKey(info.musicName)){
+                                IContent.getInstacne().map.remove(info.musicName);
                             }
                         }
                     }
                 });
-
-
                 songList.remove(position);
 
                 if (songList == null || songList.size() <= 0){
@@ -220,6 +202,7 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
         });
         builder.setNegativeButton(getResources().getString(R.string.cancle),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
@@ -233,7 +216,6 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
     public class Task extends AsyncTask<Void,Void,ArrayList<MusicInfo>>{
         @Override
         protected ArrayList<MusicInfo> doInBackground(final Void... unused) {
-
             isAZSort = mPreferences.getSongSortOrder().equals(SortOrder.SongSortOrder.SONG_A_Z);
             boolean hasFolder = false;
             File file = DownFileUtils.creatFileDir(mContext,IContent.FILEM_USIC);
@@ -243,29 +225,24 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
                 hasFolder = true;
             }
             if(hasFolder){
+                L.e("======",file.getAbsolutePath());
                 songList = MusicUtils.queryMusic(mContext, file.getAbsolutePath(), IConstants.START_FROM_FOLDER);
-//                    MusicInfo musicInfo = songList.get(3);
-//                    L.e("QQQ",musicInfo.duration+"="+musicInfo.size+ "=="+musicInfo.musicName+"=="+musicInfo.data+"=="+musicInfo.lrc+"=="+musicInfo.songId+"=="+musicInfo.islocal+"="+musicInfo.albumId +"--"+songList.size());
             }
-
             if (songList == null) {
                 songList = new ArrayList<MusicInfo>();
             }
-            L.e("===========================","================"+songList.size());
             if (isAZSort) {
                 Collections.sort(songList, new MusicComparator());
                 for (int i = 0; i < songList.size(); i++) {
-                    if (positionMap.get(songList.get(i).sort) == null)
+                    if (positionMap.get(songList.get(i).sort) == null) {
                         positionMap.put(songList.get(i).sort, i);
+                    }
                 }
             }
-
             return songList;
         }
         @Override
         protected void onPostExecute(ArrayList<MusicInfo> aVoid) {
-            L.e("===========================","================"+aVoid.size());
-            toSynchronousdata();
             if (aVoid == null || aVoid.size() <= 0){
                 View view = viewStub.inflate();
                 ImageView image = (ImageView) view.findViewById(R.id.net_fail_image);
@@ -288,44 +265,43 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
         }
     }
 
-    public void toSynchronousdata( ){
-        if (NetUtils.isConnectInternet(this)) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for (int i = 0; i < IContent.getInstacne().downList.size(); i++) {
-                        DownMusicBean bean = IContent.getInstacne().downList.get(i);
-                        final String name = bean.getMusicName();
-                        L.e("Synchronousdata=======","================"+name);
-                        if (!isInDownList(name)){
-                            L.e("Synchronousdata=======","================"+name);
-                            netWorkRequest.sendDeleteDownMusic(name, new SaveCallback() {
-                                @Override
-                                public void done(AVException e) {
-                                    if (e==null){
-                                        for (int i=0;i<IContent.getInstacne().downList.size();i++){
-                                            DownMusicBean bean = IContent.getInstacne().downList.get(i);
-                                            if (bean.getMusicName()!= null && bean.getMusicName().equals(name))
-                                                IContent.getInstacne().downList.remove(i);
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    }
-                }
-            }).start();
+//    public void toSynchronousdata( ){
+//        if (NetUtils.isConnectInternet(this)) {
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Map<String,MusicInfo> map = IContent.getInstacne().map;
+//                    for (final Map.Entry<String,MusicInfo> entrySet  : map.entrySet()){
+//                        L.e("entrySet",entrySet.getKey());
+//                        netWorkRequest.sendDeleteDownMusic(entrySet.getKey(), new SaveCallback() {
+//                            @Override
+//                            public void done(AVException e) {
+//                                if (e==null){
+//                                    IContent.getInstacne().map.remove(entrySet.getKey());
+//                                }else {
+//                                }
+//                            }
+//                        });
+//
+//                    }
+//                }
+//            }).start();
+//
+//        }
+//    }
 
-        }
-    }
+
+
 
     public boolean isInDownList(String name){
         for (int i=0;i<songList.size();i++){
             MusicInfo info = songList.get(i);
-            if (info == null || name == null)
+            if (info == null || name == null) {
                 return true;
-            if (name != null && name.equals(info.musicName))
+            }
+            if (name != null && name.equals(info.musicName)) {
                 return true;
+            }
         }
         return false;
     }
@@ -348,8 +324,9 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
                 info.islocal = true;
                 infos.put(list[i], songList.get(i));
             }
-            if (position > -1)
+            if (position > -1) {
                 MusicPlayer.playAll(infos, list, position, false);
+            }
         }
     }
     @Override
