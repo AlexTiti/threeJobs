@@ -1,7 +1,6 @@
 package com.findtech.threePomelos.mydevices.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,14 +29,12 @@ import java.util.ArrayList;
  */
 public class BluetoothLinkAdapter extends BaseAdapter {
 
-    private ArrayList<DeviceCarBean> arrayList ;
+    private ArrayList<DeviceCarBean> arrayList;
     private ItemClickListtener itemClickListtener;
     LongClick longClick;
     private Context context;
     private String number_0 = "0";
     private String number_1 = "1";
-
-
 
 
     public BluetoothLinkAdapter(Context context) {
@@ -49,18 +46,18 @@ public class BluetoothLinkAdapter extends BaseAdapter {
 
     }
 
-    public void  setLongClick( LongClick longClick){
+    public void setLongClick(LongClick longClick) {
         this.longClick = longClick;
     }
 
     public void setArrayList(ArrayList<DeviceCarBean> arrayList) {
         this.arrayList = arrayList;
-        L.e("==============","==========="+arrayList.size());
+
     }
 
     @Override
     public int getCount() {
-        return arrayList == null ? 0:arrayList.size();
+        return arrayList == null ? 0 : arrayList.size();
     }
 
     @Override
@@ -75,32 +72,32 @@ public class BluetoothLinkAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
+        L.e("==============", position + "===========" + arrayList.size());
         ViewHolder viewHolder;
-        if(convertView == null){
+        if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_device,parent,false);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_device, parent, false);
             viewHolder.text_name = (TextView) convertView.findViewById(R.id.text_name_bluetooth);
             viewHolder.text_number = (TextView) convertView.findViewById(R.id.text_state_bluetooth);
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.image_cartype);
             viewHolder.relayout_pagement = (RelativeLayout) convertView.findViewById(R.id.relayout_pagement);
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         DeviceCarBean device = arrayList.get(position);
         String name = device.getDeviceName();
         viewHolder.text_name.setText(name);
         String address = device.getDeviceaAddress();
-        if (address!= null && address.equals(IContent.getInstacne().address)) {
+        if (address != null && address.equals(IContent.getInstacne().address)) {
             viewHolder.text_number.setText(context.getResources().getString(R.string.device_linking));
             viewHolder.text_number.setTextColor(context.getResources().getColor(R.color.text_green));
-        }else{
+        } else {
             viewHolder.text_number.setText(context.getResources().getString(R.string.device_nolink));
             viewHolder.text_number.setTextColor(context.getResources().getColor(R.color.divider_color));
         }
 
-        if(number_0.equals(device.getFunctionType()) ) {
+        if (number_0.equals(device.getFunctionType())) {
             viewHolder.imageView.setImageResource(R.drawable.face_page_high);
         }
         if (number_1.equals(device.getFunctionType())) {
@@ -124,14 +121,15 @@ public class BluetoothLinkAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         private TextView text_number;
         private TextView text_name;
         private ImageView imageView;
         private RelativeLayout relayout_pagement;
     }
-    public  interface  LongClick{
-void longClick(int position);
+
+    public interface LongClick {
+        void longClick(int position);
     }
 
 }

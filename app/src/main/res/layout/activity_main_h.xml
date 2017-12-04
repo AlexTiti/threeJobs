@@ -83,6 +83,7 @@
                    android:layout_height="match_parent"
                    android:layout_weight="1"
                    android:orientation="vertical"
+                   android:background="?android:attr/selectableItemBackground"
                    >
 
                    <LinearLayout
@@ -91,6 +92,7 @@
                        android:layout_height="match_parent"
                        android:layout_gravity="center"
                        android:gravity="center_horizontal"
+                       android:background="?android:attr/selectableItemBackground"
                        android:orientation="vertical">
                        <ImageView
                            android:layout_width="@dimen/x36"
@@ -147,7 +149,9 @@
                    android:layout_width="0dp"
                    android:layout_height="match_parent"
                    android:layout_weight="1"
-                   android:orientation="vertical">
+                   android:orientation="vertical"
+
+                   >
 
                    <LinearLayout
                        android:id="@+id/weight_layout"
@@ -155,6 +159,7 @@
                        android:layout_height="match_parent"
                        android:layout_gravity="center"
                        android:gravity="center_horizontal"
+                       android:background="?android:attr/selectableItemBackground"
                        android:orientation="vertical">
                        <ImageView
                            android:layout_width="@dimen/x36"
@@ -218,6 +223,7 @@
         </View>
 
         <LinearLayout
+            android:id="@+id/listView_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -242,7 +248,7 @@
                     android:layout_width="@dimen/x25"
                     android:padding="@dimen/x5"
                     android:layout_height="@dimen/x25"
-                    android:background="@drawable/bac_play_next"
+                    android:background="?android:attr/selectableItemBackground"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/icon_add_device"
                     />
@@ -262,23 +268,21 @@
                 android:paddingBottom="@dimen/y5"
                 />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <com.findtech.threePomelos.view.MyListView
+
+            <ListView
                 android:id="@+id/mylist_showcar_page"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="@dimen/y8"
                 >
-            </com.findtech.threePomelos.view.MyListView>
-            </RelativeLayout>
+
+            </ListView>
+
         </LinearLayout>
         </LinearLayout>
         </RelativeLayout>
     </com.findtech.threePomelos.view.HeadZoomScrollView>
-
-
 
     <RelativeLayout
         android:id="@+id/layout_top_page"

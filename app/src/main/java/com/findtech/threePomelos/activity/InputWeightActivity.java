@@ -105,6 +105,10 @@ public class InputWeightActivity extends MyActionBarActivity implements View.OnC
                 Toast.makeText(this, getString(R.string.net_exception), Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (Integer.valueOf(weight) > 200){
+                Toast.makeText(this, getString(R.string.data_max_notice), Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (!TextUtils.isEmpty(weight) && !TextUtils.isEmpty(time)) {
                 //判断是否是安全数据
                 String heightNumStr = RequestUtils.getSharepreference(this).getString(RequestUtils.WEIGHT, "0");

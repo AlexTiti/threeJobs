@@ -23,6 +23,9 @@ import com.findtech.threePomelos.home.MainHomeActivity;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.utils.ToastUtil;
 
+/**
+ * @author Alex
+ */
 public class ForgetPasswordActivity extends MyActionBarActivity implements View.OnClickListener {
 
     private EditText phoneTextView, passwordTextView, identifyTextView;

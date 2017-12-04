@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
@@ -53,11 +54,10 @@ public class LaunchActivity extends BaseActivity implements OperateDBUtils.SaveB
     private boolean isShowOnce = false; //是否已经显示一次了
     private final int TIMEOUT = 0x01;
     SharedPreferences sp;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.setFlags(
@@ -65,27 +65,28 @@ public class LaunchActivity extends BaseActivity implements OperateDBUtils.SaveB
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
         sp = getSharedPreferences(IContent.IS_FIRST_USE, MODE_PRIVATE);
-
-            Message message = new Message();
-            message.what = TIMEOUT;
-            mHandle.sendMessageDelayed(message, 2000);
+        Message message = new Message();
+        message.what = TIMEOUT;
+        mHandle.sendMessageDelayed(message, 2000);
         operateDBUtils = new OperateDBUtils(this);
         operateDBUtils.setSaveBabyInfoFinishListener(this);
         netWorkRequest = new NetWorkRequest(this);
         if (AVUser.getCurrentUser() != null && NetUtils.isConnectInternet(this)) {
             netWorkRequest.getTravelInfoDataAndSaveToDB();
-           // netWorkRequest.getTotalMileageDataAndSaveToSP();
+            // netWorkRequest.getTotalMileageDataAndSaveToSP();
             netWorkRequest.getBabyHeightDataAndSaveToDB();
             netWorkRequest.getBabyWeightDataAndSaveToDB();
             netWorkRequest.getBabyInfoDataAndSaveToDB();
+            netWorkRequest.selectDeviceTypeAndIdentifier();
         }
     }
+
     Handler mHandle = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case TIMEOUT:
-                    if (sp.getBoolean(IContent.IS_FIRST_USE, true)){
+                    if (sp.getBoolean(IContent.IS_FIRST_USE, true)) {
                         startActivity(new Intent(LaunchActivity.this, GuideActivity.class));
                         finish();
                         return;

@@ -27,10 +27,8 @@ import java.util.ArrayList;
  */
 public class RecenetMusicAdapter extends RecyclerView.Adapter<RecenetMusicAdapter.RecenetMusicViewHolder> {
 
-
     private ArrayList<MusicInfo> songs;
     private ItemClickListtener itemCliclListener;
-
 
     public void setMusicInfos(ArrayList<MusicInfo> songs) {
         this.songs = songs;

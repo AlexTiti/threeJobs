@@ -8,25 +8,22 @@
         android:id="@+id/layout_bac_repair"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y254"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/text_pink">
-        <ImageView
-            android:layout_width="@dimen/x204"
-            android:layout_height="@dimen/y206"
-            android:layout_centerHorizontal="true"
-             android:layout_alignParentBottom="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/update"/>
 
     </RelativeLayout>
 
-    <View
+    <ImageView
         android:id="@+id/btn_update"
         android:layout_width="@dimen/x155"
         android:layout_height="@dimen/y45"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/layout_bac_repair"
         android:layout_marginTop="@dimen/y60"
-        android:background="@drawable/btn_repair_back"/>
+        android:background="@drawable/btn_repair_back"
+        android:src="?android:attr/selectableItemBackground"
+        />
     <TextView
         android:id="@+id/text_state_repair"
         android:layout_width="wrap_content"
@@ -37,7 +34,16 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size"
+        android:focusable="false"
         />
+
+    <ImageView
+        android:layout_width="@dimen/x204"
+        android:layout_height="@dimen/y206"
+        android:layout_above="@+id/btn_update"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/update" />
 
 
 </RelativeLayout>

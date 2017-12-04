@@ -5,8 +5,7 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * 解决ScrollView与ListView的嵌套问题
- * 
+ * @author Administrator
  */
 public class MyListView extends ListView
 {

@@ -1,13 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.findtech.threePomelos.activity.BabyDataDetailActivity">
 
     <!--<include-->
-        <!--android:id="@+id/custom_actionbar"-->
-        <!--layout="@layout/toolbar_layout" />-->
+    <!--android:id="@+id/custom_actionbar"-->
+    <!--layout="@layout/toolbar_layout" />-->
 
     <LinearLayout
         android:id="@+id/layout_share_page"
@@ -56,11 +55,12 @@
             <LinearLayout
                 android:id="@+id/layout_app_description"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/y30"
                 android:layout_below="@id/layout_text_description"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center">
+
                 <View
                     android:layout_width="50dp"
                     android:layout_height="1dp"
@@ -75,6 +75,7 @@
                     android:text="@string/text_share_info_from_app"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
+
                 <View
                     android:layout_width="50dp"
                     android:layout_height="1dp"
@@ -109,17 +110,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </FrameLayout>
+
             <LinearLayout
                 android:id="@+id/layout_share_buttom"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_gravity="bottom"
                 android:layout_below="@id/id_fl_viewpager"
+                android:layout_gravity="bottom"
                 android:background="@color/text_pink"
-                android:visibility="gone"
                 android:gravity="center"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"
+                android:visibility="gone"></LinearLayout>
 
         </RelativeLayout>
 
@@ -164,4 +165,5 @@
             android:baselineAligned="false"
             android:orientation="vertical" />
     </LinearLayout>
+
 </RelativeLayout>

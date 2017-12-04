@@ -66,7 +66,6 @@ public class MusicTrack implements Parcelable {
         dest.writeLong(mId);
         dest.writeInt(mSourcePosition);
 
-
     }
 
 }

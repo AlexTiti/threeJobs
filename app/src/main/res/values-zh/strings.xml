@@ -365,7 +365,7 @@
     <string name="bluetooth_unopen">蓝牙未开启</string>
 
     <string name="link_icon">连接音箱</string>
-    <string name="close_message">关机前请确认推车处于安全状态!</string>
+    <string name="close_message">请确认推车处于安全状态!</string>
     <!--<string name="close_shake">智能刹车已关闭推车处于刹车状态，手握感应区域即可解除！</string>-->
     <string name="close_shake">智能刹车已关闭</string>
     <string name="unbound_success">解绑成功</string>
@@ -394,6 +394,7 @@
     <string name="not_open_message">未打开权限,将无法确保婴儿推车数据正确</string>
     <string name="weight_message_confirm">请确认是否添加本次宝宝体重?</string>
     <string name="blue_tooth_update">请选择  3POMELOS_A3  的设备！</string>
+    <string name="blue_tooth_update_meizu">请选择"蓝牙"  进入列表后点击3POMELOS_A3!</string>
     <string name="logout_confirm">确认退出登录?</string>
     <string name="loging_state">登录中，请稍后...</string>
 
@@ -420,6 +421,7 @@
     <string name="checkNumber_useless">无效的短信验证码，通常是不匹配或者过期</string>
     <string name="checkNumber_send_fail">短信请求次数超上限！</string>
     <string name="login_empty_notice">账号或密码不能为空!</string>
+    <string name="data_max_notice">输入数据过大</string>
 
 
     <string name="babay_sex">是男宝还是女宝啊</string>
@@ -449,6 +451,10 @@
     <string name="pro_action_notice">请关闭一键防盗再修复！</string>
     <string name="update_low_elec">电量过低，请先充满电后再升级！</string>
     <string name="drop_refresh">下拉刷新</string>
+
+    <string name="age_info_notice">修改宝宝生日后年龄会自动同步</string>
+    <string name="height_ino_notice">请到首页添加身高</string>
+    <string name="weight_ino_notice">请到首页添加体重</string>
 
     <string name="page_tab1">首页</string>
     <string name="page_tab2">音乐</string>
@@ -481,12 +487,10 @@
     <string name="bluetooth_scan_common">蓝牙搜索不到</string>
     <string name="bluetooth_scan_common_deal"> 每辆推车同时只能连接一部手机，且连接后其他手机后无法搜索到此推车蓝牙，所以请检查是否该推车与其他手机连接或者将推车电源重启，然后重新搜索蓝牙</string>
     <string name="bluetooth_fail_common">绑定设备失败</string>
-    <string name="bluetooth_fail_common_deal">  绑定推车时需要与系统后台服务器进行网络连接，因此请您保持网络顺畅，用4G信号会可能更好哦。</string>
+    <string name="bluetooth_fail_common_deal">绑定推车时需要与系统后台服务器进行网络连接，因此请您保持网络顺畅，用4G信号会可能更好哦。</string>
 
     <string name="bluetooth_data_common">同步数据失败</string>
     <string name="bluetooth_data_common_deal">请依次排查：电源是否开启、蓝牙是否进入睡眠模式（若进入请触碰相关区域唤醒）、蓝牙是否开启时间过长（重新开启蓝牙）</string>
-
-    <string name="update_noticeText"> 固件升级内容：\n\n "1\t新版本智能刹车默认为关闭状态，若需要开启，请使用APP连接推车开启智能刹车 \n 2\t为方便推行，升级成功的推车，在正常关机后智能刹车直接解除 \n 3\t为保证安全，低电量关机后智能刹车会默认刹住，踩一次脚刹即可解除刹车\n  4\t提高初始音量和音量调节速度\n  5\t提高感应区灵敏度，防止误刹车"</string>
 
 
 </resources>

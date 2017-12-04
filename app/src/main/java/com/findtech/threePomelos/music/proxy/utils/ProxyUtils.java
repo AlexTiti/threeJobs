@@ -10,8 +10,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * @author Administrator
+ */
 public class ProxyUtils {
-    private static final String LOG_TAG = ProxyUtils.class.getSimpleName();
 
     /**
      * 删除多余的缓存文件
@@ -23,9 +25,7 @@ public class ProxyUtils {
             @Override
             public void run() {
                 List<File> lstBufferFile = getFilesSortByDate(Constants.DOWNLOAD_PATH);
-                L.e("ProxyUtils"+lstBufferFile.size()+"maximun");
                 while (lstBufferFile.size() > maximun) {
-                    L.e("lstBufferFile.get(0).delete()");
                     lstBufferFile.get(0).delete();
                     lstBufferFile.remove(0);
                 }
@@ -34,11 +34,42 @@ public class ProxyUtils {
     }
 
     /**
+     * 外部储存控件过小时删除缓存文件
+     */
+
+    static protected boolean removeBufferFile() {
+
+                List<File> listBufferFile = getFilesSortByDate(Constants.DOWNLOAD_PATH);
+                L.e("ProxyFileUtils",listBufferFile.size()+"=");
+                if (listBufferFile.size() == 0){
+                    return  false;
+                }
+               if (  listBufferFile.size() >5){
+                   for (int i=0 ;i<3;i++){
+                       listBufferFile.get(i).delete();
+                       listBufferFile.remove(i);
+                       L.e("ProxyFileUtils","listBufferFile.remove=>5"+listBufferFile.size());
+                   }
+                   return true;
+               }else {
+                   for (int i=0 ;i<listBufferFile.size();i++){
+                       listBufferFile.get(i).delete();
+                       listBufferFile.remove(i);
+                       L.e("ProxyFileUtils","listBufferFile.remove=>5");
+                   }
+                   return true;
+               }
+
+
+    }
+
+
+    /**
      * 获取外部存储器可用的空间
      *
      * @return
      */
-    static protected long getAvailaleSize(String dir) {
+    static public long getAvailaleSize(String dir) {
         StatFs stat = new StatFs(dir);// path.getPath());
         long totalBlocks = stat.getBlockCount();// 获取block数量
         long blockSize = stat.getBlockSize();
@@ -55,7 +86,6 @@ public class ProxyUtils {
     static private List<File> getFilesSortByDate(String dirPath) {
         List<File> result = new ArrayList<File>();
         File dir = new File(dirPath);
-
         File[] files = dir.listFiles();
         L.e("ProxyUtils",dir.list().length+"=="+dir.listFiles().length);
         if (files == null || files.length == 0) {
@@ -63,6 +93,7 @@ public class ProxyUtils {
         }
 
         Arrays.sort(files, new Comparator<File>() {
+            @Override
             public int compare(File f1, File f2) {
                 return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
             }

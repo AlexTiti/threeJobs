@@ -208,7 +208,7 @@ public class RecentStore {
                                     mostRecentItem.getColumnIndex(RecentStoreColumns.PLAYCOUNT);
                                     int count_first = mostRecentItem.getInt(mostRecentItem.getColumnIndex(RecentStoreColumns.PLAYCOUNT));
                                     count_first++;
-                                    L.e("count_pre", count_first + "====" + info.musicName);
+                                    L.e("8.1", count_first + "====" + info.musicName);
                                     update(count_first, info.musicName);
                                 }
                             }
@@ -223,6 +223,9 @@ public class RecentStore {
             }
             if (songId >= 0  && MusicPlayer.getPlayinfos() != null) {
                 MusicInfo info = MusicPlayer.getPlayinfos().get(songId);
+                if (info == null ){
+                    return;
+                }
                 final Cursor cursor = database.query(RecentStoreColumns.NAME, null, WHERE_ID_EQUALS,
                         new String[]{info.musicName}, null, null, null);
                 int count_pre = 0;

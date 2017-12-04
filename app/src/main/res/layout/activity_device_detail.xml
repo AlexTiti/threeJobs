@@ -15,7 +15,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_toolbar">
+        android:layout_below="@+id/layout_toolbar"
+        android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -48,8 +49,8 @@
 
             <ImageView
                 android:id="@+id/image_edit_detail"
-                android:layout_width="@dimen/y15"
-                android:layout_height="@dimen/y15"
+                android:layout_width="@dimen/y20"
+                android:layout_height="@dimen/y20"
                 android:layout_below="@+id/weight_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/y4"
@@ -414,12 +415,97 @@
                     android:text="@string/control_device"
                     android:textColor="@color/text_grey"
                     android:textSize="@dimen/text_size" />
+
+                <RelativeLayout
+                    android:id="@+id/protect_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:layout_marginTop="@dimen/y15">
+
+                    <ImageView
+                        android:id="@+id/id_id"
+                        android:layout_width="@dimen/x14"
+                        android:layout_height="@dimen/x14"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_protect" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x7"
+                        android:layout_toRightOf="@+id/id_id"
+                        android:text="@string/anti_theft"
+                        android:textColor="@color/text_grey"
+                        android:textSize="@dimen/text_size"></TextView>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/x14"
+                        app:switchMinWidth="@dimen/x40"
+                        android:checked="false"
+                        app:showText="true"
+                        android:textOff="@string/text_off"
+                        android:textOn="@string/text_on"
+                        android:enabled="false"
+                        app:switchTextAppearance="@style/textStytle_SwitchCompat"
+                        android:thumb="@drawable/seek_button_close"
+                        app:theme="@style/MySwitch" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:layout_marginTop="@dimen/y15">
+
+                    <ImageView
+                       android:id="@+id/brake"
+                        android:layout_width="@dimen/x14"
+                        android:layout_height="@dimen/x14"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_break_protect" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/x7"
+                        android:layout_toRightOf="@+id/brake"
+                        android:text="@string/intelligent_brake"
+                        android:textColor="@color/text_grey"
+                        android:textSize="@dimen/text_size"></TextView>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_brake_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/x14"
+                        app:switchMinWidth="@dimen/x40"
+                        android:checked="true"
+                        app:showText="true"
+                        android:textOff="@string/text_off"
+                        android:textOn="@string/text_on"
+                        android:enabled="false"
+                        app:switchTextAppearance="@style/textStytle_SwitchCompat"
+                        android:thumb="@drawable/seek_button_close"
+                        app:theme="@style/MySwitch" />
+
+                </RelativeLayout>
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ima"
                     android:layout_marginLeft="@dimen/x15"
-                    android:layout_marginTop="@dimen/y10"
+                    android:layout_marginTop="@dimen/y15"
                     android:orientation="horizontal">
                     <ImageView
                         android:layout_width="@dimen/x14"
@@ -444,7 +530,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="@dimen/x15"
                     android:layout_marginRight="@dimen/x15"
-                    android:layout_marginTop="@dimen/y25">
+                    android:layout_marginTop="@dimen/y15">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -535,87 +621,6 @@
                         android:secondaryProgress="0"
                         android:enabled="false"
                         android:thumb="@drawable/seek_button_close" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/protect_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:layout_marginTop="@dimen/y25">
-
-                    <ImageView
-                        android:id="@+id/id_id"
-                        android:layout_width="@dimen/x14"
-                        android:layout_height="@dimen/x14"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/icon_protect" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/x7"
-                        android:layout_toRightOf="@+id/id_id"
-                        android:text="@string/anti_theft"
-                        android:textColor="@color/text_grey"
-                        android:textSize="@dimen/text_size"></TextView>
-
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/switch_close"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/x14"
-                        android:checked="true"
-                        app:showText="true"
-                        android:textOff="@string/text_off"
-                        android:textOn="@string/text_on"
-                        android:enabled="false"
-                        app:switchTextAppearance="@style/textStytle_SwitchCompat"
-                        android:thumb="@drawable/seek_button_close"
-                        app:theme="@style/MySwitch" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x15"
-                    android:layout_marginTop="@dimen/y25">
-
-                    <ImageView
-                       android:id="@+id/brake"
-                        android:layout_width="@dimen/x14"
-                        android:layout_height="@dimen/x14"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/icon_break_protect" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/x7"
-                        android:layout_toRightOf="@+id/brake"
-                        android:text="@string/intelligent_brake"
-                        android:textColor="@color/text_grey"
-                        android:textSize="@dimen/text_size"></TextView>
-
-                    <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/switch_brake_close"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/x14"
-                        android:checked="true"
-                        app:showText="true"
-                        android:textOff="@string/text_off"
-                        android:textOn="@string/text_on"
-                        android:enabled="false"
-                        app:switchTextAppearance="@style/textStytle_SwitchCompat"
-                        android:thumb="@drawable/seek_button_close"
-                        app:theme="@style/MySwitch" />
 
                 </RelativeLayout>
 

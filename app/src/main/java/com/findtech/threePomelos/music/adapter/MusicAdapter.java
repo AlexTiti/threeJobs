@@ -101,9 +101,9 @@ public class MusicAdapter extends BaseAdapter {
             viewHolder.image_down.setAnimation(animation);
             animation.start();
         }else if (mode.islocal) {
-            L.e("downing",mode.musicName);
-            if (animation != null)
+            if (animation != null) {
                 viewHolder.image_down.clearAnimation();
+            }
              viewHolder.image_down.setEnabled(false);
              viewHolder.image_down.setImageResource(R.drawable.icon_downed);
         } else {

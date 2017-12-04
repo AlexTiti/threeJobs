@@ -2,6 +2,8 @@ package com.findtech.threePomelos.mydevices.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -11,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -58,6 +61,7 @@ import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.utils.DialogUtil;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.RequestUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
@@ -72,14 +76,14 @@ import java.util.List;
 /**
  * @author Administrator
  */
-public class DeviceDetailActivity extends MyActionBarActivity implements View.OnClickListener, BLEDevice.RFStarBLEBroadcastReceiver, AdultWeightPickerDialog.OnWeightListener {
+public class DeviceDetailActivity extends MyActionBarActivity implements View.OnClickListener, BLEDevice.RFStarBLEBroadcastReceiver, AdultWeightPickerDialog.OnWeightListener, DialogUtil.ConfirmClick {
 
     private ImageView mImage, isnot_ble_car, isnot_ble_car_bac;
     private ImageView image_wheel_detail, iamge_bac__;
     private ImageView image_brake_detail;
     private TextView textView_toolbar;
     private ImageView img_is_tempurature;
-    private RelativeLayout idBle_device,layout;
+    private RelativeLayout idBle_device, layout;
     private RelativeLayout is_tempurature;
     private LinearLayout layout_ble_detail;
     private LinearLayout is_notBledevice;
@@ -94,7 +98,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     private TextView text_today_mileage, text_today_calor;
     private TextView text_total_mileage, total_calories, weight_parent;
     private ImageView electricity_layout;
-    private RelativeLayout image_elec_relayout,protect_layout;
+    private RelativeLayout image_elec_relayout, protect_layout;
     private int height;
     public static int RED_COLOR_LOW = 0xffED487A;
     public static int RED_COLOR_HIGH = 0xffB33647;
@@ -107,7 +111,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     private Button mButton;
     private ImageView image_back_speed;
     private RelativeLayout layout_hhh;
-    private SwitchCompat mSwitchCompat,switch_brake_close;
+    private SwitchCompat mSwitchCompat, switch_brake_close;
     private ImageView image_edit_detail;
     private ImageView imageView[] = new ImageView[7];
     private int id[] = {R.id.ianme01, R.id.ianme02, R.id.ianme03, R.id.ianme04, R.id.ianme05, R.id.ianme06, R.id.ianme07};
@@ -117,22 +121,26 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     private String deviceFunction;
     BluetoothAdapter bleAdapter;
     BluetoothManager manager;
-    boolean  isopen_Auto_brake = true;
+    boolean isopen_Auto_brake = true;
     private RelativeLayout layout_seekbar_detail;
     private int progres;
     int elec;
     private OperateDBUtils operateDBUtils;
     private boolean car_protect_state;
-    boolean low_elec  = false;
+    boolean low_elec = false;
+    private DialogUtil dialogUtil;
+    private IContent content = IContent.getInstacne();
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_detail);
         Intent intent = getIntent();
         if (intent != null) {
-            selectAddress = intent.getStringExtra(IContent.getInstacne().clickPositionAddress);
-            selectName = intent.getStringExtra(IContent.getInstacne().clickPositionName);
-            deviceFunction =  intent.getStringExtra(IContent.getInstacne().clickPositionFunction);
+            selectAddress = intent.getStringExtra(content.clickPositionAddress);
+            selectName = intent.getStringExtra(content.clickPositionName);
+            deviceFunction = intent.getStringExtra(content.clickPositionFunction);
         }
         if (selectName == null) {
             setToolbar(getString(R.string.detail_car), true, null);
@@ -174,10 +182,32 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         mButton = (Button) findViewById(R.id.btn_close_open);
         refresh_Unlink_Close();
         layout_seekbar_detail.setFocusable(false);
-        animator =(ObjectAnimator.ofFloat(image_wheel_detail, "rotation", new float[]{0.0F, -360.0F}));
-        animator.setRepeatCount(ObjectAnimator.INFINITE);
+        animator = (ObjectAnimator.ofFloat(image_wheel_detail, "rotation", new float[]{0.0F, -360.0F}));
+        animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setDuration(3000L);
+        animator.setRepeatCount(ValueAnimator.RESTART);
         animator.setInterpolator(new LinearInterpolator());
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                animation.end();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
         mSeekBar.setMax(6);
         mSeekBar.setProgress(0);
         for (int i = 0; i < imageView.length; i++) {
@@ -201,7 +231,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             if (IContent.isBLE) {
                 app.manager.cubicBLEDevice.registerReceiver();
                 app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
-                showProgressDialog(getResources().getString(R.string.data_update),getString(R.string.data_update_fail));
+                showProgressDialog(getResources().getString(R.string.data_update), getString(R.string.data_update_fail));
                 app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, IContent.NOTIFY_DATA);
             } else {
                 app.manager.cubicBLEDevice.registerReceiver();
@@ -209,31 +239,34 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 refreshOpne();
             }
         } else {
-            showProgressDialog(getResources().getString(R.string.data_update), 25000 ,getString(R.string.data_update_fail));
+            showProgressDialog(getResources().getString(R.string.data_update), 25000, getString(R.string.data_update_fail));
             manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
             bleAdapter = manager.getAdapter();
             app.manager.bluetoothDevice = bleAdapter.getRemoteDevice(selectAddress);
             app.manager.isEnabled(this);
-             app.manager.cubicBLEDevice = new CubicBLEDevice(
+            app.manager.cubicBLEDevice = new CubicBLEDevice(
                     this, app.manager.bluetoothDevice);
             app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
         }
-        if ( travelInfoEntity.getAdultWeight().equals("0")){
-            showNameBlueToothDialog();
-        }
+//        if (travelInfoEntity.getAdultWeight().equals("0")) {
+//            showNameBlueToothDialog();
+//        }
+        dialogUtil = DialogUtil.getIntence();
+
+
     }
 
     /**
      * to refresh
      */
-    private void refresh_Unlink_Close(){
-        if (  deviceFunction!= null && deviceFunction.equals("0")){
+    private void refresh_Unlink_Close() {
+        if (deviceFunction != null && deviceFunction.equals("0")) {
             idBle_device.setVisibility(View.GONE);
             layout_ble_detail.setVisibility(View.GONE);
             is_tempurature.setVisibility(View.VISIBLE);
             is_notBledevice.setVisibility(View.VISIBLE);
             text_speed_detail.setVisibility(View.GONE);
-      }
+        }
     }
 
     private void getCalor() {
@@ -254,7 +287,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     }
                     weight_parent.setText(travelInfoEntity.getAdultWeight());
                     total_calories.setText(travelInfoEntity.getTotalCalor());
-                }else {
+                } else {
                     travelInfoEntity.setAdultWeight(RequestUtils.getSharepreference(DeviceDetailActivity.this).getString(OperateDBUtils.ADULT_WEIGHT, "56"));
                     travelInfoEntity.setTotalCalor(RequestUtils.getSharepreference(DeviceDetailActivity.this).getString(OperateDBUtils.TOTAL_CALOR, "0"));
                     weight_parent.setText(travelInfoEntity.getAdultWeight());
@@ -263,6 +296,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
         });
     }
+
     private void getTravelInfo() {
         netWorkRequest.getTravelInfo(selectAddress, new FindCallback<AVObject>() {
             @Override
@@ -273,11 +307,11 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                         travelInfoEntity.setTodayMileage(avObject.getString(OperateDBUtils.TODAY_MILEAGE));
                         travelInfoEntity.setTotalMileage(avObject.getString(OperateDBUtils.TOTAL_MILEAGE));
                         String todayCalor = avObject.getString("calorieValue");
-                        travelInfoEntity.setTodayCalor(todayCalor );
+                        travelInfoEntity.setTodayCalor(todayCalor);
                         RequestUtils.getSharepreferenceEditor(DeviceDetailActivity.this).putString(OperateDBUtils.TODAY_CALOR,
                                 todayCalor).commit();
                     }
-                }else {
+                } else {
                     travelInfoEntity.setTodayCalor(RequestUtils.getSharepreference(DeviceDetailActivity.this).getString(OperateDBUtils.TODAY_CALOR, "0"));
                 }
                 text_today_mileage.setText(travelInfoEntity.getTodayMileage());
@@ -302,14 +336,15 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     Animation a;
     Animation y;
     AnimationSet animationSet;
+
     private void initAnimation() {
 
         a = new RotateAnimation(0, -12, Animation.RELATIVE_TO_SELF,
                 0f, Animation.RELATIVE_TO_SELF, 0.5f);
-        y = new TranslateAnimation(0,0,0,-10);
+        y = new TranslateAnimation(0, 0, 0, -10);
         animationSet = new AnimationSet(true);
         animationSet.addAnimation(a);
-        animationSet.addAnimation(y );
+        animationSet.addAnimation(y);
         animationSet.setDuration(1000);
         animationSet.setInterpolator(new LinearInterpolator());
         animationSet.setFillAfter(true);
@@ -322,8 +357,8 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         } else {
             text_brake_state.setText(getResources().getString(R.string.device_isbrake));
             iamge_bac__.setVisibility(View.GONE);
-           animator.cancel();
-           image_wheel_detail.clearAnimation();
+            animator.cancel();
+            image_wheel_detail.clearAnimation();
             image_brake_detail.clearAnimation();
         }
     }
@@ -367,11 +402,12 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         }
         GradientDrawable bg = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, color);
         mImage.setImageDrawable(bg);
-        if (IContent.isBLE){
+
+        if (IContent.isBLE) {
             if (app.manager.cubicBLEDevice != null) {
-            byte bytes[] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x0B, (byte) 0xEA};
-            app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
-        }
+                byte bytes[] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x0B, (byte) 0xEA};
+                app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
+            }
         }
     }
 
@@ -397,11 +433,11 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         if (app.manager.cubicBLEDevice != null) {
-                        byte b[] =  {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0x0E, (byte) 0xE7};
-                           app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE,b);
+                            byte b[] = {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0x0E, (byte) 0xE7};
+                            app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, b);
                         }
                     } else {
-                        byte b[] =  {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0x0D, (byte) 0xE8};
+                        byte b[] = {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0x0D, (byte) 0xE8};
                         if (app.manager.cubicBLEDevice != null) {
                             app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, b);
                         }
@@ -426,21 +462,21 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 closeDevice();
                 break;
             case R.id.layout_repair_popwindow:
-                if (car_protect_state){
+                if (car_protect_state) {
                     ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.pro_action_notice));
                     mPicChooserDialog.dismiss();
                     return;
                 }
                 mPicChooserDialog.dismiss();
-                startActivityForResult(new Intent(DeviceDetailActivity.this, RepairActivity.class),100);
+                startActivityForResult(new Intent(DeviceDetailActivity.this, RepairActivity.class), 100);
                 break;
             case R.id.layout_update_popwindow:
                 mPicChooserDialog.dismiss();
-                if (low_elec){
+                if (low_elec) {
                     ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.update_low_elec));
                     return;
                 }
-                startActivityForResult(new Intent(DeviceDetailActivity.this, DeviceUpdateActivity.class),100);
+                startActivityForResult(new Intent(DeviceDetailActivity.this, DeviceUpdateActivity.class), 100);
                 break;
             case R.id.layout_changeName_popwindow:
                 mPicChooserDialog.dismiss();
@@ -475,6 +511,8 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                                                 if (e == null) {
                                                     ToastUtil.showToast(DeviceDetailActivity.this, getResources().getString(R.string.unbound_success));
                                                     removeIContent(deviceNum);
+                                                    Intent intent = new Intent();
+                                                    setResult(Activity.RESULT_OK,intent);
                                                     finish();
                                                 } else {
                                                     checkNetWork();
@@ -483,7 +521,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                                         });
                                     }
                                 } else {
-                                   dismissProgressDialog();
+                                    dismissProgressDialog();
                                     checkNetWork();
                                 }
                             }
@@ -502,14 +540,16 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 break;
         }
     }
+
     private void removeIContent(String address) {
 
-        for (int i = 0; i < IContent.getInstacne().addressList.size(); i++) {
-            if (IContent.getInstacne().addressList.get(i).getDeviceaAddress().equals(address)) {
-                IContent.getInstacne().addressList.remove(i);
+        for (int i = 0; i < content.addressList.size(); i++) {
+            if (content.addressList.get(i).getDeviceaAddress().equals(address)) {
+                content.addressList.remove(i);
             }
         }
     }
+
     private void closeDevice() {
         final CustomDialog.Builder builder = new CustomDialog.Builder(DeviceDetailActivity.this);
         builder.setTitle(getResources().getString(R.string.notice));
@@ -533,7 +573,9 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 });
         builder.create().show();
     }
+
     private Dialog mPopupdialog;
+
     private void showTextDialog() {
         View viewDialog = getLayoutInflater().inflate(R.layout.textview_popwindow, null);
         final EditText editText = (EditText) viewDialog.findViewById(R.id.editText_weight);
@@ -568,6 +610,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
         });
     }
+
     private void sendNameToServer(final String name) {
         netWorkRequest.sendNameToServer(name, selectAddress, new SaveCallback() {
             @Override
@@ -582,6 +625,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
         });
     }
+
     private void refreshList() {
         netWorkRequest.getDeviceUser(new FindCallback<AVObject>() {
             @Override
@@ -594,7 +638,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                         String functionType = avObject.getString(NetWorkRequest.FUNCTION_TYPE);
                         String company = avObject.getString(NetWorkRequest.COMPANY);
                         if (address != null) {
-                            IContent.getInstacne().addressList.add(new DeviceCarBean(name, address, deviceType,functionType,company));
+                            content.addressList.add(new DeviceCarBean(name, address, deviceType, functionType, company));
                         }
                     }
                 } else {
@@ -624,24 +668,21 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     Button text_update_notice;
 
     private void showPopWindow() {
-//        if (app.manager.cubicBLEDevice != null) {
-//            byte bytes[] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x0B, (byte) 0xEA};
-//            app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, bytes);
-//        }
+
         View viewDialog = getLayoutInflater().inflate(R.layout.popwindow_item, null);
         LinearLayout layout_repair_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_repair_popwindow);
         TextView textV_repaire = (TextView) viewDialog.findViewById(R.id.textV_repaire);
-        if (car_protect_state){
+        if (car_protect_state) {
             textV_repaire.setTextColor(getResources().getColor(R.color.hint_text));
-        }else {
+        } else {
             textV_repaire.setTextColor(getResources().getColor(R.color.grey_color));
         }
         LinearLayout layout_unbind_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_unbind_popwindow);
         LinearLayout layout_update_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_update_popwindow);
         TextView textV_more = (TextView) viewDialog.findViewById(R.id.textV_more);
-        if (low_elec){
+        if (low_elec) {
             textV_more.setTextColor(getResources().getColor(R.color.hint_text));
-        }else {
+        } else {
             textV_more.setTextColor(getResources().getColor(R.color.grey_color));
         }
         LinearLayout layout_code_popwindow = (LinearLayout) viewDialog.findViewById(R.id.layout_code_popwindow);
@@ -653,14 +694,13 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         layout_unbind_popwindow.setOnClickListener(this);
         TextView textView = (TextView) viewDialog.findViewById(R.id.code_text);
         text_code = (TextView) viewDialog.findViewById(R.id.text_update_code);
-        text_code.setText(IContent.getInstacne().code);
-        if (IContent.getInstacne().newCode != null && IContent.getInstacne().newCode.compareToIgnoreCase(IContent.getInstacne().code) == 1) {
-            //int code_cur = String.valueOf()
+        text_code.setText(content.code);
+        if (content.newCode != null && content.newCode.compareToIgnoreCase(content.code) == 1) {
             text_update_notice.setVisibility(View.VISIBLE);
         } else {
             text_update_notice.setVisibility(View.INVISIBLE);
         }
-        if (IContent.isBLE &&deviceFunction != null&& deviceFunction.equals("1")) {
+        if (IContent.isBLE && deviceFunction != null && deviceFunction.equals("1")) {
             layout_update_popwindow.setVisibility(View.VISIBLE);
             layout_repair_popwindow.setVisibility(View.VISIBLE);
             layout_code_popwindow.setVisibility(View.GONE);
@@ -685,6 +725,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         dialogWindow.setAttributes(p);
         mPicChooserDialog.show();
     }
+
     private void showNameBlueToothDialog() {
         if (weightPickerDialog != null && weightPickerDialog.isShowing()) {
             return;
@@ -700,7 +741,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         super.onResume();
         if (isopen_Auto_brake) {
             if (IContent.isBLE && deviceFunction != null && deviceFunction.equals("1")) {
-                L.e("============","=============="+IContent.isBLE);
+                L.e("============", "==============" + IContent.isBLE);
                 idBle_device.setVisibility(View.VISIBLE);
                 layout_ble_detail.setVisibility(View.VISIBLE);
                 is_tempurature.setVisibility(View.GONE);
@@ -735,12 +776,12 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             switch_brake_close.setEnabled(false);
             switch_brake_close.setThumbResource(R.drawable.seek_button_close);
             mSeekBar.setEnabled(false);
-            IContent.getInstacne().address = null;
-            IContent.getInstacne().isBind = false;
+            content.address = null;
+            content.isBind = false;
             mSeekBar.setThumb(getResources().getDrawable(R.drawable.seek_button_close));
             image_elec_relayout.setVisibility(View.GONE);
             if (animator != null) {
-                animator.end();
+                animator.cancel();
             }
             if (a != null) {
                 image_brake_detail.clearAnimation();
@@ -771,18 +812,17 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             mSwitchCompat.setEnabled(true);
             switch_brake_close.setThumbResource(R.drawable.play_plybar_btn);
             switch_brake_close.setEnabled(true);
-            if ( !isRun || !isopen_Auto_brake) {
-                L.e("==============",isRun+"=========="+isopen_Auto_brake);
+            if (!isRun || !isopen_Auto_brake) {
+                L.e("==============", isRun + "==========" + isopen_Auto_brake);
                 mSeekBar.setEnabled(true);
             }
             mSeekBar.setThumb(getResources().getDrawable(R.drawable.play_plybar_btn));
-           // mSeekBar.setEnabled(true);
             image_elec_relayout.setVisibility(View.VISIBLE);
             layout_hhh.setVisibility(View.VISIBLE);
             electric_rate.setText(getResources().getString(R.string.electricity, 00 + "%"));
 
             if (isopen_Auto_brake) {
-                L.e("======","================"+isopen_Auto_brake);
+                L.e("======", "================" + isopen_Auto_brake);
                 image_wheel_detail.setVisibility(View.VISIBLE);
                 image_brake_detail.setVisibility(View.VISIBLE);
                 if (isRun) {
@@ -792,8 +832,9 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 }
             }
             initColor(elec);
+
         } else {
-            L.e("==============","=================="+Integer.valueOf(travelInfoEntity.getElectric_rate()));
+            L.e("==============", "==================" + Integer.valueOf(travelInfoEntity.getElectric_rate()));
             initColor(Integer.valueOf(travelInfoEntity.getElectric_rate()));
             text_tempurature.setText(travelInfoEntity.getText_tempurature() + " ℃");
             image_elec_relayout.setVisibility(View.VISIBLE);
@@ -808,8 +849,8 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         text_speed_detail.setText(travelInfoEntity.getAverageSpeed());
         text_today_mileage.setText(travelInfoEntity.getTodayMileage());
         text_total_mileage.setText(travelInfoEntity.getTotalMileage());
-        if (IContent.getInstacne().address!= null) {
-            netWorkRequest.saveDataToServer(IContent.getInstacne().address, travelInfoEntity.getTodayMileage(), travelInfoEntity.getTotalMileage(), travelInfoEntity.getAverageSpeed(), IContent.getInstacne().clickPositionType, new SaveCallback() {
+        if (content.address != null) {
+            netWorkRequest.saveDataToServer(content.address, travelInfoEntity.getTodayMileage(), travelInfoEntity.getTotalMileage(), travelInfoEntity.getAverageSpeed(), content.clickPositionType, new SaveCallback() {
                 @Override
                 public void done(AVException e) {
                     if (e == null) {
@@ -826,8 +867,10 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-            app.manager.cubicBLEDevice.closeDevice();
+        app.manager.cubicBLEDevice.closeDevice();
         unregisterReceiver(mBroadcastReceiver);
+
+
     }
 
     @Override
@@ -842,52 +885,71 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             return;
         }
         if (RFStarBLEService.ACTION_GATT_CONNECTED.equals(action)) {
-            L.e("=======================ACTION_GATT_CONNECTED","========================");
+
             netWorkRequest.updateUUIDCreatAt(macData, new SaveCallback() {
                 @Override
                 public void done(AVException e) {
-                    L.e("================",macData);
+
                 }
             });
         } else if (RFStarBLEService.ACTION_GATT_DISCONNECTED.equals(action)) {
-            IContent.getInstacne().isBind = false;
-            IContent.getInstacne().address = null;
-            IContent.getInstacne().deviceName = null;
+            content.isBind = false;
+            content.address = null;
+            content.deviceName = null;
             refresh_close();
-        } else if(RFStarBLEService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)){
+        } else if (RFStarBLEService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
 
-            L.e("=======================ACTION_GATT_SERVICES_DISCOVERED","========================");
-            IContent.getInstacne().isBind = true;
-            IContent.getInstacne().address = macData;
-            IContent.getInstacne().deviceName = selectName;
+            content.isBind = true;
+            content.address = macData;
+            content.deviceName = selectName;
 
         } else if (RFStarBLEService.DESCRIPTOR_WRITER_DONE
                 .equals(action)) {
-            L.e("========================","============================");
+            L.e("========================", "============================");
             app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, IContent.NOTIFY_DATA);
         } else if (action.equals(RFStarBLEService.ACTION_WRITE_DONE)) {
 
-            if (IContent.getInstacne().WRITEVALUE != null) {
-                app.manager.cubicBLEDevice.readValue(IContent.SERVERUUID_BLE, IContent.READUUID_BLE, IContent.getInstacne().WRITEVALUE);
+            if (content.WRITEVALUE != null) {
+                app.manager.cubicBLEDevice.readValue(IContent.SERVERUUID_BLE, IContent.READUUID_BLE, content.WRITEVALUE);
             }
         } else if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE)) {
 
-
             dismissProgressDialog();
             byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
-
-            L.e("=========0x0x",Tools.byte2Hex(data));
-
             if (!IContent.isBLE) {
                 return;
             }
             if (data[3] == (byte) 0x81 && data[4] == 0x03) {
                 if (data[5] == 0x01) {
-                    IContent.getInstacne().SD_Mode = true;
+                    content.SD_Mode = true;
                 }
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x08) {
+                String str = "V1.0." + data[5] ;
+                content.code = str;
+                L.e("str===", str);
+                if (str.equals("V1.0.3")) {
+                    SharedPreferences sp = getSharedPreferences(IContent.IS_FIRST_USE, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    if (sp.getBoolean(IContent.IS_VERSION, true)) {
+                        dialogUtil.showDialogNoConfirm(DeviceDetailActivity.this);
+                        editor.putBoolean(IContent.IS_VERSION, false).apply();
+                    }
+                }
+                if (!low_elec && content.newCode != null && content.newCode.compareToIgnoreCase(content.code) == 1) {
+                    SharedPreferences sp = getSharedPreferences(IContent.IS_FIRST_USE, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    if (!content.newCode.equals(sp.getString(IContent.VERSION_UPDATE, "V1.0.2"))) {
+                        dialogUtil.setConfirmClick(this);
+                        dialogUtil.showDialogConfirm(DeviceDetailActivity.this);
+                        editor.putString(IContent.VERSION_UPDATE, content.newCode).apply();
+                    }
+
+
+                }
+
                 toSendData(data);
+
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x01) {
                 int averageSpeed0 = data[6] & 0xff;
@@ -912,19 +974,19 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             if (data[3] == (byte) 0x8B && data[4] == 0x04) {
                 if (data[05] == 0x00) {
                     isRun = true;
-                   if (isopen_Auto_brake) {
+                    if (isopen_Auto_brake) {
                         mSeekBar.setEnabled(false);
                         layout_seekbar_detail.setEnabled(true);
                         layout_seekbar_detail.setFocusable(true);
                         layout_seekbar_detail.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            ToastUtil.showToast(DeviceDetailActivity.this,getString(R.string.run_action_notice));
-                        }
-                    });
+                            @Override
+                            public void onClick(View v) {
+                                ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.run_action_notice));
+                            }
+                        });
                     }
                 } else if (data[05] == 0x55) {
-                    L.e("======================","=====================================data[05] == 0x55");
+                    L.e("======================", "=====================================data[05] == 0x55");
                     isRun = false;
                     mSeekBar.setEnabled(true);
                     layout_seekbar_detail.setFocusable(false);
@@ -958,23 +1020,23 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 refresh_close();
                 return;
             }
-            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0D){
+            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0D) {
                 switch_brake_close.setChecked(false);
                 protect_layout.setAlpha(0.3f);
                 mSwitchCompat.setThumbResource(R.drawable.seek_button_close);
                 mSwitchCompat.setEnabled(false);
-
                 refresh_wheel_close();
+
             }
-            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0E){
+            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0E) {
                 switch_brake_close.setChecked(true);
                 protect_layout.setAlpha(1f);
                 mSwitchCompat.setThumbResource(R.drawable.play_plybar_btn);
                 mSwitchCompat.setEnabled(true);
                 refresh_wheel_open();
             }
-            if (data[3] == (byte) 0x83 ) {
-                L.e("=========doMusic(data)==========",Tools.byte2Hex(data));
+            if (data[3] == (byte) 0x83) {
+                L.e("=========doMusic(data)==========", Tools.byte2Hex(data));
                 doMusic(data);
             }
 
@@ -1011,26 +1073,41 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 mSeekBar.setProgress(data[5]);
                 initSeekBar(data[5]);
             }
-            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0B) {
-                String str = "V" + data[5] + "." + data[6] + "." + data[7];
-                IContent.getInstacne().code = "V1.0.1";
-
-                if (IContent.getInstacne().code.equals("V1.0.3")){
-                    showPopWindowTest();
-
-                }
-                return;
-            }
-            if (data[3] == (byte) 0x8B && data[4] == (byte)0x0D) {
+//            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0B) {
+//                String str = "V" + data[5] + "." + data[6] + "." + data[7];
+//                content.code = str;
+//                L.e("str===", str);
+//                if (str.equals("V1.0.3")) {
+//                    SharedPreferences sp = getSharedPreferences(IContent.IS_FIRST_USE, MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sp.edit();
+//                    if (sp.getBoolean(IContent.IS_VERSION, true)) {
+//                        dialogUtil.showDialogNoConfirm(DeviceDetailActivity.this);
+//                        editor.putBoolean(IContent.IS_VERSION, false).apply();
+//                    }
+//                }
+//                if (!low_elec && content.newCode != null && content.newCode.compareToIgnoreCase(content.code) == 1) {
+//                    SharedPreferences sp = getSharedPreferences(IContent.IS_FIRST_USE, MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sp.edit();
+//                    if (!content.newCode.equals(sp.getString(IContent.VERSION_UPDATE, "V1.0.2"))) {
+//                        dialogUtil.setConfirmClick(this);
+//                        dialogUtil.showDialogConfirm(DeviceDetailActivity.this);
+//                        editor.putString(IContent.VERSION_UPDATE, content.newCode).apply();
+//                    }
+//
+//
+//                }
+//                return;
+//            }
+            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0D) {
                 switch_brake_close.setChecked(false);
                 protect_layout.setAlpha(0.3f);
                 mSwitchCompat.setThumbResource(R.drawable.seek_button_close);
                 mSwitchCompat.setEnabled(false);
-                ToastUtil.showToast(DeviceDetailActivity.this,getResources().getString(R.string.close_shake), Toast.LENGTH_SHORT);
+                ToastUtil.showToast(DeviceDetailActivity.this, getResources().getString(R.string.close_shake), Toast.LENGTH_SHORT);
                 refresh_wheel_close();
                 return;
             }
-            if (data[3] == (byte) 0x8B && data[4] == (byte)0x0E) {
+            if (data[3] == (byte) 0x8B && data[4] == (byte) 0x0E) {
                 switch_brake_close.setChecked(true);
                 mSwitchCompat.setThumbResource(R.drawable.play_plybar_btn);
                 protect_layout.setAlpha(1f);
@@ -1041,37 +1118,20 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         }
     }
 
-    private void showPopWindowTest() {
-        View view = LayoutInflater.from(this).inflate(R.layout.popwindowtest,null);
-        Dialog dialog = new Dialog(this, R.style.MyDialogStyleBottom);
-        dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
-        DisplayMetrics dm = new DisplayMetrics();
-        Window dialogWindow = dialog.getWindow();
-        WindowManager m = dialogWindow.getWindowManager();
-        m.getDefaultDisplay().getMetrics(dm);
-        WindowManager.LayoutParams p = dialogWindow.getAttributes();
-        p.width = dm.widthPixels;
-        p.alpha = 1.0f;
-        p.dimAmount = 0.6f;
-        p.gravity = Gravity.CENTER;
-        dialogWindow.setAttributes(p);
-        dialog.show();
 
-    }
-
-    private void toSendData(byte b[]){
-      String data_message =  Tools.byte2Hex(b);
-        netWorkRequest.sendDataMessage(data_message, Tools.getCurrentDateHour(), selectAddress,IContent.getInstacne().clickPositionType  , new SaveCallback() {
+    private void toSendData(byte b[]) {
+        String data_message = Tools.byte2Hex(b);
+        netWorkRequest.sendDataMessage(data_message, Tools.getCurrentDateHour(), selectAddress, content.clickPositionType, new SaveCallback() {
             @Override
             public void done(AVException e) {
-                if (e != null){
+                if (e != null) {
                     checkNetWork();
                 }
             }
         });
     }
-    private void refresh_wheel_close(){
+
+    private void refresh_wheel_close() {
         mSeekBar.setEnabled(true);
         layout_seekbar_detail.setEnabled(false);
         layout_seekbar_detail.setFocusable(false);
@@ -1082,25 +1142,28 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         image_brake_detail.setVisibility(View.GONE);
         iamge_bac__.setVisibility(View.GONE);
         image_back_speed.setImageResource(R.drawable.brake_bac_close);
+        if (animator != null){
+            animator.cancel();
+        }
     }
 
-    private void refresh_wheel_open(){
+    private void refresh_wheel_open() {
         isopen_Auto_brake = true;
-           if (!isRun){
+        if (!isRun) {
             mSeekBar.setEnabled(true);
             layout_seekbar_detail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.showToast(DeviceDetailActivity.this,getString(R.string.run_action_notice));
+                    ToastUtil.showToast(DeviceDetailActivity.this, getString(R.string.run_action_notice));
                 }
-            });}
+            });
+        }
         image_wheel_detail.setVisibility(View.VISIBLE);
         image_brake_detail.setVisibility(View.VISIBLE);
         if (isRun) {
             text_brake_state.setText(getResources().getString(R.string.device_running));
             iamge_bac__.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             text_brake_state.setText(getResources().getString(R.string.device_isbrake));
             iamge_bac__.setVisibility(View.GONE);
         }
@@ -1111,8 +1174,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         for (int i = 0; i < imageView.length; i++) {
             if (i <= data) {
                 imageView[i].setImageResource(R.drawable.red_circle);
-            }
-            else {
+            } else {
                 imageView[i].setImageResource(R.drawable.gray_circle);
             }
         }
@@ -1148,15 +1210,20 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             RequestUtils.getSharepreferenceEditor(this).putString(RequestUtils.WEIGHT, data).commit();
             operateDBUtils.queryUserWeightData();
         }
-        L.e("currentTime","==================onReceiveDataAvailable");
-
-
     }
 
     @Override
     public void onClick(String weight) {
         weightPickerDialog.dismiss();
         sendWeightToServer(weight);
+    }
+
+    @Override
+    public void onConfirm() {
+        Intent intent = new Intent(this,DeviceUpdateActivity.class);
+        intent.putExtra("update", true);
+        startActivity(intent);
+
     }
 
     public class MyBroadcastReceiver extends BroadcastReceiver {
@@ -1187,7 +1254,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     @Override
     protected void onPause() {
         super.onPause();
-        if (app.manager.cubicBLEDevice != null ) {
+        if (app.manager.cubicBLEDevice != null) {
             byte b[] = Tools.getDateTimeSplit();
             byte bytes[] = {0x55, (byte) 0xAA, 0x07, 0x0B, 0x0A, b[0], b[1], b[2], b[3], b[4], b[5], b[6], (byte) (0 - (0x07 + 0x0B + 0x0A + b[0] + b[1] + b[2] + b[3] + b[4] + b[5] + b[6]))};
             if (app.manager.cubicBLEDevice != null) {
@@ -1199,7 +1266,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        L.e("============","===================="+requestCode);
+        L.e("============", "====================" + requestCode);
         if (app.manager.cubicBLEDevice != null) {
             if (IContent.isBLE) {
                 app.manager.cubicBLEDevice.registerReceiver();
@@ -1207,17 +1274,18 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
             }
         }
 
-        if (requestCode == 100  && resultCode == RESULT_OK){
+        if (requestCode == 100 && resultCode == RESULT_OK) {
             String s = data.getStringExtra("updateDone");
-            if (!TextUtils.isEmpty(s) && s.equals("updateDone")){
+            if (!TextUtils.isEmpty(s) && s.equals("updateDone")) {
                 restartProgress();
             }
         }
     }
 
     ProgressDialog pd;
+
     protected void restartProgress() {
-        pd = new  ProgressDialog(this);
+        pd = new ProgressDialog(this);
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pd.setCanceledOnTouchOutside(false);
         pd.setMax(15);
@@ -1226,10 +1294,10 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         pd.show();
     }
 
-    CountDownTimer timer = new CountDownTimer(15000,1000) {
+    CountDownTimer timer = new CountDownTimer(15000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            pd.setProgress(15-(int) (millisUntilFinished/1000));
+            pd.setProgress(15 - (int) (millisUntilFinished / 1000));
         }
 
         @Override

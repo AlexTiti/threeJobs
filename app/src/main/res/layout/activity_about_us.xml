@@ -59,6 +59,7 @@
         android:id="@+id/relay_approve_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@+id/relayout_func_us">
 
 
@@ -100,6 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/y5"
+        android:background="?android:attr/selectableItemBackground"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
 
@@ -142,7 +144,7 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@+id/relay_approve_us"
-        tools:layout_editor_absoluteX="0dp">
+        android:background="?android:attr/selectableItemBackground">
 
 
         <TextView

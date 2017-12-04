@@ -59,8 +59,6 @@ public final class PreferencesUtility {
         editor.apply();
     }
 
-
-
     public boolean getFavriateMusicPlaylist() {
         return mPreferences.getBoolean(FAVRIATE_MUSIC_PLAYLIST, false);
     }

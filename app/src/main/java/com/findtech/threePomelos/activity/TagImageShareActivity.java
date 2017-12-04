@@ -90,6 +90,7 @@ public class TagImageShareActivity extends MyActionBarActivity implements View.O
             }
         };
         registerMusicBroadcast();
+        saveTagPictureAndShare();
     }
     @Override
     protected void onResume() {
@@ -128,11 +129,9 @@ public class TagImageShareActivity extends MyActionBarActivity implements View.O
 
                 break;
             case R.id.btn_tagimage_save:
-                //finish;
                 if (isSaved) {
                     Toast.makeText(this, getResources().getString(R.string.text_toast_pic_had_been_saved), Toast.LENGTH_SHORT).show();
                 } else {
-                   // saveTagPicture();
                 }
                 break;
             default:
@@ -140,34 +139,6 @@ public class TagImageShareActivity extends MyActionBarActivity implements View.O
         }
     }
 
-//    private void saveTagPicture() {
-//        if (isSaved) {
-//            Toast.makeText(this, getResources().getString(R.string.text_toast_pic_had_been_saved), Toast.LENGTH_SHORT).show();
-//        } else {
-//            progressDialog.show();
-//            new Thread() {
-//                @Override
-//                public void run() {
-//                    super.run();
-//                    if (!isSaved) {
-//                        Message msg = new Message();
-//                        saveImagePath = FileUtils.saveCroppedImage(TagImageShareActivity.this, FileUtils.createBitmapFromView(mTagImageView), false);
-//                        if (saveImagePath != null) {
-//                            isSaved = true;
-//                            if (FileUtils.fileIsExists(FileUtils.SOURCE_IMAGE_FILE_TEMP)) {
-//                                FileUtils.deleteFileFromPath(FileUtils.SOURCE_IMAGE_FILE_TEMP);
-//                            }
-//                            msg.what = IMAGE_SAVE_OK;
-//                            myHandler.sendMessage(msg);
-//                        } else {
-//                            msg.what = IMAGE_SAVE_FAILED;
-//                            myHandler.sendMessage(msg);
-//                        }
-//                    }
-//                }
-//            }.start();
-//        }
-//    }
     private void saveTagPictureAndShare() {
         CustomShareBoard.Builder builder = new CustomShareBoard.Builder(TagImageShareActivity.this);
         if (saveImagePath != null) {
@@ -177,25 +148,6 @@ public class TagImageShareActivity extends MyActionBarActivity implements View.O
         } else {
             ToastUtil.showToast(this,getString(R.string.save_error));
 
-//            new Thread() {
-//                @Override
-//                public void run() {
-//                    super.run();
-//                    saveImagePath = FileUtils.saveCroppedImage(TagImageShareActivity.this, FileUtils.createBitmapFromView(mTagImageView), false);
-//                    if (saveImagePath != null) {
-//                        if (FileUtils.fileIsExists(FileUtils.SOURCE_IMAGE_FILE_TEMP)) {
-//                            FileUtils.deleteFileFromPath(FileUtils.SOURCE_IMAGE_FILE_TEMP);
-//                        }
-//                        Message msg = new Message();
-//                        msg.what = PREPARE_FOR_SHARE_DONE;
-//                        myHandler.sendMessage(msg);
-//                    } else {
-//                        Message msg = new Message();
-//                        msg.what = PREPARE_FOR_SHARE_UNDONE;
-//                        myHandler.sendMessage(msg);
-//                    }
-//                }
-//            }.start();
         }
     }
     @Override

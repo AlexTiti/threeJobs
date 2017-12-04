@@ -58,7 +58,7 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
         public void handleMessage(final Message msg) {
             switch (msg.what) {
                 case MSG_LONGPRESS_TIMEOUT:
-                    if (DEBUG) Log.v(TAG, "Handling longpress timeout, launched " + mLaunched);
+
                     if (!mLaunched) {
                         final Context context = (Context) msg.obj;
                         final Intent i = new Intent();
@@ -73,7 +73,7 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
                     final int clickCount = msg.arg1;
                     final String command;
 
-                    if (DEBUG) Log.v(TAG, "Handling headset click, count = " + clickCount);
+
                     switch (clickCount) {
                         case 1:
                             command = MediaService.CMDTOGGLEPAUSE;
@@ -114,7 +114,7 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Timber headset button");
             mWakeLock.setReferenceCounted(false);
         }
-        if (DEBUG) Log.v(TAG, "Acquiring wake lock and sending " + msg.what);
+
         // Make sure we don't indefinitely hold the wake lock under any circumstances
         mWakeLock.acquire(10000);
 
@@ -124,12 +124,12 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
     private static void releaseWakeLockIfHandlerIdle() {
         if (mHandler.hasMessages(MSG_LONGPRESS_TIMEOUT)
                 || mHandler.hasMessages(MSG_HEADSET_DOUBLE_CLICK_TIMEOUT)) {
-            if (DEBUG) Log.v(TAG, "Handler still has messages pending, not releasing wake lock");
+
             return;
         }
 
         if (mWakeLock != null) {
-            if (DEBUG) Log.v(TAG, "Releasing wake lock");
+
             mWakeLock.release();
             mWakeLock = null;
         }
@@ -139,8 +139,7 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
         final String intentAction = intent.getAction();
         if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intentAction)) {
-            if (true)
-                startService(context, MediaService.CMDPAUSE);
+            startService(context, MediaService.CMDPAUSE);
         } else if (Intent.ACTION_MEDIA_BUTTON.equals(intentAction)) {
             final KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
             if (event == null) {
@@ -192,7 +191,7 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
                             }
 
                             mClickCounter++;
-                            if (DEBUG) Log.v(TAG, "Got headset click, count = " + mClickCounter);
+
                             mHandler.removeMessages(MSG_HEADSET_DOUBLE_CLICK_TIMEOUT);
 
                             Message msg = mHandler.obtainMessage(

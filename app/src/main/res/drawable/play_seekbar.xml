@@ -8,7 +8,7 @@
     <item android:id="@android:id/secondaryProgress">
         <scale android:scaleWidth="100%"
            >
-            <nine-patch android:src="@drawable/play_plybar_ready" />
+            <nine-patch android:src="@drawable/huancun" />
         </scale>
     </item>
     <item android:id="@android:id/progress">

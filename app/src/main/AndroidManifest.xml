@@ -30,6 +30,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.SEND" />
 
     <application
         android:name=".base.MyApplication"
@@ -91,14 +92,8 @@
             android:name=".login.ForgetPasswordActivity"
             android:label="@string/title_activity_forget_password"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".login.InputIdentifyActivity"
-            android:label="@string/title_activity_input_identify"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".login.SetPasswordActivity"
-            android:label="@string/title_activity_set_password"
-            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".bluetooth.ReceivedataActivity"
             android:label="@string/title_activity_set_password"
@@ -270,7 +265,8 @@
         <activity android:name=".activity.InstructionsMainActivity" />
         <activity android:name=".activity.CompanyActivity" />
         <activity android:name=".activity.FunctionDescActivity" />
-        <activity android:name=".activity.CommendProblemActivity"></activity>
+        <activity android:name=".activity.CommendProblemActivity" />
+
     </application>
 
 </manifest>

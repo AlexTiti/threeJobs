@@ -98,7 +98,7 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     private String content;
     private IContent icontent = IContent.getInstacne();
 
-    private  String[] proj_music = new String[]{
+    private String[] proj_music = new String[]{
             MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.ALBUM_ID,
             MediaStore.Audio.Media.ALBUM, MediaStore.Audio.Media.ARTIST,
@@ -154,13 +154,7 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
         listView.setAdapter(musicAdapter);
         Nammu.init(this);
         musicAdapter.setItemCliclListener(this, this);
-        if (number == 5) {
-            /**
-             * 车载音乐部分
-             */
-        } else {
-            refreshData();
-        }
+        refreshData();
         handler = HandlerUtil.getInstance(this);
         registerMusicBroadcast();
     }
@@ -354,7 +348,7 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
                     netWorkRequest.sendMusicDown(info.musicName, new SaveCallback() {
                         @Override
                         public void done(AVException e) {
-                            if (e==null){
+                            if (e == null) {
                             } else {
                                 checkNetWork();
                             }
@@ -414,10 +408,10 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     @Override
     protected void onResume() {
         super.onResume();
-        for (int i = 0;i<musicInfos.size();i++){
+        for (int i = 0; i < musicInfos.size(); i++) {
             MusicInfo info = musicInfos.get(i);
-            if (icontent.map.containsKey(info.musicName)){
-                musicInfos.set(i,icontent.map.get(info.musicName));
+            if (icontent.map.containsKey(info.musicName)) {
+                musicInfos.set(i, icontent.map.get(info.musicName));
             }
         }
         musicAdapter.setAvObjectList(musicInfos);

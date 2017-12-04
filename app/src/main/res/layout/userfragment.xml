@@ -135,6 +135,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_alignParentStart="true">
 
         <ImageView
@@ -185,6 +186,7 @@
         android:id="@+id/update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         >
 
         <ImageView
@@ -205,10 +207,24 @@
             android:layout_toRightOf="@+id/icon_02"
             android:gravity="center"
             android:text="@string/update"
-
             android:layout_marginTop="@dimen/y10"
             android:textColor="@color/home_text_black"
             android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/text_update_notice"
+            android:layout_width="@dimen/x22"
+            android:layout_height="@dimen/x12"
+            android:layout_toRightOf="@+id/app_info_title2"
+            android:gravity="center"
+            android:layout_alignBottom="@+id/app_info_title2"
+            android:textColor="@color/text_pink"
+            android:layout_marginTop="@dimen/y2"
+            android:layout_marginLeft="@dimen/x8"
+            android:textSize="@dimen/text_size_little"
+            android:text="New"
+            android:background="@drawable/notice_bac"
+           />
 
         <ImageView
             android:id="@+id/image_line2"
@@ -234,6 +250,7 @@
         android:id="@+id/relay_common_problem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         >
 
 
@@ -244,7 +261,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x15"
             android:scaleType="centerCrop"
-            android:src="@drawable/icon_update" />
+            android:src="@drawable/common_problem" />
         <TextView
             android:id="@+id/title2_common"
             android:layout_width="wrap_content"
@@ -282,7 +299,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/icon_04"

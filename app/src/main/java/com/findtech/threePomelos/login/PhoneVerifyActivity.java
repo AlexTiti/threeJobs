@@ -25,6 +25,9 @@ import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.utils.RequestUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
 
+/**
+ * @author Alex
+ */
 public class PhoneVerifyActivity extends MyActionBarActivity implements View.OnClickListener {
 
     private TextView mIdentify;

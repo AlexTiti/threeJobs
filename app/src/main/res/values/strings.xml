@@ -455,10 +455,23 @@
     <!--<string name="close_shake">The intelligent brake is closed, the cart is in braking state, and the induction region is lifted by hand!</string>-->
     <string name="close_shake">The smart brakes are closed!</string>
     <string name="gujian_shengji">Firmware update process takes about 15s, please wait a minute...</string>
-    <string name="update_noticeText"> The firmware upgrade content\n\n  1 The new version of the smart brake defaults to the closed state. If you need to open, use the APP connection trolley to start the intelligent brake\n       2 In order to facilitate the implementation, upgrade the successful cart, after the normal shutdown, the intelligent brake is directly lifted\n           3 In order to ensure the safety, low battery shutdown will default on intelligent brake brakes, a foot brake can lift the brake\n          4 Improve the initial volume and volume adjustment speed\n           5 Improve sensitivity of induction zone to prevent false braking</string>
     <string name="restarting">Restart the cart, please later...</string>
     <string name="update_low_elec">The electricity is too low. Please fill it up before you upgrade!</string>
     <string name="update_Hardware">upgrade</string>
 
+    <string name="age_info_notice">The age of the baby will be automatically synchronized after birth</string>
+    <string name="height_ino_notice">Please add height to the front page</string>
+    <string name="weight_ino_notice">Please add weight to the front page</string>
+
+    <string name="data_max_notice">Too large input data</string>
+    <string name="blue_tooth_update_meizu">Please select the \"Bluetooth\"!</string>
+    <string name="bluetooth_common">Binding device method</string>
+    <string name="bluetooth_common_deal">Open \"three dad parenting\" APP, and click on the home 【add device】 or 【+】 jump the search interface and bind the device named \"3POMELOS_A3_BLE\"</string>
+    <string name="bluetooth_scan_common">Bluetooth search is not available</string>
+    <string name="bluetooth_scan_common_deal">Each trolley can only connect one cell phone at the same time, and can\'t search for the Bluetooth after this connection. So please check whether the cart is connected with other cell phones or reboot the power of the cart, then search for Bluetooth.</string>
+    <string name="bluetooth_fail_common">Bindings device failure</string>
+    <string name="bluetooth_fail_common_deal">When binding the cart, you need to connect with the system background server, so please keep the network smooth and use the 4G signal to be better.</string>
+    <string name="bluetooth_data_common">Synchronization data failure</string>
+    <string name="bluetooth_data_common_deal">Please check in turn: whether the power is turned on, whether Bluetooth goes into sleep mode (if you touch in the relevant area wakeup), and whether the Bluetooth is open too long (re open the Bluetooth).</string>
 
 </resources>

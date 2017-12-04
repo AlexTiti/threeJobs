@@ -26,7 +26,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -41,14 +40,12 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.adapter.AdapterItemDecoration;
 import com.findtech.threePomelos.adapter.BabyInfoAdapter;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
 import com.findtech.threePomelos.entity.TravelInfoEntity;
-import com.findtech.threePomelos.home.MainHomeActivity;
 import com.findtech.threePomelos.home.fragment.UserFragment;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
@@ -56,13 +53,13 @@ import com.findtech.threePomelos.utils.FileUtils;
 import com.findtech.threePomelos.utils.MyCalendar;
 import com.findtech.threePomelos.utils.PicOperator;
 import com.findtech.threePomelos.utils.RequestUtils;
+import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
 import com.findtech.threePomelos.view.datepicker.DatepickerDialog;
 import com.findtech.threePomelos.view.datepicker.NativePickerDialog;
 import com.findtech.threePomelos.view.dialog.CustomDialog;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -153,8 +150,9 @@ public class BabyInfoActivity extends MyActionBarActivity implements View.OnClic
         } else {
             mBabyImage.setImageResource(R.mipmap.personal_head_bg2_nor2x);
         }
-        if (babyInfoEntity.getBabyName()!= null)
-        babyNameView.setText(babyInfoEntity.getBabyName());
+        if (babyInfoEntity.getBabyName()!= null) {
+            babyNameView.setText(babyInfoEntity.getBabyName());
+        }
         final String currentDate = Tools.getSystemTimeInChina("yyyy-MM-dd");
         try {
             if (babyInfoEntity.getBirthday() != null && !babyInfoEntity.getBirthday().equals(getString(R.string.input_birth_baby))) {
@@ -185,6 +183,15 @@ public class BabyInfoActivity extends MyActionBarActivity implements View.OnClic
                 break;
             case 1:
                 showInputBabyBirthdayDataPicker();
+                break;
+            case 2:
+                ToastUtil.showToast(this,getString(R.string.age_info_notice));
+                break;
+            case 3:
+                ToastUtil.showToast(this,getString(R.string.height_ino_notice));
+                break;
+            case 4:
+                ToastUtil.showToast(this,getString(R.string.weight_ino_notice));
                 break;
             case 5:
                 showInputBabyNativeDialog();
@@ -267,6 +274,7 @@ public class BabyInfoActivity extends MyActionBarActivity implements View.OnClic
         builder.setShowButton(true);
         builder.setShowSelectSex(false);
         builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 if (!TextUtils.isEmpty(edittext.getText().toString())) {
@@ -311,6 +319,7 @@ public class BabyInfoActivity extends MyActionBarActivity implements View.OnClic
         });
         builder.setNegativeButton(getResources().getString(R.string.cancle),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }

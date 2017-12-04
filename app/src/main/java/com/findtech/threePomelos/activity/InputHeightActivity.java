@@ -98,6 +98,11 @@ public class InputHeightActivity extends MyActionBarActivity implements View.OnC
                 Toast.makeText(this, getString(R.string.net_exception), Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (Integer.valueOf(height) > 200){
+                Toast.makeText(this, getString(R.string.data_max_notice), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (!TextUtils.isEmpty(height) && !TextUtils.isEmpty(time)) {
                 netWorkRequest.getProgressDialog().show();
 

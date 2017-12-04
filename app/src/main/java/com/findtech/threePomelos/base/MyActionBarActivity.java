@@ -57,9 +57,6 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
     public ImageView btn_tagimage_edit_next;
     public LinearLayout share_button_layout;
     public LinearLayout toolbar_layout;
-    private ImageView ImageViewMore;
-    private ImageView ImageViewClose;
-    private RelativeLayout aboutBtn, deviceBtn;
     public RelativeLayout HomeMenuLayout,share;
    public File file_music;
     public String Log_TAG ;
@@ -95,8 +92,9 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT)
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Log_TAG = this.getLocalClassName();
@@ -178,12 +176,15 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
         btn_tagimage_edit_next = (ImageView) toolbar_layout.findViewById(R.id.btn_tagimage_edit_next);
         share_button_layout = (LinearLayout) toolbar_layout.findViewById(R.id.share_button_layout);
 
-        if (mToolbar.getVisibility() == View.GONE  )
+        if (mToolbar.getVisibility() == View.GONE  ) {
             mToolbar.setVisibility(View.VISIBLE);
-        if (btn_tagimage_edit_next.getVisibility() == View.VISIBLE)
+        }
+        if (btn_tagimage_edit_next.getVisibility() == View.VISIBLE) {
             btn_tagimage_edit_next.setVisibility(View.GONE);
-        if (share_button_layout.getVisibility() == View.VISIBLE)
+        }
+        if (share_button_layout.getVisibility() == View.VISIBLE) {
             share_button_layout.setVisibility(View.GONE);
+        }
 
         if (showWhat != null){
             switch (showWhat){
@@ -242,6 +243,7 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
         builder.setNotifyInfo(getResources().getString(R.string.open_bluetooth_message));
         builder.setShowButton(true);
         builder.setPositiveButton(getResources().getString(R.string.set), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
@@ -251,6 +253,7 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
         });
 
         builder.setNegativeButton(getResources().getString(R.string.cancle), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 ToastUtil.showToast(MyActionBarActivity.this, getResources().getString(R.string.open_bluetooth_cancle), Toast.LENGTH_LONG);
@@ -372,24 +375,16 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
 
 
     public void initShareView(){
-        if (toolbar_layout == null)
+        if (toolbar_layout == null) {
             return;
-        else {
+        } else {
             share = (RelativeLayout) toolbar_layout.findViewById(R.id.share);
             share.setVisibility(View.VISIBLE);
 
         }
     }
 
-   public void   initHomeView(){
-        if (toolbar_layout == null)
-            return;
-      else{
-            //HomeMenuLayout = (RelativeLayout) toolbar_layout.findViewById(R.id.home_menu_layout);
-//            HomeMenuLayout.setVisibility(View.VISIBLE);
-//            HomeMenuLayout.setOnClickListener(listener);
-        }
-    }
+
 
 
     public void readyGoToKilled(Class<?> clazz){

@@ -77,7 +77,7 @@
     <string name="my_service">服務</string>
     <string name="my_share">分享</string>
     <string name="pic_save">圖片以保存到相冊</string>
-    <string name= "save_error">照片保存有誤</string>
+    <string name="save_error">照片保存有誤</string>
 
     <!--Bluetooth -->
 
@@ -183,7 +183,7 @@
     <string name="xliff_weight_health_state">參考範圍 : <xliff:g id="weight_health">%1$3s</xliff:g> kg</string>
     <string name="xliff_standard_height_num">參考值 : <xliff:g id="height">%1$3s</xliff:g> cm</string>
     <string name="xliff_standard_weight_num">參考值 : <xliff:g id="weight">%1$3s</xliff:g> kg</string>
-    <string name="xliff_weight_service">寶寶體重為<xliff:g id= "weight_service">%1$3s</xliff:g> kg,是否保存？</string>
+    <string name="xliff_weight_service">寶寶體重為<xliff:g id="weight_service">%1$3s</xliff:g> kg,是否保存？</string>
     <string name="xliff_current_code">當前版本 <xliff:g id="current_code">%1$2s</xliff:g></string>
 
     <!--date label-->
@@ -247,7 +247,7 @@
     <string name="text_activity_firmware_update_string">固件升級中</string>
     <string name="text_activity_firmware_update_finished_string">固件更新成功! </string>
     <string name="text_share_description_text">我的小寶貝！</string>
-    <string name="baby" >寶貝</string>
+    <string name="baby">寶貝</string>
     <string name="pic_tag_love">卡哇伊</string>
     <string name="pic_tag_praise">贊贊贊</string>
     <string name="pic_tag_monther">媽媽真棒</string>
@@ -309,7 +309,7 @@
     <string name="add_car">添加設備</string>
 
     <!--Devices Link-->
-    <string name="devices_link_notice" >長按電源鍵\n啟動設備</string>
+    <string name="devices_link_notice">長按電源鍵\n啟動設備</string>
     <string name="open_buluetooth">打開手機藍牙</string>
     <string name="link_buluetooth">連接設備</string>
     <string name="link_notice">請先連接推車</string>
@@ -418,6 +418,7 @@
     <string name="checkNumber_useless">無效的簡訊驗證碼，通常是不匹配或者過期</string>
     <string name="checkNumber_send_fail">簡訊請求次數超上限！</string>
     <string name="login_empty_notice">賬號或密碼不能為空!</string>
+    <string name="data_max_notice">輸入數據過大</string>
 
 
     <string name="babay_sex">是男寶還是女寶啊</string>
@@ -469,11 +470,23 @@
     <string name="btn_baby_datepicker_confirm">確定</string>
     <string name="btn_baby_datepicker_cancel">取消</string>
     <string name="scan_device">搜索的設備</string>
-    <!--<string name="close_shake">智能剎車已關閉推車處於剎車狀態，手握感應區域即可解除！</string>-->
+
     <string name="close_shake">智能剎車已關閉！</string>
     <string name="gujian_shengji">固件升級過程耗時約15s,請稍後...</string>
     <string name="restarting">推车重启中，请稍后...</string>
-    <string name="update_noticeText">固件升級內容：\n\n 1\t新版本智能剎車默認為關閉狀態，若需要開啟，請使用APP連接推車開啟智能剎車\n  2\t為方便推行，升級成功的推車，在正常關機後智能剎車直接解除\n  3\t為保證安全，低電量關機後智能剎車會默認剎住，踩一次腳剎即可解除剎車\n  4\t提高初始音量和音量调节速度\n  5\t提高感应区灵敏度，防止误刹车</string>
     <string name="update_low_elec">電量過低，請先充滿電後再升級！</string>
     <string name="update_Hardware">升級</string>
+
+    <string name="age_info_notice">修改寶寶生日後年齡會自動同步</string>
+    <string name="height_ino_notice">請到首頁添加身高</string>
+    <string name="weight_ino_notice">請到首頁添加體重</string>
+    <string name="blue_tooth_update_meizu">請選擇"藍牙"  進入列表後點擊3POMELOS_A3!</string>
+    <string name="bluetooth_common">綁定設備方法</string>
+    <string name="bluetooth_common_deal">打開“三爸育兒”APP，點擊首頁【添加設備】或【+】跳轉搜索界面，綁定名稱爲“3POMELOS_A3_BLE”的設備</string>
+    <string name="bluetooth_scan_common">藍牙搜索不到</string>
+    <string name="bluetooth_scan_common_deal">每輛推車同時只能連接一部手機，且連接後其他手機後無法搜索到此推車藍牙，所以請檢查是否該推車與其他手機連接或者將推車電源重啓，然後重新搜索藍牙</string>
+    <string name="bluetooth_fail_common">綁定設備失敗</string>
+    <string name="bluetooth_fail_common_deal">綁定推車時需要與系統後台服務器進行網絡連接，因此請您保持網絡順暢，用4G信號會可能更好哦。</string>
+    <string name="bluetooth_data_common">同步數據失敗</string>
+    <string name="bluetooth_data_common_deal">請依次排查：電源是否開啓、藍牙是否進入睡眠模式（若進入請觸碰相關區域喚醒）、藍牙是否開啓時間過長（重新開啓藍牙）</string>
 </resources>

@@ -106,19 +106,19 @@ public class AppManager {
      * 扫描蓝牙设备
      */
     public void startScanBluetoothDevice() {
-        L.e("AAA","startScanBluetoothDevice");
+
         if (scanBlueDeviceArray != null) {
             scanBlueDeviceArray = null;
         }
         scanBlueDeviceArray = new ArrayList<>();
-
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
                 stopScanBluetoothDevice();
             }
-        }, SCAN_TIME); // 10秒后停止扫描
+        }, SCAN_TIME);
+
         isScanning = true;
         if (bleAdapter != null) {
             L.e("AAA","startLeScan");
@@ -136,7 +136,7 @@ public class AppManager {
             isScanning = false;
             if (bleAdapter != null) {
                 L.e("AAA","bleStopScanCallback");
-                bleAdapter.stopLeScan(bleStopScanCallback);
+                bleAdapter.stopLeScan(bleScanCallback);
             }
             listener.RFstarBLEManageStopScan();
         }
@@ -149,41 +149,18 @@ public class AppManager {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    // TODO Auto-generated method stub
+                    L.e("scan_or_stop","======");
                     if (!scanBlueDeviceArray.contains(device)) {
-                        String name = device.getName();
-                        L.e("!!!!!!!!!",device.getName()+"="+device.getType()+"="+device.getAddress()+"="+device.getUuids()+"="+device.getBondState()+"="+device.describeContents());
-//                      if (name != null &&  name.startsWith("3") && name.substring(1,8).equalsIgnoreCase("POMELOS")) {
+                        L.e("scan_or_stop","======"+device.getName());
                             scanBlueDeviceArray.add(device);
                             listener.RFstarBLEManageListener(device, rssi,
                                     scanRecord);
-                       //}
                     }
                 }
             });
         }
     };
 
-    private BluetoothAdapter.LeScanCallback bleStopScanCallback = new BluetoothAdapter.LeScanCallback() {
-        @Override
-        public void onLeScan(final BluetoothDevice device, final int rssi,
-                             final byte[] scanRecord) {
-            // TODO 添加扫描到的device，并刷新数据
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    // TODO Auto-generated method stub
-
-//                    if (!scanBlueDeviceArray.contains(device)) {
-//                        scanBlueDeviceArray.add(device);
-
-                        listener.RFstopBLEManageListener(device, rssi,
-                                scanRecord);
-                   // }
-                }
-            });
-        }
-    };
 
     /**
      * 每扫描到一个蓝牙设备调用一次

@@ -46,7 +46,12 @@ public class MusicPlayer {
         sEmptyList = new long[0];
     }
 
-    //绑定服务（Do at BaseActivity）
+    /**
+     * bind service at base
+     * @param context
+     * @param callback
+     * @return
+     */
     public static final ServiceToken bindToService(final Context context,
                                                    final ServiceConnection callback) {
 
@@ -66,6 +71,10 @@ public class MusicPlayer {
         return null;
     }
 
+    /**
+     * unbind service at base
+     * @param token
+     */
     public static void unbindFromService(final ServiceToken token) {
         if (token == null) {
             return;
@@ -318,33 +327,32 @@ public class MusicPlayer {
         if (list == null || list.length == 0 || mService == null) {
             return;
         }
-
         try {
             //如果强制的话
             if (forceShuffle) {
                 mService.setShuffleMode(MediaService.SHUFFLE_NORMAL);
             }
-            //获取点击之前的播放歌曲的id
+            //to Get Current Music Id
             final long currentId = mService.getAudioId();
-            //点击准备播放的音乐id
+            //selected music id
             long playId = list[position];
-            L.e("SixItem", currentId + "playAll"+"position="+position);
-            //获取点击之前的播放队列的位置
+            L.e("1", currentId + "playAll"+"position="+position);
+            //get current music queue;
             final int currentQueuePosition = getQueuePosition();
-            L.e("SixItem", currentQueuePosition + "playAll");
+            L.e("2", currentQueuePosition + "playAll");
             if (position != -1) {
-                //获取播放列表数据
-                L.e("SixItem", "currentQueuePosition + position != -1");
+                //get play music list
+                L.e("3", "currentQueuePosition + position != -1");
                 final long[] playlist = getQueue();
-                //判断点击的和当前播放的是否为同一个歌曲
+                //is the same  music list
                 if (Arrays.equals(list, playlist)) {
+                    // is the music which is playing
                     if (currentQueuePosition == position && currentId == list[position]) {
-                        //重新播放曲目，后续继续按播放列表播放
                         L.e("SixItem", "currentQueuePosition + playAll"+position);
                         mService.play();
                         return;
                     } else {
-                        //设置播放队列的位置
+                        //change music
                         mService.setQueuePosition(position);
                         L.e("SixItem", "setQueuePosition + playAll"+position);
                         return;
@@ -355,7 +363,7 @@ public class MusicPlayer {
             if (position < 0) {
                 position = 0;
             }
-            //
+
             mService.open(infos, list, forceShuffle ? -1 : position);
             mService.play();
            // L.e("SixItem", System.currentTimeMillis() + "playAll");
@@ -432,24 +440,6 @@ public class MusicPlayer {
             }
         }
         return 0;
-    }
-
-
-    public static void makeInsertItems(final long[] ids, final int offset, int len, final int base) {
-        if (offset + len > ids.length) {
-            len = ids.length - offset;
-        }
-
-        if (mContentValuesCache == null || mContentValuesCache.length != len) {
-            mContentValuesCache = new ContentValues[len];
-        }
-        for (int i = 0; i < len; i++) {
-            if (mContentValuesCache[i] == null) {
-                mContentValuesCache[i] = new ContentValues();
-            }
-            mContentValuesCache[i].put(MediaStore.Audio.Playlists.Members.PLAY_ORDER, base + offset + i);
-            mContentValuesCache[i].put(MediaStore.Audio.Playlists.Members.AUDIO_ID, ids[offset + i]);
-        }
     }
 
     public static void timing(int time) {

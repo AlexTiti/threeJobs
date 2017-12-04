@@ -77,10 +77,15 @@ public class ProxyFileUtils {
         // 可用空间大小是否大于SD卡预留最小值
         long freeSize = ProxyUtils.getAvailaleSize(Constants.DOWNLOAD_PATH);
         L.e("ProxyFileUtils",freeSize+"=");
+
         if (freeSize > Constants.SD_REMAIN_SIZE) {
             return true;
         } else {
-            return false;
+            /**
+             * 内存不足删除文件
+             */
+            boolean  b =   ProxyUtils.removeBufferFile();
+            return b;
         }
     }
 
@@ -105,8 +110,6 @@ public class ProxyFileUtils {
                 file.createNewFile();
 
             }
-        L.e("=======================DDDDDDDD","========================"+file.getAbsolutePath());
-
             randomAccessFile = new RandomAccessFile(file, "r");
             outputStream = new FileOutputStream(file, true);
             isEnable = true;

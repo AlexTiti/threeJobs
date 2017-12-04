@@ -23,7 +23,7 @@
             <include
                 android:id="@+id/baby_data_tag"
                 layout="@layout/baby_data_tag_layout"
-                android:layout_width="@dimen/x100"
+                android:layout_width="@dimen/x110"
                 android:layout_height="@dimen/y90"
                 android:layout_marginTop="@dimen/y18"
                 android:layout_marginRight="@dimen/x15"

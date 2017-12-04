@@ -34,8 +34,10 @@ public class IContent {
     public static final String FILEM_USIC = "Music";
     public static final String UPDATE = "Update";
     public static final String IS_FIRST_USE = "isFirstUse";
-    public static final int[]  healthImageIds = new int[]{R.drawable.developmentalessentials,R.drawable.developmentalsigns,R.drawable.sciencetips,R.drawable.growingconcern,R.drawable.parent_childinteraction};
-    public static final int[]  healthMessIds = new int[]{R.string.title_activity_childcare_points,R.string.title_activity_dp_sign,R.string.title_activity_science_tip,R.string.title_activity_grown_concern,R.string.title_activity_parental_interaction};
+    public static final String IS_VERSION = "is_version";
+    public static final String VERSION_UPDATE = "version_update";
+    public static final String APP_UPDATE = "app_update";
+   public static final String MEI_ZU = "Meizu";
 
     public static final String TITLE = "title";
     public static final String CONTENT = "content";
@@ -58,13 +60,19 @@ public class IContent {
     public static byte SDMODE[] = {0x55, (byte) 0xAA,0x01,0x01,0x02, 0x01,(0-(4+0x01))};
     public static byte BLUEMODE[] = {0x55, (byte) 0xAA,0x01,0x01,0x02, 0x03,(0-(4+0x03))};
     public static byte READMODE[] = {0x55, (byte) 0xAA,0x00,0x01,0x03, (byte) 0x0FC};
-
     public static byte GET_FILE[] =   {0x55, (byte) 0xaa,0x04,0x02,0x03,0x00,0x00,0x00,0x01,(0 - 0x0a)};
     public static byte NOTIFY_DATA [] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x0c, (byte) 0xE9};
     public static byte CLOSE_DEVICE [] = {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0xAA, (byte) 0x4B};
     public static byte BRAKE_CAR [] = {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0x05, (byte) 0xF0};
     public static byte BRAKE_CAR_CLEAR [] = {0x55, (byte) 0xAA, 0x00, 0x0B, (byte) 0x06, (byte) 0xEF};
     public static byte REPAIR_CAR [] = {0x55, (byte) 0xAA, 0x00, 0x0B, 0x55, (byte) 0xA0};
+
+    /**
+     * Combi bluetooth control
+     */
+
+    public static final byte COMBI_NOTIFY[] =  {0x55, (byte) 0xAA, 0x00, 0x0C, 0x0C, (byte) 0xE8};
+
 
     public byte [] WRITEVALUE;
     public String address = null;
@@ -79,6 +87,8 @@ public class IContent {
     public String clickPositionName = "clickPositionName";
     public String clickPositionFunction = "clickPositionFunction";
     public String newCode = null;
+    public String newCodeUrl = null;
+    public String newVersion = null;
     public  String  clickPositionType = null;
     public boolean isBind = false;
     public String code = "V1.0.1";

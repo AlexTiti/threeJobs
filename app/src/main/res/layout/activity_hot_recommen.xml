@@ -16,6 +16,9 @@
 
    <include
        android:id="@+id/net_fail_host"
+       android:layout_width="350dp"
+       android:layout_height="350dp"
+       android:layout_centerInParent="true"
        layout="@layout/net_fail_layout"
 
        ></include>

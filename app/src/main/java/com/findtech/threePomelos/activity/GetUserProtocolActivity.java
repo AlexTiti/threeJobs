@@ -1,9 +1,11 @@
 package com.findtech.threePomelos.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -37,12 +39,15 @@ public class GetUserProtocolActivity extends MyActionBarActivity {
         progressBar.setBackgroundColor(getResources().getColor(R.color.white));
         progressBar.setMax(100);
         webView_user_protect = (WebView) findViewById(R.id.webView_user_protect);
-        webView_user_protect.loadUrl(protect_url);
-        webView_user_protect.setWebViewClient(new WebViewClient() {
+
+        webView_user_protect.setWebViewClient(new WebViewClient(){
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // TODO Auto-generated method stub
-                view.loadUrl(url);
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    view.loadUrl(request.getUrl().toString());
+                } else {
+                    view.loadUrl(request.toString());
+                }
                 return true;
             }
         });
@@ -59,75 +64,17 @@ public class GetUserProtocolActivity extends MyActionBarActivity {
                 }
             }
         });
+        webView_user_protect.loadUrl(protect_url);
         registerMusicBroadcast();
     }
-
     @Override
     protected void onStart() {
         super.onStart();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
     }
 
-//    Handler mHandle = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            if (msg.what == 0x75) {
-////                userProtocolContent.setText(Html.fromHtml((String) msg.obj));
-//            }
-//        }
-//    };
 
-//    private void initProgressDialog() {
-//        progressDialog = new ProgressDialog(this);
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.setMessage(getResources().getString(R.string.getMessage_fromNet));
-//        progressDialog.setIndeterminate(false);
-//        progressDialog.setCancelable(true);
-//        progressDialog.setCanceledOnTouchOutside(true);
-//    }
-//
-//    private void getUserProtocol() {
-//        progressDialog.show();
-//        AVQuery<AVObject> query = new AVQuery<>(NetWorkRequest.USER_PROTOCOL);
-//        query.findInBackground(new FindCallback<AVObject>() {
-//            public void done(List<AVObject> avObjects, AVException e) {
-//                if (e == null) {
-//                    if (avObjects.size() > 0) {
-//                        AVFile avFile = avObjects.get(1).getAVFile("userProtocol");
-//                        if (avFile == null) {
-//                            ToastUtil.showToast(GetUserProtocolActivity.this, getResources().getString(R.string.data_exception));
-//                            return;
-//                        }
-//                        avFile.getDataInBackground(new GetDataCallback() {
-//                            public void done(byte[] data, AVException e) {
-//                                //process data or exception.
-//                                progressDialog.dismiss();
-//                                if (e == null) {
-//                                    String body = new String(data);
-//                                    mHandle.obtainMessage(0x75, body).sendToTarget();
-//                                } else {
-//                                    checkNetWork();
-//                                }
-//                            }
-//                        }, new ProgressCallback() {
-//                            @Override
-//                            public void done(Integer integer) {
-//                                mHandle.obtainMessage(0x74, integer).sendToTarget();
-//                            }
-//                        });
-//                    } else {
-//                        progressDialog.dismiss();
-//                        ToastUtil.showToast(GetUserProtocolActivity.this, getResources().getString(R.string.no_data));
-//                    }
-//                } else {
-//                    progressDialog.dismiss();
-//                    checkNetWork();
-//                }
-//            }
-//        });
-//    }
 }

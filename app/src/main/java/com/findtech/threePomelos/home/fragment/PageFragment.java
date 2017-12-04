@@ -3,6 +3,7 @@ package com.findtech.threePomelos.home.fragment;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -19,6 +20,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,8 +28,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +47,7 @@ import com.findtech.threePomelos.activity.BabyInfoActivity;
 import com.findtech.threePomelos.activity.TagImageEditActivity;
 import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.BaseLazyFragment;
+import com.findtech.threePomelos.bluetooth.AppManager;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
 import com.findtech.threePomelos.home.MainHomeActivity;
@@ -54,6 +60,7 @@ import com.findtech.threePomelos.mydevices.activity.DeviceDetailActivity;
 import com.findtech.threePomelos.mydevices.adapter.BluetoothLinkAdapter;
 import com.findtech.threePomelos.mydevices.bean.BluetoothLinkBean;
 import com.findtech.threePomelos.net.NetWorkRequest;
+import com.findtech.threePomelos.utils.DialogUtil;
 import com.findtech.threePomelos.utils.FileUtils;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.MyCalendar;
@@ -87,7 +94,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class PageFragment extends BaseLazyFragment implements View.OnClickListener, HeadZoomScrollView.OnScrollListener, ItemClickListtener, BluetoothLinkAdapter.LongClick {
-
     LinearLayout heightLayout;
     LinearLayout weightLayout;
     CircleImageView mBabyInfoView;
@@ -98,7 +104,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
     TextView babyAge;
     TextView heightHealthState;
     TextView weightHealthState;
-    private MyListView mylist_showcar_page;
+    private ListView mylist_showcar_page;
     private RelativeLayout relativeLayout;
     private ImageView image_searchcar;
     private String photoPath = null, tempPhotoPath, camera_path;
@@ -128,6 +134,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
     protected int getContentViewLayoutID() {
         return R.layout.activity_main_h;
     }
+
     @Override
     protected void initViewsAndEvents(View view) {
         view1 = view.findViewById(R.id.view_test);
@@ -137,7 +144,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         netWorkRequest = new NetWorkRequest(mContext);
         content = IContent.getInstacne();
         refreshdata();
-        if (IContent.getInstacne().newCode == null) {
+        if (content.newCode == null) {
             netWorkRequest.downUpDateOr(new FindCallback<AVObject>() {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
@@ -145,15 +152,16 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                         if (list.size() != 0) {
                             AVObject avObject = list.get(0);
                             String code = avObject.getString("fileVersion");
-                            if (code != null) {
-                                IContent.getInstacne().newCode = code;
+                            String codeUrl = avObject.getAVFile("imageNotice").getUrl();
+                            if (!TextUtils.isEmpty(code) && !TextUtils.isEmpty(codeUrl)) {
+                                content.newCode = code;
+                                content.newCodeUrl = codeUrl;
                             }
                         }
                     }
                 }
             });
         }
-
         text_add_car_page = (TextView) view.findViewById(R.id.text_add_car_page);
         heightLayout = (LinearLayout) view.findViewById(R.id.height_layout);
         weightLayout = (LinearLayout) view.findViewById(R.id.weight_layout);
@@ -165,7 +173,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         babyAge = (TextView) view.findViewById(R.id.text_id_below);
         heightHealthState = (TextView) view.findViewById(R.id.height_health_state);
         weightHealthState = (TextView) view.findViewById(R.id.weight_health_state);
-        mylist_showcar_page = (MyListView) view.findViewById(R.id.mylist_showcar_page);
+        mylist_showcar_page = (ListView) view.findViewById(R.id.mylist_showcar_page);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.layout_top_page);
         headZoomScrollView = (HeadZoomScrollView) view.findViewById(R.id.dzsv);
         image_searchcar = (ImageView) view.findViewById(R.id.image_searchcar);
@@ -184,6 +192,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         bluetoothLinkAdapter.setItemClickListtener(this);
         bluetoothLinkAdapter.setLongClick(this);
         mylist_showcar_page.setAdapter(bluetoothLinkAdapter);
+
         heightLayout.setOnClickListener(this);
         weightLayout.setOnClickListener(this);
         mBabyInfoView.setOnClickListener(this);
@@ -199,11 +208,12 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         oldBabySex = babyInfoEntity.getBabySex();
         manager = (BluetoothManager) getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
         bleAdapter = manager.getAdapter();
-
         closeReceiver = new CloseReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(BaseActivity.DEVICE_CLOSE_ONPAGE);
-        getActivity().registerReceiver(closeReceiver,filter);
+        getActivity().registerReceiver(closeReceiver, filter);
+//        DialogUtil dialogUtil = DialogUtil.getIntence(getActivity());
+//        dialogUtil.showDialogNoConfirm();
     }
 
     @Override
@@ -269,10 +279,10 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                 final String currentDate = Tools.getSystemTimeInChina("yyyy-MM-dd");
                 String birthday = babyInfoEntity.getBirthday().replace("年", "-").replace("月", "-").replace("日", "");
                 babyInfoEntity.setBabyTotalDay(mContext, birthday, "0");
-                MyCalendar myCalendar = new MyCalendar(birthday, currentDate,getActivity());
+                MyCalendar myCalendar = new MyCalendar(birthday, currentDate, getActivity());
                 babyAge.setText(myCalendar.getDate());
                 babyTotalMonth = myCalendar.getStandardDate();
-                L.e("==============getHealth",  babyInfoEntity.getBirthday()+ "============"+babyTotalMonth);
+                L.e("==============getHealth", babyInfoEntity.getBirthday() + "============" + babyTotalMonth);
                 String heightHealthStateSp = RequestUtils.getSharepreference(mContext).getString(RequestUtils.HEIGHT_HEALTH_STATE, "0~0");
                 String weightHealthStateSp = RequestUtils.getSharepreference(mContext).getString(RequestUtils.WEIGHT_HEALTH_STATE, "0~0");
                 nowBabySex = babyInfoEntity.getBabySex();
@@ -296,9 +306,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
             heightHealthState.setText(mContext.getResources().getString(R.string.xliff_height_health_state, "0~0"));
             weightHealthState.setText(mContext.getResources().getString(R.string.xliff_weight_health_state, "0~0"));
         }
-        toRefreshAdapter();
         AVAnalytics.onFragmentStart("PageFragment");
-
 
 
     }
@@ -306,13 +314,13 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
     private void toRefreshAdapter() {
         ArrayList<DeviceCarBean> strings = IContent.getInstacne().addressList;
         bluetoothLinkAdapter.setArrayList(strings);
+        setListViewHeight(mylist_showcar_page);
         bluetoothLinkAdapter.notifyDataSetChanged();
         if (IContent.getInstacne().addressList.size() == 0) {
             text_add_car_page.setVisibility(View.VISIBLE);
         } else {
             text_add_car_page.setVisibility(View.GONE);
         }
-
 
 
     }
@@ -369,7 +377,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         builder.setTitle(getString(R.string.notice));
         builder.setNotifyInfo(getString(R.string.input_baby_info));
         builder.setShowButton(true);
-        builder.setPositiveButton(getString(R.string.set), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -458,7 +466,6 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                 }
                 break;
             case R.id.image_searchcar:
-
                 searchDevice();
                 break;
             case R.id.text_add_car_page:
@@ -472,26 +479,29 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
             app.manager.isEnabled(getActivity());
             return;
         }
-
-        netWorkRequest.selectDeviceTypeAndIdentifier(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (e == null) {
-                    content.bluetoothLinkBeen.clear();
-                    for (AVObject avObject : list) {
-                        BluetoothLinkBean bean = new BluetoothLinkBean();
-                        bean.setDeviceIndentifier(avObject.getString(NetWorkRequest.DEVICEIDENTIFITER));
-                        bean.setName(avObject.getString(NetWorkRequest.BLUETOOTH_NAME));
-                        bean.setType(avObject.getString(NetWorkRequest.FUNCTION_TYPE));
-                        bean.setCompany(avObject.getString(NetWorkRequest.COMPANY));
-                        content.bluetoothLinkBeen.add(bean);
+        if (content.bluetoothLinkBeen != null && content.bluetoothLinkBeen.isEmpty()) {
+            netWorkRequest.selectDeviceTypeAndIdentifier(new FindCallback<AVObject>() {
+                @Override
+                public void done(List<AVObject> list, AVException e) {
+                    if (e == null) {
+                        content.bluetoothLinkBeen.clear();
+                        for (AVObject avObject : list) {
+                            BluetoothLinkBean bean = new BluetoothLinkBean();
+                            bean.setDeviceIndentifier(avObject.getString(NetWorkRequest.DEVICEIDENTIFITER));
+                            bean.setName(avObject.getString(NetWorkRequest.BLUETOOTH_NAME));
+                            bean.setType(avObject.getString(NetWorkRequest.FUNCTION_TYPE));
+                            bean.setCompany(avObject.getString(NetWorkRequest.COMPANY));
+                            content.bluetoothLinkBeen.add(bean);
+                        }
+                        startActivityForResult(new Intent(mContext, BluetoothlinkActivity.class), 111);
+                    } else {
+                        ((MainHomeActivity) getActivity()).checkNetWork();
                     }
-                    startActivity(new Intent(mContext, BluetoothlinkActivity.class));
-                } else {
-                    ((MainHomeActivity) getActivity()).checkNetWork();
                 }
-            }
-        });
+            });
+        } else {
+            startActivityForResult(new Intent(mContext, BluetoothlinkActivity.class), 111);
+        }
     }
 
     private Dialog mPicChooserDialog = null;
@@ -560,28 +570,33 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != getActivity().RESULT_OK) {
+
+        if (requestCode == 111) {
+            toRefreshAdapter();
+            return;
+        }
+        if (requestCode == 110) {
+            bluetoothLinkAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        if (resultCode != Activity.RESULT_OK) {
             return;
         }
         switch (requestCode) {
             case Tools.CAMERA_WITH_DATA:
                 photoPath = tempPhotoPath;
-                camera_path = FileUtils.SaveBitmapToFilePath(picOperator.decodeBitmapFromFilePath(photoPath, 900, 900), FileUtils.SOURCE_IMAGE_FILEFOLDER_TEMP);
+                camera_path = FileUtils.SaveBitmapToFilePath(PicOperator.decodeBitmapFromFilePath(photoPath, 900, 900), FileUtils.SOURCE_IMAGE_FILEFOLDER_TEMP);
                 startTagImageActivity();
                 break;
             case Tools.PHOTO_PICKED_WITH_DATA:
                 Uri originalUri = data.getData();
                 photoPath = FileUtils.getPath(mContext, originalUri);
-                camera_path = FileUtils.SaveBitmapToFilePath(picOperator.decodeBitmapFromFilePath(photoPath, 900, 900), FileUtils.SOURCE_IMAGE_FILEFOLDER_TEMP);
+                camera_path = FileUtils.SaveBitmapToFilePath(PicOperator.decodeBitmapFromFilePath(photoPath, 900, 900), FileUtils.SOURCE_IMAGE_FILEFOLDER_TEMP);
                 startTagImageActivity();
                 break;
             case 100:
                 ((MainHomeActivity) getActivity()).viewpager_home.setCurrentItem(2);
-
-                break;
-            case 110:
-                bluetoothLinkAdapter.notifyDataSetChanged();
                 break;
             default:
                 break;
@@ -651,7 +666,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         super.onPause();
         AVAnalytics.onFragmentEnd("PageFragment");
     }
-    
+
     @Override
     public void longClick(final int position) {
         final CustomDialog.Builder builder = new CustomDialog.Builder(getActivity());
@@ -663,7 +678,8 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
             public void onClick(final DialogInterface dialog, int which) {
                 final DeviceCarBean deviceCarBean = IContent.getInstacne().addressList.get(position);
                 final String deviceNumAddress = deviceCarBean.getDeviceaAddress();
-                if (app.manager.cubicBLEDevice != null &&  deviceNumAddress.equals(IContent.getInstacne().address)) {
+
+                if (app.manager.cubicBLEDevice != null && deviceNumAddress.equals(IContent.getInstacne().address)) {
                     app.manager.cubicBLEDevice.disconnectedDevice();
                 }
 
@@ -700,18 +716,20 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         });
         builder.setNegativeButton(getResources().getString(R.string.cancle),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 });
         builder.create().show();
     }
-    class  CloseReceiver extends BroadcastReceiver{
+
+    class CloseReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent != null ) {
+            if (intent != null) {
                 String action = intent.getAction();
-                if (action != null && action.equals(BaseActivity.DEVICE_CLOSE_ONPAGE)){
+                if (action != null && action.equals(BaseActivity.DEVICE_CLOSE_ONPAGE)) {
                     IContent.getInstacne().isBind = false;
                     IContent.getInstacne().address = null;
                     IContent.getInstacne().deviceName = null;
@@ -721,5 +739,25 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
             }
 
         }
+    }
+
+    public static void setListViewHeight(ListView lv) {
+        if (lv == null) {
+            return;
+        }
+        ListAdapter adapter = lv.getAdapter();
+        if (adapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            View listItem = adapter.getView(i, null, lv);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = lv.getLayoutParams();
+        params.height = totalHeight + (lv.getDividerHeight() * (lv.getCount() - 1));//这里还将分割线的高度考虑进去了，统计出所有分割线占有的高度和
+        lv.setLayoutParams(params);
+
     }
 }

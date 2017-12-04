@@ -101,8 +101,10 @@ public class RequestDealThread extends Thread {
             /*
              * 如果缓存完成，无需发送请求，本地缓存返回MediaPlayer。
 			 */
-            if (fileUtils.isEnable() && fileUtils.getLength() == cacheFileSize) {
+            if (fileUtils.isEnable() && (fileUtils.getLength() == cacheFileSize || fileUtils.getLength() -500 >= cacheFileSize )) {
                 L.e(LOG_TAG, "如果缓存完成，无需发送请求");
+
+                cacheFileSize = fileUtils.getLength();
                 audioCache = fileUtils.read(originRangeStart, Constants.AUDIO_BUFFER_MAX_LENGTH);
                 sendLocalHeaderAndCache(originRangeStart, cacheFileSize - 1, cacheFileSize, audioCache);
 
@@ -116,18 +118,17 @@ public class RequestDealThread extends Thread {
             /*
              * 请求Range起始值和本地缓存比对。如果有缓存，得到缓存内容，修改Range。 如果没有缓存，则Range不变。
 			 */
-//            if (fileUtils.isEnable() && originRangeStart < fileUtils.getLength()) {
-//                audioCache = fileUtils.read(originRangeStart, Constants.AUDIO_BUFFER_MAX_LENGTH);
-//                L.e(LOG_TAG, Constants.AUDIO_BUFFER_MAX_LENGTH+"本地已缓存长度（跳过）:" + audioCache.length);
-//                // 得到需要发送请求Range Start（本地缓存结尾位置+1=缓存长度）
-//                realRangeStart = fileUtils.getLength();
-//                // 替换请求Header
-//                request.setRequestProperty(Constants.RANGE, Constants.RANGE_PARAMS + realRangeStart + "-");
-////                	request.removeHeaders(Constants.RANGE);
-////                	request.addHeader(Constants.RANGE, Constants.RANGE_PARAMS + realRangeStart + "-");
-//            } else {
-//                realRangeStart = originRangeStart;
-//            }
+            if (fileUtils.isEnable() && originRangeStart < fileUtils.getLength()) {
+                audioCache = fileUtils.read(originRangeStart, Constants.AUDIO_BUFFER_MAX_LENGTH);
+                L.e(LOG_TAG, Constants.AUDIO_BUFFER_MAX_LENGTH+"本地已缓存长度（跳过）:" + audioCache.length);
+                // 得到需要发送请求Range Start（本地缓存结尾位置+1=缓存长度）
+                realRangeStart = fileUtils.getLength();
+                // 替换请求Header
+                request.setRequestProperty(Constants.RANGE, Constants.RANGE_PARAMS + realRangeStart + "-");
+
+            } else {
+                realRangeStart = originRangeStart;
+            }
             // 缓存是否已经到最大值（如果缓存已经到最大值，则只需要返回缓存）
             boolean isCacheEnough = (audioCache != null && audioCache.length == Constants.AUDIO_BUFFER_MAX_LENGTH) ? true
                     : false;
@@ -168,12 +169,7 @@ public class RequestDealThread extends Thread {
                         L.e(LOG_TAG, "二次缓存不足，发送请求");
                         return;
                     }
-                    /**
-                     * 添加的。。。。。。
-                     */
-                L.e("=====================","=================");
-                    cacheFileSize = getContentLength(realResponse);
-                    sendLocalHeaderAndCache(originRangeStart, cacheFileSize - 1, cacheFileSize, audioCache);
+
                 }
                 L.e(LOG_TAG, "接收ResponseContent");
                 InputStream data = realResponse.getInputStream();

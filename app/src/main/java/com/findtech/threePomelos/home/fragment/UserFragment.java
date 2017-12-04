@@ -5,16 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,15 +27,14 @@ import com.findtech.threePomelos.activity.AboutUSActivity;
 import com.findtech.threePomelos.activity.BabyInfoActivity;
 import com.findtech.threePomelos.activity.CommendProblemActivity;
 import com.findtech.threePomelos.activity.FeedBack;
-import com.findtech.threePomelos.activity.GetUserProtocolActivity;
 import com.findtech.threePomelos.base.BaseLazyFragment;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
-import com.findtech.threePomelos.home.MainHomeActivity;
+import com.findtech.threePomelos.home.MyUICheckUpdateCallback;
 import com.findtech.threePomelos.login.LoginActivity;
 import com.findtech.threePomelos.login.ThirdPartyController;
-import com.findtech.threePomelos.music.utils.HandlerUtil;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
+import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.MyCalendar;
 import com.findtech.threePomelos.utils.PicOperator;
 import com.findtech.threePomelos.utils.RequestUtils;
@@ -72,13 +67,15 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
     private Button text_out;
     private ThirdPartyController mThirdPartyController;
     private RelativeLayout relativeLayout;
-    private TextView text_weight_user, text_height_user,app_info_arrow_right00;
+    private TextView text_weight_user, text_height_user,text_update_notice;
     private CircleImageView circleImage;
     private Bitmap bitmap;
     private TextView text_id, text_age_user;
     private BabyInfoEntity babyInfoEntity = BabyInfoEntity.getInstance();
     public final static String CHANGE = "CHANGE";
     public final int TOAST_NUMB = 1001;
+    private IContent content = IContent.getInstacne();
+
 
     Handler handler = new Handler() {
         @Override
@@ -102,6 +99,7 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
 
     @Override
     protected void initViewsAndEvents(View view) {
+
         text_id = (TextView) view.findViewById(R.id.text_id);
         text_age_user = (TextView) view.findViewById(R.id.text_age_user);
         circleImage = (CircleImageView) view.findViewById(R.id.circleImage);
@@ -109,10 +107,19 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
         update = (RelativeLayout) view.findViewById(R.id.update);
         about_us = (RelativeLayout) view.findViewById(R.id.about_us);
         text_out = (Button) view.findViewById(R.id.text_out);
+        text_update_notice = (TextView) view.findViewById(R.id.text_update_notice);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         relay_common_problem = (RelativeLayout) view.findViewById(R.id.relay_common_problem);
         text_weight_user = (TextView) view.findViewById(R.id.text_weight_user);
         text_height_user = (TextView) view.findViewById(R.id.text_height_user);
+
+        String currentVersion = Tools.getCurrentVersion(getActivity());
+        if ( content.newVersion != null && content.newVersion.compareToIgnoreCase(currentVersion) == 1){
+            text_update_notice.setVisibility(View.VISIBLE);
+        }else {
+            text_update_notice.setVisibility(View.INVISIBLE);
+        }
+
         View view1 = view.findViewById(R.id.view);
         ViewGroup.LayoutParams layoutParams = view1.getLayoutParams();
         layoutParams.height = ScreenUtils.getStatusBarHeight(getActivity());
@@ -149,6 +156,9 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
 
     @Override
     protected void onFirstUserVisible() {
+        if (content.newVersion == null){
+            NetWorkRequest.getAPPVersion();
+        }
     }
 
     private void setCircleImage() {
@@ -244,15 +254,6 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
         progressDialog.setIndeterminate(true);
     }
 
-    private class MyUICheckUpdateCallback implements UICheckUpdateCallback {
-        @Override
-        public void onNoUpdateFound() {
-        }
-
-        @Override
-        public void onCheckComplete() {
-        }
-    }
 
     public void logOut() {
         AVUser.logOut();

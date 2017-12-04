@@ -1,5 +1,6 @@
 package com.findtech.threePomelos.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -87,7 +88,7 @@ public class WeightTipsFragment extends Fragment implements View.OnClickListener
                 gotoBabyInfoViewDialog();
             } else {
                 Intent intent = new Intent();
-                getActivity().setResult(getActivity().RESULT_OK,intent);
+                getActivity().setResult(Activity.RESULT_OK,intent);
                 getActivity().finish();
             }
         }

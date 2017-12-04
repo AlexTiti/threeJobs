@@ -1,482 +1,495 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-        <string name="app_name">三爸育兒</string>
-        <string name="baby_info">寶寶信息</string>
-        <string name="hint_name">寶寶姓名</string>
-        <string name="hint_relationship">我是寶寶的</string>
-        <string name="hint_sex">寶寶性別</string>
-        <string name="hint_username_text">請輸入用戶名</string>
-        <string name="hint_phone_text">請輸入手機號碼</string>
-        <string name="hint_identify_text">請輸入驗證碼</string>
-        <string name="input_phone_number">請輸入手機號碼!</string>
-        <string name="input_legal_phone_number">請輸入正確的手機號碼!</string>
-        <string name="input_password">請輸入密碼!</string>
-        <string name="input_user_name">請輸入用戶名!</string>
-        <string name="identify">發送驗證碼</string>
-        <string name="label_device_address">設備地址</string>
-        <string name="hint_birthday">生日</string>
-        <string name="weight_line_chart">體重摺線圖</string>
-        <string name="mileage_line_chart">里程折線圖</string>
-        <string name="action_more">更多操作</string>
+    <string name="app_name">三爸育兒</string>
+    <string name="baby_info">寶寶信息</string>
+    <string name="hint_name">寶寶姓名</string>
+    <string name="hint_relationship">我是寶寶的</string>
+    <string name="hint_sex">寶寶性別</string>
+    <string name="hint_username_text">請輸入用戶名</string>
+    <string name="hint_phone_text">請輸入手機號碼</string>
+    <string name="hint_identify_text">請輸入驗證碼</string>
+    <string name="input_phone_number">請輸入手機號碼!</string>
+    <string name="input_legal_phone_number">請輸入正確的手機號碼!</string>
+    <string name="input_password">請輸入密碼!</string>
+    <string name="input_user_name">請輸入用戶名!</string>
+    <string name="identify">發送驗證碼</string>
+    <string name="label_device_address">設備地址</string>
+    <string name="hint_birthday">生日</string>
+    <string name="weight_line_chart">體重摺線圖</string>
+    <string name="mileage_line_chart">里程折線圖</string>
+    <string name="action_more">更多操作</string>
 
-        <!--forget password -->
-        <string name="hint_register_phone_text">請輸入註冊時的手機號碼</string>
-        <string name="hint_set_password_text">設置登錄密碼</string>
-        <string name="smsCodeError">無效的短訊驗證碼</string>
-        <string name="noFoundUser">沒有找到可用的用戶</string>
-
-
-        <string name="finish">完成</string>
-        <string name="next_step">下一步</string>
-        <string name="hello_world">Hello world!</string>
-        <string name="action_settings">設置</string>
-        <string name="drawer_open">打開</string>
-        <string name="drawer_close">關閉</string>
-        <string name="hint_password_text">請輸入密碼</string>
-
-        <!--Toolbar Title -->
-        <string name="person_info">個人信息</string>
-        <string name="phone_verify">註冊</string>
-
-        <string name="skip">跳過</string>
-        <string name="login">登錄</string>
-        <string name="register">新用戶註冊</string>
-        <string name="logout">退出登錄</string>
-        <string name="find_password">找回密碼</string>
-        <string name="save">保存</string>
-        <string name="input_address_baby">請輸入寶寶籍貫</string>
-        <string name="input_sex_baby">請輸入寶寶性別</string>
-        <string name="input_birth_baby">請輸入寶寶生日</string>
-        <string name="input_birth_notice">輸入寶寶生日才會有年齡</string>
-        <string name="title_activity_set_baby_info">寶寶信息設置</string>
-        <string name="title_activity_device_control">設備控制</string>
-        <string name="title_activity_device_scan">掃描設備</string>
-        <string name="record_growth">記錄成長</string>
-        <string name="dummy_button">Dummy Button</string>
-        <string name="dummy_content">DUMMY\nCONTENT</string>
-
-        <string name="weight_info_text"> kg</string>
-        <string name="height_info_text"> cm</string>
-        <string name="milleage_info_text"> km</string>
-        <string name="main_tab_height">寶寶身高</string>
-        <string name="main_tab_weight">寶寶體重</string>
-        <string name="main_tab_mileage">推車裡程記錄</string>
-        <string name="instruc">說明書</string>
-        <string name="loging_notice">登錄即同意</string>
-        <string name="loging_click">用戶協議</string>
-        <string name="edit_done">編輯完成</string>
+    <!--forget password -->
+    <string name="hint_register_phone_text">請輸入註冊時的手機號碼</string>
+    <string name="hint_set_password_text">設置登錄密碼</string>
+    <string name="smsCodeError">無效的短訊驗證碼</string>
+    <string name="noFoundUser">沒有找到可用的用戶</string>
 
 
-        <!--Warning -->
-        <string name="input_identify">請輸入驗證碼</string>
+    <string name="finish">完成</string>
+    <string name="next_step">下一步</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">設置</string>
+    <string name="drawer_open">打開</string>
+    <string name="drawer_close">關閉</string>
+    <string name="hint_password_text">請輸入密碼</string>
 
-        <!-- more action -->
+    <!--Toolbar Title -->
+    <string name="person_info">個人信息</string>
+    <string name="phone_verify">註冊</string>
 
-        <string name="my_device">我的設備</string>
-        <string name="my_info">我的信息</string>
-        <string name="my_service">服務</string>
-        <string name="my_share">分享</string>
-        <string name="pic_save">圖片以保存到相冊</string>
-        <string name= "save_error">照片保存有誤</string>
+    <string name="skip">跳過</string>
+    <string name="login">登錄</string>
+    <string name="register">新用戶註冊</string>
+    <string name="logout">退出登錄</string>
+    <string name="find_password">找回密碼</string>
+    <string name="save">保存</string>
+    <string name="input_address_baby">請輸入寶寶籍貫</string>
+    <string name="input_sex_baby">請輸入寶寶性別</string>
+    <string name="input_birth_baby">請輸入寶寶生日</string>
+    <string name="input_birth_notice">輸入寶寶生日才會有年齡</string>
+    <string name="title_activity_set_baby_info">寶寶信息設置</string>
+    <string name="title_activity_device_control">設備控制</string>
+    <string name="title_activity_device_scan">掃描設備</string>
+    <string name="record_growth">記錄成長</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
-        <!--Bluetooth -->
-
-        <string name="ble_not_supported">不支持藍牙</string>
-        <string name="label_data">數據：</string>
-        <string name="label_state">狀態：</string>
-        <string name="no_data">沒有數據</string>
-        <string name="connected">已連接</string>
-        <string name="connecting">連接中，請稍後...</string>
-        <string name="connecting_fail">連接失敗！</string>
-
-        <string name="disconnected">未連接</string>
-        <string name="title_devices">掃描藍牙設備</string>
-        <string name="error_bluetooth_not_supported">藍牙不支持.</string>
-
-        <string name="unknown_device">未知設備</string>
-        <string name="unknown_characteristic">Unknown characteristic</string>
-        <string name="unknown_service">未知設備</string>
-        <string name="nodata">暫無數據</string>
-
-        <!-- Menu items -->
-        <string name="menu_connect">連接</string>
-        <string name="menu_disconnect">斷開連接</string>
-        <string name="menu_scan">掃描</string>
-        <string name="menu_stop">停止</string>
-        <string name="menu_fresh">刷新</string>
-        <string name="title_activity_user_weight_info">用戶體重信息</string>
-        <string name="title_activity_test">測試</string>
-
-        <string name="hello_blank_fragment">Hello blank fragment</string>
-
-        <!-- title -->
-        <string name="title_activity_login">用戶登錄</string>
-        <string name="title_activity_phone_verify">手機驗證</string>
-        <string name="title_activity_forget_password">修改密碼</string>
-        <string name="title_activity_forget_password_success">修改成功</string>
-        <string name="title_activity_input_identify">輸入驗證碼</string>
-        <string name="title_activity_input_weight">手動錄入體重</string>
-        <string name="title_activity_input_height">手動錄入身高</string>
-        <string name="title_activity_baby_info">寶寶資料</string>
-        <string name="title_activity_baby_health_tip">寶貝健康小貼士</string>
-        <string name="title_activity_get_user_protocol">用戶協議</string>
-
-        <string name="title_activity_childcare_points">育兒要點</string>
-        <string name="title_activity_dp_sign">發育體征</string>
-        <string name="title_activity_dp_sign_t">學會觀察寶寶才能</string>
-        <string name="title_activity_dp_sign_b">更好的照顧他</string>
-
-        <string name="title_activity_science_tip">科普提示</string>
-        <string name="title_activity_science_tip_t">我們在這裡為您提供</string>
-        <string name="title_activity_science_tip_b">最專業的育兒指導</string>
-        <string name="title_activity_grown_concern">成長關注</string>
-        <string name="title_activity_grown_concern_t">照顧寶寶重點</string>
-        <string name="title_activity_grown_concern_b">都在這兒啦</string>
-        <string name="title_activity_parental_interaction">親子互動</string>
-        <string name="title_activity_parental_interaction_t">玩耍也是幫助</string>
-        <string name="title_activity_parental_interaction_b">寶寶成長</string>
+    <string name="weight_info_text"> kg</string>
+    <string name="height_info_text"> cm</string>
+    <string name="milleage_info_text"> km</string>
+    <string name="main_tab_height">寶寶身高</string>
+    <string name="main_tab_weight">寶寶體重</string>
+    <string name="main_tab_mileage">推車裡程記錄</string>
+    <string name="instruc">說明書</string>
+    <string name="loging_notice">登錄即同意</string>
+    <string name="loging_click">用戶協議</string>
+    <string name="edit_done">編輯完成</string>
 
 
-        <!--baby Info-->
-        <string name="label_boy">小王子</string>
-        <string name="label_girl">小公舉</string>
-        <string name="title_baby_sex_info">寶寶性別</string>
-        <string name="title_baby_birthday_info">寶寶生日</string>
-        <string name="title_activity_set_password">設置密碼</string>
-        <string name="label_baby_birthday">寶寶生日</string>
-        <string name="label_baby_birthday_health">寶寶生日 | </string>
-        <string name="new_height_num">最新身高</string>
-        <string name="weight">體重:  <xliff:g id="weight">%1$s</xliff:g> kg</string>
-        <string name="height">身高:  <xliff:g id="height">%1$s</xliff:g> cm</string>
-        <string name="weight_info"><xliff:g id="weight_info">%1$s</xliff:g> kg</string>
-        <string name="height_info"><xliff:g id="height_info">%1$s</xliff:g> cm</string>
-        <string name="day">日期</string>
-        <string name="input_weight">輸入體重</string>
-        <string name="input_height">輸入身高</string>
-        <string name="input_day">輸入日期</string>
-        <string name="babay_height">寶貝身高</string>
-        <string name="babay_weight">寶貝體重</string>
-        <string name="edit_nikename">編輯昵稱</string>
-        <string name="baby_niName">寶寶昵稱</string>
-        <string name="input_babay_height">請輸入寶貝身高</string>
-        <string name="input_babay_weight">請輸入寶貝體重</string>
+    <!--Warning -->
+    <string name="input_identify">請輸入驗證碼</string>
 
-        <string name="sex_baby">性別</string>
-        <string name="birth_baby">生日</string>
-        <string name="age_bany">年齡</string>
-        <string name="height_baby">身高</string>
-        <string name="weight_baby">體重</string>
-        <string name="address">籍貫</string>
-        <string name="weight_page">體重 | kg</string>
-        <string name="height_page">身高 | cm</string>
-        <string name="health_notice">根據寶寶年齡為您提供</string>
+    <!-- more action -->
 
-        <string name="xliff_weight_num"><xliff:g id="weight">%1$3s</xliff:g></string>
-        <string name="xliff_height_num"><xliff:g id="height">%1$3s</xliff:g></string>
-        <string name="xliff_total_mileage_num"><xliff:g id="total_mileage">%1$3s</xliff:g> km</string>
-        <string name="xliff_today_mileage_num"><xliff:g id="today_mileage">%1$3s</xliff:g> km</string>
-        <string name="xliff_average_speed_num"><xliff:g id="average_speed">%1$3s</xliff:g> km/h</string>
-        <string name="xliff_total_mileage_fragment_num">總里程 : <xliff:g id="total_mileage">%1$3s</xliff:g> km</string>
-        <string name="xliff_today_mileage_fragment_num">今日里程 : <xliff:g id="today_mileage">%1$3s</xliff:g> km</string>
-        <string name="xliff_average_speed_fragment_num">平均時速 : <xliff:g id="average_speed">%1$3s</xliff:g> km/h</string>
-        <string name="xliff_height_health_state">參考範圍 : <xliff:g id="height_health">%1$3s</xliff:g> cm</string>
-        <string name="xliff_weight_health_state">參考範圍 : <xliff:g id="weight_health">%1$3s</xliff:g> kg</string>
-        <string name="xliff_standard_height_num">參考值 : <xliff:g id="height">%1$3s</xliff:g> cm</string>
-        <string name="xliff_standard_weight_num">參考值 : <xliff:g id="weight">%1$3s</xliff:g> kg</string>
-        <string name="xliff_weight_service">寶寶體重為<xliff:g id= "weight_service">%1$3s</xliff:g> kg,是否保存？</string>
-        <string name="xliff_current_code">當前版本 <xliff:g id="current_code">%1$2s</xliff:g></string>
+    <string name="my_device">我的設備</string>
+    <string name="my_info">我的信息</string>
+    <string name="my_service">服務</string>
+    <string name="my_share">分享</string>
+    <string name="pic_save">圖片以保存到相冊</string>
+    <string name="save_error">照片保存有誤</string>
 
-        <!--date label-->
-        <string name="label_date_year">年</string>
-        <string name="label_date__month">月</string>
-        <string name="label_date_day">日</string>
-        <string name="label_date_week">周</string>
-        <string name="label_date_d">天</string>d
+    <!--Bluetooth -->
 
-        <!--PicChooserDialog-->
-        <string name="pic_chooser_title">選擇上傳照片方式</string>
-        <string name="pic_chooser_camera">拍照</string>
-        <string name="pic_chooser_gallery">相冊</string>
-        <string name="pic_chooser_cancel">取消</string>
+    <string name="ble_not_supported">不支持藍牙</string>
+    <string name="label_data">數據：</string>
+    <string name="label_state">狀態：</string>
+    <string name="no_data">沒有數據</string>
+    <string name="connected">已連接</string>
+    <string name="connecting">連接中，請稍後...</string>
+    <string name="connecting_fail">連接失敗！</string>
 
-        <string name="text_popwindow_menu_my_device">我的設備</string>
-        <string name="text_activity_title_device">我的設備</string>
-        <string name="app_device_text_bind">綁定推車</string>
-        <string name="app_device_text_check_firmware_version">固件版本</string>
-        <string name="app_device_text_current_electric">推車電量</string>
+    <string name="disconnected">未連接</string>
+    <string name="title_devices">掃描藍牙設備</string>
+    <string name="error_bluetooth_not_supported">藍牙不支持.</string>
 
-        <string name="text_popwindow_menu_app_about">關 於</string>
-        <string name="text_activity_title_app_about">關 於</string>
-        <string name="app_about_text_check_version">檢查更新</string>
-        <string name="app_about_text_user_agreement">用戶協議</string>
-        <string name="app_about_text_log_out">退出登錄</string>
+    <string name="unknown_device">未知設備</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">未知設備</string>
+    <string name="nodata">暫無數據</string>
 
-        <string name="title_activity_share">ShareActivity</string>
-        <string name="title_activity_tagimage_text_input">編輯水印文字</string>
-        <string name="input_tagimage_text">輸入水印文字</string>
-        <string name="btn_tagimage_save">確定</string>
-        <string name="title_activity_tagimage_show">添加水印</string>
-        <string name="btn_tagimage_show_next">下一步</string>
-        <string name="btn_tagimage_show_share">分享</string>
-        <string name="btn_tagimage_show_save">保存</string>
-        <string name="title_activity_start">StartActivity</string>
-        <string name="text_activity_title_tag_image_edit">編輯圖片</string>
-        <string name="text_toast_null_text">請輸入文字！</string>
-        <string name="text_tag_image">水印</string>
-        <string name="text_tag_babydata_text1">寶寶</string>
-        <string name="text_tag_babydata_text_day">天</string>
-        <string name="text_tag_babydata_text_days">天啦</string>
-        <string name="text_toast_pic_had_been_saved">圖片已存在！</string>
-        <string name="text_toast_pic_saved_successfully">已保存至：</string>
-        <string name="text_toast_pic_saved_failed">保存失敗！</string>
-        <string name="text_tag_input_dalog_title">請輸入文字：</string>
-        <string name="tag_edit_empty_toast_txt">內容為空！</string>
-        <string name="tag_edit_pic_handle_progress_txt">圖片處理中，請稍候！</string>
-        <string name="tag_share_pic_handle_progress_txt">拚命處理中，請稍候！</string>
-        <string name="tag_edit_dialog_ok_button_txt">確定</string>
-        <string name="tag_edit_dialog_cancel_button_txt">取消</string>
-        <string name="text_toast_no_storage_permission">無讀取存儲權限！</string>
-        <string name="tag_delete_dialog_text">刪除水印？</string>
-        <string name="tag_delete_dialog_ok">確定</string>
-        <string name="tag_delete_dialog_cancel">取消</string>
-        <string name="title_dialog_firmware_update">固件更新</string>
-        <string name="message_dialog_firmware_update">有新固件版本，需要更新嗎？</string>
-        <string name="message_dialog_firmware_no_update">已經是最新版本，無需更新！</string>
-        <string name="ok_button_dialog_firmware_update">確定</string>
-        <string name="cancel_button_dialog_firmware_update">取消</string>
-        <string name="text_activity_firmware_update_string">固件升級中</string>
-        <string name="text_activity_firmware_update_finished_string">固件更新成功! </string>
-        <string name="text_share_description_text">我的小寶貝！</string>
-        <string name="baby" >寶貝</string>
-        <string name="pic_tag_love">卡哇伊</string>
-        <string name="pic_tag_praise">贊贊贊</string>
-        <string name="pic_tag_monther">媽媽真棒</string>
-        <string name="edit_down">編輯完成</string>
-        <string name="text_share_info_from_app">來自推車信息</string>
-        <string name="text_share_hegiht_description_text">我的<xliff:g>%s</xliff:g>身高已經<xliff:g>%s</xliff:g>cm啦！</string>
-        <string name="text_share_no_data_description_text">還未錄入過寶寶信息哦！</string>
-        <string name="text_share_wegiht_description_text">我的<xliff:g>%s</xliff:g>已經<xliff:g>%s</xliff:g>kg啦！</string>
-        <string name="text_age_description_text">我的<xliff:g>%s</xliff:g>已經<xliff:g>%s</xliff:g>啦！</string>
-        <string name="text_share_miles_description_text">你的推車總里程擊敗來全國<xliff:g>%s</xliff:g>的寶媽！</string>
-        <string name="text_datepick_show_errortime_set">日期設置不能超前於今天哦！</string>
-        <string name="double_click_exit">再按一次退出程序！</string>
-        <string name="equipment_linked">連接的設備</string>
-        <string name="music_classify">歌單分類</string>
-        <string name="baby_like">寶寶喜歡</string>
-        <string name="local_music">本地音樂</string>
-        <string name="recent_play">最近播放</string>
-        <string name="host">熱門推薦</string>
-        <string name="story">兒童故事</string>
-        <string name="story_notice">童話故事的情節可以讓孩子自由發揮想像力，幫助孩子建立正確的世界觀</string>
-        <string name="rhyme">精品兒歌</string>
-        <string name="rhyme_notice">兒歌的吟唱中，優美的旋律、和諧的節奏、真摯的情感可以給兒童以美的享受和情感熏陶</string>
-        <string name="poetry">經典古詩</string>
-        <string name="poetry_notice">古典詩詞的創作時間跨度之長，內容之豐富，成就和影響力之大，蘊涵的古文和傳統文化知識之多，使它成為文化學習最為重要的部分之一</string>
-        <string name="three_character">三字經</string>
-        <string name="three_character_notice">一曉教育\n二曉道德\n三曉常識\n四曉典籍\n五曉歷史\n六曉勤奮</string>
-        <string name="english">啟蒙英語</string>
-        <string name="english_notice">啟蒙音樂可以培養孩子的聽力辯音能力和語音感，可以為接觸語義和持續學習打下基礎</string>
-        <string name="car_music">車載音樂</string>
-        <string name="car_music_notice"> 將喜歡的音樂傳到推車上去，隨時隨地可以播放孩子喜歡的音樂</string>
-        <string name="toolbar_health">健康貼士</string>
-        <string name="toolbar_music">音樂播放</string>
-        <string name="toolbar_user">個人主頁</string>
-        <string name="essentials">發育要點</string>
-        <string name="essentials_t">寶寶在不同時期需要</string>
-        <string name="essentials_op">不同的照顧哦</string>
-        <string name="common_problem">常見問題</string>
+    <!-- Menu items -->
+    <string name="menu_connect">連接</string>
+    <string name="menu_disconnect">斷開連接</string>
+    <string name="menu_scan">掃描</string>
+    <string name="menu_stop">停止</string>
+    <string name="menu_fresh">刷新</string>
+    <string name="title_activity_user_weight_info">用戶體重信息</string>
+    <string name="title_activity_test">測試</string>
 
-        <string name="concern">成長關注</string>
-        <string name="about_us">關於我們</string>
-        <string name="hint_birthdate">寶寶生日</string>
-        <string name="approve">用戶協議</string>
-        <string name="update">檢查更新</string>
-        <string name="faceback">用戶反饋</string>
-        <string name="function_introduce">功能介紹</string>
-        <string name="company_introduce">公司簡介</string>
-        <string name="network">暫時與母星失去聯絡\n點擊刷新</string>
-        <string name="network_babylike">為寶寶收藏的歌曲\n都放在這兒</string>
-        <string name="network_recentplay">最近聽過的歌曲\n都會出現在這兒</string>
-        <string name="network_local">下載的歌曲\n都會存放在這</string>
-        <string name="bind_success">綁定成功</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- title -->
+    <string name="title_activity_login">用戶登錄</string>
+    <string name="title_activity_phone_verify">手機驗證</string>
+    <string name="title_activity_forget_password">修改密碼</string>
+    <string name="title_activity_forget_password_success">修改成功</string>
+    <string name="title_activity_input_identify">輸入驗證碼</string>
+    <string name="title_activity_input_weight">手動錄入體重</string>
+    <string name="title_activity_input_height">手動錄入身高</string>
+    <string name="title_activity_baby_info">寶寶資料</string>
+    <string name="title_activity_baby_health_tip">寶貝健康小貼士</string>
+    <string name="title_activity_get_user_protocol">用戶協議</string>
+
+    <string name="title_activity_childcare_points">育兒要點</string>
+    <string name="title_activity_dp_sign">發育體征</string>
+    <string name="title_activity_dp_sign_t">學會觀察寶寶才能</string>
+    <string name="title_activity_dp_sign_b">更好的照顧他</string>
+
+    <string name="title_activity_science_tip">科普提示</string>
+    <string name="title_activity_science_tip_t">我們在這裡為您提供</string>
+    <string name="title_activity_science_tip_b">最專業的育兒指導</string>
+    <string name="title_activity_grown_concern">成長關注</string>
+    <string name="title_activity_grown_concern_t">照顧寶寶重點</string>
+    <string name="title_activity_grown_concern_b">都在這兒啦</string>
+    <string name="title_activity_parental_interaction">親子互動</string>
+    <string name="title_activity_parental_interaction_t">玩耍也是幫助</string>
+    <string name="title_activity_parental_interaction_b">寶寶成長</string>
 
 
-        <!--MusicInfo-->
-        <string name="random_play">隨機播放</string>
-        <string name="loop_play">列表循環</string>
-        <string name="singles_play">單曲播放</string>
-        <string name="nosd">無SD卡可用</string>
-        <string name="add_car">添加設備</string>
+    <!--baby Info-->
+    <string name="label_boy">小王子</string>
+    <string name="label_girl">小公舉</string>
+    <string name="title_baby_sex_info">寶寶性別</string>
+    <string name="title_baby_birthday_info">寶寶生日</string>
+    <string name="title_activity_set_password">設置密碼</string>
+    <string name="label_baby_birthday">寶寶生日</string>
+    <string name="label_baby_birthday_health">寶寶生日 | </string>
+    <string name="new_height_num">最新身高</string>
+    <string name="weight">體重:  <xliff:g id="weight">%1$s</xliff:g> kg</string>
+    <string name="height">身高:  <xliff:g id="height">%1$s</xliff:g> cm</string>
+    <string name="weight_info"><xliff:g id="weight_info">%1$s</xliff:g> kg</string>
+    <string name="height_info"><xliff:g id="height_info">%1$s</xliff:g> cm</string>
+    <string name="day">日期</string>
+    <string name="input_weight">輸入體重</string>
+    <string name="input_height">輸入身高</string>
+    <string name="input_day">輸入日期</string>
+    <string name="babay_height">寶貝身高</string>
+    <string name="babay_weight">寶貝體重</string>
+    <string name="edit_nikename">編輯昵稱</string>
+    <string name="baby_niName">寶寶昵稱</string>
+    <string name="input_babay_height">請輸入寶貝身高</string>
+    <string name="input_babay_weight">請輸入寶貝體重</string>
 
-        <!--Devices Link-->
-        <string name="devices_link_notice" >長按電源鍵\n啟動設備</string>
-        <string name="open_buluetooth">打開手機藍牙</string>
-        <string name="link_buluetooth">連接設備</string>
-        <string name="link_notice">請先連接推車</string>
-        <string name="kcal">kcal</string>
-        <string name="kcal_today">今日卡路里</string>
-        <string name="kcal_total">總卡路里</string>
-        <string name="km_today">今日里程</string>
-        <string name="km_total">總里程</string>
-        <string name="device_state">推車狀態</string>
-        <string name="device_running">未剎車</string>
-        <string name="device_close">已關閉</string>
-        <string name="device_isbrake">已剎車</string>
-        <string name="electricity">剩餘電量<xliff:g id="total_mileage">%1$3s</xliff:g> </string>
-        <string name="electricity_0">剩餘電量</string>
-        <string name="close_device">一鍵關機</string>
-        <string name="control_device">推車控制</string>
-        <string name="control_device_light">按鍵背光調節</string>
-        <string name="bind_now">現在綁定</string>
-        <string name="view_device">查看設備</string>
-        <string name="repair">一鍵修復</string>
-        <string name="repairing">修復中，請稍後...</string>
-        <string name="repair_done">修復完成</string>
-        <string name="repair_fail">修復失敗</string>
-        <string name="up_date">固件升級</string>
-        <string name="code">固件版本 : <xliff:g id="ele"> %1$3s</xliff:g> </string>
-        <string name="ubound">解除綁定</string>
-        <string name="instructions">使用說明</string>
-        <string name="averger_speed">今日平均時速</string>
-        <string name="averger_speedinfo">平均時速</string>
-        <string name="text_off">關</string>
-        <string name="text_on">開</string>
-        <string name="tempurature">車內溫度</string>
-        <string name="anti_theft">一鍵防盜</string>
-        <string name="intelligent_brake">智能剎車</string>
-        <string name="back">返回</string>
-        <string name="feedback_notice">感謝您提出的寶貴意見，我們會儘快改善！</string>
-        <string name="send">發送</string>
-        <string name="height_text">身高</string>
-        <string name="weight_text">體重</string>
-        <string name="height_text__">身高 :</string>
-        <string name="weight_text__">體重 :</string>
-        <string name="input_baby_info">請輸入寶貝的詳細信息！</string>
-        <string name="weight_text_input">選擇體重</string>
-        <string name="weight_text_notice">為了準確計算您的卡路里值!</string>
-        <string name="weight_text_hint">請輸入體重:kg</string>
-        <string name="cancle">取消</string>
-        <string name="confirm">確定</string>
-        <string name="go_link">去連接</string>
-        <string name="notice">提示</string>
-        <string name="unbound_message">請確認是否解除綁定？</string>
-        <string name="music_link_bluetooth">請打開藍牙  並連接3Pomelos_A3</string>
-        <string name="music_link_bluetooth_open">請到藍牙列表連接3Pomelos_A3</string>
-        <string name="bluetooth_unopen">藍牙未開啟</string>
+    <string name="sex_baby">性別</string>
+    <string name="birth_baby">生日</string>
+    <string name="age_bany">年齡</string>
+    <string name="height_baby">身高</string>
+    <string name="weight_baby">體重</string>
+    <string name="address">籍貫</string>
+    <string name="weight_page">體重 | kg</string>
+    <string name="height_page">身高 | cm</string>
+    <string name="health_notice">根據寶寶年齡為您提供</string>
 
-        <string name="link_icon">連接音箱</string>
-        <string name="close_message">關機前請確認推車處於安全狀態!</string>
-        <string name="unbound_success">解綁成功</string>
-        <string name="name_change">修改設備名稱</string>
-        <string name="name_change_dialog">給你的推車起個名字吧</string>
-        <string name="device_nolink">推車未連接</string>
-        <string name="device_linking">推車已連接</string>
-        <string name="delete_notice">確定刪除嗎？</string>
+    <string name="xliff_weight_num"><xliff:g id="weight">%1$3s</xliff:g></string>
+    <string name="xliff_height_num"><xliff:g id="height">%1$3s</xliff:g></string>
+    <string name="xliff_total_mileage_num"><xliff:g id="total_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_today_mileage_num"><xliff:g id="today_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_average_speed_num"><xliff:g id="average_speed">%1$3s</xliff:g> km/h</string>
+    <string name="xliff_total_mileage_fragment_num">總里程 : <xliff:g id="total_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_today_mileage_fragment_num">今日里程 : <xliff:g id="today_mileage">%1$3s</xliff:g> km</string>
+    <string name="xliff_average_speed_fragment_num">平均時速 : <xliff:g id="average_speed">%1$3s</xliff:g> km/h</string>
+    <string name="xliff_height_health_state">參考範圍 : <xliff:g id="height_health">%1$3s</xliff:g> cm</string>
+    <string name="xliff_weight_health_state">參考範圍 : <xliff:g id="weight_health">%1$3s</xliff:g> kg</string>
+    <string name="xliff_standard_height_num">參考值 : <xliff:g id="height">%1$3s</xliff:g> cm</string>
+    <string name="xliff_standard_weight_num">參考值 : <xliff:g id="weight">%1$3s</xliff:g> kg</string>
+    <string name="xliff_weight_service">寶寶體重為<xliff:g id="weight_service">%1$3s</xliff:g> kg,是否保存？</string>
+    <string name="xliff_current_code">當前版本 <xliff:g id="current_code">%1$2s</xliff:g></string>
 
-        <!--Loading Dialog-->
-        <string name="getMessage_fromNet">加載中，請稍後...</string>
-        <string name="getMessage_fromNet_fail">加載失敗！</string>
-        <string name="sendMessage_">發送中，請稍後...</string>
-        <string name="sendMessage_fail">發送失敗！</string>
-        <string name="upDateMessage_">檢測版本中，請稍後...</string>
-        <string name="upDateNew">當前版本已經是最新版本了！</string>
-        <string name="delete_confirm">請確認是否修改或刪除這條數據!</string>
-        <string name="delete">刪除</string>
-        <string name="delete_message">正在刪除，請稍後...</string>
-        <string name="save_message">正在保存，請稍後...</string>
-        <string name="blut_notice">取消授權將無法搜索推車!</string>
-        <string name="set">設置</string>
-        <string name="change">更改</string>
-        <string name="open_bluetooth_cancle">取消設置權限,將無法確保推車數據正確</string>
-        <string name="open_bluetooth_message">請打開權限，確保數據正確！</string>
-        <string name="not_open_message">未打開權限,將無法確保嬰兒推車數據正確</string>
-        <string name="weight_message_confirm">請確認是否添加本次寶寶體重?</string>
-        <string name="blue_tooth_update">請選擇  3POMELOS_A3  的設備！</string>
-        <string name="logout_confirm">確認退出登錄?</string>
-        <string name="loging_state">登錄中，請稍後...</string>
+    <!--date label-->
+    <string name="label_date_year">年</string>
+    <string name="label_date__month">月</string>
+    <string name="label_date_day">日</string>
+    <string name="label_date_week">周</string>
+    <string name="label_date_d">天</string>d
 
-        <!--Toast Notice-->
-        <string name="data_exception">數據異常！</string>
-        <string name="net_exception">網絡連接異常！</string>
-        <string name="playback_failed">播放失敗！</string>
-        <string name="install_qq">請安裝QQ客戶端!</string>
-        <string name="install_wx">請安裝微信客戶端!</string>
-        <string name="name_not">內容不能為空!</string>
-        <string name="name_change_sucess">修改成功！</string>
-        <string name="send_sucess">發送成功！</string>
-        <string name="data_update_sucess">數據同步成功！</string>
-        <string name="data_update">數據同步中，請稍後...</string>
-        <string name="data_update_fail">數據同步失敗,請檢查推車電源或休眠狀態！</string>
-        <string name="close_sucess">關機成功！</string>
-        <string name="pomoles_car">柚子推車</string>
-        <string name="delete_data_failed">刪除數據失敗！</string>
-        <string name="save_data_failed">保存數據失敗！</string>
-        <string name="name_useless">用戶名不可用!</string>
-        <string name="login_notice">請輸入正確的用戶名或密碼!</string>
-        <string name="change_bluetooth_mode">已切換為藍牙模式</string>
-        <string name="change_sd_mode">已切換到SD模式</string>
-        <string name="checkNumber_useless">無效的短訊驗證碼，通常是不匹配或者過期</string>
-        <string name="checkNumber_send_fail">短訊請求次數超上限！</string>
-        <string name="login_empty_notice">賬號或密碼不能為空!</string>
+    <!--PicChooserDialog-->
+    <string name="pic_chooser_title">選擇上傳照片方式</string>
+    <string name="pic_chooser_camera">拍照</string>
+    <string name="pic_chooser_gallery">相冊</string>
+    <string name="pic_chooser_cancel">取消</string>
+
+    <string name="text_popwindow_menu_my_device">我的設備</string>
+    <string name="text_activity_title_device">我的設備</string>
+    <string name="app_device_text_bind">綁定推車</string>
+    <string name="app_device_text_check_firmware_version">固件版本</string>
+    <string name="app_device_text_current_electric">推車電量</string>
+
+    <string name="text_popwindow_menu_app_about">關 於</string>
+    <string name="text_activity_title_app_about">關 於</string>
+    <string name="app_about_text_check_version">檢查更新</string>
+    <string name="app_about_text_user_agreement">用戶協議</string>
+    <string name="app_about_text_log_out">退出登錄</string>
+
+    <string name="title_activity_share">ShareActivity</string>
+    <string name="title_activity_tagimage_text_input">編輯水印文字</string>
+    <string name="input_tagimage_text">輸入水印文字</string>
+    <string name="btn_tagimage_save">確定</string>
+    <string name="title_activity_tagimage_show">添加水印</string>
+    <string name="btn_tagimage_show_next">下一步</string>
+    <string name="btn_tagimage_show_share">分享</string>
+    <string name="btn_tagimage_show_save">保存</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="text_activity_title_tag_image_edit">編輯圖片</string>
+    <string name="text_toast_null_text">請輸入文字！</string>
+    <string name="text_tag_image">水印</string>
+    <string name="text_tag_babydata_text1">寶寶</string>
+    <string name="text_tag_babydata_text_day">天</string>
+    <string name="text_tag_babydata_text_days">天啦</string>
+    <string name="text_toast_pic_had_been_saved">圖片已存在！</string>
+    <string name="text_toast_pic_saved_successfully">已保存至：</string>
+    <string name="text_toast_pic_saved_failed">保存失敗！</string>
+    <string name="text_tag_input_dalog_title">請輸入文字：</string>
+    <string name="tag_edit_empty_toast_txt">內容為空！</string>
+    <string name="tag_edit_pic_handle_progress_txt">圖片處理中，請稍候！</string>
+    <string name="tag_share_pic_handle_progress_txt">拚命處理中，請稍候！</string>
+    <string name="tag_edit_dialog_ok_button_txt">確定</string>
+    <string name="tag_edit_dialog_cancel_button_txt">取消</string>
+    <string name="text_toast_no_storage_permission">無讀取存儲權限！</string>
+    <string name="tag_delete_dialog_text">刪除水印？</string>
+    <string name="tag_delete_dialog_ok">確定</string>
+    <string name="tag_delete_dialog_cancel">取消</string>
+    <string name="title_dialog_firmware_update">固件更新</string>
+    <string name="message_dialog_firmware_update">有新固件版本，需要更新嗎？</string>
+    <string name="message_dialog_firmware_no_update">已經是最新版本，無需更新！</string>
+    <string name="ok_button_dialog_firmware_update">確定</string>
+    <string name="cancel_button_dialog_firmware_update">取消</string>
+    <string name="text_activity_firmware_update_string">固件升級中</string>
+    <string name="text_activity_firmware_update_finished_string">固件更新成功! </string>
+    <string name="text_share_description_text">我的小寶貝！</string>
+    <string name="baby">寶貝</string>
+    <string name="pic_tag_love">卡哇伊</string>
+    <string name="pic_tag_praise">贊贊贊</string>
+    <string name="pic_tag_monther">媽媽真棒</string>
+    <string name="edit_down">編輯完成</string>
+    <string name="text_share_info_from_app">來自推車信息</string>
+    <string name="text_share_hegiht_description_text">我的<xliff:g>%s</xliff:g>身高已經<xliff:g>%s</xliff:g>cm啦！</string>
+    <string name="text_share_no_data_description_text">還未錄入過寶寶信息哦！</string>
+    <string name="text_share_wegiht_description_text">我的<xliff:g>%s</xliff:g>已經<xliff:g>%s</xliff:g>kg啦！</string>
+    <string name="text_age_description_text">我的<xliff:g>%s</xliff:g>已經<xliff:g>%s</xliff:g>啦！</string>
+    <string name="text_share_miles_description_text">你的推車總里程擊敗來全國<xliff:g>%s</xliff:g>的寶媽！</string>
+    <string name="text_datepick_show_errortime_set">日期設置不能超前於今天哦！</string>
+    <string name="double_click_exit">再按一次退出程序！</string>
+    <string name="equipment_linked">連接的設備</string>
+    <string name="music_classify">歌單分類</string>
+    <string name="baby_like">寶寶喜歡</string>
+    <string name="local_music">本地音樂</string>
+    <string name="recent_play">最近播放</string>
+    <string name="host">熱門推薦</string>
+    <string name="story">兒童故事</string>
+    <string name="story_notice">童話故事的情節可以讓孩子自由發揮想像力，幫助孩子建立正確的世界觀</string>
+    <string name="rhyme">精品兒歌</string>
+    <string name="rhyme_notice">兒歌的吟唱中，優美的旋律、和諧的節奏、真摯的情感可以給兒童以美的享受和情感熏陶</string>
+    <string name="poetry">經典古詩</string>
+    <string name="poetry_notice">古典詩詞的創作時間跨度之長，內容之豐富，成就和影響力之大，蘊涵的古文和傳統文化知識之多，使它成為文化學習最為重要的部分之一</string>
+    <string name="three_character">三字經</string>
+    <string name="three_character_notice">一曉教育\n二曉道德\n三曉常識\n四曉典籍\n五曉歷史\n六曉勤奮</string>
+    <string name="english">啟蒙英語</string>
+    <string name="english_notice">啟蒙音樂可以培養孩子的聽力辯音能力和語音感，可以為接觸語義和持續學習打下基礎</string>
+    <string name="car_music">車載音樂</string>
+    <string name="car_music_notice"> 將喜歡的音樂傳到推車上去，隨時隨地可以播放孩子喜歡的音樂</string>
+    <string name="toolbar_health">健康貼士</string>
+    <string name="toolbar_music">音樂播放</string>
+    <string name="toolbar_user">個人主頁</string>
+    <string name="essentials">發育要點</string>
+    <string name="essentials_t">寶寶在不同時期需要</string>
+    <string name="essentials_op">不同的照顧哦</string>
+    <string name="common_problem">常見問題</string>
+
+    <string name="concern">成長關注</string>
+    <string name="about_us">關於我們</string>
+    <string name="hint_birthdate">寶寶生日</string>
+    <string name="approve">用戶協議</string>
+    <string name="update">檢查更新</string>
+    <string name="faceback">用戶反饋</string>
+    <string name="function_introduce">功能介紹</string>
+    <string name="company_introduce">公司簡介</string>
+    <string name="network">暫時與母星失去聯絡\n點擊刷新</string>
+    <string name="network_babylike">為寶寶收藏的歌曲\n都放在這兒</string>
+    <string name="network_recentplay">最近聽過的歌曲\n都會出現在這兒</string>
+    <string name="network_local">下載的歌曲\n都會存放在這</string>
+    <string name="bind_success">綁定成功</string>
 
 
-        <string name="babay_sex">是男寶還是女寶啊</string>
-        <string name="princeling">小王子</string>
-        <string name="princess">小公舉</string>
-        <string name="regist_sucess">註冊成功！</string>
-        <string name="baby_birth_none">寶貝生日不能為空！</string>
-        <string name="phone_number_useless">該手機號已經被註冊！</string>
-        <string name="pasw_empty">用戶名或密碼不能為空！</string>
-        <string name="update_success">升級成功,推車即將重新啟動！</string>
-        <string name="update_failed">升級失敗，請檢查連接藍牙設備是否正確！</string>
-        <string name="updateing">更新中，請稍後...</string>
-        <string name="registraing">註冊中，請稍後...</string>
-        <string name="input_time_height">請填寫時間和身高</string>
-        <string name="input_time_weight">請填寫時間和體重</string>
-        <string name="down_loading">下載中，請稍後...</string>
-        <string name="down_loading_fail">下載失敗！</string>
-        <string name="just_do">立即體驗</string>
-        <string name="detail_car">推車詳情</string>
-        <string name="listen_tegether">大家都在聽</string>
-        <string name="checkNum_send">驗證碼已經發送</string>
-        <string name="checkNum_notice">驗證碼已經發送,有效期2分鐘哦!</string>
-        <string name="logout_success">退出成功</string>
-        <string name="run_action_notice">請將手移除感應區域再操作！</string>
-        <string name="pro_action_notice">請關閉一鍵防盜再修復！</string>
-        <string name="drop_refresh">下拉刷新</string>
+    <!--MusicInfo-->
+    <string name="random_play">隨機播放</string>
+    <string name="loop_play">列表循環</string>
+    <string name="singles_play">單曲播放</string>
+    <string name="nosd">無SD卡可用</string>
+    <string name="add_car">添加設備</string>
 
-        <string name="page_tab1">首頁</string>
-        <string name="page_tab2">音樂</string>
-        <string name="page_tab3">健康</string>
-        <string name="page_tab4">我的</string>
+    <!--Devices Link-->
+    <string name="devices_link_notice">長按電源鍵\n啟動設備</string>
+    <string name="open_buluetooth">打開手機藍牙</string>
+    <string name="link_buluetooth">連接設備</string>
+    <string name="link_notice">請先連接推車</string>
+    <string name="kcal">kcal</string>
+    <string name="kcal_today">今日卡路里</string>
+    <string name="kcal_total">總卡路里</string>
+    <string name="km_today">今日里程</string>
+    <string name="km_total">總里程</string>
+    <string name="device_state">推車狀態</string>
+    <string name="device_running">未剎車</string>
+    <string name="device_close">已關閉</string>
+    <string name="device_isbrake">已剎車</string>
+    <string name="electricity">剩餘電量<xliff:g id="total_mileage">%1$3s</xliff:g> </string>
+    <string name="electricity_0">剩餘電量</string>
+    <string name="close_device">一鍵關機</string>
+    <string name="control_device">推車控制</string>
+    <string name="control_device_light">按鍵背光調節</string>
+    <string name="bind_now">現在綁定</string>
+    <string name="view_device">查看設備</string>
+    <string name="repair">一鍵修復</string>
+    <string name="repairing">修復中，請稍後...</string>
+    <string name="repair_done">修復完成</string>
+    <string name="repair_fail">修復失敗</string>
+    <string name="up_date">固件升級</string>
+    <string name="code">固件版本 : <xliff:g id="ele"> %1$3s</xliff:g> </string>
+    <string name="ubound">解除綁定</string>
+    <string name="instructions">使用說明</string>
+    <string name="averger_speed">今日平均時速</string>
+    <string name="averger_speedinfo">平均時速</string>
+    <string name="text_off">關</string>
+    <string name="text_on">開</string>
+    <string name="tempurature">車內溫度</string>
+    <string name="anti_theft">一鍵防盜</string>
+    <string name="intelligent_brake">智能剎車</string>
+    <string name="back">返回</string>
+    <string name="feedback_notice">感謝您提出的寶貴意見，我們會儘快改善！</string>
+    <string name="send">發送</string>
+    <string name="height_text">身高</string>
+    <string name="weight_text">體重</string>
+    <string name="height_text__">身高 :</string>
+    <string name="weight_text__">體重 :</string>
+    <string name="input_baby_info">請輸入寶貝的詳細信息！</string>
+    <string name="weight_text_input">選擇體重</string>
+    <string name="weight_text_notice">為了準確計算您的卡路里值!</string>
+    <string name="weight_text_hint">請輸入體重:kg</string>
+    <string name="cancle">取消</string>
+    <string name="confirm">確定</string>
+    <string name="go_link">去連接</string>
+    <string name="notice">提示</string>
+    <string name="unbound_message">請確認是否解除綁定？</string>
+    <string name="music_link_bluetooth">請打開藍牙  並連接3Pomelos_A3</string>
+    <string name="music_link_bluetooth_open">請到藍牙列表連接3Pomelos_A3</string>
+    <string name="bluetooth_unopen">藍牙未開啟</string>
 
-        <string name="add_weight">添加體重</string>
-        <string name="tips">育兒小貼士</string>
-        <string name="text_health">錄入寶貝生日才能夠為您提供育兒貼士服務！</string>
-        <string name="sd_notice">請檢查SD卡</string>
-        <string name="wechat">微信</string>
-        <string name="friend_circle">朋友圈</string>
-        <string name="xinlang">新浪微博</string>
-        <string name="zidingyi">自定義</string>
-        <string name="lab">標籤</string>
+    <string name="link_icon">連接音箱</string>
+    <string name="close_message">關機前請確認推車處於安全狀態!</string>
+    <string name="unbound_success">解綁成功</string>
+    <string name="name_change">修改設備名稱</string>
+    <string name="name_change_dialog">給你的推車起個名字吧</string>
+    <string name="device_nolink">推車未連接</string>
+    <string name="device_linking">推車已連接</string>
+    <string name="delete_notice">確定刪除嗎？</string>
 
-        <string name="share_wei_friend_suc">微信朋友圈分享成功！</string>
-        <string name="share_wei_suc">微信分享成功！</string>
-        <string name="share_xinl">新浪微博分享成功！</string>
-        <string name="share_qq">QQ分享成功！</string>
-        <string name="never_shou">沒有授權</string>
-        <string name="share_defail">分享失敗</string>
-        <string name="btn_baby_datepicker_confirm">確定</string>
-        <string name="btn_baby_datepicker_cancel">取消</string>
-        <string name="scan_device">搜索的設備</string>
-        <string name="app_device_text_unbind"></string>
+    <!--Loading Dialog-->
+    <string name="getMessage_fromNet">加載中，請稍後...</string>
+    <string name="getMessage_fromNet_fail">加載失敗！</string>
+    <string name="sendMessage_">發送中，請稍後...</string>
+    <string name="sendMessage_fail">發送失敗！</string>
+    <string name="upDateMessage_">檢測版本中，請稍後...</string>
+    <string name="upDateNew">當前版本已經是最新版本了！</string>
+    <string name="delete_confirm">請確認是否修改或刪除這條數據!</string>
+    <string name="delete">刪除</string>
+    <string name="delete_message">正在刪除，請稍後...</string>
+    <string name="save_message">正在保存，請稍後...</string>
+    <string name="blut_notice">取消授權將無法搜索推車!</string>
+    <string name="set">設置</string>
+    <string name="change">更改</string>
+    <string name="open_bluetooth_cancle">取消設置權限,將無法確保推車數據正確</string>
+    <string name="open_bluetooth_message">請打開權限，確保數據正確！</string>
+    <string name="not_open_message">未打開權限,將無法確保嬰兒推車數據正確</string>
+    <string name="weight_message_confirm">請確認是否添加本次寶寶體重?</string>
+    <string name="blue_tooth_update">請選擇  3POMELOS_A3  的設備！</string>
+    <string name="logout_confirm">確認退出登錄?</string>
+    <string name="loging_state">登錄中，請稍後...</string>
+
+    <!--Toast Notice-->
+    <string name="data_exception">數據異常！</string>
+    <string name="net_exception">網絡連接異常！</string>
+    <string name="playback_failed">播放失敗！</string>
+    <string name="install_qq">請安裝QQ客戶端!</string>
+    <string name="install_wx">請安裝微信客戶端!</string>
+    <string name="name_not">內容不能為空!</string>
+    <string name="name_change_sucess">修改成功！</string>
+    <string name="send_sucess">發送成功！</string>
+    <string name="data_update_sucess">數據同步成功！</string>
+    <string name="data_update">數據同步中，請稍後...</string>
+    <string name="data_update_fail">數據同步失敗,請檢查推車電源或休眠狀態！</string>
+    <string name="close_sucess">關機成功！</string>
+    <string name="pomoles_car">柚子推車</string>
+    <string name="delete_data_failed">刪除數據失敗！</string>
+    <string name="save_data_failed">保存數據失敗！</string>
+    <string name="name_useless">用戶名不可用!</string>
+    <string name="login_notice">請輸入正確的用戶名或密碼!</string>
+    <string name="change_bluetooth_mode">已切換為藍牙模式</string>
+    <string name="change_sd_mode">已切換到SD模式</string>
+    <string name="checkNumber_useless">無效的短訊驗證碼，通常是不匹配或者過期</string>
+    <string name="checkNumber_send_fail">短訊請求次數超上限！</string>
+    <string name="login_empty_notice">賬號或密碼不能為空!</string>
+    <string name="data_max_notice">輸入數據過大</string>
+
+
+    <string name="babay_sex">是男寶還是女寶啊</string>
+    <string name="princeling">小王子</string>
+    <string name="princess">小公舉</string>
+    <string name="regist_sucess">註冊成功！</string>
+    <string name="baby_birth_none">寶貝生日不能為空！</string>
+    <string name="phone_number_useless">該手機號已經被註冊！</string>
+    <string name="pasw_empty">用戶名或密碼不能為空！</string>
+    <string name="update_success">升級成功,推車即將重新啟動！</string>
+    <string name="update_failed">升級失敗，請檢查連接藍牙設備是否正確！</string>
+    <string name="updateing">更新中，請稍後...</string>
+    <string name="registraing">註冊中，請稍後...</string>
+    <string name="input_time_height">請填寫時間和身高</string>
+    <string name="input_time_weight">請填寫時間和體重</string>
+    <string name="down_loading">下載中，請稍後...</string>
+    <string name="down_loading_fail">下載失敗！</string>
+    <string name="just_do">立即體驗</string>
+    <string name="detail_car">推車詳情</string>
+    <string name="listen_tegether">大家都在聽</string>
+    <string name="checkNum_send">驗證碼已經發送</string>
+    <string name="checkNum_notice">驗證碼已經發送,有效期2分鐘哦!</string>
+    <string name="logout_success">退出成功</string>
+    <string name="run_action_notice">請將手移除感應區域再操作！</string>
+    <string name="pro_action_notice">請關閉一鍵防盜再修復！</string>
+    <string name="drop_refresh">下拉刷新</string>
+
+    <string name="page_tab1">首頁</string>
+    <string name="page_tab2">音樂</string>
+    <string name="page_tab3">健康</string>
+    <string name="page_tab4">我的</string>
+
+    <string name="add_weight">添加體重</string>
+    <string name="tips">育兒小貼士</string>
+    <string name="text_health">錄入寶貝生日才能夠為您提供育兒貼士服務！</string>
+    <string name="sd_notice">請檢查SD卡</string>
+    <string name="wechat">微信</string>
+    <string name="friend_circle">朋友圈</string>
+    <string name="xinlang">新浪微博</string>
+    <string name="zidingyi">自定義</string>
+    <string name="lab">標籤</string>
+
+    <string name="share_wei_friend_suc">微信朋友圈分享成功！</string>
+    <string name="share_wei_suc">微信分享成功！</string>
+    <string name="share_xinl">新浪微博分享成功！</string>
+    <string name="share_qq">QQ分享成功！</string>
+    <string name="never_shou">沒有授權</string>
+    <string name="share_defail">分享失敗</string>
+    <string name="btn_baby_datepicker_confirm">確定</string>
+    <string name="btn_baby_datepicker_cancel">取消</string>
+    <string name="scan_device">搜索的設備</string>
+    <string name="app_device_text_unbind"></string>
     <!--<string name="close_shake">智能剎車已關閉推車處於剎車狀態，手握感應區域即可解除！</string>-->
-        <string name="close_shake">智能剎車已關閉！</string>
+    <string name="close_shake">智能剎車已關閉！</string>
     <string name="gujian_shengji">固件升級過程耗時約15s,請稍後...</string>
     <string name="restarting">推车重启中，请稍后...</string>
-        <string name="update_noticeText">固件升級內容：\n\n  1\t新版本智能剎車默認為關閉狀態，若需要開啟，請使用APP連接推車開啟智能剎車\n  2\t為方便推行，升級成功的推車，在正常關機後智能剎車直接解除\n  3\t為保證安全，低電量關機後智能剎車會默認剎住，踩一次腳剎即可解除剎車\n  4\t提高初始音量和音量调节速度\n  5\t提高感应区灵敏度，防止误刹车</string>
-        <string name="update_low_elec">電量過低，請先充滿電後再升級！</string>
-        <string name="update_Hardware">升級</string>
+    <string name="update_low_elec">電量過低，請先充滿電後再升級！</string>
+    <string name="update_Hardware">升級</string>
+
+    <string name="age_info_notice">修改寶寶生日後年齡會自動同步</string>
+    <string name="height_ino_notice">請到首頁添加身高</string>
+    <string name="weight_ino_notice">請到首頁添加體重</string>
+    <string name="blue_tooth_update_meizu">請選擇"藍牙"  進入列表後點擊3POMELOS_A3!</string>
+    <string name="bluetooth_common">綁定設備方法</string>
+    <string name="bluetooth_common_deal">打開“三爸育兒”APP，點擊首頁【添加設備】或【+】跳轉搜索界面，綁定名稱爲“3POMELOS_A3_BLE”的設備</string>
+    <string name="bluetooth_scan_common">藍牙搜索不到</string>
+    <string name="bluetooth_scan_common_deal">每輛推車同時只能連接一部手機，且連接後其他手機後無法搜索到此推車藍牙，所以請檢查是否該推車與其他手機連接或者將推車電源重啓，然後重新搜索藍牙</string>
+    <string name="bluetooth_fail_common">綁定設備失敗</string>
+    <string name="bluetooth_fail_common_deal">綁定推車時需要與系統後台服務器進行網絡連接，因此請您保持網絡順暢，用4G信號會可能更好哦。</string>
+    <string name="bluetooth_data_common">同步數據失敗</string>
+    <string name="bluetooth_data_common_deal">請依次排查：電源是否開啓、藍牙是否進入睡眠模式（若進入請觸碰相關區域喚醒）、藍牙是否開啓時間過長（重新開啓藍牙）</string>
 
 </resources>

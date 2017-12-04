@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/x10"
     android:descendantFocusability= "blocksDescendants"
     android:background="@color/white"
+
     >
 
     <ImageView
@@ -32,6 +33,7 @@
         android:id="@+id/lay_number"
         android:layout_width="@dimen/x25"
         android:layout_height="@dimen/x25"
+
         android:layout_centerVertical="true">
         <TextView
             android:id="@+id/text_number"
@@ -65,6 +67,7 @@
         android:layout_centerVertical="true"
         android:textSize="@dimen/text_size"
         android:textColor="@color/grey_color"
+        android:background="?android:attr/selectableItemBackground"
         android:text="BBBBB"/>
 
 

@@ -6,17 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.webkit.MimeTypeMap;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
@@ -33,6 +24,7 @@ import com.findtech.threePomelos.music.utils.DownFileUtils;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.utils.DialogUtil;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
@@ -41,63 +33,56 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class DeviceUpdateActivity extends MyActionBarActivity implements View.OnClickListener, BaseActivity.DialogClick, BLEDevice.RFStarBLEBroadcastReceiver {
+public class DeviceUpdateActivity extends MyActionBarActivity implements View.OnClickListener, BaseActivity.DialogClick, BLEDevice.RFStarBLEBroadcastReceiver, DialogUtil.ConfirmClick {
 
-    View button_update;
+    ImageView button_update;
     private NetWorkRequest netWorkRequest;
     private Dialog dialog;
     String code;
     AVFile avFile;
     File file;
+    private DialogUtil dialogUtil;
+    private String carrier;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_update);
-        setToolbar(getResources().getString(R.string.up_date),true,null);
-        button_update = findViewById(R.id.btn_update);
+        setToolbar(getResources().getString(R.string.up_date), true, null);
+        button_update = (ImageView) findViewById(R.id.btn_update);
         button_update.setOnClickListener(this);
         netWorkRequest = new NetWorkRequest(this);
         setClickListening(this);
-        if ( app.manager.cubicBLEDevice != null) {
+        dialogUtil = DialogUtil.getIntence();
+        dialogUtil.setConfirmClick(this);
+        Intent intent = getIntent();
+        carrier= android.os.Build.MANUFACTURER;
+        if (app.manager.cubicBLEDevice != null) {
             app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
         }
-        if ( IContent.getInstacne().newCode != null && IContent.getInstacne().newCode.compareToIgnoreCase(IContent.getInstacne().code) == 1 && IContent.getInstacne().isBind){
-            showPopWindowUpdate();
+        if (intent != null && intent.getBooleanExtra("update", false)) {
+            update();
         }
 
     }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_update:
-
-               if ( IContent.getInstacne().newCode == null ||  IContent.getInstacne().code.equals(IContent.getInstacne().newCode)){
-                ToastUtil.showToast(this,getString(R.string.upDateNew));
-                   return;
-            }
-                if (!IContent.getInstacne().isBind){
-                    ToastUtil.showToast(DeviceUpdateActivity.this,getString(R.string.device_nolink));
+                if (IContent.getInstacne().newCode == null || IContent.getInstacne().code.equals(IContent.getInstacne().newCode)) {
+                    ToastUtil.showToast(this, getString(R.string.upDateNew));
                     return;
                 }
-                update();
-                break;
-            case R.id.negativeButton:
-                dialog.dismiss();
+                if (!IContent.getInstacne().isBind) {
+                    ToastUtil.showToast(DeviceUpdateActivity.this, getString(R.string.device_nolink));
+                    return;
+                }
+                dialogUtil.showDialogConfirm(DeviceUpdateActivity.this);
 
                 break;
-            case R.id.positiveButton:
-                dialog.dismiss();
-                if ( IContent.getInstacne().newCode == null ||  IContent.getInstacne().code.equals(IContent.getInstacne().newCode)){
-                    ToastUtil.showToast(this,getString(R.string.upDateNew));
-                    return;
-                }
-                if (!IContent.getInstacne().isBind){
-                    ToastUtil.showToast(DeviceUpdateActivity.this,getString(R.string.device_nolink));
-                    return;
-                }
-                update();
+
+            default:
                 break;
         }
     }
@@ -116,7 +101,6 @@ public class DeviceUpdateActivity extends MyActionBarActivity implements View.On
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         downProgress();
         netWorkRequest.downUpDateOr(new FindCallback<AVObject>() {
             @Override
@@ -133,16 +117,16 @@ public class DeviceUpdateActivity extends MyActionBarActivity implements View.On
                         }
                     }
                 } else {
-                   checkNetWork();
+                    checkNetWork();
                 }
             }
         });
     }
 
-
     ProgressDialog pd;
+
     protected void downProgress() {
-        pd = new  ProgressDialog(this);
+        pd = new ProgressDialog(this);
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pd.setCanceledOnTouchOutside(false);
         pd.setMax(100);
@@ -156,29 +140,43 @@ public class DeviceUpdateActivity extends MyActionBarActivity implements View.On
                 @Override
                 public void done(Integer integer) {
                     pd.setProgress(integer);
-                    L.e("=============",integer+"================");
                     if (integer == 100) {
-
                         pd.dismiss();
-                        showDialogConfirm(getString(R.string.notice), getString(R.string.blue_tooth_update));
+                        if (carrier != null && carrier.equals(IContent.MEI_ZU)){
+                            meiZuUpdate();
+                        }else{
+                            showDialogConfirm(getString(R.string.notice), getString(R.string.blue_tooth_update));
+                        }
                     }
                 }
             });
         }
     }
 
+    public void meiZuUpdate(){
+
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            String filePath = file.getPath();
+            intent.setType("text/*");
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(filePath)));
+            startActivityForResult(Intent.createChooser(intent,getString(R.string.blue_tooth_update_meizu)), 100);
+            return;
+
+    }
+
     @Override
     public void configClick() {
+
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
         String filePath = file.getPath();
-        String extension = filePath.substring(filePath.lastIndexOf(".") + 1);
-        String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         intent.setType("text/*");
         intent.setClassName("com.android.bluetooth", "com.android.bluetooth.opp.BluetoothOppLauncherActivity");
         intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(filePath)));
         startActivityForResult(intent, 100);
     }
+
 
     @Override
     public void cancleClick() {
@@ -188,8 +186,9 @@ public class DeviceUpdateActivity extends MyActionBarActivity implements View.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == 100) {
-           showProgressDialog(getString(R.string.gujian_shengji),60000,getString(R.string.update_failed));
+            showProgressDialog(getString(R.string.gujian_shengji), 30000, getString(R.string.update_failed));
         }
     }
 
@@ -208,22 +207,23 @@ public class DeviceUpdateActivity extends MyActionBarActivity implements View.On
         } else if (RFStarBLEService.ACTION_GATT_DISCONNECTED.equals(action)) {
             IContent.getInstacne().isBind = false;
             IContent.getInstacne().address = null;
+            dismissProgressDialog();
 
-        }else if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE)) {
+        } else if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE)) {
             byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
             L.e("AAAAA==================", Tools.byte2Hex(data) + "==" + data.length);
-            if (data[3] == (byte) 0x83 ) {
+            if (data[3] == (byte) 0x83) {
                 doMusic(data);
             }
-            if (data[3] == (byte) 0x8c && data[4] == 0x01){
+            if (data[3] == (byte) 0x8c && data[4] == 0x01) {
                 dismissProgressDialog();
                 Intent intent1 = new Intent();
-                intent1.putExtra("updateDone","updateDone");
-                setResult(RESULT_OK,intent1);
+                intent1.putExtra("updateDone", "updateDone");
+                setResult(RESULT_OK, intent1);
                 finish();
-            }else {
+            } else {
                 dismissProgressDialog();
-                ToastUtil.showToast(DeviceUpdateActivity.this,getResources().getString(R.string.update_failed));
+                ToastUtil.showToast(DeviceUpdateActivity.this, getResources().getString(R.string.update_failed));
             }
         }
     }
@@ -233,26 +233,11 @@ public class DeviceUpdateActivity extends MyActionBarActivity implements View.On
 
     }
 
-    private void showPopWindowUpdate() {
-        View view = LayoutInflater.from(this).inflate(R.layout.popwindow_update,null);
-        Button negativeButton = (Button) view.findViewById(R.id.negativeButton);
-        Button positiveButton = (Button) view.findViewById(R.id.positiveButton);
-        negativeButton.setOnClickListener(this);
-        positiveButton.setOnClickListener(this);
-         dialog = new Dialog(this, R.style.MyDialogStyleBottom);
-        dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
-        DisplayMetrics dm = new DisplayMetrics();
-        Window dialogWindow = dialog.getWindow();
-        WindowManager m = dialogWindow.getWindowManager();
-        m.getDefaultDisplay().getMetrics(dm);
-        WindowManager.LayoutParams p = dialogWindow.getAttributes();
-        p.width = dm.widthPixels;
-        p.alpha = 1.0f;
-        p.dimAmount = 0.6f;
-        p.gravity = Gravity.CENTER;
-        dialogWindow.setAttributes(p);
-        dialog.show();
+
+    @Override
+    public void onConfirm() {
+        update();
+
     }
 
 }

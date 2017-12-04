@@ -866,7 +866,8 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             }
         }
         MusicInfo mode = MusicPlayer.getPlayinfos().get(MusicPlayer.getCurrentAudioId());
-        if (!isCollection) {
+
+        if (!isCollection && mode != null) {
             if (content.collectedList.contains(mode.musicName)){
                 isCollection = true;
             }
@@ -882,7 +883,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
         updateFav(isCollection);
     }
         private void upImageView(MusicInfo info ){
-            if (info.faceImage != null){
+            if ( info != null && info.faceImage != null){
                 Glide.with(PlayDetailActivity.this).load(info.faceImage).error(R.drawable.face_music_car_a).into(img_round_detail);
             }
 

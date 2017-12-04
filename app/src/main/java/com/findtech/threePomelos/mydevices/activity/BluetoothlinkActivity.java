@@ -144,8 +144,10 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
     }
     @TargetApi(Build.VERSION_CODES.M)
     private void startScanBluetoothDevice() {
+
         int hasAccessCoarseLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
         int hasAccessFineLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
+
         if (hasAccessCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     REQUEST_CODE_ASK_ACCESS_COARSE_LOCATION_PERMISSIONS);
@@ -194,7 +196,7 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
                                     @Override
                                     public void done(List<AVObject> list, AVException e) {
                                         if (e == null) {
-                                            L.e("==================done","======================="+list.size());
+
                                             if (list != null && list.size() == 0) {
                                                 netWorkRequest.addBlueTooth(true, deviceNum, deviceName, functionType, deviceIndentifier, company,new SaveCallback() {
                                                     @Override
@@ -349,7 +351,8 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
             app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
         }
         if (IContent.getInstacne().isBind && bluetoothDevice.getAddress().equals(IContent.getInstacne().address)) {
-            Intent intent = new Intent(this, DeviceDetailActivity.class);
+            //Intent intent = new Intent(this, DeviceDetailActivity.class);
+           Intent intent = new Intent(this, DeviceDetailActivity.class);
             intent.putExtra(IContent.getInstacne().clickPositionAddress, bluetoothDevice.getAddress());
             intent.putExtra(IContent.getInstacne().clickPositionName, bluetoothDevice.getName());
             intent.putExtra(IContent.getInstacne().clickPositionFunction, functionType);
@@ -361,10 +364,12 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
         }
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        blueSearchAdapter.notifyDataSetChanged();
-//
-//}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (app.manager != null){
+            app.manager.stopScanBluetoothDevice();
+        }
+
+    }
 }

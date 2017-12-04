@@ -35,13 +35,15 @@ public class GuideActivity extends BaseActivity {
     LinearLayout llPoint;
     Button bt_goto_main;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT)
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         setContentView(R.layout.activity_launch);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.setFlags(
@@ -66,7 +68,6 @@ public class GuideActivity extends BaseActivity {
 
         ViewPager.OnPageChangeListener listener = new ViewPager.OnPageChangeListener() {
             private int preSelect = 0;
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == imageViewList.size() - 1 && positionOffset > 0.6) {
@@ -100,7 +101,6 @@ public class GuideActivity extends BaseActivity {
             }
         };
 
-
         ImageView imageView;
         View pointView;
         LinearLayout.LayoutParams layoutParams;
@@ -110,14 +110,13 @@ public class GuideActivity extends BaseActivity {
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
             imageViewList.add(imageView);
-
             //指示器
             pointView = new ImageView(this);
             pointView.setBackgroundResource(R.drawable.launch_select_bac);
             layoutParams = new LinearLayout.LayoutParams(30, 30);
-            if (i != 0)
+            if (i != 0) {
                 layoutParams.leftMargin = 50;
-
+            }
             pointView.setEnabled(false);
             llPoint.addView(pointView, layoutParams);
         }
@@ -126,8 +125,6 @@ public class GuideActivity extends BaseActivity {
         llPoint.getChildAt(0).setEnabled(true);
         guideContent.addOnPageChangeListener(listener);
     }
-
-
     private void initData() {
         imageId = new int[]{R.drawable.guide_1, R.drawable.guide_2, R.drawable.guide_3,R.drawable.guide_4};
         imageViewList = new ArrayList<>();

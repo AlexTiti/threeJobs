@@ -107,7 +107,7 @@
             android:layout_marginLeft="@dimen/x5"
             android:textSize="@dimen/text_size_little"
             android:background="@drawable/launch_bac"
-            android:text="更新"
+            android:text="New"
             android:visibility="invisible"/>
 
 

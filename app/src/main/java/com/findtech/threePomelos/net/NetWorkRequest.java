@@ -25,6 +25,7 @@ import com.findtech.threePomelos.entity.TravelInfoEntity;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.utils.DownFileUtils;
 import com.findtech.threePomelos.music.utils.L;
+import com.findtech.threePomelos.mydevices.bean.BluetoothLinkBean;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.RequestUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
@@ -679,7 +680,28 @@ public class NetWorkRequest {
         postTotalMileage.saveInBackground(saveCallback);
     }
 
+    public void selectDeviceTypeAndIdentifier() {
+        AVQuery<AVObject> query = new AVQuery<>(CART_LIST_DETAILS);
+        query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        query.setMaxCacheAge(24 * 3600 * 7 *1000);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null) {
+                    for (AVObject avObject : list) {
+                        BluetoothLinkBean bean = new BluetoothLinkBean();
+                        bean.setDeviceIndentifier(avObject.getString(NetWorkRequest.DEVICEIDENTIFITER));
+                        bean.setName(avObject.getString(NetWorkRequest.BLUETOOTH_NAME));
+                        bean.setType(avObject.getString(NetWorkRequest.FUNCTION_TYPE));
+                        bean.setCompany(avObject.getString(NetWorkRequest.COMPANY));
+                        IContent.getInstacne().bluetoothLinkBeen.add(bean);
+                    }
+                }
+            }
+        });
 
+
+    }
     public void selectDeviceTypeAndIdentifier(FindCallback<AVObject> findCallback) {
         AVQuery<AVObject> query = new AVQuery<>(CART_LIST_DETAILS);
         query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
@@ -1102,6 +1124,20 @@ public class NetWorkRequest {
                         avObject.put("play_count",count);
                         avObject.saveInBackground();
                     }
+                }
+            }
+        });
+    }
+
+    public static void getAPPVersion(){
+        AVQuery<AVObject> query = new AVQuery<>("AndroidAPPVersion");
+        query.orderByDescending("createdAt");
+        query.limit(1);
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null && list.size() >0){
+                    IContent.getInstacne().newVersion = list.get(0).getString("version");
                 }
             }
         });

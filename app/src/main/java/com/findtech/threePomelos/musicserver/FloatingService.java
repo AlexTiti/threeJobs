@@ -76,7 +76,6 @@ public class FloatingService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Log.e("onCreate","onCreate");
 		initWindow();//设置窗口的参数
 
 		IntentFilter intentFilter = new IntentFilter(IContent.ACTION_PLAY_OR_PAUSE);
@@ -87,7 +86,6 @@ public class FloatingService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.e("onCreate","onStartCommand");
 		initFloating();//设置悬浮窗图标
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -160,14 +158,8 @@ public class FloatingService extends Service {
 	 * 设置悬浮窗的点击、滑动事件
 	 */
 	private void initFloating() {
-		Log.e("onCreate","initFloating");
-		//mfloatingIv = (ImageButton) mlayout.findViewById(R.id.floating_imageView);
-		//mfloatingIv.getBackground().setAlpha(150);
-
 		doubleWaveView = (DoubleWaveView) mlayout.findViewById(R.id.waveView);
 		mGestureDetector = new GestureDetector(this, new MyOnGestureListener());
-		//设置监听器
-		//mfloatingIv.setOnTouchListener(new FloatingListener());
 		doubleWaveView.setOnTouchListener(new FloatingListener());
 
 
@@ -273,7 +265,6 @@ public class FloatingService extends Service {
 
         @Override
         public boolean onDown(MotionEvent e) {
-           // Toast.makeText(getApplicationContext(), "onDown",Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -294,8 +285,9 @@ public class FloatingService extends Service {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (action == null)
+			if (action == null) {
 				return;
+			}
 
 			if (action.equals(IContent.ACTION_PLAY_OR_PAUSE)){
 				doubleWaveView.setAnim(intent.getBooleanExtra("isPlay",true));

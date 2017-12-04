@@ -101,6 +101,7 @@
         android:id="@+id/childcare_points"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_weight="1">
 
         <ImageView
@@ -166,6 +167,7 @@
         android:id="@+id/dp_sign"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_weight="1">
 
         <ImageView
@@ -229,6 +231,7 @@
         android:id="@+id/science_tip"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_weight="1">
 
 
@@ -293,6 +296,7 @@
         android:id="@+id/grown_concern"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_weight="1">
 
 
@@ -357,8 +361,8 @@
         android:id="@+id/interaction"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_weight="1">
-
 
         <ImageView
             android:id="@+id/ima5"
