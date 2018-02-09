@@ -1,8 +1,6 @@
 package com.findtech.threePomelos.music.proxy.utils;
 
 import android.content.Context;
-import android.util.Log;
-
 
 import com.findtech.threePomelos.music.proxy.db.CacheFileInfoDao;
 import com.findtech.threePomelos.music.utils.L;
@@ -152,7 +150,6 @@ public class ProxyFileUtils {
                 randomAccessFile.read(tmp);
                 return tmp;
             } catch (IOException e) {
-                Log.e(LOG_TAG, "缓存读取失败", e);
                 return null;
             }
         } else {
@@ -172,7 +169,6 @@ public class ProxyFileUtils {
                 randomAccessFile.read(tmp);
                 return tmp;
             } catch (IOException e) {
-                Log.e(LOG_TAG, "缓存读取失败", e);
                 return null;
             }
         } else {
@@ -186,7 +182,6 @@ public class ProxyFileUtils {
                 outputStream.write(buffer, 0, byteCount);
                 outputStream.flush();
             } catch (IOException e) {
-                Log.e(LOG_TAG, "缓存写入失败", e);
             }
         }
     }

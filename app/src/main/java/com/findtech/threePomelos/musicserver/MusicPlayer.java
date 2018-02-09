@@ -354,7 +354,7 @@ public class MusicPlayer {
                     } else {
                         //change music
                         mService.setQueuePosition(position);
-                        L.e("SixItem", "setQueuePosition + playAll"+position);
+                        L.e("FFFFFFF","setQueuePosition"+position);
                         return;
                     }
 

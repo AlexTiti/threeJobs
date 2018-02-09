@@ -90,7 +90,11 @@ public class MyApplication extends Application {
 
     public static MyApplication getInstance() {
         if (null == instance) {
-            instance = new MyApplication();
+            synchronized (MyApplication.class) {
+                if (null == instance) {
+                    instance = new MyApplication();
+                }
+            }
         }
         return instance;
     }

@@ -83,7 +83,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     private PlaylistsManager mPlaylistsManager;
     private ImageView image_download;
     private TextView textView;
-    private SeekBar seekBarVoice;
+    private PlayerSeekBar seekBarVoice;
     private AudioManager mAudiomanger;
     private int maxVoice, currentVoice;
     private boolean isVoice = false;
@@ -216,7 +216,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
             }
         }
         textView = (TextView) findViewById(R.id.text_progress);
-        seekBarVoice = (SeekBar) findViewById(R.id.voice_seekbar);
+        seekBarVoice = (PlayerSeekBar) findViewById(R.id.voice_seekbar);
         image_voice = (ImageView) findViewById(R.id.image_voice);
         image_voice.setOnClickListener(this);
         playerSeekBar.setIndeterminate(false);
@@ -363,6 +363,7 @@ public class PlayDetailActivity extends MyActionBarActivity implements View.OnCl
     }
 
     private void refreshVoice(){
+        isVoice = false;
         seekBarVoice.setVisibility(View.GONE);
         textView_music.setVisibility(View.VISIBLE);
         image_voice.setImageResource(R.drawable.icon_voice);

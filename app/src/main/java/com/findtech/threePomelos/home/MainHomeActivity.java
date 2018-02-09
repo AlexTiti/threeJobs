@@ -2,15 +2,18 @@ package com.findtech.threePomelos.home;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.avos.avoscloud.AVException;
@@ -47,10 +50,6 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
     TabLayout tab_home_layout;
     FragmentAdapter fragmentAdapter;
     private static long DOUBLE_CLICK_TIME = 0L;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,9 +63,7 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
         homePresenter = new HomePresenter(this);
         homePresenter.installModelData();
         Nammu.init(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkPermission();
-        }
+
         PushService.setDefaultPushCallback(this, MainHomeActivity.class);
         AVInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             @Override
@@ -117,15 +114,6 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
 
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void checkPermission() {
-        if (!Nammu.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    PERMISSIONS_STORAGE, 1
-            );
-        }
-    }
 
     @Override
     public void refreshUI(ArrayList<Fragment> fragments) {
@@ -186,4 +174,6 @@ public class MainHomeActivity extends MyActionBarActivity implements IViewMainHo
     public void onPageScrollStateChanged(int state) {
 
     }
+
+
 }

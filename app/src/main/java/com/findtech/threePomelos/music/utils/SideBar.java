@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -48,6 +47,7 @@ public class SideBar extends View {
     /**
      * 重写这个方法
      */
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
@@ -152,7 +152,7 @@ public class SideBar extends View {
 
 
     public void setSelected(String nowChar) {
-        Log.i("OnRecyclerViewOnScrol", "setSelected:" + nowChar);
+
         if (nowChar != null) {
             for (int i = 0; i < b.length; i++) {
                 if (b[i].equals(nowChar)) {

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -144,7 +143,7 @@ public class HeightBarCharFragment extends Fragment {
         barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, int i, Highlight highlight) {
-                Log.d("ZZZ", "onValueSelected entry = " + entry + " i = " + i + " highlight = " + highlight);
+
                 value = entry.getVal();
                 index = entry.getXIndex();
             }
@@ -170,9 +169,7 @@ public class HeightBarCharFragment extends Fragment {
             public void onChartDoubleTapped(MotionEvent motionEvent) {
                 if (cacheHeightTimeArray != null) {
                     if (value == 0.0f) {
-                        Log.d("ZZZ", "onChartDoubleTapped index = " + index);
-                        Log.d("ZZZ", "onChartDoubleTapped height = " + cacheHeightTimeArray.get(index).getHeight());
-                        Log.d("ZZZ", "onChartDoubleTapped time = " + cacheHeightTimeArray.get(index).getTime());
+
                         if (cacheHeightTimeArray.get(index).getHeight() != 0.0f ||
                                 (cacheHeightTimeArray.get(index).getHeight() == 0.0f &&
                                         TextUtils.isEmpty(cacheHeightTimeArray.get(index).getTime()))) {
@@ -308,6 +305,7 @@ public class HeightBarCharFragment extends Fragment {
         builder.setShowButton(true);
         builder.setCanceledOnTouchOutside(true);
         builder.setPositiveButton("更改", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(final DialogInterface dialog, int which) {
                 dialog.dismiss();
                 showUpdateHeightDialog(time);
@@ -316,9 +314,10 @@ public class HeightBarCharFragment extends Fragment {
 
         builder.setNegativeButton(getResources().getString(R.string.delete),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final Date finalDate = Tools.getDateFromTimeStr(time);
-                        Log.d("ZZZ", "finalDate = " + finalDate);
+
                         final AVQuery<AVObject> query = AVQuery.getQuery(NetWorkRequest.BABY_HEIGHT);
                         query.whereEqualTo("post", AVUser.getCurrentUser());
                         query.whereEqualTo(OperateDBUtils.DATE, finalDate);
@@ -328,7 +327,7 @@ public class HeightBarCharFragment extends Fragment {
                         query.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
-                                Log.d("ZZZ", "findInBackground = " + list.size());
+
                                 if (e == null) {
                                     AVObject.deleteAllInBackground(list, new DeleteCallback() {
                                         @Override
@@ -376,6 +375,7 @@ public class HeightBarCharFragment extends Fragment {
         builder.setCanceledOnTouchOutside(true);
 
         builder.setPositiveButton(getResources().getString(R.string.btn_tagimage_show_save), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (edittext == null || (edittext != null && TextUtils.isEmpty(edittext.getText().toString()))) {
                     return;
@@ -391,7 +391,7 @@ public class HeightBarCharFragment extends Fragment {
                 query.findInBackground(new FindCallback<AVObject>() {
                     @Override
                     public void done(List<AVObject> list, AVException e) {
-                        Log.d("ZZZ", "findInBackground = " + list.size());
+
                         if (e == null) {
                             if (list.size() > 0) {
                                 for (int i = 0; i < list.size(); i++) {
@@ -421,6 +421,7 @@ public class HeightBarCharFragment extends Fragment {
 
         builder.setNegativeButton(getResources().getString(R.string.cancle),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }

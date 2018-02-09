@@ -419,7 +419,7 @@
     <string name="checkNumber_useless">無效的短訊驗證碼，通常是不匹配或者過期</string>
     <string name="checkNumber_send_fail">短訊請求次數超上限！</string>
     <string name="login_empty_notice">賬號或密碼不能為空!</string>
-    <string name="data_max_notice">輸入數據過大</string>
+    <string name="data_max_notice">請輸入正確的數值!</string>
 
 
     <string name="babay_sex">是男寶還是女寶啊</string>
@@ -491,5 +491,7 @@
     <string name="bluetooth_fail_common_deal">綁定推車時需要與系統後台服務器進行網絡連接，因此請您保持網絡順暢，用4G信號會可能更好哦。</string>
     <string name="bluetooth_data_common">同步數據失敗</string>
     <string name="bluetooth_data_common_deal">請依次排查：電源是否開啓、藍牙是否進入睡眠模式（若進入請觸碰相關區域喚醒）、藍牙是否開啓時間過長（重新開啓藍牙）</string>
+    <string name="checkNumberRate">發送簡訊過快，請稍後重試</string>
+    <string name="primess_notice">請允許此權限否則該功能無法使用!</string>
 
 </resources>

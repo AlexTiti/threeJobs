@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 
@@ -46,7 +45,7 @@ public class FileUtils {
         if (isMountedSDCard()) {
             File sdcardDir = Environment.getExternalStorageDirectory();
             if (!sdcardDir.canWrite()) {
-                Log.w(TAG, "SDCARD can not write !");
+
             }
             return sdcardDir.getPath();
         }
@@ -63,7 +62,7 @@ public class FileUtils {
                 .getExternalStorageState())) {
             return true;
         } else {
-            Log.w(TAG, "SDCARD is not MOUNTED !");
+
             return false;
         }
     }
@@ -179,8 +178,9 @@ public class FileUtils {
             cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
                     null);
             if (cursor != null && cursor.moveToFirst()) {
-                if (DEBUG)
+                if (DEBUG) {
                     DatabaseUtils.dumpCursor(cursor);
+                }
 
                 final int column_index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(column_index);
@@ -188,8 +188,9 @@ public class FileUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
+            }
         }
         return null;
     }
@@ -209,17 +210,6 @@ public class FileUtils {
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static String getPath(final Context context, final Uri uri) {
-
-        if (DEBUG)
-            Log.d(TAG + " File -",
-                    "Authority: " + uri.getAuthority() +
-                            ", Fragment: " + uri.getFragment() +
-                            ", Port: " + uri.getPort() +
-                            ", Query: " + uri.getQuery() +
-                            ", Scheme: " + uri.getScheme() +
-                            ", Host: " + uri.getHost() +
-                            ", Segments: " + uri.getPathSegments().toString()
-            );
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
@@ -278,8 +268,9 @@ public class FileUtils {
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
 
             // Return the remote address
-            if (isGooglePhotosUri(uri))
+            if (isGooglePhotosUri(uri)) {
                 return uri.getLastPathSegment();
+            }
 
             return getDataColumn(context, uri, null, null);
         }
@@ -325,8 +316,9 @@ public class FileUtils {
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
             File dir = new File(filePathTemp);
-            if (!dir.exists())
+            if (!dir.exists()) {
                 dir.mkdir();
+            }
             File file = new File(filePathTemp + "temp" + ".jpg");
             FileOutputStream out;
             try {
@@ -335,7 +327,7 @@ public class FileUtils {
                     out.flush();
                     out.close();
                 }
-                android.util.Log.d("wxh3","file.getAbsolutePath() : "+file.getAbsolutePath());
+
                 return file.getAbsolutePath();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -372,8 +364,9 @@ public class FileUtils {
         File file = null;
         if (isTemp) {
             file = new File(FileUtils.SOURCE_IMAGE_FILEFOLDER_TEMP);
-            if (!file.exists())
+            if (!file.exists()) {
                 file.mkdir();
+            }
             String tempFilePath = FileUtils.SOURCE_IMAGE_FILE_TEMP;
             deleteFileFromPath(tempFilePath);
             file = new File(tempFilePath);
@@ -382,8 +375,9 @@ public class FileUtils {
             String tempFilePath = FileUtils.SOURCE_IMAGE_FILE_TEMP;
             deleteFileFromPath(tempFilePath);
             file = new File(FileUtils.IMAGE_FILE_SAVE_PATH);
-            if (!file.exists())
+            if (!file.exists()) {
                 file.mkdir();
+            }
             String savePicPath = FileUtils.IMAGE_FILE_SAVE_PATH + "baby_" + getNewFileName() + ".png";
             file = new File(savePicPath);
         }

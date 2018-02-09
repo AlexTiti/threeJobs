@@ -19,7 +19,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,7 +176,7 @@ public class BabyInfoActivity extends MyActionBarActivity implements View.OnClic
 
     @Override
     public void onItemClick(View view, int position) {
-        Log.d("ZZ", "position = " + position);
+
         switch (position) {
             case 0:
                 showInputBabySexDialog();

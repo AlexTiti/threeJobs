@@ -9,14 +9,12 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.entity.BabyInfoEntity;
 import com.findtech.threePomelos.home.MainHomeActivity;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.net.QueryBabyInfoCallBack;
@@ -111,7 +109,7 @@ public class ThirdPartyController {
         mShareController.getConfig().closeToast();
         wxHandler.addToSocialSDK();
 
-        UMWXHandler wxCircleHandler = new UMWXHandler(mContext,WXAppId,WXAppId);
+        UMWXHandler wxCircleHandler = new UMWXHandler(mContext, WXAppId, WXAppId);
         wxCircleHandler.setToCircle(true);
         wxCircleHandler.showCompressToast(false);
         wxCircleHandler.addToSocialSDK();
@@ -125,6 +123,7 @@ public class ThirdPartyController {
         Tencent mTencent = Tencent.createInstance(QQAppId, mContext);
         return mTencent.isSupportSSOLogin((Activity) mContext);
     }
+
     public boolean isWeiboClientInstalled() {
         return checkApkExist(mContext, "com.sina.weibo");
     }
@@ -162,13 +161,12 @@ public class ThirdPartyController {
                 mLoginController.getPlatformInfo(mContext, platform, new SocializeListeners.UMDataListener() {
                     @Override
                     public void onStart() {
-                        Log.d("ZZ", "getPlatformInfo onStart");
+
                     }
 
                     @Override
                     public void onComplete(int status, Map<String, Object> info) {
-                        Log.d("ZZ", "status" + status);
-                        Log.d("ZZ", "info" + info);
+
                         if (status == 200 && info != null) {
                             StringBuilder sb = new StringBuilder();
                             Set<String> keys = info.keySet();

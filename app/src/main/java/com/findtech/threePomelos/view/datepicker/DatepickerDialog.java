@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.utils.ToastUtil;
@@ -333,7 +331,7 @@ public class DatepickerDialog extends Dialog implements android.view.View.OnClic
         for (int i = 0; i < size; i++) {
             TextView textvew = (TextView) arrayList.get(i);
             currentText = getNumbers(textvew.getText().toString());
-            Log.d("cdg", "currentText :" + currentText + " curriteItemText: " + curriteItemText);
+
             int curriteItemInt = Integer.parseInt(curriteItemText);
             int currentInt = Integer.parseInt(currentText);
 

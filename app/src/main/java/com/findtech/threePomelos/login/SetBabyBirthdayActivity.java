@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,10 +20,11 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.SignUpCallback;
+import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
-import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.home.MainHomeActivity;
+import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.net.QueryBabyInfoCallBack;
 import com.findtech.threePomelos.utils.RequestUtils;
@@ -119,6 +119,7 @@ public class SetBabyBirthdayActivity extends MyActionBarActivity implements View
                     if (e == null) {
                         setBabyInfo();
                     } else {
+                        L.e("===",e.toString());
                         progressDialog.dismiss();
                         if (e.getCode() == 214) {
                             ToastUtil.showToast(SetBabyBirthdayActivity.this, getResources().getString(R.string.phone_number_useless));

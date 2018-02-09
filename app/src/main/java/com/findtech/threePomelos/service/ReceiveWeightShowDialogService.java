@@ -1,14 +1,11 @@
 package com.findtech.threePomelos.service;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -21,7 +18,6 @@ import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.utils.RequestUtils;
 import com.findtech.threePomelos.utils.Tools;
 import com.findtech.threePomelos.view.dialog.CustomDialog;
 
@@ -87,6 +83,7 @@ public class ReceiveWeightShowDialogService extends Service {
 
             builder.setNegativeButton(getString(R.string.cancle),
                     new android.content.DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                             stopTimer();
@@ -152,13 +149,13 @@ public class ReceiveWeightShowDialogService extends Service {
     }
 
     private void updateWeightToServer(final String weight, final Date date) {
-        Log.d("ZZ", "update weight data");
+
         netWorkRequest.updateWeightAndTimeToServer(weight, date, new SaveCallback() {
             @Override
             public void done(AVException e) {
                 if (e == null) {
                     operateDBUtils.saveWeightToDB(weight, Tools.getTimeFromDate(date));
-//                    delegate.onReceiveDataAvailable(RequestUtils.WEIGHT, weight, null, Tools.getTimeFromDate(date));
+
                 } else {
                     Toast.makeText(getApplicationContext(), getString(R.string.save_data_failed), Toast.LENGTH_SHORT).show();
                 }
@@ -177,7 +174,7 @@ public class ReceiveWeightShowDialogService extends Service {
     }
 
     private void startTimer() {
-        if (mTimer == null) {
+        if ( mTimer == null) {
             mTimer = new Timer();
         }
         if (mTimerTask == null) {

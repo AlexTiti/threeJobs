@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +82,6 @@ public class HeightViewFragment extends Fragment implements View.OnClickListener
     }
 
 
-
     @Override
     public void onPause() {
         super.onPause();
@@ -133,8 +132,7 @@ public class HeightViewFragment extends Fragment implements View.OnClickListener
                                 personDataEntity.setTime(timePoint);
                                 personDataEntity.setHeight(heightNum);
                                 timeHeightDataArray.add(personDataEntity);
-//                            Log.d("ZZ", "heightNum = " + heightNum);
-//                            Log.d("ZZ", "timePoint = " + timePoint);
+
                             }
                             Collections.sort(timeHeightDataArray, sort);
                         }
@@ -180,7 +178,6 @@ public class HeightViewFragment extends Fragment implements View.OnClickListener
                     String heightNumStr = RequestUtils.getSharepreference(getContext()).getString(RequestUtils.HEIGHT, "- -");
                     heightNum.setText(heightNumStr);
                 } catch (Exception e) {
-                    Log.e("ZZ", "HeightViewFragment handler e " + e);
                 }
                 getFragmentManager().beginTransaction().remove(heightBarCharFragment).commitAllowingStateLoss();
                 getFragmentManager().beginTransaction().replace(R.id.bar_chart_layout, newHeightBarCharFragment).commitAllowingStateLoss();

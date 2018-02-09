@@ -2,8 +2,6 @@ package com.findtech.threePomelos.music.proxy.utils;
 
 import android.content.Context;
 import android.os.Looper;
-import android.util.Log;
-
 
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.music.proxy.db.CacheFileInfoDao;

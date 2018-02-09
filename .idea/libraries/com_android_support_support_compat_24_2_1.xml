@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="com.android.support:support-compat-24.2.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.1.aar/14fb1cbeb0a7cbbef7e4634ce1b709df/jars/classes.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.1.aar/14fb1cbeb0a7cbbef7e4634ce1b709df/jars/libs/internal_impl-24.2.1.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.1.aar/14fb1cbeb0a7cbbef7e4634ce1b709df/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.1.aar/4df7292586899f9ae63328d775871d84/jars/libs/internal_impl-24.2.1.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.1.aar/4df7292586899f9ae63328d775871d84/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-24.2.1.aar/4df7292586899f9ae63328d775871d84/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://D:/ProgramFils/android-sdk_r24.1.2-windows/android-sdk-windows/extras/android/m2repository/com/android/support/support-compat/24.2.1/support-compat-24.2.1-javadoc.jar!/" />

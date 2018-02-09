@@ -16,9 +16,11 @@ import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -28,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -55,12 +56,12 @@ import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
 import com.findtech.threePomelos.login.ThirdPartyController;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
 import com.findtech.threePomelos.music.utils.L;
+import com.findtech.threePomelos.musicserver.Nammu;
 import com.findtech.threePomelos.mydevices.activity.BluetoothlinkActivity;
 import com.findtech.threePomelos.mydevices.activity.DeviceDetailActivity;
 import com.findtech.threePomelos.mydevices.adapter.BluetoothLinkAdapter;
 import com.findtech.threePomelos.mydevices.bean.BluetoothLinkBean;
 import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.utils.DialogUtil;
 import com.findtech.threePomelos.utils.FileUtils;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.MyCalendar;
@@ -70,7 +71,6 @@ import com.findtech.threePomelos.utils.ScreenUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
 import com.findtech.threePomelos.view.HeadZoomScrollView;
-import com.findtech.threePomelos.view.MyListView;
 import com.findtech.threePomelos.view.dialog.CustomDialog;
 
 import java.io.File;
@@ -113,7 +113,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
     PicOperator picOperator;
     private NetWorkRequest netWorkRequest;
     private OperateDBUtils operateDBUtils;
-    private boolean isBind, onceShow;
+
     private BabyInfoEntity babyInfoEntity = BabyInfoEntity.getInstance();
     private String deviceNum;
     private String babyTotalMonth, oldBabyTotalMonth, oldBabySex, nowBabySex;
@@ -202,24 +202,24 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         mContext.getContentResolver().registerContentObserver(OperateDBUtils.WEIGHT_URI, true, contentObserver);
         operateDBUtils = new OperateDBUtils(mContext);
         picOperator = new PicOperator(getActivity());
-        isBind = babyInfoEntity.getIsBind();
+
         deviceNum = babyInfoEntity.getBluetoothDeviceId();
         oldBabyTotalMonth = RequestUtils.getSharepreference(mContext).getString(RequestUtils.BABY_TOTAL_MONTH, "-1");
         oldBabySex = babyInfoEntity.getBabySex();
         manager = (BluetoothManager) getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
         bleAdapter = manager.getAdapter();
+
         closeReceiver = new CloseReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(BaseActivity.DEVICE_CLOSE_ONPAGE);
         getActivity().registerReceiver(closeReceiver, filter);
-//        DialogUtil dialogUtil = DialogUtil.getIntence(getActivity());
-//        dialogUtil.showDialogNoConfirm();
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        onceShow = true;
+
     }
 
     public void refreshdata() {
@@ -248,17 +248,17 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
-        boolean isLogin = RequestUtils.getSharepreference(mContext)
-                .getBoolean(RequestUtils.IS_LOGIN, false);
-        if (isLogin) {
-            if (getString(R.string.input_sex_baby).equals(babyInfoEntity.getBabySex()) ||
-                    getString(R.string.input_birth_baby).equals(babyInfoEntity.getBirthday()) ||
-                    getString(R.string.input_address_baby).equals(babyInfoEntity.getBabyNative())) {
-                RequestUtils.getSharepreferenceEditor(mContext)
-                        .putBoolean(RequestUtils.IS_LOGIN, false).apply();
-                gotoBabyInfoViewDialog();
-            }
-        }
+//        boolean isLogin = RequestUtils.getSharepreference(mContext)
+//                .getBoolean(RequestUtils.IS_LOGIN, false);
+//        if (isLogin) {
+//            if (getString(R.string.input_sex_baby).equals(babyInfoEntity.getBabySex()) ||
+//                    getString(R.string.input_birth_baby).equals(babyInfoEntity.getBirthday()) ||
+//                    getString(R.string.input_address_baby).equals(babyInfoEntity.getBabyNative())) {
+//                RequestUtils.getSharepreferenceEditor(mContext)
+//                        .putBoolean(RequestUtils.IS_LOGIN, false).apply();
+//                //gotoBabyInfoViewDialog();
+//            }
+//        }
         mThirdPartyController = new ThirdPartyController(mContext);
         updateView();
         bitmap = PicOperator.getIconFromData(mContext);
@@ -372,26 +372,26 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
     protected void onUserVisible() {
     }
 
-    private void gotoBabyInfoViewDialog() {
-        final CustomDialog.Builder builder = new CustomDialog.Builder(mContext);
-        builder.setTitle(getString(R.string.notice));
-        builder.setNotifyInfo(getString(R.string.input_baby_info));
-        builder.setShowButton(true);
-        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                startActivity(new Intent(mContext, BabyInfoActivity.class));
-            }
-        });
-        builder.setNegativeButton(getString(R.string.cancle), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.create().show();
-    }
+//    private void gotoBabyInfoViewDialog() {
+//        final CustomDialog.Builder builder = new CustomDialog.Builder(mContext);
+//        builder.setTitle(getString(R.string.notice));
+//        builder.setNotifyInfo(getString(R.string.input_baby_info));
+//        builder.setShowButton(true);
+//        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//                startActivity(new Intent(mContext, BabyInfoActivity.class));
+//            }
+//        });
+//        builder.setNegativeButton(getString(R.string.cancle), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        builder.create().show();
+//    }
 
     ContentObserver contentObserver = new ContentObserver(new Handler()) {
         @Override
@@ -434,7 +434,10 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         IContent.getInstacne().functionType = deviceCarBean.getFunctionType();
         IContent.getInstacne().company = deviceCarBean.getCompany();
         startActivityForResult(intent, 110);
+
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -455,30 +458,38 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                 startActivity(new Intent(mContext, BabyInfoActivity.class));
                 break;
             case R.id.btn_image_choose_pic:
-                PackageManager pm = mContext.getPackageManager();
-                boolean permission = (PackageManager.PERMISSION_GRANTED ==
-                        pm.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", mContext.getPackageName()));
-                if (permission) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Nammu.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    requestPermissions(Nammu.PERMISSIONS_STORAGE,WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
+                }else {
                     showPicChooserDialog();
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
                 }
                 break;
             case R.id.image_searchcar:
-                searchDevice();
+                isBluetoothUseful();
                 break;
             case R.id.text_add_car_page:
-                searchDevice();
+                isBluetoothUseful();
                 break;
+                default:
+                    break;
         }
     }
 
-    private void searchDevice() {
+    private void isBluetoothUseful(){
+
         if (!bleAdapter.isEnabled()) {
-            app.manager.isEnabled(getActivity());
-            return;
+            Intent enableBtIntent = new Intent(
+                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            enableBtIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 200);
+            startActivityForResult(enableBtIntent, 102);
+        }else {
+            searchDevice();
         }
+
+    }
+
+    private void searchDevice() {
+
         if (content.bluetoothLinkBeen != null && content.bluetoothLinkBeen.isEmpty()) {
             netWorkRequest.selectDeviceTypeAndIdentifier(new FindCallback<AVObject>() {
                 @Override
@@ -544,8 +555,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         File dir = new File(FileUtils.DCIMCamera_PATH);
         if (!dir.exists()) {
-            boolean isCreate = dir.mkdir();
-            Log.d(TAG_LOG, "no dir and create it :" + isCreate);
+             dir.mkdir();
         }
         tempPhotoPath = FileUtils.DCIMCamera_PATH + "temp.jpg";
         mCurrentPhotoFile = new File(tempPhotoPath);
@@ -583,6 +593,13 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
+
+
+
+        if (requestCode == 102){
+           searchDevice();
+        }
+
         switch (requestCode) {
             case Tools.CAMERA_WITH_DATA:
                 photoPath = tempPhotoPath;
@@ -756,8 +773,24 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
             totalHeight += listItem.getMeasuredHeight();
         }
         ViewGroup.LayoutParams params = lv.getLayoutParams();
-        params.height = totalHeight + (lv.getDividerHeight() * (lv.getCount() - 1));//这里还将分割线的高度考虑进去了，统计出所有分割线占有的高度和
+        params.height = totalHeight + (lv.getDividerHeight() * (lv.getCount() - 1));
         lv.setLayoutParams(params);
 
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode) {
+            case WRITE_EXTERNAL_STORAGE_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showPicChooserDialog();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

@@ -2,12 +2,8 @@ package com.findtech.threePomelos.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 
-import com.avos.avoscloud.AVCloud;
-import com.avos.avoscloud.AVUser;
 import com.findtech.threePomelos.base.MyApplication;
 
 /**

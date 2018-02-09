@@ -3,6 +3,7 @@ package com.findtech.threePomelos.music.activity;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -221,20 +223,18 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     @Override
     public void click(int position) {
         this.position = position;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Nammu.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                ActivityCompat.requestPermissions(
-                        this,
-                        PERMISSIONS_STORAGE, 1
-                );
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Nammu.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Nammu.requestPermission(this,Nammu.PERMISSIONS_STORAGE,1,Manifest.permission.WRITE_EXTERNAL_STORAGE,getResources().getString(R.string.primess_notice));
+        }else {
+            goMusic();
         }
+
         if (IContent.getInstacne().SD_Mode) {
             if (app.manager.cubicBLEDevice != null) {
                 app.manager.cubicBLEDevice.writeValue(IContent.SERVERUUID_BLE, IContent.WRITEUUID_BLE, IContent.BLUEMODE);
             }
         }
-        goMusic();
+
     }
 
     @MainThread
@@ -289,7 +289,14 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     @Override
     public void downclick(int position) {
         down_position = position;
-        downMusic(musicInfos.get(position));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Nammu.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Nammu.requestPermission(this,Nammu.PERMISSIONS_STORAGE,100,Manifest.permission.WRITE_EXTERNAL_STORAGE,getResources().getString(R.string.primess_notice));
+        }else {
+            downMusic(musicInfos.get(position));
+        }
+
+
     }
 
     class PlayMusic implements Runnable {
@@ -301,6 +308,7 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
 
         @Override
         public void run() {
+
             long[] list = new long[musicInfos.size()];
             HashMap<Long, MusicInfo> infos = new HashMap();
             for (int i = 0; i < musicInfos.size(); i++) {
@@ -332,9 +340,12 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     }
 
     private void downMusic(final MusicInfo info) {
+
+
         musicInfos.get(down_position).artist = "downing";
         musicAdapter.setAvObjectList(musicInfos);
         musicAdapter.notifyDataSetChanged();
+
 
         final NetWorkRequest netWorkRequest = new NetWorkRequest(this);
         NetWorkRequest.downMusicFromNet(this, info, new ProgressCallback() {
@@ -422,5 +433,25 @@ public class SixItemMusicActivity extends BaseActivity implements ItemClickListt
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         L.e("onActivityResult");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                goMusic();
+                }
+                break;
+            case 100:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    downMusic(musicInfos.get(down_position));
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

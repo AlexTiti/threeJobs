@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +61,9 @@ public class WeightTipsFragment extends Fragment implements View.OnClickListener
         babyHealthTip = (RelativeLayout) view.findViewById(R.id.baby_health_tip);
         babyHealthTip.setOnClickListener(this);
         final String currentDate = Tools.getSystemTimeInChina("yyyy-MM-dd");
-        Log.d("ZZ", "babyInfoEntity.getBirthday() = " + babyInfoEntity.getBirthday());
-        if (babyInfoEntity.getBirthday() == null)
+        if (babyInfoEntity.getBirthday() == null) {
             return view;
+        }
         if (!getString(R.string.input_birth_baby).equals(babyInfoEntity.getBirthday())) {
 
             String birthday = babyInfoEntity.getBirthday().replace("年", "-").replace("月", "-").replace("日", "");
@@ -75,7 +74,6 @@ public class WeightTipsFragment extends Fragment implements View.OnClickListener
                 e.printStackTrace();
             }
         } else {
-            Log.d("ZZ", "babyInfoEntity.getBirthday() 222");
             tipsTitle.setText(getString(R.string.tips));
         }
         return view;
@@ -101,6 +99,7 @@ public class WeightTipsFragment extends Fragment implements View.OnClickListener
 
         builder.setShowButton(true);
         builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 startActivity(new Intent(getContext(), BabyInfoActivity.class));
@@ -108,6 +107,7 @@ public class WeightTipsFragment extends Fragment implements View.OnClickListener
         });
 
         builder.setNegativeButton(getString(R.string.cancle), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
@@ -138,10 +138,11 @@ public class WeightTipsFragment extends Fragment implements View.OnClickListener
             String birthday = babyInfoEntity.getBirthday().replace("年", "-").replace("月", "-").replace("日", "");
             babyInfoEntity.setBabyTotalDay(getContext(), birthday, "0");
             myCalendar = new MyCalendar(birthday, currentDate,getActivity());
-            Log.d("ZZ", "String is : " + myCalendar.getDateForHealthTips());
+
             AVQuery<AVObject> query = new AVQuery<>(NetWorkRequest.HEALTH_TIPS);
             query.whereEqualTo("Date", myCalendar.getDateForHealthTips());
             query.findInBackground(new FindCallback<AVObject>() {
+                @Override
                 public void done(List<AVObject> avObjects, AVException e) {
                     if (e == null) {
                         if (avObjects.size() > 0) {

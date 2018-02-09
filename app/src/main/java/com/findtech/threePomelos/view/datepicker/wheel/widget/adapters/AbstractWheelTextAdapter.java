@@ -17,7 +17,6 @@ package com.findtech.threePomelos.view.datepicker.wheel.widget.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -238,7 +237,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
 				convertView = getView(itemResourceId, parent);
 			}
 			TextView textView = getTextView(convertView, itemTextResourceId);
-			Log.d("cdgf", "TextView.getHeight() :" + textView.getHeight());
+
 			if (!arrayList.contains(textView)) {
 				arrayList.add(textView);
 			}
@@ -315,7 +314,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
 				text = (TextView) view.findViewById(textResource);
 			}
 		} catch (ClassCastException e) {
-			Log.e("AbstractWheelAdapter", "You must supply a resource ID for a TextView");
+
 			throw new IllegalStateException("AbstractWheelAdapter requires the resource ID to be a TextView", e);
 		}
 

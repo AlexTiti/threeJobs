@@ -10,6 +10,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * @author Administrator
+ */
 public class MyCalendar {
     Calendar datebegin;
     Calendar dateend;
@@ -83,9 +86,12 @@ public class MyCalendar {
         int month2 = dateend.get(Calendar.MONTH);
         int year = year2 - year1;
         if (compareTo()) //计算天时向月借了一个月
+        {
             month2 -= 1;
-        if (month1 > month2)
+        }
+        if (month1 > month2) {
             year -= 1;
+        }
         return year;
     }
 

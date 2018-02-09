@@ -1,13 +1,18 @@
 package com.findtech.threePomelos.music.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -32,6 +37,7 @@ import com.findtech.threePomelos.music.utils.PreferencesUtility;
 import com.findtech.threePomelos.music.utils.SideBar;
 import com.findtech.threePomelos.music.utils.SortOrder;
 import com.findtech.threePomelos.musicserver.MusicPlayer;
+import com.findtech.threePomelos.musicserver.Nammu;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.NetUtils;
@@ -55,38 +61,48 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
     private TextView dialogText;
     private HashMap<String, Integer> positionMap = new HashMap<>();
     private boolean isAZSort = true;
-    ArrayList<MusicInfo> songList ;
+    ArrayList<MusicInfo> songList;
     PlayMusic playMusic;
     Handler handler;
     public Activity mContext = this;
     private ViewStub viewStub;
     private int position;
     private NetWorkRequest netWorkRequest;
+
     private void loadView() {
-            dialogText = (TextView) findViewById(R.id.dialog_text);
-            recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
-             viewStub = (ViewStub) findViewById(R.id.viewstub);
-            layoutManager = new LinearLayoutManager(mContext);
-            recyclerView.setLayoutManager(layoutManager);
-            musicAdapter = new ShowMusicAdapter();
-            recyclerView.setAdapter(musicAdapter);
-            recyclerView.setHasFixedSize(true);
-            musicAdapter.setItemCliclListener(this);
-            musicAdapter.setLongClickListener(this);
-            sideBar = (SideBar) findViewById(R.id.sidebar);
-            sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
-                @Override
-                public void onTouchingLetterChanged(String s) {
-                    dialogText.setText(s);
-                    sideBar.setView(dialogText);
-                    if (positionMap.get(s) != null) {
-                        int i = positionMap.get(s);
-                        ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(i + 1, 0);
-                    }
+        dialogText = (TextView) findViewById(R.id.dialog_text);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        viewStub = (ViewStub) findViewById(R.id.viewstub);
+        layoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
+        musicAdapter = new ShowMusicAdapter();
+        recyclerView.setAdapter(musicAdapter);
+        recyclerView.setHasFixedSize(true);
+        musicAdapter.setItemCliclListener(this);
+        musicAdapter.setLongClickListener(this);
+        sideBar = (SideBar) findViewById(R.id.sidebar);
+        sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
+            @Override
+            public void onTouchingLetterChanged(String s) {
+                dialogText.setText(s);
+                sideBar.setView(dialogText);
+                if (positionMap.get(s) != null) {
+                    int i = positionMap.get(s);
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(i + 1, 0);
                 }
-            });
+            }
+        });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Nammu.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            Nammu.requestPermission(this,Nammu.PERMISSIONS_STORAGE,100,Manifest.permission.READ_EXTERNAL_STORAGE,getResources().getString(R.string.primess_notice));
+        }else {
+            file_music = DownFileUtils.creatFileDir(this, IContent.FILEM_USIC);
             reloadAdapter();
         }
+
+        netWorkRequest = new NetWorkRequest(this);
+
+    }
 
     private RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
         @Override
@@ -102,14 +118,13 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_framelayout);
-        setToolbar(getResources().getString(R.string.local_music),true,null);
+        setToolbar(getResources().getString(R.string.local_music), true, null);
         registerMusicBroadcast();
         mPreferences = PreferencesUtility.getInstance(mContext);
         handler = HandlerUtil.getInstance(mContext);
         isFirstLoad = true;
         isAZSort = mPreferences.getSongSortOrder().equals(SortOrder.SongSortOrder.SONG_A_Z);
-        file_music = DownFileUtils.creatFileDir(this, IContent.FILEM_USIC);
-        netWorkRequest = new NetWorkRequest(this);
+        Nammu.init(this);
         loadView();
     }
 
@@ -137,7 +152,7 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
 
     }
 
-    public void goMusic(){
+    public void goMusic() {
         if (playMusic != null) {
             handler.removeCallbacks(playMusic);
         }
@@ -158,20 +173,20 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
         builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, int which) {
-                  final  MusicInfo info = songList.get(position);
+                final MusicInfo info = songList.get(position);
                 Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, info.songId);
                 mContext.getContentResolver().delete(uri, null, null);
                 final File file = DownFileUtils.creatFile(MusicLocalActivity.this, IContent.FILEM_USIC, info.musicName + ".mp3");
-                L.e("=============",info.musicName+"==============="+file.getAbsolutePath());
+                L.e("=============", info.musicName + "===============" + file.getAbsolutePath());
                 if (file.exists()) {
                     file.delete();
                 }
                 netWorkRequest.sendDeleteDownMusic(info.musicName, new SaveCallback() {
                     @Override
                     public void done(AVException e) {
-                        if (e==null){
+                        if (e == null) {
                             Map map = IContent.getInstacne().map;
-                            if (map.containsKey(info.musicName)){
+                            if (map.containsKey(info.musicName)) {
                                 IContent.getInstacne().map.remove(info.musicName);
                             }
                         }
@@ -179,7 +194,7 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
                 });
                 songList.remove(position);
 
-                if (songList == null || songList.size() <= 0){
+                if (songList == null || songList.size() <= 0) {
                     View view = viewStub.inflate();
                     ImageView image = (ImageView) view.findViewById(R.id.net_fail_image);
                     image.setImageResource(R.drawable.down_list);
@@ -213,19 +228,19 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
     }
 
 
-    public class Task extends AsyncTask<Void,Void,ArrayList<MusicInfo>>{
+    public class Task extends AsyncTask<Void, Void, ArrayList<MusicInfo>> {
         @Override
         protected ArrayList<MusicInfo> doInBackground(final Void... unused) {
             isAZSort = mPreferences.getSongSortOrder().equals(SortOrder.SongSortOrder.SONG_A_Z);
             boolean hasFolder = false;
-            File file = DownFileUtils.creatFileDir(mContext,IContent.FILEM_USIC);
-            if(!file.exists()){
+            File file = DownFileUtils.creatFileDir(mContext, IContent.FILEM_USIC);
+            if (!file.exists()) {
                 hasFolder = file.mkdirs();
-            }else {
+            } else {
                 hasFolder = true;
             }
-            if(hasFolder){
-                L.e("======",file.getAbsolutePath());
+            if (hasFolder) {
+                L.e("======", file.getAbsolutePath());
                 songList = MusicUtils.queryMusic(mContext, file.getAbsolutePath(), IConstants.START_FROM_FOLDER);
             }
             if (songList == null) {
@@ -241,9 +256,10 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
             }
             return songList;
         }
+
         @Override
         protected void onPostExecute(ArrayList<MusicInfo> aVoid) {
-            if (aVoid == null || aVoid.size() <= 0){
+            if (aVoid == null || aVoid.size() <= 0) {
                 View view = viewStub.inflate();
                 ImageView image = (ImageView) view.findViewById(R.id.net_fail_image);
                 image.setImageResource(R.drawable.down_list);
@@ -265,52 +281,14 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
         }
     }
 
-//    public void toSynchronousdata( ){
-//        if (NetUtils.isConnectInternet(this)) {
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Map<String,MusicInfo> map = IContent.getInstacne().map;
-//                    for (final Map.Entry<String,MusicInfo> entrySet  : map.entrySet()){
-//                        L.e("entrySet",entrySet.getKey());
-//                        netWorkRequest.sendDeleteDownMusic(entrySet.getKey(), new SaveCallback() {
-//                            @Override
-//                            public void done(AVException e) {
-//                                if (e==null){
-//                                    IContent.getInstacne().map.remove(entrySet.getKey());
-//                                }else {
-//                                }
-//                            }
-//                        });
-//
-//                    }
-//                }
-//            }).start();
-//
-//        }
-//    }
 
 
 
 
-    public boolean isInDownList(String name){
-        for (int i=0;i<songList.size();i++){
-            MusicInfo info = songList.get(i);
-            if (info == null || name == null) {
-                return true;
-            }
-            if (name != null && name.equals(info.musicName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
-    class PlayMusic implements Runnable{
+    class PlayMusic implements Runnable {
         int position;
-        public PlayMusic(int position){
+
+        public PlayMusic(int position) {
             this.position = position;
         }
 
@@ -329,14 +307,27 @@ public class MusicLocalActivity extends MyActionBarActivity implements ItemClick
             }
         }
     }
+
     @Override
     public void updateTrack() {
         super.updateTrack();
         musicAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 100:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    file_music = DownFileUtils.creatFileDir(this, IContent.FILEM_USIC);
+                    loadView();
+                }
+                break;
+            default:
+                break;
+        }
 
 
-
-
+    }
 }

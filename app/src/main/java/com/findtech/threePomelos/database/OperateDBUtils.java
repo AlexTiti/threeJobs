@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
+
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
@@ -135,7 +135,6 @@ public class OperateDBUtils {
                         MyApplication.getInstance().setUserHeightData(timeHeightDataArray);
                         sendBroadcast(TABLE_HEIGHT);
                     } catch (Exception e) {
-                        Log.d(TAG, " e = " + e);
                         e.printStackTrace();
                     } finally {
                         if (cursor != null) {
@@ -161,7 +160,6 @@ public class OperateDBUtils {
                 insertHeight(height, time);
             }
         } catch (Exception e) {
-            Log.d(TAG, "e = " + e);
             e.printStackTrace();
         } finally {
             if (cursor != null) {
@@ -214,7 +212,6 @@ public class OperateDBUtils {
                         }
                         sendBroadcast(TABLE_TRAVEL_INFO);
                     } catch (Exception e) {
-                        Log.d(TAG, " e = " + e);
                         e.printStackTrace();
                     } finally {
                         if (cursor != null) {
@@ -240,7 +237,6 @@ public class OperateDBUtils {
                 insertTravelInfo(travelInfoEntity, time);
             }
         } catch (Exception e) {
-            Log.d(TAG, "e = " + e);
             e.printStackTrace();
         } finally {
             if (cursor != null) {
@@ -305,7 +301,7 @@ public class OperateDBUtils {
                             RequestUtils.getSharepreferenceEditor(mContext).putString(RequestUtils.WEIGHT,
                                     "0").commit();
                         }
-                        Log.d(TAG, "timeWeightDataArray = " + timeWeightDataArray);
+
                         MyApplication.getInstance().setUserWeightData(timeWeightDataArray);
                         sendBroadcast(TABLE_WEIGHT);
                     } catch (Exception e) {
@@ -334,7 +330,6 @@ public class OperateDBUtils {
                 insertWeightToDB(weight, time);
             }
         } catch (Exception e) {
-            Log.d(TAG, "e = " + e);
             e.printStackTrace();
         } finally {
             if (cursor != null) {
@@ -376,7 +371,6 @@ public class OperateDBUtils {
                 insertMileageInfoToDB(travelInfoEntity, time);
             }
         } catch (Exception e) {
-            Log.d(TAG, "e = " + e);
             e.printStackTrace();
         } finally {
             if (cursor != null) {
@@ -415,13 +409,13 @@ public class OperateDBUtils {
             public void run() {
                 synchronized (object) {
                     AVObject avObject = null;
-                    Log.d(TAG, "setBabyInfoDataToDB AVObjects = " + AVObjects);
                     if (AVObjects != null) {
                         if (AVObjects.size() > 0) {
                             avObject = AVObjects.get(0);
                             AVFile avFile = avObject.getAVFile(HEADIMG);//获取头像
                             if (avFile != null) {
                                 avFile.getDataInBackground(new GetDataCallback() {
+                                    @Override
                                     public void done(byte[] data, AVException e) {
                                         if (e == null) {
                                             if (PicOperator.bytes2Bitmap(data) != null) {
@@ -442,14 +436,12 @@ public class OperateDBUtils {
                             cursor = mContext.getContentResolver().query(BABYINFO_URI, null, selection,
                                     new String[]{AVUser.getCurrentUser().getObjectId()}, null);
                             if (cursor != null && cursor.moveToFirst()) {
-                                Log.d(TAG, "setBabyInfoDataToDB updateBabyInfo");
                                 updateBabyInfo(avObject);
                             } else {
-                                Log.d(TAG, "setBabyInfoDataToDB insertBabyInfo");
+
                                 insertBabyInfo(avObject);
                             }
                         } catch (Exception e) {
-                            Log.d(TAG, "e = " + e);
                             e.printStackTrace();
                         } finally {
                             if (cursor != null) {
@@ -527,7 +519,6 @@ public class OperateDBUtils {
                         }
                         sendBroadcast(TABLE_BABY_INFO);
                     } catch (Exception e) {
-                        Log.d(TAG, "queryBabyInfoDataFromDB e = " + e);
                         e.printStackTrace();
                     } finally {
                         if (cursor != null) {
@@ -553,7 +544,6 @@ public class OperateDBUtils {
                         mContext.getContentResolver().update(OperateDBUtils.BABYINFO_URI, values, where,
                                 new String[]{AVUser.getCurrentUser().getObjectId()});
                     } catch (Exception e) {
-                        Log.d(TAG, "saveBlueToothIsBindToDB e = " + e);
                         e.printStackTrace();
                     }
                 }

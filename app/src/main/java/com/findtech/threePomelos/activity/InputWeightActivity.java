@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,23 +13,18 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
-import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.R;
+import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.utils.NetUtils;
 import com.findtech.threePomelos.utils.RequestUtils;
-import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
 import com.findtech.threePomelos.view.datepicker.DatepickerDialog;
 import com.findtech.threePomelos.view.dialog.CustomDialog;
-import com.umeng.socialize.net.utils.UResponse;
 
 import java.util.Date;
 import java.util.List;
@@ -105,7 +99,7 @@ public class InputWeightActivity extends MyActionBarActivity implements View.OnC
                 Toast.makeText(this, getString(R.string.net_exception), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (Integer.valueOf(weight) > 200){
+            if ( TextUtils.isEmpty(weight) || Double.valueOf(weight) > 200){
                 Toast.makeText(this, getString(R.string.data_max_notice), Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -120,6 +114,7 @@ public class InputWeightActivity extends MyActionBarActivity implements View.OnC
                     builder.setShowBindInfo(getString(R.string.weight_message_confirm));
                     builder.setShowButton(true);
                     builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(final DialogInterface dialog, int which) {
                             netWorkRequest.getProgressDialog().show();
                             saveWeightDataToServer(weight, time);
@@ -129,6 +124,7 @@ public class InputWeightActivity extends MyActionBarActivity implements View.OnC
 
                     builder.setNegativeButton(getString(R.string.cancle),
                             new android.content.DialogInterface.OnClickListener() {
+                                @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                 }

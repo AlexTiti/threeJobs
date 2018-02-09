@@ -13,7 +13,7 @@ import android.graphics.RectF;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
-import android.util.Log;
+
 
 import com.avos.avoscloud.AVUser;
 import com.findtech.threePomelos.base.MyApplication;
@@ -95,7 +95,9 @@ public class PicOperator {
 
     public static Bitmap decodeUriAsBitmap(Context context, Uri uri) {
 
-        if (uri == null) return null;
+        if (uri == null) {
+            return null;
+        }
         Bitmap bitmap = null;
         try {
             bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri));
@@ -214,7 +216,6 @@ public class PicOperator {
                 inSampleSize *= 2;
             }
         }
-        Log.d("cdg22", "inSampleSize : " + inSampleSize);
         return inSampleSize;
     }
 }

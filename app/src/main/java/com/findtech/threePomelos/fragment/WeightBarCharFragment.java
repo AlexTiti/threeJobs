@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -107,6 +106,7 @@ public class WeightBarCharFragment extends Fragment {
         super.onResume();
         AVAnalytics.onFragmentStart("WeightBarCharFragment");
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -147,7 +147,6 @@ public class WeightBarCharFragment extends Fragment {
         lineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, int dataSetIndex, Highlight h) {
-                Log.d("ZZZ", "Entry = " + entry + " dataSetIndex = " + dataSetIndex + " Highlight = " + h);
                 value = entry.getVal();
                 index = entry.getXIndex();
             }
@@ -313,6 +312,7 @@ public class WeightBarCharFragment extends Fragment {
         builder.setShowButton(true);
         builder.setCanceledOnTouchOutside(true);
         builder.setPositiveButton(getActivity().getResources().getString(R.string.change), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 showUpdateWeightDialog(time);
@@ -321,6 +321,7 @@ public class WeightBarCharFragment extends Fragment {
 
         builder.setNegativeButton(getActivity().getResources().getString(R.string.delete),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final Date finalDate = Tools.getDateFromTimeStr(time);
                         final AVQuery<AVObject> query = AVQuery.getQuery(NetWorkRequest.BABY_WEIGHT);
@@ -332,7 +333,7 @@ public class WeightBarCharFragment extends Fragment {
                         query.findInBackground(new FindCallback<AVObject>() {
                             @Override
                             public void done(List<AVObject> list, AVException e) {
-                                Log.d("ZZZ", "findInBackground = " + list.size());
+
                                 if (e == null) {
                                     AVObject.deleteAllInBackground(list, new DeleteCallback() {
                                         @Override
@@ -342,13 +343,13 @@ public class WeightBarCharFragment extends Fragment {
                                                 progressDialog.dismiss();
                                             } else {
                                                 progressDialog.dismiss();
-                                                ToastUtil.showToast(getContext(),getActivity().getResources().getString(R.string.delete_data_failed) );
+                                                ToastUtil.showToast(getContext(), getActivity().getResources().getString(R.string.delete_data_failed));
                                             }
                                         }
                                     });
                                 } else {
                                     progressDialog.dismiss();
-                                    ToastUtil.showToast(getContext(), getActivity().getResources().getString(R.string.delete_data_failed) );
+                                    ToastUtil.showToast(getContext(), getActivity().getResources().getString(R.string.delete_data_failed));
                                 }
                             }
                         });
@@ -380,6 +381,7 @@ public class WeightBarCharFragment extends Fragment {
         builder.setCanceledOnTouchOutside(true);
 
         builder.setPositiveButton(getActivity().getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (edittext == null || (edittext != null && TextUtils.isEmpty(edittext.getText().toString()))) {
                     return;
@@ -395,7 +397,7 @@ public class WeightBarCharFragment extends Fragment {
                 query.findInBackground(new FindCallback<AVObject>() {
                     @Override
                     public void done(List<AVObject> list, AVException e) {
-                        Log.d("ZZZ", "findInBackground = " + list.size());
+
                         if (e == null) {
                             if (list.size() > 0) {
                                 for (int i = 0; i < list.size(); i++) {
@@ -425,6 +427,7 @@ public class WeightBarCharFragment extends Fragment {
 
         builder.setNegativeButton(getActivity().getResources().getString(R.string.cancle),
                 new android.content.DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
@@ -180,11 +179,11 @@ public class NetWorkRequest {
                         });
                     } else {
                         mOperateDBUtils.saveBabyInfoDataToDB(list);
-                        Log.d(TAG, "NetWorkRequest findInBackground done");
+
                     }
                 } else {
                     mOperateDBUtils.queryBabyInfoDataFromDB();
-                    Log.d(TAG, "NetWorkRequest findInBackground e = " + e);
+
                 }
             }
         });
@@ -216,16 +215,16 @@ public class NetWorkRequest {
                         if (list != null && list.size() > 0) {
                             queryIsBind.finishQueryIsBind(list.get(0).getBoolean(OperateDBUtils.IS_BIND),
                                     list.get(0).getString(OperateDBUtils.BLUETOOTH_DEVICE_ID));
-                            Log.d(TAG, "finishQueryIsBind");
+
                         } else {
                             queryIsBind.finishQueryIsBind(false, "");
-                            Log.d(TAG, "finishQueryIsBind 1");
+
                         }
-                        Log.d(TAG, "NetWorkRequest findInBackground done 1");
+
                     }
                 } else {
                     mOperateDBUtils.queryBabyInfoDataFromDB();
-                    Log.d(TAG, "NetWorkRequest findInBackground e = " + e);
+
                 }
             }
         });
@@ -253,7 +252,7 @@ public class NetWorkRequest {
                     mOperateDBUtils.queryUserWeightData();
                 } else {
                     mOperateDBUtils.queryUserWeightData();
-                    Log.d("ZZ", "getBabyWeightDataAndSaveToDB e = " + e);
+
                 }
             }
         });
@@ -271,7 +270,7 @@ public class NetWorkRequest {
     public void getMusicDownList(FindCallback findCallback) {
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
         query.whereEqualTo("post_user", AVUser.getCurrentUser());
-        query.whereEqualTo("is_down","1");
+        query.whereEqualTo("is_down", "1");
         query.findInBackground(findCallback);
     }
 
@@ -300,17 +299,17 @@ public class NetWorkRequest {
         });
     }
 
-    public void sendDeleteDownMusic(final String name , final SaveCallback saveCallback){
+    public void sendDeleteDownMusic(final String name, final SaveCallback saveCallback) {
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
-        query.whereEqualTo("post_user",AVUser.getCurrentUser());
-        query.whereEqualTo("musicName",name);
-        query.whereEqualTo("is_down","1");
+        query.whereEqualTo("post_user", AVUser.getCurrentUser());
+        query.whereEqualTo("musicName", name);
+        query.whereEqualTo("is_down", "1");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e==null && list.size() != 0){
-                    for (AVObject avObject : list){
-                        avObject.put("is_down","0");
+                if (e == null && list.size() != 0) {
+                    for (AVObject avObject : list) {
+                        avObject.put("is_down", "0");
                         avObject.saveInBackground(saveCallback);
                     }
                 }
@@ -328,16 +327,16 @@ public class NetWorkRequest {
             public void done(List<AVObject> list, AVException e) {
                 progressDialog.dismiss();
                 if (e == null) {
-                    boolean  b = list == null;
+                    boolean b = list == null;
                     for (int i = 0; i < list.size(); i++) {
                         AVObject avObject = list.get(i);
-                        if ( avObject.getString("bluetoothDeviceId")!= null &&  avObject.getString("bluetoothDeviceId").equals(address)) {
+                        if (avObject.getString("bluetoothDeviceId") != null && avObject.getString("bluetoothDeviceId").equals(address)) {
                             avObject.put("bluetoothName", name);
                             avObject.saveInBackground(saveCallback);
                         }
                     }
-                }else {
-                    L.e("======",e.toString());
+                } else {
+                    L.e("======", e.toString());
                 }
             }
         });
@@ -407,7 +406,7 @@ public class NetWorkRequest {
                     mOperateDBUtils.queryUserHeightData();
                 } else {
                     mOperateDBUtils.queryUserHeightData();
-                    Log.d("ZZ", "getBabyHeightDataAndSaveToDB e = " + e);
+
                 }
             }
         });
@@ -432,18 +431,14 @@ public class NetWorkRequest {
                             todayMileage).commit();
                 } else {
                     todayMileage = RequestUtils.getSharepreference(mContext).getString(OperateDBUtils.TOTAL_MILEAGE, "0.0");
-                    Log.d("ZZ", "getBabyHeightDataAndSaveToDB e = " + e);
+
                 }
                 travelInfoEntity.setTotalMileage(todayMileage);
-                L.e("==============","=================="+travelInfoEntity.getTotalMileage());
+                L.e("==============", "==================" + travelInfoEntity.getTotalMileage());
                 mHandle.sendEmptyMessage(0x99);
             }
         });
     }
-
-
-
-
 
 
     Handler mHandle = new Handler(new Handler.Callback() {
@@ -468,7 +463,7 @@ public class NetWorkRequest {
                     mOperateDBUtils.deleteTimeDBTable(OperateDBUtils.TABLE_TRAVEL_URI, Tools.getTimeFromDate(curDate));
                     if (list.size() > 0) {
                         for (AVObject avObject : list) {
-                           ;
+                            ;
                             TravelInfoEntity travelInfoEntity = TravelInfoEntity.getInstance();
                             travelInfoEntity.setTodayMileage(avObject.getString(OperateDBUtils.TODAY_MILEAGE));
                             travelInfoEntity.setAverageSpeed(avObject.getString(OperateDBUtils.AVERAGE_SPEED));
@@ -531,7 +526,7 @@ public class NetWorkRequest {
 
     public void updateWeightAndTimeToServer(final String weight, final Date date, final SaveCallback saveCallback) {
         if (TextUtils.isEmpty(weight) || date == null) {
-            Log.d(TAG, "updateWeightAndTimeToServer weight =  " + weight + " , date = " + date);
+
             return;
         }
         final AVQuery<AVObject> query = AVQuery.getQuery(BABY_WEIGHT);
@@ -555,7 +550,7 @@ public class NetWorkRequest {
 
     public void addWeightAndTimeToServer(final String weight, final Date date, final SaveCallback saveCallback) {
         if (TextUtils.isEmpty(weight) || date == null) {
-            Log.d(TAG, "addWeightAndTimeToServer weight =  " + weight + " , date = " + date);
+
             return;
         }
 
@@ -568,7 +563,7 @@ public class NetWorkRequest {
 
     public void updateHeightAndTimeToServer(final String height, final Date date, final SaveCallback saveCallback) {
         if (TextUtils.isEmpty(height) || date == null) {
-            Log.d(TAG, "updateHeightAndTimeToServer height =  " + height + " , date = " + date);
+
             return;
         }
         final AVQuery<AVObject> query = AVQuery.getQuery(BABY_HEIGHT);
@@ -592,7 +587,7 @@ public class NetWorkRequest {
 
     public void addHeightAndTimeToServer(final String height, final Date date, final SaveCallback saveCallback) {
         if (TextUtils.isEmpty(height) || date == null) {
-            Log.d(TAG, "addHeightAndTimeToServer height =  " + height + " , date = " + date);
+
             return;
         }
 
@@ -605,7 +600,7 @@ public class NetWorkRequest {
 
     public void updateTotalMileageAndTimeToServer(final String totalMileage, final SaveCallback saveCallback) {
         if (TextUtils.isEmpty(totalMileage)) {
-            Log.d(TAG, "updateTotalMileageAndTimeToServer totalMileage =  " + totalMileage);
+
             return;
         }
         final AVQuery<AVObject> query = AVQuery.getQuery(TOTAL_MILEAGE);
@@ -628,7 +623,7 @@ public class NetWorkRequest {
 
     public void addTotalMileageAndTimeToServer(final String totalMileage, final SaveCallback saveCallback) {
         if (TextUtils.isEmpty(totalMileage)) {
-            Log.d(TAG, "addTotalMileageAndTimeToServer totalMileage =  " + totalMileage);
+
             return;
         }
         AVObject postTotalMileage = new AVObject(TOTAL_MILEAGE);
@@ -639,7 +634,6 @@ public class NetWorkRequest {
 
     public void updateTravelInfoAndTimeToServer(final TravelInfoEntity travelInfoEntity, final Date date, final SaveCallback saveCallback) {
         if (travelInfoEntity == null || date == null) {
-            Log.d(TAG, "updateTravelInfoAndTimeToServer travelInfoEntity =  " + travelInfoEntity + " , date = " + date);
             return;
         }
         final AVQuery<AVObject> query = AVQuery.getQuery(TRAVEL_INFO);
@@ -655,7 +649,7 @@ public class NetWorkRequest {
                             avObjects.put(OperateDBUtils.TOTAL_MILEAGE, travelInfoEntity.getTotalMileage());
                             avObjects.put(OperateDBUtils.TODAY_MILEAGE, travelInfoEntity.getTodayMileage());
                             avObjects.put(OperateDBUtils.AVERAGE_SPEED, travelInfoEntity.getAverageSpeed());
-                            avObjects.put(DEVICEIDENTIFITER,  IContent.getInstacne().clickPositionType);
+                            avObjects.put(DEVICEIDENTIFITER, IContent.getInstacne().clickPositionType);
                             avObjects.saveInBackground(saveCallback);
                         }
                     }
@@ -666,13 +660,13 @@ public class NetWorkRequest {
 
     public void addTravelInfoAndTimeToServer(final TravelInfoEntity travelInfoEntity, final Date date, final SaveCallback saveCallback) {
         if (travelInfoEntity == null || date == null) {
-            Log.d(TAG, "addTravelInfoAndTimeToServer travelInfoEntity =  " + travelInfoEntity + " , date = " + date);
+
             return;
         }
         AVObject postTotalMileage = new AVObject(TRAVEL_INFO);
         postTotalMileage.put("post", AVUser.getCurrentUser());
         postTotalMileage.put(OperateDBUtils.DATE, date);
-        postTotalMileage.put(DEVICEIDENTIFITER,  IContent.getInstacne().clickPositionType);
+        postTotalMileage.put(DEVICEIDENTIFITER, IContent.getInstacne().clickPositionType);
         postTotalMileage.put("bluetoothDeviceId", IContent.getInstacne().address);
         postTotalMileage.put(OperateDBUtils.TOTAL_MILEAGE, travelInfoEntity.getTotalMileage());
         postTotalMileage.put(OperateDBUtils.TODAY_MILEAGE, travelInfoEntity.getTodayMileage());
@@ -683,7 +677,7 @@ public class NetWorkRequest {
     public void selectDeviceTypeAndIdentifier() {
         AVQuery<AVObject> query = new AVQuery<>(CART_LIST_DETAILS);
         query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        query.setMaxCacheAge(24 * 3600 * 7 *1000);
+        query.setMaxCacheAge(24 * 3600 * 7 * 1000);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
@@ -702,44 +696,45 @@ public class NetWorkRequest {
 
 
     }
+
     public void selectDeviceTypeAndIdentifier(FindCallback<AVObject> findCallback) {
         AVQuery<AVObject> query = new AVQuery<>(CART_LIST_DETAILS);
         query.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
-        query.setMaxCacheAge(24 * 3600 * 7 *1000);
+        query.setMaxCacheAge(24 * 3600 * 7 * 1000);
         query.findInBackground(findCallback);
 
 
     }
 
-    public void thisBlueToothIsBinded(  final String deviceNum, FindCallback<AVObject> findCallback) {
+    public void thisBlueToothIsBinded(final String deviceNum, FindCallback<AVObject> findCallback) {
         AVQuery<AVObject> query = new AVQuery<>(DEVICE_UUID);
         query.whereEqualTo("post", AVUser.getCurrentUser());
-        query.whereEqualTo(OperateDBUtils.BLUETOOTH_DEVICE_ID,deviceNum);
+        query.whereEqualTo(OperateDBUtils.BLUETOOTH_DEVICE_ID, deviceNum);
         query.findInBackground(findCallback);
 
     }
 
-    public void updateBlueTooth(final boolean isBind, final String deviceNum, final String deviceName, final String functype, final String deviceIndentifier, final SaveCallback saveCallback){
+    public void updateBlueTooth(final boolean isBind, final String deviceNum, final String deviceName, final String functype, final String deviceIndentifier, final SaveCallback saveCallback) {
 
 
     }
 
-    public void addBlueTooth(final boolean isBind, final String deviceNum, final String deviceName, final String functype, final String deviceIndentifier,String company, final SaveCallback saveCallback){
-                         AVObject object_bind = new AVObject(DEVICE_UUID);
-                        object_bind.put(OperateDBUtils.BLUETOOTH_DEVICE_ID, deviceNum);
-                        object_bind.put("bluetoothName", deviceName);
-                        object_bind.put("bluetoothBind", isBind);
-                        object_bind.put(DEVICEIDENTIFITER, deviceIndentifier);
-                        object_bind.put(FUNCTION_TYPE, functype);
-                        object_bind.put(COMPANY, company);
-                        object_bind.put("post", AVUser.getCurrentUser());
-                        object_bind.saveInBackground(saveCallback);
+    public void addBlueTooth(final boolean isBind, final String deviceNum, final String deviceName, final String functype, final String deviceIndentifier, String company, final SaveCallback saveCallback) {
+        AVObject object_bind = new AVObject(DEVICE_UUID);
+        object_bind.put(OperateDBUtils.BLUETOOTH_DEVICE_ID, deviceNum);
+        object_bind.put("bluetoothName", deviceName);
+        object_bind.put("bluetoothBind", isBind);
+        object_bind.put(DEVICEIDENTIFITER, deviceIndentifier);
+        object_bind.put(FUNCTION_TYPE, functype);
+        object_bind.put(COMPANY, company);
+        object_bind.put("post", AVUser.getCurrentUser());
+        object_bind.saveInBackground(saveCallback);
     }
 
     public void deleteBlueToothIsBind(final String deviceNum, final FindCallback<AVObject> findCallback) {
         AVQuery<AVObject> query = new AVQuery<>(DEVICE_UUID);
         query.whereEqualTo("post", AVUser.getCurrentUser());
-        query.whereEqualTo(OperateDBUtils.BLUETOOTH_DEVICE_ID,deviceNum);
+        query.whereEqualTo(OperateDBUtils.BLUETOOTH_DEVICE_ID, deviceNum);
         query.findInBackground(findCallback);
     }
 
@@ -756,9 +751,10 @@ public class NetWorkRequest {
         AVQuery<AVObject> query = new AVQuery<>(TRAVEL_INFO);
         query.whereEqualTo("post", AVUser.getCurrentUser());
         query.whereEqualTo("date", Tools.getCurrentDate());
-        query.whereEqualTo(OperateDBUtils.BLUETOOTH_DEVICE_ID,IContent.getInstacne().address);
+        query.whereEqualTo(OperateDBUtils.BLUETOOTH_DEVICE_ID, IContent.getInstacne().address);
         query.findInBackground(new FindCallback<AVObject>() {
             boolean isHere = false;
+
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (e == null) {
@@ -766,7 +762,7 @@ public class NetWorkRequest {
                     for (int i = 0; i < list.size(); i++) {
                         AVObject avObjects = list.get(i);
                         String deviceAddress = avObjects.getString(OperateDBUtils.BLUETOOTH_DEVICE_ID);
-                        if ( deviceAddress != null &&  deviceAddress.equals(IContent.getInstacne().address)) {
+                        if (deviceAddress != null && deviceAddress.equals(IContent.getInstacne().address)) {
                             avObjects.put(OperateDBUtils.AVERAGE_SPEED, speed);
                             avObjects.put(OperateDBUtils.TODAY_MILEAGE, today);
                             avObjects.put(OperateDBUtils.TOTAL_MILEAGE, total);
@@ -821,11 +817,10 @@ public class NetWorkRequest {
     }
 
 
-
     public void getMusicCollect(final FindCallback<AVObject> findCallback) {
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
         query.whereEqualTo("post_user", AVUser.getCurrentUser());
-        query.whereEqualTo("is_collected","1");
+        query.whereEqualTo("is_collected", "1");
         query.findInBackground(findCallback);
     }
 
@@ -914,7 +909,7 @@ public class NetWorkRequest {
                             //AVFile avFile_info = avObject_info.getAVFile("musicFiles");
                             avObject.put("musicName", info.musicName);
                             avObject.put("typeNumber", info.type);
-                           // avObject.put("musicFiles", avFile_info);
+                            // avObject.put("musicFiles", avFile_info);
                             avObject.put("user", AVUser.getCurrentUser());
                             avObject.saveInBackground(saveCallback);
                         } catch (Exception e0) {
@@ -942,7 +937,7 @@ public class NetWorkRequest {
     }
 
 
-    public  void getDeviceUser(FindCallback<AVObject> findCallback) {
+    public void getDeviceUser(FindCallback<AVObject> findCallback) {
         IContent.getInstacne().addressList.clear();
         AVQuery<AVObject> query = AVQuery.getQuery(DEVICE_UUID);
         query.whereEqualTo("post", AVUser.getCurrentUser());
@@ -954,7 +949,7 @@ public class NetWorkRequest {
     }
 
 
-    public  void getUserProtect(FindCallback<AVObject> findCallback) {
+    public void getUserProtect(FindCallback<AVObject> findCallback) {
 
         AVQuery<AVObject> query = new AVQuery<>(NetWorkRequest.USER_PROTOCOL);
         query.findInBackground(findCallback);
@@ -1034,51 +1029,52 @@ public class NetWorkRequest {
     /**
      * 优化统计接口
      */
-    private static  final  String MUSIC_USER = "Music_relate_user";
+    private static final String MUSIC_USER = "Music_relate_user";
 
 
-    public void  sendMusicDown( final String musicName, final SaveCallback saveCallback){
+    public void sendMusicDown(final String musicName, final SaveCallback saveCallback) {
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
-        query.whereEqualTo("post_user",AVUser.getCurrentUser());
-        query.whereEqualTo("musicName",musicName);
+        query.whereEqualTo("post_user", AVUser.getCurrentUser());
+        query.whereEqualTo("musicName", musicName);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e == null){
-                    if (list != null && list.size() > 0){
+                if (e == null) {
+                    if (list != null && list.size() > 0) {
                         AVObject avObject = list.get(0);
-                        avObject.put("is_down","1");
+                        avObject.put("is_down", "1");
                         avObject.saveInBackground(saveCallback);
-                    }else {
+                    } else {
                         AVObject avObject = new AVObject(MUSIC_USER);
-                        avObject.put("musicName",musicName);
-                        avObject.put("post_user",AVUser.getCurrentUser());
-                        avObject.put("is_down","1");
+                        avObject.put("musicName", musicName);
+                        avObject.put("post_user", AVUser.getCurrentUser());
+                        avObject.put("is_down", "1");
                         avObject.saveInBackground(saveCallback);
                     }
                 }
             }
         });
     }
-    public void sendMusicCollecting(final String musicName, final SaveCallback saveCallback){
+
+    public void sendMusicCollecting(final String musicName, final SaveCallback saveCallback) {
 
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
-        query.whereEqualTo("post_user",AVUser.getCurrentUser());
-        query.whereEqualTo("musicName",musicName);
+        query.whereEqualTo("post_user", AVUser.getCurrentUser());
+        query.whereEqualTo("musicName", musicName);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e == null){
-                    if (list != null && list.size() > 0){
+                if (e == null) {
+                    if (list != null && list.size() > 0) {
                         AVObject avObject = list.get(0);
-                        avObject.put("is_collected","1");
+                        avObject.put("is_collected", "1");
                         avObject.saveInBackground(saveCallback);
-                    }else {
+                    } else {
 
                         AVObject avObject = new AVObject(MUSIC_USER);
-                        avObject.put("musicName",musicName);
-                        avObject.put("post_user",AVUser.getCurrentUser());
-                        avObject.put("is_collected","1");
+                        avObject.put("musicName", musicName);
+                        avObject.put("post_user", AVUser.getCurrentUser());
+                        avObject.put("is_collected", "1");
                         avObject.saveInBackground(saveCallback);
                     }
                 }
@@ -1086,17 +1082,17 @@ public class NetWorkRequest {
         });
     }
 
-    public void deleteMusicCollecting(final String musicName, final SaveCallback saveCallback){
+    public void deleteMusicCollecting(final String musicName, final SaveCallback saveCallback) {
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
-        query.whereEqualTo("post_user",AVUser.getCurrentUser());
-        query.whereEqualTo("musicName",musicName);
+        query.whereEqualTo("post_user", AVUser.getCurrentUser());
+        query.whereEqualTo("musicName", musicName);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e == null){
-                    if (list != null && list.size() > 0){
+                if (e == null) {
+                    if (list != null && list.size() > 0) {
                         AVObject avObject = list.get(0);
-                        avObject.put("is_collected","0");
+                        avObject.put("is_collected", "0");
                         avObject.saveInBackground(saveCallback);
                     }
                 }
@@ -1104,24 +1100,24 @@ public class NetWorkRequest {
         });
     }
 
-    public static void setPlayCount(final String musicName ,final int count){
-        L.e("count_pre",count+"==================================="+musicName);
+    public static void setPlayCount(final String musicName, final int count) {
+        L.e("count_pre", count + "===================================" + musicName);
         AVQuery<AVObject> query = new AVQuery<>(MUSIC_USER);
-        query.whereEqualTo("post_user",AVUser.getCurrentUser());
-        query.whereEqualTo("musicName",musicName);
+        query.whereEqualTo("post_user", AVUser.getCurrentUser());
+        query.whereEqualTo("musicName", musicName);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e == null){
-                    if (list != null && list.size() > 0){
+                if (e == null) {
+                    if (list != null && list.size() > 0) {
                         AVObject avObject = list.get(0);
-                        avObject.put("play_count",count);
+                        avObject.put("play_count", count);
                         avObject.saveInBackground();
-                    }else {
+                    } else {
                         AVObject avObject = new AVObject(MUSIC_USER);
-                        avObject.put("musicName",musicName);
-                        avObject.put("post_user",AVUser.getCurrentUser());
-                        avObject.put("play_count",count);
+                        avObject.put("musicName", musicName);
+                        avObject.put("post_user", AVUser.getCurrentUser());
+                        avObject.put("play_count", count);
                         avObject.saveInBackground();
                     }
                 }
@@ -1129,14 +1125,14 @@ public class NetWorkRequest {
         });
     }
 
-    public static void getAPPVersion(){
+    public static void getAPPVersion() {
         AVQuery<AVObject> query = new AVQuery<>("AndroidAPPVersion");
         query.orderByDescending("createdAt");
         query.limit(1);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e == null && list.size() >0){
+                if (e == null && list.size() > 0) {
                     IContent.getInstacne().newVersion = list.get(0).getString("version");
                 }
             }

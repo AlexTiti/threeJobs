@@ -27,7 +27,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -647,7 +646,6 @@ public class WheelView extends View {
 	private void drawCenterRect(Canvas canvas) {
 	int center = getHeight() / 2;
 		int offset = (int) (getItemHeight() / 2 * 1.2);
-		Log.d("cdgcdg", "getItemHeight() " + getItemHeight());
 		Paint paint = new Paint();
 		paint.setColor(getResources().getColor(R.color.board_line));
 		// 设置线宽

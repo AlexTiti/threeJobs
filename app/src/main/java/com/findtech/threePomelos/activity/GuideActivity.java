@@ -43,13 +43,13 @@ public class GuideActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        setContentView(R.layout.activity_launch);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.setFlags(
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+        setContentView(R.layout.activity_launch);
         SharedPreferences sp = getSharedPreferences(IContent.IS_FIRST_USE, MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         guideContent = (ViewPager) findViewById(R.id.vp_launch_content);

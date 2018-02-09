@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVFile;
-import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.LogInCallback;
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.activity.GetUserProtocolActivity;
 import com.findtech.threePomelos.base.BaseActivity;
-import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.home.MainHomeActivity;
@@ -36,7 +30,6 @@ import com.findtech.threePomelos.utils.ToastUtil;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.sso.UMSsoHandler;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

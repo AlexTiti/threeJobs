@@ -1,11 +1,8 @@
 package com.findtech.threePomelos.entity;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.utils.RequestUtils;
 
 import java.text.ParseException;

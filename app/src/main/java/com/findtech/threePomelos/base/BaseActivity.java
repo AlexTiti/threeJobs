@@ -85,6 +85,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     private String hasTimeNotice = null;
     private final static int NOTIME = 100;
     private final static int HASTIME = 101;
+    private final static int HASTIME_DIS = 102;
 
     Handler myHandler = new Handler(){
         @Override
@@ -107,10 +108,21 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                         }
                     }
                     break;
+                case  HASTIME_DIS:
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                        if (!TextUtils.isEmpty(hasTimeNotice)) {
+                            ToastUtil.showToast(BaseActivity.this, hasTimeNotice);
+                        }
+                        if (app.manager.cubicBLEDevice != null){
+                            app.manager.cubicBLEDevice.disconnectedDevice();
+                        }
+                    }
 
+                    break;
+                    default:
+                        break;
             }
-
-
         }
     };
 
@@ -147,6 +159,25 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             public void run() {
                 Message msg = new Message();
                 msg.what = HASTIME;
+                myHandler.sendMessage(msg);
+            }
+        },time);
+    }
+
+    public void showProgressDialogDis(String message, final long time, final String notice ) {
+        this.hasTimeNotice = notice;
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage(message);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(true);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.what = HASTIME_DIS;
                 myHandler.sendMessage(msg);
             }
         },time);
@@ -310,6 +341,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         mPlayThread = new PlayMusic();
         mPlayThread.start();
         builder = new CustomDialog.Builder(this);
+
 
     }
 
@@ -618,10 +650,11 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                 IContent.isModePlay = true;
             }
         }
-
     }
 
   public   interface MusicInterface{
         void musicReciver(Intent intent);
     }
+
+
 }

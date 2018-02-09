@@ -1,20 +1,11 @@
 package com.findtech.threePomelos.activity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,22 +20,15 @@ import com.avos.avoscloud.ProgressCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.adapter.TipsRecycleAdpter;
 import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
-import com.findtech.threePomelos.entity.Datebean;
-import com.findtech.threePomelos.music.model.ItemClickListtener;
-import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.utils.MyCalendar;
-import com.findtech.threePomelos.utils.NetUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
-import com.findtech.threePomelos.view.MyListView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

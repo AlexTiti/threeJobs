@@ -3,9 +3,7 @@ package com.findtech.threePomelos.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Looper;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +14,9 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.RequestMobileCodeCallback;
 import com.avos.avoscloud.UpdatePasswordCallback;
+import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
-import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.home.MainHomeActivity;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.utils.ToastUtil;
@@ -46,7 +44,7 @@ public class ForgetPasswordActivity extends MyActionBarActivity implements View.
 
 
         nextButton = (Button) findViewById(R.id.next_step);
-        sendIdentify= (TextView) findViewById(R.id.send_identify);
+        sendIdentify = (TextView) findViewById(R.id.send_identify);
 
         sendIdentify.setOnClickListener(this);
         nextButton.setOnClickListener(this);
@@ -72,7 +70,7 @@ public class ForgetPasswordActivity extends MyActionBarActivity implements View.
                     toast.show();
                     return;
                 } else {
-                        requestPassword(phoneStr);
+                    requestPassword(phoneStr);
                 }
                 break;
             case R.id.next_step:
@@ -93,7 +91,7 @@ public class ForgetPasswordActivity extends MyActionBarActivity implements View.
                     ToastUtil.showToast(ForgetPasswordActivity.this, R.string.input_identify);
                     return;
                 }
-              checkIdentifyAndResetPassword(identifyStr, passwordStr);
+                checkIdentifyAndResetPassword(identifyStr, passwordStr);
                 break;
         }
     }
@@ -108,9 +106,13 @@ public class ForgetPasswordActivity extends MyActionBarActivity implements View.
                     Toast toast = Toast.makeText(ForgetPasswordActivity.this, getString(R.string.checkNum_send), Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-
+                    L.e("======", e.getMessage()+"==="+e.getCode());
                     if (e.getCode() == 213) {
                         Toast toast = Toast.makeText(ForgetPasswordActivity.this, R.string.noFoundUser, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    if (e.getCode() == 601){
+                        Toast toast = Toast.makeText(ForgetPasswordActivity.this, R.string.checkNumberRate, Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 }
@@ -120,18 +122,12 @@ public class ForgetPasswordActivity extends MyActionBarActivity implements View.
 
     private void checkIdentifyAndResetPassword(String identify, String newPassword) {
 
-        L.e("=======",Thread.currentThread().getName());
+        L.e("=======", Thread.currentThread().getName());
         AVUser.resetPasswordBySmsCodeInBackground(identify, newPassword, new UpdatePasswordCallback() {
             @Override
             public void done(AVException e) {
 
-                L.e("=======",Thread.currentThread().getName());
-
                 if (e == null) {
-//                    Toast toast = Toast.makeText(ForgetPasswordActivity.this, R.string.smsCodeError, Toast.LENGTH_SHORT);
-//                    toast.show();
-                    L.e("=================","=================");
-
                     if (AVUser.getCurrentUser() != null) {
                         Intent nextIntent = new Intent(ForgetPasswordActivity.this, MainHomeActivity.class);
                         startActivity(nextIntent);
@@ -139,7 +135,7 @@ public class ForgetPasswordActivity extends MyActionBarActivity implements View.
                         Intent nextIntent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
                         startActivity(nextIntent);
                     }
-                    ToastUtil.showToast(ForgetPasswordActivity.this,R.string.title_activity_forget_password_success);
+                    ToastUtil.showToast(ForgetPasswordActivity.this, R.string.title_activity_forget_password_success);
                 } else {
                     if (e.getCode() == 603) {
                         Toast toast = Toast.makeText(ForgetPasswordActivity.this, R.string.smsCodeError, Toast.LENGTH_SHORT);
@@ -151,22 +147,22 @@ public class ForgetPasswordActivity extends MyActionBarActivity implements View.
         });
     }
 
-        CountDownTimer timer = new CountDownTimer(60000, 1000) {
+    CountDownTimer timer = new CountDownTimer(60000, 1000) {
 
-            @Override
-            public void onTick(long millisUntilFinished) {
-                sendIdentify.setBackground(getResources().getDrawable(R.drawable.forget_psd_bac));
-                sendIdentify.setEnabled(false);
-                sendIdentify.setText(millisUntilFinished/1000 + "s");
-            }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            sendIdentify.setBackground(getResources().getDrawable(R.drawable.forget_psd_bac));
+            sendIdentify.setEnabled(false);
+            sendIdentify.setText(millisUntilFinished / 1000 + "s");
+        }
 
-            @Override
-            public void onFinish() {
-                sendIdentify.setBackground(getResources().getDrawable(R.drawable.login_button_selector));
-                sendIdentify.setEnabled(true);
-                sendIdentify.setText(getString(R.string.identify));
-            }
-        };
+        @Override
+        public void onFinish() {
+            sendIdentify.setBackground(getResources().getDrawable(R.drawable.login_button_selector));
+            sendIdentify.setEnabled(true);
+            sendIdentify.setText(getString(R.string.identify));
+        }
+    };
 
     @Override
     protected void onDestroy() {

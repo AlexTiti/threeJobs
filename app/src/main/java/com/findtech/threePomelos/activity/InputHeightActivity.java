@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +15,8 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
-import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.R;
+import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.net.NetWorkRequest;
 import com.findtech.threePomelos.utils.NetUtils;
@@ -98,7 +96,7 @@ public class InputHeightActivity extends MyActionBarActivity implements View.OnC
                 Toast.makeText(this, getString(R.string.net_exception), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (Integer.valueOf(height) > 200){
+            if ( TextUtils.isEmpty(height) || Double.valueOf(height) > 200){
                 Toast.makeText(this, getString(R.string.data_max_notice), Toast.LENGTH_SHORT).show();
                 return;
             }

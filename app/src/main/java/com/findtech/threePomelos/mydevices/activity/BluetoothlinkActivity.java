@@ -340,7 +340,7 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
         BluetoothDevice bluetoothDevice = arraySource.get(position);
         if (!bluetoothDevice.getAddress().equals(IContent.getInstacne().address)) {
             IContent.isSended = false;
-            showProgressDialog(getString(R.string.connecting), 25000, null);
+            showProgressDialogDis(getString(R.string.connecting), 25000, null);
             if (app.manager.cubicBLEDevice != null) {
                 app.manager.cubicBLEDevice.disconnectedDevice();
             }

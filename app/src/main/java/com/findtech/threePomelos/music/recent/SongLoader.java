@@ -30,7 +30,7 @@ public class SongLoader {
 
     public static ArrayList<Song> getSongsForCursor(Cursor cursor) {
         ArrayList arrayList = new ArrayList();
-        if ((cursor != null) && (cursor.moveToFirst()))
+        if ((cursor != null) && (cursor.moveToFirst())) {
             do {
                 long id = cursor.getLong(0);
                 String title = cursor.getString(1);
@@ -44,6 +44,7 @@ public class SongLoader {
                 arrayList.add(new Song(id, albumId, artistId, title, artist, album, duration, trackNumber));
             }
             while (cursor.moveToNext());
+        }
         if (cursor != null)
             cursor.close();
         return arrayList;

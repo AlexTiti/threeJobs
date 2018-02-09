@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.Albums;
 import android.provider.MediaStore.Audio.Media;
 import android.provider.MediaStore.Files.FileColumns;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -119,7 +120,9 @@ public class MusicUtils implements IConstants {
             music.size = cursor.getInt(cursor
                     .getColumnIndex(Media.SIZE));
             music.islocal = true;
-            music.sort = Pinyin.toPinyin(music.musicName.charAt(0)).substring(0, 1).toUpperCase();
+            if (!TextUtils.isEmpty(music.musicName)) {
+                music.sort = Pinyin.toPinyin(music.musicName.charAt(0)).substring(0, 1).toUpperCase();
+            }
             musicList.add(music);
 
         }

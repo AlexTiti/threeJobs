@@ -3,7 +3,6 @@ package com.findtech.threePomelos.bluetooth;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -45,8 +44,9 @@ public class ReceivedataActivity extends MyActionBarActivity implements
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (app.manager.cubicBLEDevice != null)
+		if (app.manager.cubicBLEDevice != null) {
 			app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
+		}
 	}
 
 	@SuppressWarnings("static-access")
@@ -74,7 +74,7 @@ public class ReceivedataActivity extends MyActionBarActivity implements
 		// TODO Auto-generated method stub
 		receiveDataView.changeEditBackground(isChecked);
 		if (app.manager.cubicBLEDevice != null) {
-			Log.d(MyApplication.TAG, "isChecked = " + isChecked);
+
 			app.manager.cubicBLEDevice.setNotification(
 					isChecked);
 		}
@@ -86,8 +86,7 @@ public class ReceivedataActivity extends MyActionBarActivity implements
 	@Override
 	public void onReceive(Context context, Intent intent, String macData,
 			String uuid) {
-		Log.d(MyApplication.TAG, "有数据返回");
-		// TODO Auto-generated method stub
+
 		String action = intent.getAction();
 		this.connectedOrDis(intent.getAction());
 		if (RFStarBLEService.ACTION_DATA_AVAILABLE.equals(action)) {

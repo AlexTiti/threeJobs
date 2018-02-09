@@ -9,9 +9,11 @@ import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
@@ -39,6 +43,7 @@ import com.findtech.threePomelos.utils.RequestUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
 import com.findtech.threePomelos.view.CustomShareBoard;
+import com.findtech.threePomelos.view.dialog.CustomDialog;
 import com.umeng.socialize.bean.SocializeConfig;
 import com.umeng.socialize.sso.UMSsoHandler;
 
@@ -133,7 +138,36 @@ public class BabyDataDetailActivity extends MyActionBarActivity {
                 }
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                requestOverlays(this,getResources().getString(R.string.open_bluetooth_cancle));
+            }
+        }
     }
+//    private void requestAlertWindowPermission() {
+//        final CustomDialog.Builder builder = new CustomDialog.Builder(this);
+//        builder.setTitle(getResources().getString(R.string.notice));
+//        builder.setNotifyInfo(getResources().getString(R.string.open_bluetooth_message));
+//        builder.setShowButton(true);
+//        builder.setPositiveButton(getResources().getString(R.string.set), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+//                intent.setData(Uri.parse("package:" + getPackageName()));
+//                startActivityForResult(intent, REQUEST_CODE_ASK_SYSTEM_ALERT_WINDOW_PERMISSIONS);
+//            }
+//        });
+//
+//        builder.setNegativeButton(getResources().getString(R.string.cancle), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//                ToastUtil.showToast(BabyDataDetailActivity.this, getResources().getString(R.string.open_bluetooth_cancle), Toast.LENGTH_LONG);
+//            }
+//        });
+//        builder.create().show();
+//    }
 
     public void DoShareStep() {
         showSharePage(true);
@@ -366,6 +400,14 @@ public class BabyDataDetailActivity extends MyActionBarActivity {
         if (ssoHandler != null) {
             ssoHandler.authorizeCallBack(requestCode, resultCode, data);
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (requestCode == REQUEST_CODE_ASK_SYSTEM_ALERT_WINDOW_PERMISSIONS) {
+                if (!Settings.canDrawOverlays(this)) {
+                    ToastUtil.showToast(BabyDataDetailActivity.this, getResources().getString(R.string.not_open_message), Toast.LENGTH_LONG);
+                }
+            }
+        }
     }
 
     ContentObserver contentObserver = new ContentObserver(new Handler()) {
@@ -381,4 +423,6 @@ public class BabyDataDetailActivity extends MyActionBarActivity {
 
         }
     };
+
+
 }

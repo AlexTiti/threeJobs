@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +90,7 @@ public class WeightViewFragment extends Fragment implements RequestUtils.UserWei
     private UserInfoModel getData() {
         UserInfoModel model = new UserInfoModel();
         String weightNum = RequestUtils.getSharepreference(getContext()).getString(RequestUtils.WEIGHT, "0");
-        Log.d("ZZ", "weightNum = " + weightNum);
+
         if (Tools.isNumericOrDot(weightNum)) {
             newTotalMin = Double.parseDouble(weightNum);
             model.setUserTotal(newTotalMin);
@@ -99,7 +99,7 @@ public class WeightViewFragment extends Fragment implements RequestUtils.UserWei
         }
         model.setAssess("体重良好");
         model.setTotalMin(oldTotalMin);
-        Log.d("ZZ", "oldTotalMin = " + oldTotalMin);
+
         oldTotalMin = newTotalMin;
         model.setTotalMax(40);
         String weightState = RequestUtils.getSharepreference(getContext()).getString(RequestUtils.WEIGHT_HEALTH_STATE, "0~0");
@@ -139,8 +139,7 @@ public class WeightViewFragment extends Fragment implements RequestUtils.UserWei
                                 personDataEntity.setTime(timePoint);
                                 personDataEntity.setWeight(weightNum);
                                 timeWeightDataArray.add(personDataEntity);
-                                Log.d("ZZ", "weightNum = " + weightNum);
-                                Log.d("ZZ", "timePoint = " + timePoint);
+
                             }
                             Collections.sort(timeWeightDataArray, sort);
                         }
@@ -183,7 +182,6 @@ public class WeightViewFragment extends Fragment implements RequestUtils.UserWei
                 mWeightArcView.setDataModel(getData());
                 mWeightArcView.invalidate();
                 WeightBarCharFragment newWeightBarCharFragment = new WeightBarCharFragment("");
-                Log.d("ZZ", "timeWeightDataArray --> size = " + timeWeightDataArray.size());
                 newWeightBarCharFragment.setTimeWeightDataArray(timeWeightDataArray);
 
                 getFragmentManager().beginTransaction().remove(weightBarCharFragment).commitAllowingStateLoss();

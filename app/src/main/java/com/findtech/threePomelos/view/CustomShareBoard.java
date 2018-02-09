@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +17,13 @@ import com.findtech.threePomelos.login.ThirdPartyController;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
-import com.umeng.socialize.bean.UMComment;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMusic;
 
 /**
- * 
+ *
  */
 public class CustomShareBoard extends Dialog {
     private Context mContext;
@@ -52,6 +50,7 @@ public class CustomShareBoard extends Dialog {
         private UMusic music;
 
         private ThirdPartyController thirdPartyController;
+
         public Builder(Context context) {
             this.context = context;
         }
@@ -119,7 +118,7 @@ public class CustomShareBoard extends Dialog {
                             ToastUtil.showToast(context, context.getResources().getString(R.string.install_qq));
                         }
                     } catch (Exception e) {
-                        Log.d("ZZ", "ThirdPartyLogin e " + e);
+
                     }
                     break;
 //                case R.id.qzone:
@@ -169,10 +168,11 @@ public class CustomShareBoard extends Dialog {
         }
 
         private void setShareContent() {
-            if (str == null)
-            mController.setShareMedia(umImage);
-            else
+            if (str == null) {
+                mController.setShareMedia(umImage);
+            } else {
                 mController.setShareMedia(music);
+            }
         }
 
         public void setUMImage(String path) {

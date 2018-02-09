@@ -1,7 +1,6 @@
 package com.findtech.threePomelos.music.proxy.utils;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.findtech.threePomelos.music.utils.L;
 
@@ -19,7 +18,6 @@ import java.util.StringTokenizer;
 
 /**
  * 代理
- *
  */
 public class MediaPlayerProxy implements Runnable {
     private static final String LOG_TAG = MediaPlayerProxy.class.getSimpleName();
@@ -44,11 +42,11 @@ public class MediaPlayerProxy implements Runnable {
             socket = new ServerSocket(port, 0, InetAddress.getByAddress(new byte[]{127, 0, 0, 1}));
             socket.setSoTimeout(5000);
             port = socket.getLocalPort();
-            L.e(LOG_TAG, "port " + port + " obtained");
+
         } catch (UnknownHostException e) {
-            L.e(LOG_TAG, "Error initializing server");
+
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Error initializing server", e);
+
         }
     }
 
@@ -71,11 +69,10 @@ public class MediaPlayerProxy implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Log.d(LOG_TAG, "stop");
+
     }
 
     public String getProxyURL(String url) {
-        //return String.format("http://127.0.0.1:%d/%s", port, url);
         return String.format(Locale.getDefault(), "http://127.0.0.1:%d/%s", port, url);
     }
 
@@ -88,7 +85,7 @@ public class MediaPlayerProxy implements Runnable {
                 if (client == null) {
                     continue;
                 }
-                L.e(LOG_TAG, "client connected"+client);
+                L.e(LOG_TAG, "client connected" + client);
 
                 HttpURLConnection request = readRequest(client);
                 if (request != null) {
@@ -98,7 +95,7 @@ public class MediaPlayerProxy implements Runnable {
             } catch (SocketTimeoutException e) {
                 // Do nothing
             } catch (IOException e) {
-                Log.e(LOG_TAG, "Error connecting to client", e);
+
             }
         }
         L.e(LOG_TAG, "Proxy interrupted. Shutting down.");
@@ -134,7 +131,7 @@ public class MediaPlayerProxy implements Runnable {
                 byte[] tmpBuffer = new byte[bytes_read];
                 System.arraycopy(local_request, 0, tmpBuffer, 0, bytes_read);
                 String str = new String(tmpBuffer);
-                L.e(LOG_TAG + " Header-> ", str+"str");
+                L.e(LOG_TAG + " Header-> ", str + "str");
                 requestStr = requestStr + str;
                 if (requestStr.contains("GET") && requestStr.contains(Constants.HTTP_END)) {
                     break;

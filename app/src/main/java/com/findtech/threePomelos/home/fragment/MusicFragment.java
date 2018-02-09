@@ -4,10 +4,13 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -61,10 +64,7 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
     private RelativeLayout relayout_babylike;
     private RelativeLayout relayout_recentplay;
     private NetWorkRequest netWorkRequest;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
+
     private IContent content = IContent.getInstacne();
 
     @Override
@@ -100,24 +100,21 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
         relayout_musiclocal.setOnClickListener(this);
         relayout_babylike.setOnClickListener(this);
         relayout_recentplay.setOnClickListener(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Nammu.init(getActivity());
-            checkPermission();
-        }
+
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void checkPermission() {
-        if (!Nammu.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            ActivityCompat.requestPermissions(
-                    getActivity(),
-                    PERMISSIONS_STORAGE, 1
-            );
-        }
-    }
 
     @Override
     protected void onFirstUserVisible() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Nammu.checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            requestPermissions(Nammu.PERMISSIONS_STORAGE, 100);
+        } else {
+            initMuisic();
+        }
+
+    }
+
+    private void initMuisic() {
         if (content.map.size() == 0) {
             File file = new File(Environment.getExternalStorageDirectory(), "threepomelos" + File.separator + IContent.FILEM_USIC);
             if (file.exists()) {
@@ -137,10 +134,8 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
                 playlist = (Playlist) playlists.get(0);
             }
             if (playlist != null) {
-                 PlaylistsManager.getInstance(getActivity()).getMusicInfos(playlist.id);
-                L.e(content.collectedList.size()+"");
+                PlaylistsManager.getInstance(getActivity()).getMusicInfos(playlist.id);
             }
-
         }
     }
 
@@ -148,6 +143,7 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
     protected void onUserVisible() {
 
     }
+
     @Override
     public void onClick(View v) {
         Intent intent = null;
@@ -213,6 +209,8 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
             case R.id.relayout_popular:
                 startActivity(new Intent(mContext, HotRecommenActivity.class));
                 break;
+            default:
+                break;
         }
     }
 
@@ -276,5 +274,19 @@ public class MusicFragment extends BaseLazyFragment implements View.OnClickListe
     public void onResume() {
         super.onResume();
         AVAnalytics.onFragmentStart("MusicFragment");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode) {
+            case 100:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initMuisic();
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -108,7 +108,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/text_size_music" />
 
-    <SeekBar
+    <com.findtech.threePomelos.view.PlayerSeekBar
         android:id="@+id/voice_seekbar"
         android:layout_width="@dimen/x280"
         android:layout_height="wrap_content"
@@ -116,12 +116,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y18"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:maxHeight="@dimen/x1"
+        android:maxHeight="@dimen/x2"
         android:minHeight="@dimen/x1"
         android:progressDrawable="@drawable/play_seekbar"
         android:secondaryProgress="0"
         android:thumb="@drawable/play_plybar_btn"
         android:visibility="gone"
+
 
         />
 

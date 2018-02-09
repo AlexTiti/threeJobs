@@ -62,8 +62,8 @@ public class HeadZoomScrollView extends ScrollView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-//        不可过度滚动，否则上移后下拉会出现部分空白的情况
         setOverScrollMode(OVER_SCROLL_NEVER);
+
 //        获得默认第一个view
         if (getChildAt(0) != null && getChildAt(0) instanceof ViewGroup && zoomView == null) {
             ViewGroup vg = (ViewGroup) getChildAt(0);
@@ -86,13 +86,15 @@ public class HeadZoomScrollView extends ScrollView {
             case MotionEvent.ACTION_MOVE:
                 if (!mScaling) {
                     if (getScrollY() == 0) {
-                        y = ev.getY();//滑动到顶部时，记录位置
+                        y = ev.getY();
                     } else {
                         break;
                     }
                 }
                 int distance = (int) ((ev.getY() - y)*mScaleRatio);
-                if (distance < 0) break;//若往下滑动
+                if (distance < 0) {
+                    break;//若往下滑动
+                }
                 mScaling = true;
                 setZoom(distance);
                 return true;
@@ -108,8 +110,9 @@ public class HeadZoomScrollView extends ScrollView {
     private void setZoom(float s) {
         float scaleTimes = (float) ((zoomViewWidth+s)/(zoomViewWidth*1.0));
 //        如超过最大放大倍数，直接返回
-        if (scaleTimes > mScaleTimes) return;
-
+        if (scaleTimes > mScaleTimes) {
+            return;
+        }
         ViewGroup.LayoutParams layoutParams = zoomView.getLayoutParams();
         layoutParams.width = (int) (zoomViewWidth + s);
         layoutParams.height = (int)(zoomViewHeight*((zoomViewWidth+s)/zoomViewWidth));
@@ -135,7 +138,9 @@ public class HeadZoomScrollView extends ScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-        if (onScrollListener!=null) onScrollListener.onScroll(l,t,oldl,oldt);
+        if (onScrollListener!=null) {
+            onScrollListener.onScroll(l, t, oldl, oldt);
+        }
     }
 
     public OnScrollListener onScrollListener;

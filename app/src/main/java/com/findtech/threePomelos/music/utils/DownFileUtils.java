@@ -25,7 +25,6 @@ public class DownFileUtils {
      * @return
      */
 
-
     public static File creatFileDir(Context context,String path){
 
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable()) {

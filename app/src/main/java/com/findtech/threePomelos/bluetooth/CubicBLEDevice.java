@@ -1,18 +1,13 @@
 package com.findtech.threePomelos.bluetooth;
 
-import com.findtech.threePomelos.base.MyApplication;
-import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.utils.IContent;
-import com.findtech.threePomelos.utils.Tools;
-
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
-
 import android.os.Build;
-import android.util.Log;
+import com.findtech.threePomelos.base.MyApplication;
+import com.findtech.threePomelos.utils.IContent;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class CubicBLEDevice extends BLEDevice {
@@ -24,24 +19,7 @@ public class CubicBLEDevice extends BLEDevice {
 
 	@Override
 	protected void discoverCharacteristicsFromService() {
-		// TODO Auto-generated method stub
 
-//		if (bleService != null) {
-//			Log.d(MyApplication.TAG, "load all the services ");
-//			for (BluetoothGattService bluetoothGattService : bleService
-//					.getSupportedGattServices(device)) {
-//				String serviceUUID = Long.toHexString(
-//						bluetoothGattService.getUuid().getMostSignificantBits())
-//						.substring(0, 4);
-//				for (BluetoothGattCharacteristic bluetoothGattCharacteristic : bluetoothGattService
-//						.getCharacteristics()) {
-//					String characterUUID = Long.toHexString(
-//							bluetoothGattCharacteristic.getUuid()
-//									.getMostSignificantBits()).substring(0, 4);
-//
-//				}
-//			}
-//		}
 	}
 
 	/**
@@ -145,8 +123,6 @@ public class CubicBLEDevice extends BLEDevice {
 								.getMostSignificantBits()).substring(0, 4);
 				if (gattServiceUUID.equals(serviceUUID)
 						&& characteristicUUID.equals(characterUUID)) {
-					Log.d(MyApplication.TAG, "charaterUUID read is success  : "
-							+ characterUUID);
 					this.readValue(bluetoothGattCharacteristic);
 				}
 			}

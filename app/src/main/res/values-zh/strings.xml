@@ -24,6 +24,7 @@
     <string name="hint_set_password_text">设置登录密码</string>
     <string name="smsCodeError">无效的短信验证码</string>
     <string name="noFoundUser">没有找到可用的用户</string>
+    <string name="checkNumberRate">发送短信过快，请稍后重试</string>
 
 
     <string name="finish">完成</string>
@@ -78,7 +79,7 @@
     <string name="my_share">分享</string>
     <string name="pic_save">图片以保存到相册</string>
     <string name="save_error">照片保存有误</string>
-
+    <string name="primess_notice">请允许此权限否则该功能无法使用!</string>
     <!--Bluetooth -->
 
     <string name="ble_not_supported">不支持蓝牙</string>
@@ -390,7 +391,7 @@
     <string name="set">设置</string>
     <string name="change">更改</string>
     <string name="open_bluetooth_cancle">取消设置权限,将无法确保推车数据正确</string>
-    <string name="open_bluetooth_message">请打开权限，确保数据正确！</string>
+    <string name="open_bluetooth_message">请打开悬浮窗权限，确保数据正确！</string>
     <string name="not_open_message">未打开权限,将无法确保婴儿推车数据正确</string>
     <string name="weight_message_confirm">请确认是否添加本次宝宝体重?</string>
     <string name="blue_tooth_update">请选择  3POMELOS_A3  的设备！</string>
@@ -421,7 +422,7 @@
     <string name="checkNumber_useless">无效的短信验证码，通常是不匹配或者过期</string>
     <string name="checkNumber_send_fail">短信请求次数超上限！</string>
     <string name="login_empty_notice">账号或密码不能为空!</string>
-    <string name="data_max_notice">输入数据过大</string>
+    <string name="data_max_notice">请输入正确的数值!</string>
 
 
     <string name="babay_sex">是男宝还是女宝啊</string>

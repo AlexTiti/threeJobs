@@ -192,6 +192,7 @@ public class RecentStore {
 
     public synchronized void addSongId(final long songId) {
 
+
         final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         database.beginTransaction();
         try {
@@ -223,9 +224,12 @@ public class RecentStore {
             }
             if (songId >= 0  && MusicPlayer.getPlayinfos() != null) {
                 MusicInfo info = MusicPlayer.getPlayinfos().get(songId);
+
                 if (info == null ){
+                    L.e("FFFFFFE","info == null");
                     return;
                 }
+                L.e("FFFFFFE","MusicPlayer.getPlayinfos()==="+info.musicName);
                 final Cursor cursor = database.query(RecentStoreColumns.NAME, null, WHERE_ID_EQUALS,
                         new String[]{info.musicName}, null, null, null);
                 int count_pre = 0;

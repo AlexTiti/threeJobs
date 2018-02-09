@@ -1,13 +1,13 @@
 package com.findtech.threePomelos.base;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,10 +18,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.WindowCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -30,17 +28,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.findtech.threePomelos.R;
-
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.service.RFStarBLEService;
 import com.findtech.threePomelos.utils.ToastUtil;
@@ -51,15 +46,15 @@ import java.io.File;
 /**
  * Created by zhi.zhang on 10/22/15.
  */
-public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener{
+public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
 
     public Toolbar mToolbar;
     public ImageView btn_tagimage_edit_next;
     public LinearLayout share_button_layout;
     public LinearLayout toolbar_layout;
-    public RelativeLayout HomeMenuLayout,share;
-   public File file_music;
-    public String Log_TAG ;
+    public RelativeLayout HomeMenuLayout, share;
+    public File file_music;
+    public String Log_TAG;
     public RelativeLayout btn_menu_more;
     protected final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 122;
     protected final int REQUEST_CODE_ASK_ACCESS_COARSE_LOCATION_PERMISSIONS = 123;
@@ -92,7 +87,7 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -100,37 +95,32 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
         Log_TAG = this.getLocalClassName();
 
         supportRequestWindowFeature(WindowCompat.FEATURE_ACTION_MODE_OVERLAY);//长按出现复制粘贴栏在顶部占位问题解决方法
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(this)) {
-                requestAlertWindowPermission();
-            }
-        }
+
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.home_toolbar_layout);
         MyApplication.getInstance().addActivity(this);
-        L.e("QQQQQQQQ","=="+this.getClass());
+        L.e("QQQQQQQQ", "==" + this.getClass());
 
     }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        L.e(Log_TAG,"setContentView");
+        L.e(Log_TAG, "setContentView");
         toolbar_layout = (LinearLayout) findViewById(R.id.toolbar_layout);
         setContentView(View.inflate(this, layoutResID, null));
     }
 
     @Override
     public void setContentView(View view) {
-        L.e(Log_TAG,"setContentView");
+        L.e(Log_TAG, "setContentView");
         if (toolbar_layout == null) {
-            L.e("setContentView","setContentView===");
+            L.e("setContentView", "setContentView===");
             return;
         }
         toolbar_layout.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
     }
-
 
 
     @Override
@@ -169,14 +159,14 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-    protected void setToolbar(String title, boolean canBack ,String  showWhat) {
+    protected void setToolbar(String title, boolean canBack, String showWhat) {
 
         mToolbar = (Toolbar) toolbar_layout.findViewById(R.id.toolbar);
         btn_menu_more = (RelativeLayout) toolbar_layout.findViewById(R.id.action_more);
         btn_tagimage_edit_next = (ImageView) toolbar_layout.findViewById(R.id.btn_tagimage_edit_next);
         share_button_layout = (LinearLayout) toolbar_layout.findViewById(R.id.share_button_layout);
 
-        if (mToolbar.getVisibility() == View.GONE  ) {
+        if (mToolbar.getVisibility() == View.GONE) {
             mToolbar.setVisibility(View.VISIBLE);
         }
         if (btn_tagimage_edit_next.getVisibility() == View.VISIBLE) {
@@ -186,8 +176,8 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
             share_button_layout.setVisibility(View.GONE);
         }
 
-        if (showWhat != null){
-            switch (showWhat){
+        if (showWhat != null) {
+            switch (showWhat) {
                 case "Save And Share":
                     share_button_layout.setVisibility(View.VISIBLE);
                     break;
@@ -206,7 +196,8 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
         mTextView.setTextSize(20f);
         setToolbar(mToolbar, canBack);
     }
-    protected   void setToolBarDiss(){
+
+    protected void setToolBarDiss() {
         mToolbar = (Toolbar) toolbar_layout.findViewById(R.id.toolbar);
         mToolbar.setVisibility(View.GONE);
     }
@@ -224,20 +215,17 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
         return super.dispatchTouchEvent(ev);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("ZZ", "requestCode = " + requestCode + " resultCode = " + resultCode + " data = " + data);
+
+
+    public void requestOverlays(Context activity,String notice) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (requestCode == REQUEST_CODE_ASK_SYSTEM_ALERT_WINDOW_PERMISSIONS) {
-                if (!Settings.canDrawOverlays(this)) {
-                    ToastUtil.showToast(MyActionBarActivity.this, getResources().getString(R.string.not_open_message), Toast.LENGTH_LONG);
-                }
+            if (!Settings.canDrawOverlays(this)) {
+                requestAlertWindowPermission(activity,notice);
             }
         }
     }
 
-    private void requestAlertWindowPermission() {
+    private void requestAlertWindowPermission(final Context activity, final String notice) {
         final CustomDialog.Builder builder = new CustomDialog.Builder(this);
         builder.setTitle(getResources().getString(R.string.notice));
         builder.setNotifyInfo(getResources().getString(R.string.open_bluetooth_message));
@@ -256,7 +244,7 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                ToastUtil.showToast(MyActionBarActivity.this, getResources().getString(R.string.open_bluetooth_cancle), Toast.LENGTH_LONG);
+                ToastUtil.showToast(activity, notice, Toast.LENGTH_LONG);
             }
         });
         builder.create().show();
@@ -313,10 +301,8 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
     // 判断是连接还是断开
     protected void connectedOrDis(String action) {
         if (RFStarBLEService.ACTION_GATT_CONNECTED.equals(action)) {
-            Log.d(MyApplication.TAG, "111111111 连接完成");
 
         } else if (RFStarBLEService.ACTION_GATT_DISCONNECTED.equals(action)) {
-            Log.d(MyApplication.TAG, "111111111 连接断开");
         }
     }
 
@@ -369,12 +355,7 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
     //---------------------------------------Tool Bar Right------------------------------//
 
 
-
-
-
-
-
-    public void initShareView(){
+    public void initShareView() {
         if (toolbar_layout == null) {
             return;
         } else {
@@ -385,15 +366,13 @@ public class MyActionBarActivity extends BaseActivity implements Toolbar.OnMenuI
     }
 
 
+    public void readyGoToKilled(Class<?> clazz) {
+        startActivity(new Intent(this, clazz));
+        finish();
+    }
 
-
-    public void readyGoToKilled(Class<?> clazz){
-    startActivity(new Intent(this,clazz));
-    finish();
-  }
-
-    public void readyGo(Class<?> clazz){
-        startActivity(new Intent(this,clazz));
+    public void readyGo(Class<?> clazz) {
+        startActivity(new Intent(this, clazz));
     }
 
 }

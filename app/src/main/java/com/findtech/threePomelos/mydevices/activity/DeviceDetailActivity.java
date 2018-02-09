@@ -21,6 +21,7 @@ import android.os.CountDownTimer;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -147,6 +148,8 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         } else {
             setToolbar(selectName, true, null);
         }
+
+
         layout = (RelativeLayout) findViewById(R.id.layout);
         mImage = (ImageView) findViewById(R.id.image_electricity_bac);
         image_edit_detail = (ImageView) findViewById(R.id.image_edit_detail);
@@ -215,6 +218,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         }
         image_edit_detail.setOnClickListener(this);
         app = (MyApplication) getApplication();
+
         operateDBUtils = new OperateDBUtils(this);
         int w = View.MeasureSpec.makeMeasureSpec(0,
                 View.MeasureSpec.UNSPECIFIED);
@@ -239,7 +243,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 refreshOpne();
             }
         } else {
-            showProgressDialog(getResources().getString(R.string.data_update), 25000, getString(R.string.data_update_fail));
+            showProgressDialogDis(getResources().getString(R.string.data_update), 25000, getString(R.string.data_update_fail));
             manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
             bleAdapter = manager.getAdapter();
             app.manager.bluetoothDevice = bleAdapter.getRemoteDevice(selectAddress);
@@ -248,12 +252,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                     this, app.manager.bluetoothDevice);
             app.manager.cubicBLEDevice.setBLEBroadcastDelegate(this);
         }
-//        if (travelInfoEntity.getAdultWeight().equals("0")) {
-//            showNameBlueToothDialog();
-//        }
         dialogUtil = DialogUtil.getIntence();
-
-
     }
 
     /**
@@ -338,6 +337,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
     AnimationSet animationSet;
 
     private void initAnimation() {
+
 
         a = new RotateAnimation(0, -12, Animation.RELATIVE_TO_SELF,
                 0f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -512,7 +512,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                                                     ToastUtil.showToast(DeviceDetailActivity.this, getResources().getString(R.string.unbound_success));
                                                     removeIContent(deviceNum);
                                                     Intent intent = new Intent();
-                                                    setResult(Activity.RESULT_OK,intent);
+                                                    setResult(Activity.RESULT_OK, intent);
                                                     finish();
                                                 } else {
                                                     checkNetWork();
@@ -925,9 +925,9 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
                 }
             }
             if (data[3] == (byte) 0x8B && data[4] == 0x08) {
-                String str = "V1.0." + data[5] ;
+                String str = "V1.0." + data[5];
                 content.code = str;
-                L.e("str===", str);
+
                 if (str.equals("V1.0.3")) {
                     SharedPreferences sp = getSharedPreferences(IContent.IS_FIRST_USE, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
@@ -1042,6 +1042,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
 
         } else if (action.equals(RFStarBLEService.ACTION_DATA_AVAILABLE_READ)) {
             byte data[] = intent.getByteArrayExtra(RFStarBLEService.EXTRA_DATA);
+
             if (data[3] == (byte) 0x8B && data[4] == (byte) 0xAA) {
                 ToastUtil.showToast(DeviceDetailActivity.this, getResources().getString(R.string.close_sucess));
                 if (app.manager.cubicBLEDevice != null) {
@@ -1142,7 +1143,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
         image_brake_detail.setVisibility(View.GONE);
         iamge_bac__.setVisibility(View.GONE);
         image_back_speed.setImageResource(R.drawable.brake_bac_close);
-        if (animator != null){
+        if (animator != null) {
             animator.cancel();
         }
     }
@@ -1220,7 +1221,7 @@ public class DeviceDetailActivity extends MyActionBarActivity implements View.On
 
     @Override
     public void onConfirm() {
-        Intent intent = new Intent(this,DeviceUpdateActivity.class);
+        Intent intent = new Intent(this, DeviceUpdateActivity.class);
         intent.putExtra("update", true);
         startActivity(intent);
 

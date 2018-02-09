@@ -108,7 +108,6 @@
     <string name="pic_chooser_camera">Camera</string>
     <string name="pic_chooser_cancel">Cancel</string>
 
-
     <string name="title_activity_forget_password">Find password</string>
     <string name="title_activity_input_identify">Input identify</string>
 
@@ -463,7 +462,7 @@
     <string name="height_ino_notice">Please add height to the front page</string>
     <string name="weight_ino_notice">Please add weight to the front page</string>
 
-    <string name="data_max_notice">Too large input data</string>
+    <string name="data_max_notice">Please enter the correct value!</string>
     <string name="blue_tooth_update_meizu">Please select the \"Bluetooth\"!</string>
     <string name="bluetooth_common">Binding device method</string>
     <string name="bluetooth_common_deal">Open \"three dad parenting\" APP, and click on the home 【add device】 or 【+】 jump the search interface and bind the device named \"3POMELOS_A3_BLE\"</string>
@@ -473,5 +472,7 @@
     <string name="bluetooth_fail_common_deal">When binding the cart, you need to connect with the system background server, so please keep the network smooth and use the 4G signal to be better.</string>
     <string name="bluetooth_data_common">Synchronization data failure</string>
     <string name="bluetooth_data_common_deal">Please check in turn: whether the power is turned on, whether Bluetooth goes into sleep mode (if you touch in the relevant area wakeup), and whether the Bluetooth is open too long (re open the Bluetooth).</string>
+    <string name="checkNumberRate">Send a short message too fast, please try again later</string>
+    <string name="primess_notice">Please allow this permission or the function cannot be used!</string>
 
 </resources>

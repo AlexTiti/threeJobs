@@ -22,7 +22,7 @@ public class Constants {
     /**
      * 单次缓存文件最大值
      */
-    public static final int AUDIO_BUFFER_MAX_LENGTH = 8 * 1024 * 1024;
+    public static final int AUDIO_BUFFER_MAX_LENGTH = 6 * 1024 * 1024;
     /**
      * 缓存文件个数最大值
      */
