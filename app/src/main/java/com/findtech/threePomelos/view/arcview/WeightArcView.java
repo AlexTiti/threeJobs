@@ -155,7 +155,6 @@ public class WeightArcView extends View {
             double endSweepValue = endPanel.getEndSweepValue();
             //计算出进度条在变化的时候体重的值
             float sesameSweepValue = startSweepValue + fraction * ((float) endSweepValue - startSweepValue);
-//            Log.d("ZZ", "startSweepValue = " + startSweepValue);
             resultPanel.setSesameSweepValue((double) sesameSweepValue);
             return resultPanel;
         }
