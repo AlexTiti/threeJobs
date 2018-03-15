@@ -21,8 +21,7 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 
 
-import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.musicserver.RecentStore;
+import com.findtech.threePomelos.musicserver.control.RecentStore;
 
 import java.util.ArrayList;
 

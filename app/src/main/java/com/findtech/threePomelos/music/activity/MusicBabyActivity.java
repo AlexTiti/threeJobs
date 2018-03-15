@@ -1,37 +1,25 @@
 package com.findtech.threePomelos.music.activity;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.bluetooth.BLEDevice;
-import com.findtech.threePomelos.entity.TravelInfoEntity;
 import com.findtech.threePomelos.music.adapter.ShowMusicAdapter;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
 import com.findtech.threePomelos.music.present.ShowMusicPresent;
 import com.findtech.threePomelos.music.utils.HandlerUtil;
 import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.music.utils.MusicUtils;
 import com.findtech.threePomelos.music.view.MusicViewIn;
-import com.findtech.threePomelos.musicserver.MusicPlayer;
-import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.musicserver.control.MusicPlayer;
 import com.findtech.threePomelos.utils.IContent;
-import com.findtech.threePomelos.utils.ToastUtil;
-import com.findtech.threePomelos.utils.Tools;
-import com.findtech.threePomelos.view.dialog.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;

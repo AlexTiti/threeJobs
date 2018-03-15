@@ -5,13 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
@@ -20,15 +14,11 @@ import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.bluetooth.BLEDevice;
 import com.findtech.threePomelos.entity.TravelInfoEntity;
-import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.bluetooth.server.RFStarBLEService;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
-
-import java.util.Arrays;
-
 
 
 public class RepairActivity extends MyActionBarActivity implements BLEDevice.RFStarBLEBroadcastReceiver  {

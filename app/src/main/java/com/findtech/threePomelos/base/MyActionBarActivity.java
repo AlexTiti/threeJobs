@@ -1,7 +1,6 @@
 package com.findtech.threePomelos.base;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,7 +36,7 @@ import android.widget.Toast;
 
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.bluetooth.server.RFStarBLEService;
 import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.view.dialog.CustomDialog;
 

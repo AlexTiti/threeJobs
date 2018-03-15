@@ -67,7 +67,9 @@ import com.findtech.threePomelos.music.proxy.utils.Constants;
 import com.findtech.threePomelos.music.proxy.utils.MediaPlayerProxy;
 import com.findtech.threePomelos.music.proxy.utils.ProxyUtils;
 import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.receiver.MediaButtonIntentReceiver;
+import com.findtech.threePomelos.musicserver.control.MusicPlaybackState;
+import com.findtech.threePomelos.musicserver.control.RecentStore;
+import com.findtech.threePomelos.musicserver.receiver.MediaButtonIntentReceiver;
 import com.findtech.threePomelos.utils.Tools;
 import com.google.gson.reflect.TypeToken;
 

@@ -27,24 +27,20 @@ import com.avos.avoscloud.SaveCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.MyActionBarActivity;
-import com.findtech.threePomelos.base.MyApplication;
 import com.findtech.threePomelos.bluetooth.AppManager;
 import com.findtech.threePomelos.bluetooth.BLEDevice;
 import com.findtech.threePomelos.bluetooth.CubicBLEDevice;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
 import com.findtech.threePomelos.entity.TravelInfoEntity;
-import com.findtech.threePomelos.home.MainHomeActivity;
-import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
+import com.findtech.threePomelos.mydevices.bean.DeviceCarBean;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
-import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.mydevices.adapter.BlueSearchAdapter;
 import com.findtech.threePomelos.mydevices.bean.BluetoothLinkBean;
 import com.findtech.threePomelos.net.NetWorkRequest;
 
-import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.bluetooth.server.RFStarBLEService;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.NetUtils;
 
@@ -303,10 +299,6 @@ public class BluetoothlinkActivity extends MyActionBarActivity implements BLEDev
         blueSearchAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void RFstopBLEManageListener(BluetoothDevice device, int rssi, byte[] scanRecord) {
-
-    }
 
     @Override
     public void RFstarBLEManageStartScan() {

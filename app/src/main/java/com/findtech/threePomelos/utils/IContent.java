@@ -1,7 +1,7 @@
 package com.findtech.threePomelos.utils;
 
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
+import com.findtech.threePomelos.mydevices.bean.DeviceCarBean;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.mydevices.bean.BluetoothLinkBean;
 

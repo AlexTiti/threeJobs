@@ -1,6 +1,5 @@
 package com.findtech.threePomelos.music.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.home.musicbean.MusicNetBean;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
 import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.musicserver.MusicPlayer;
-import com.findtech.threePomelos.utils.IContent;
-import com.findtech.threePomelos.utils.ToastUtil;
+import com.findtech.threePomelos.musicserver.control.MusicPlayer;
 
 
 import java.util.List;

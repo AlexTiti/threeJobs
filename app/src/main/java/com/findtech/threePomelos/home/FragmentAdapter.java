@@ -44,16 +44,11 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         return fragments == null ? 0:fragments.size();
     }
 
-//    public void setFragments(ArrayList<Fragment> fragments ){
-//        this.fragments = fragments;
-//    }
-
     public View getView(int position){
         View view = LayoutInflater.from(context).inflate(R.layout.tabitem,null);
         ImageView imageView = (ImageView) view.findViewById(R.id.image_tab);
         imageView.setBackgroundResource(IContent.tabImageIds[position]);
         TextView textView = (TextView) view.findViewById(R.id.text_tab);
-
         textView.setText(IContent.tabtextIds[position]);
         return  view;
     }

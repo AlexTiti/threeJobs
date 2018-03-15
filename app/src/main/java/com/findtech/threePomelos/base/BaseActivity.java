@@ -25,26 +25,22 @@ import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.DeleteCallback;
 import com.avos.avoscloud.FindCallback;
 import com.findtech.threePomelos.MediaAidlInterface;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.activity.GetUserProtocolActivity;
 import com.findtech.threePomelos.bluetooth.BLEDevice;
 import com.findtech.threePomelos.entity.TravelInfoEntity;
-import com.findtech.threePomelos.home.MainHomeActivity;
-import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
 import com.findtech.threePomelos.music.activity.PlayDetailActivity;
-import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.utils.IConstants;
 import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.musicserver.FloatingService;
+import com.findtech.threePomelos.musicserver.server.FloatingService;
 import com.findtech.threePomelos.musicserver.MediaService;
-import com.findtech.threePomelos.musicserver.MusicPlayer;
-import com.findtech.threePomelos.musicserver.MusicStateListener;
-import com.findtech.threePomelos.musicserver.WatcherHome;
+import com.findtech.threePomelos.musicserver.control.MusicPlayer;
+import com.findtech.threePomelos.musicserver.control.MusicStateListener;
+import com.findtech.threePomelos.musicserver.server.WatcherHome;
 import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.bluetooth.server.RFStarBLEService;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.NetUtils;
 import com.findtech.threePomelos.utils.ToastUtil;
@@ -53,10 +49,9 @@ import com.findtech.threePomelos.view.dialog.CustomDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import static com.findtech.threePomelos.musicserver.MusicPlayer.mService;
+import static com.findtech.threePomelos.musicserver.control.MusicPlayer.mService;
 
 
 /**
@@ -118,7 +113,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                             app.manager.cubicBLEDevice.disconnectedDevice();
                         }
                     }
-
                     break;
                     default:
                         break;
@@ -135,6 +129,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         progressDialog.setCancelable(true);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -271,34 +266,25 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
      * 歌曲切换
      */
     public void updateTrack() {
-
-
     }
 
     public void updateLrc() {
-
-
     }
 
     /**
      * @param p 更新歌曲缓冲进度值，p取值从0~100
      */
     public void updateBuffer(int p) {
-
     }
-
 
     /**
      * @param l 歌曲是否加载中
      */
     public void loading(boolean l) {
-
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         app = (MyApplication) getApplication();
         mToken = MusicPlayer.bindToService(this, this);
@@ -341,7 +327,6 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         mPlayThread = new PlayMusic();
         mPlayThread.start();
         builder = new CustomDialog.Builder(this);
-
 
     }
 
@@ -432,7 +417,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     protected void onPause() {
         super.onPause();
         AVAnalytics.onPause(this);
-        mHomeWatcher.stopWatch();// 在onPause中停止监听，不然会报错的。
+        mHomeWatcher.stopWatch();
     }
 
 
@@ -451,14 +436,12 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Unbind from the service
         unbindService();
         try {
             unregisterReceiver(mPlaybackStatus);
             unregisterReceiver(floatViewReceiver);
         } catch (final Throwable e) {
         }
-   //   unregisterReceiver(scanSdReceiver);
         mPlayHandler.removeCallbacksAndMessages(null);
         mPlayHandler.getLooper().quit();
         mPlayHandler = null;
@@ -473,23 +456,11 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         }
     }
 
-    public void setMusicStateListenerListener(final MusicStateListener status) {
-        if (status == this) {
-            throw new UnsupportedOperationException("Override the method, don't add a listener");
-        }
 
-        if (status != null) {
-            mMusicListener.add(status);
-        }
-    }
 
-    public void removeMusicStateListenerListener(final MusicStateListener status) {
-        if (status != null) {
-            mMusicListener.remove(status);
-        }
-    }
-
-    //接收广播执行相应的操作
+    /**
+     *接收广播执行相应的操作
+     */
     private final static class PlaybackStatus extends BroadcastReceiver {
 
         private final WeakReference<BaseActivity> mReference;

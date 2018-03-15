@@ -16,47 +16,60 @@ import android.widget.Toast;
 
 import com.findtech.threePomelos.music.utils.L;
 
-/*
- 管理所有的 蓝牙设备 
- * 			功能:
- * 			   1)扫描所有的蓝牙设备 
- * 			   2)判断蓝牙权限是否打开
- * @author Kevin.wu
+/**
+ * 管理所有的 蓝牙设备
+ * 功能:
+ * 1)扫描所有的蓝牙设备
+ * 2)判断蓝牙权限是否打开
  *
+ * @author Administrator
  */
 public class AppManager {
-    private static int SCAN_TIME = 10000; // 扫描的时间为10秒
-    public static final int REQUEST_CODE = 0x01;// 返回的唯一标识
+    /**
+     * 扫描的时间为10秒
+     */
+    private static int SCAN_TIME = 10000;
+    /**
+     * 返回的唯一标识
+     */
+    public static final int REQUEST_CODE = 0x01;
     private Context context = null;
     public static BluetoothAdapter bleAdapter = null;
 
     private Handler handler = null;
-    private boolean isScanning = false; // 是否正在扫描
-
+    /**
+     * 是否正在扫描
+     */
+    private boolean isScanning = false;
     private RFStarManageListener listener = null;
-
-    private ArrayList<BluetoothDevice> scanBlueDeviceArray = new ArrayList<BluetoothDevice>(); // 扫描到的数据
-
-    public BluetoothDevice bluetoothDevice = null; // 选中的设备
-    public CubicBLEDevice cubicBLEDevice = null; // 选中的cubicBLEDevice
+    /**
+     * 扫描到的数据
+     */
+    private ArrayList<BluetoothDevice> scanBlueDeviceArray = new ArrayList<BluetoothDevice>();
+    /**
+     * 选中的设备
+     */
+    public BluetoothDevice bluetoothDevice = null;
+    /**
+     * 选中的cubicBLEDevice
+     */
+    public CubicBLEDevice cubicBLEDevice = null;
 
     public AppManager(Context context) {
-        // TODO Auto-generated constructor stub
         handler = new Handler();
-        if (!context.getPackageManager().hasSystemFeature( // 检察系统是否包含蓝牙低功耗的jar包
+        //检察系统是否包含蓝牙低功耗的jar包
+        if (!context.getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(context, "设备不支持蓝牙4.0", Toast.LENGTH_SHORT)
                     .show();
-//            return;
         }
         this.context = context;
         BluetoothManager manager = (BluetoothManager) this.context
                 .getSystemService(Context.BLUETOOTH_SERVICE);
         bleAdapter = manager.getAdapter();
-
-        if (bleAdapter == null) { // 检察手机硬件是否支持蓝牙低功耗
+        //检察手机硬件是否支持蓝牙低功耗
+        if (bleAdapter == null) {
             Toast.makeText(context, "无法使用蓝牙4.0", Toast.LENGTH_SHORT).show();
-//            return;
         }
     }
 
@@ -81,32 +94,19 @@ public class AppManager {
         return false;
     }
 
+    /**
+     * 获取扫描到的设备
+     *
+     * @return
+     */
     public ArrayList<BluetoothDevice> getScanBluetoothDevices() {
         return this.scanBlueDeviceArray;
     }
 
     /**
-     * 设置权限后，返回时调用
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    public void onRequestResult(int requestCode, int resultCode, Intent data) {
-        // User chose not to enable Bluetooth.
-        if (requestCode == REQUEST_CODE
-                && resultCode == Activity.RESULT_CANCELED) {
-//            ((Activity) this.context).finish();
-            return;
-        }
-    }
-
-
-    /**
      * 扫描蓝牙设备
      */
     public void startScanBluetoothDevice() {
-
         if (scanBlueDeviceArray != null) {
             scanBlueDeviceArray = null;
         }
@@ -114,14 +114,12 @@ public class AppManager {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // TODO Auto-generated method stub
                 stopScanBluetoothDevice();
             }
         }, SCAN_TIME);
 
         isScanning = true;
         if (bleAdapter != null) {
-            L.e("AAA","startLeScan");
             bleAdapter.startLeScan(bleScanCallback);
         }
         listener.RFstarBLEManageStartScan();
@@ -135,7 +133,6 @@ public class AppManager {
         if (isScanning) {
             isScanning = false;
             if (bleAdapter != null) {
-                L.e("AAA","bleStopScanCallback");
                 bleAdapter.stopLeScan(bleScanCallback);
             }
             listener.RFstarBLEManageStopScan();
@@ -149,12 +146,10 @@ public class AppManager {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    L.e("scan_or_stop","======");
                     if (!scanBlueDeviceArray.contains(device)) {
-                        L.e("scan_or_stop","======"+device.getName());
-                            scanBlueDeviceArray.add(device);
-                            listener.RFstarBLEManageListener(device, rssi,
-                                    scanRecord);
+                        scanBlueDeviceArray.add(device);
+                        listener.RFstarBLEManageListener(device, rssi,
+                                scanRecord);
                     }
                 }
             });
@@ -173,16 +168,27 @@ public class AppManager {
 
     /**
      * 用于处理，刷新到设备时更新界面
-     *
-     * @author Kevin.wu
      */
     public interface RFStarManageListener {
-        public void RFstarBLEManageListener(BluetoothDevice device, int rssi,
-                                            byte[] scanRecord);
-        public void RFstopBLEManageListener(BluetoothDevice device, int rssi,
-                                            byte[] scanRecord);
-        public void RFstarBLEManageStartScan();
 
-        public void RFstarBLEManageStopScan();
+        /**
+         * 返回扫描数据
+         * @param device 蓝牙设备
+         * @param rssi
+         * @param scanRecord
+         */
+        void RFstarBLEManageListener(BluetoothDevice device, int rssi,
+                                     byte[] scanRecord);
+
+
+        /**
+         * 开始扫描
+         */
+        void RFstarBLEManageStartScan();
+
+        /**
+         * 扫描结束
+         */
+        void RFstarBLEManageStopScan();
     }
 }

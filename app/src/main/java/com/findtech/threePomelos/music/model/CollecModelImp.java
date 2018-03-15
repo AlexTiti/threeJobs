@@ -3,20 +3,13 @@ package com.findtech.threePomelos.music.model;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVFile;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
-import com.avos.avoscloud.FindCallback;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.info.Playlist;
-import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.musicserver.PlaylistInfo;
-import com.findtech.threePomelos.musicserver.PlaylistsManager;
+import com.findtech.threePomelos.musicserver.info.PlaylistInfo;
+import com.findtech.threePomelos.musicserver.control.PlaylistsManager;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <pre>

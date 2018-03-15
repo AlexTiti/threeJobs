@@ -4,20 +4,16 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
-import com.avos.avoscloud.AVCloud;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVUser;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.bluetooth.AppManager;
 import com.findtech.threePomelos.entity.PersonDataEntity;
-import com.findtech.threePomelos.home.MainHomeActivity;
 import com.findtech.threePomelos.music.utils.IConstants;
-import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.music.utils.PreferencesUtility;
-import com.findtech.threePomelos.musicserver.PlaylistInfo;
+import com.findtech.threePomelos.musicserver.info.PlaylistInfo;
 import com.google.gson.Gson;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,14 +48,7 @@ public class MyApplication extends Application {
         super.onCreate();
         AVOSCloud.initialize(this, APPID, APPKEY);
         AVOSCloud.setDebugLogEnabled(true);
-
         manager = new AppManager(getApplicationContext());
-//        //微信 appid appsecret
-//        PlatformConfig.setWeixin("wx897cd02216ae4253", "dbd4985c48250cb8fedda58b338c00f8");
-//        //新浪微博 appkey appsecret
-//        PlatformConfig.setSinaWeibo("1796335974", "04d7ffd3c8855d1dbe0c7b3e2fecc781");
-//        // QQ和Qzone appid appkey
-//        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
         mContext = this;
         if (!PreferencesUtility.getInstance(this).getFavriateMusicPlaylist()) {
             PlaylistInfo.getInstance(this).addPlaylist(favPlaylist, getResources().getString(R.string.baby_like),

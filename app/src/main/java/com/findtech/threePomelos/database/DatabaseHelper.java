@@ -7,7 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
 
 /**
- * Created by zhi.zhang on 1/3/16.
+ *  数据库
+ * @author Alex
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -58,18 +59,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-//        onCreate(sqLiteDatabase);
-
         if (1 == oldVersion) {
-            //TODO
             upgradeToVersion2(sqLiteDatabase);
             oldVersion = 2;
         }
-        if (2 == oldVersion) {
-            //TODO
-            //oldVersion = 3;
-        }
-
         if (oldVersion != newVersion) {
             throw new IllegalStateException(
                     "error upgrading the database to version " + newVersion);
@@ -95,7 +88,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
         }
         return result;
     }

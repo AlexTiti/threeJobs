@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.findtech.threePomelos.R;
-import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
+import com.findtech.threePomelos.mydevices.bean.DeviceCarBean;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.utils.IContent;

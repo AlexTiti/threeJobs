@@ -4,12 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.findtech.threePomelos.music.info.MusicInfo;
-import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.music.recent.Song;
-import com.findtech.threePomelos.music.recent.SongLoader;
-import com.findtech.threePomelos.music.recent.TopTracksLoader;
-import com.findtech.threePomelos.musicserver.PlaylistsManager;
-import com.findtech.threePomelos.musicserver.RecentStore;
+import com.findtech.threePomelos.musicserver.control.RecentStore;
 
 import java.util.ArrayList;
 

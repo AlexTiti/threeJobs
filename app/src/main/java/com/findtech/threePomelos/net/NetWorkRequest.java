@@ -434,7 +434,7 @@ public class NetWorkRequest {
 
                 }
                 travelInfoEntity.setTotalMileage(todayMileage);
-                L.e("==============", "==================" + travelInfoEntity.getTotalMileage());
+
                 mHandle.sendEmptyMessage(0x99);
             }
         });

@@ -28,13 +28,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by zhi.zhang on 1/3/16.
+ *
+ * @author zhi.zhang
+ * @date 1/3/16
  */
 public class OperateDBUtils {
-    private final String TAG = "OperateDBUtils";
+
     private Context mContext;
     private final Object object = new Object();
     private final Object queryTraveLock = new Object();
+
     public static final String DATABASE_NAME = "threePomelos.db";
     public static final int DATABASE_VERSION = 2;
     public static final String TABLE_BABY_INFO = "babyInfo";
@@ -49,8 +52,6 @@ public class OperateDBUtils {
     public static Uri WEIGHT_URI = Uri.parse("content://" + AUTOHORITY + "/" + TABLE_WEIGHT);
     public static Uri TABLE_TRAVEL_URI = Uri.parse("content://" + AUTOHORITY + "/" + TABLE_TRAVEL_INFO);
 
-    public static String USERNAME = "username";
-    public static String USERPASSWORD = "password";
 
     public static String BABYNAME = "name";
     public static String BABYSEX = "sex";
@@ -58,33 +59,40 @@ public class OperateDBUtils {
     public static String HEADIMG = "header";
     public static String IS_BIND = "bluetoothBind";
     public static String BLUETOOTH_DEVICE_ID = "bluetoothDeviceId";
-    public static String BLUETOOTH_UUID = "bluetoothUUID";
     public static String BABY_INFO_OBJECT_ID = "babyInfoObjectId";
 
-    public static String LOCATION = "location";
     public static String BABYNATIVE = "native";
     public static String USER_ID = "uid";
     public static String TIME = "time";
     public static String DATE = "date";
     public static String HEIGHT = "height";
     public static String WEIGHT = "weight";
+
     public static String TOTAL_MILEAGE = "totalMileage";
     public static String TOTAL_CALOR = "totalCalor";
     public static String TODAY_CALOR = "todayCalor";
     public static String ADULT_WEIGHT = "adult_weight";
     public static String TODAY_MILEAGE = "todayMileage";
-
     public static String AVERAGE_SPEED = "averageSpeed";
+
+    /**
+     * 查询结束标志
+     */
     public static final String QUERY_FINISH = "com.findtech.threePomelos.database.query.finish";
+    /**
+     * 查询标志
+     */
     public static final String QUERY_DATA = "query_data";
 
+    /**
+     * 保存查询到的身高信息
+     */
     private ArrayList<PersonDataEntity> timeHeightDataArray = new ArrayList<>();
+    /**
+     * 保存查询到的体重信息
+     */
     private ArrayList<PersonDataEntity> timeWeightDataArray = new ArrayList<>();
     private SaveBabyInfoFinishListener mSaveBabyInfoFinishListener;
-
-    public interface SaveBabyInfoFinishListener {
-        void saveBabyInfoFinish();
-    }
 
     public void setSaveBabyInfoFinishListener(SaveBabyInfoFinishListener saveBabyInfoFinishListener) {
         mSaveBabyInfoFinishListener = saveBabyInfoFinishListener;
@@ -122,16 +130,18 @@ public class OperateDBUtils {
                                 personDataEntity.setHeight(heightNum);
                                 timeHeightDataArray.add(personDataEntity);
                             }
+                            //按时间排序
                             Collections.sort(timeHeightDataArray, sort);
                         }
                         if (timeHeightDataArray.size() > 0) {
-                            //保存最近的身高
+                            //保存最新的身高
                             RequestUtils.getSharepreferenceEditor(mContext).putString(RequestUtils.HEIGHT,
                                     timeHeightDataArray.get(timeHeightDataArray.size() - 1).getHeight()).commit();
                         } else {
                             RequestUtils.getSharepreferenceEditor(mContext).putString(RequestUtils.HEIGHT,
                                     "0").commit();
                         }
+                        //保存到MyApplication的静态对象中
                         MyApplication.getInstance().setUserHeightData(timeHeightDataArray);
                         sendBroadcast(TABLE_HEIGHT);
                     } catch (Exception e) {
@@ -146,6 +156,11 @@ public class OperateDBUtils {
         });
     }
 
+    /**
+     * 保存身高信息
+     * @param height
+     * @param time
+     */
     public void saveHeightToDB(String height, String time) {
         String columns[] = new String[]{OperateDBUtils.TIME, OperateDBUtils.HEIGHT};
         Uri uri = OperateDBUtils.HEIGHT_URI;
@@ -168,6 +183,11 @@ public class OperateDBUtils {
         }
     }
 
+    /**
+     * 增加身高信息
+     * @param height
+     * @param time
+     */
     public void insertHeight(String height, String time) {
         ContentValues values = new ContentValues();
         values.put(OperateDBUtils.TIME, time);
@@ -176,6 +196,11 @@ public class OperateDBUtils {
         mContext.getContentResolver().insert(OperateDBUtils.HEIGHT_URI, values);
     }
 
+    /**
+     * 更新数据库身高信息
+     * @param height
+     * @param time
+     */
     public void updateHeight(String height, String time) {
         String where = OperateDBUtils.TIME + " = ? " + " AND " +OperateDBUtils.USER_ID + " = ?";
         ContentValues values = new ContentValues();
@@ -186,8 +211,10 @@ public class OperateDBUtils {
                 new String[]{time, AVUser.getCurrentUser().getObjectId()});
     }
 
+    /**
+     * 查询运动数据
+     */
     public void queryTravelInfoDataFromDB() {
-
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(1);
         fixedThreadPool.execute(new Runnable() {
             @Override
@@ -223,6 +250,11 @@ public class OperateDBUtils {
         });
     }
 
+    /**
+     * 保存运动信息
+     * @param travelInfoEntity
+     * @param time
+     */
     public void saveTravelInfoToDB(TravelInfoEntity travelInfoEntity, String time) {
         String columns[] = new String[]{OperateDBUtils.TIME, OperateDBUtils.TODAY_MILEAGE, OperateDBUtils.AVERAGE_SPEED};
         Uri uri = OperateDBUtils.TABLE_TRAVEL_URI;
@@ -245,6 +277,11 @@ public class OperateDBUtils {
         }
     }
 
+    /**
+     * 更新运动信息
+     * @param travelInfoEntity
+     * @param time
+     */
     private void updateTravelInfo(TravelInfoEntity travelInfoEntity, String time) {
         String where = OperateDBUtils.TIME + " = ? " + " AND " +OperateDBUtils.USER_ID + " = ?";
         ContentValues values = new ContentValues();
@@ -256,6 +293,11 @@ public class OperateDBUtils {
                 new String[]{time, AVUser.getCurrentUser().getObjectId()});
     }
 
+    /**
+     * 添加运动信息
+     * @param travelInfoEntity
+     * @param time
+     */
     private void insertTravelInfo(TravelInfoEntity travelInfoEntity, String time) {
         ContentValues values = new ContentValues();
         values.put(OperateDBUtils.TIME, time);
@@ -316,6 +358,11 @@ public class OperateDBUtils {
         });
     }
 
+    /**
+     * 保存体重信息
+     * @param weight
+     * @param time
+     */
     public void saveWeightToDB(String weight, String time) {
         String columns[] = new String[]{OperateDBUtils.TIME, OperateDBUtils.USER_ID, OperateDBUtils.WEIGHT};
         Uri uri = OperateDBUtils.WEIGHT_URI;
@@ -338,6 +385,11 @@ public class OperateDBUtils {
         }
     }
 
+    /**
+     * 增减体重信息
+     * @param weight
+     * @param time
+     */
     public void insertWeightToDB(String weight, String time) {
         ContentValues values = new ContentValues();
         values.put(OperateDBUtils.TIME, time);
@@ -346,6 +398,11 @@ public class OperateDBUtils {
         mContext.getContentResolver().insert(OperateDBUtils.WEIGHT_URI, values);
     }
 
+    /**
+     * 更新体重信息
+     * @param weight
+     * @param time
+     */
     public void updateWeightToDB(String weight, String time) {
         String where = OperateDBUtils.TIME + " = ? " + " AND " + OperateDBUtils.USER_ID + " = ?";
         ContentValues values = new ContentValues();
@@ -412,7 +469,7 @@ public class OperateDBUtils {
                     if (AVObjects != null) {
                         if (AVObjects.size() > 0) {
                             avObject = AVObjects.get(0);
-                            AVFile avFile = avObject.getAVFile(HEADIMG);//获取头像
+                            AVFile avFile = avObject.getAVFile(HEADIMG);
                             if (avFile != null) {
                                 avFile.getDataInBackground(new GetDataCallback() {
                                     @Override
@@ -565,5 +622,15 @@ public class OperateDBUtils {
     public void deleteTimeDBTable(Uri tableUri, String time) {
         String where = OperateDBUtils.TIME + " = ? " + " AND " + USER_ID + " = ?";
         mContext.getContentResolver().delete(tableUri, where, new String[]{time, AVUser.getCurrentUser().getObjectId()});
+    }
+
+    /**
+     * 保存宝宝信息的回调接口
+     */
+    public interface SaveBabyInfoFinishListener {
+        /**
+         * 保存宝宝信息完成
+         */
+        void saveBabyInfoFinish();
     }
 }

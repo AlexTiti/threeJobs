@@ -20,6 +20,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.findtech.threePomelos.musicserver.control.MusicPlaybackState;
+import com.findtech.threePomelos.musicserver.info.PlaylistInfo;
+import com.findtech.threePomelos.musicserver.control.PlaylistsManager;
+import com.findtech.threePomelos.musicserver.control.RecentStore;
+
 public class MusicDB extends SQLiteOpenHelper {
 
     public static final String DATABASENAME = "musicdb.db";

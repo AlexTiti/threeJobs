@@ -1,27 +1,16 @@
 package com.findtech.threePomelos.home;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVInstallation;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.PushService;
 import com.avos.avoscloud.SaveCallback;
 import com.baidu.autoupdatesdk.AppUpdateInfo;
@@ -31,7 +20,6 @@ import com.baidu.autoupdatesdk.CPCheckUpdateCallback;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.base.MyActionBarActivity;
 import com.findtech.threePomelos.base.MyApplication;
-import com.findtech.threePomelos.home.fragment.UserFragment;
 import com.findtech.threePomelos.home.presenter.HomePresenter;
 import com.findtech.threePomelos.home.view.IViewMainHome;
 import com.findtech.threePomelos.music.utils.L;
@@ -41,7 +29,6 @@ import com.findtech.threePomelos.utils.ToastUtil;
 import com.findtech.threePomelos.utils.Tools;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainHomeActivity extends MyActionBarActivity implements IViewMainHome, ViewPager.OnPageChangeListener {
 

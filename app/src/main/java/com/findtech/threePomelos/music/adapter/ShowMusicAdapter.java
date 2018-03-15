@@ -10,8 +10,7 @@ import android.widget.TextView;
 import com.findtech.threePomelos.R;
 import com.findtech.threePomelos.music.info.MusicInfo;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
-import com.findtech.threePomelos.music.utils.L;
-import com.findtech.threePomelos.musicserver.MusicPlayer;
+import com.findtech.threePomelos.musicserver.control.MusicPlayer;
 
 import java.util.ArrayList;
 

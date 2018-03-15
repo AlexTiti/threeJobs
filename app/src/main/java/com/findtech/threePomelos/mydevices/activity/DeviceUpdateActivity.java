@@ -23,7 +23,7 @@ import com.findtech.threePomelos.entity.TravelInfoEntity;
 import com.findtech.threePomelos.music.utils.DownFileUtils;
 import com.findtech.threePomelos.music.utils.L;
 import com.findtech.threePomelos.net.NetWorkRequest;
-import com.findtech.threePomelos.service.RFStarBLEService;
+import com.findtech.threePomelos.bluetooth.server.RFStarBLEService;
 import com.findtech.threePomelos.utils.DialogUtil;
 import com.findtech.threePomelos.utils.IContent;
 import com.findtech.threePomelos.utils.ToastUtil;

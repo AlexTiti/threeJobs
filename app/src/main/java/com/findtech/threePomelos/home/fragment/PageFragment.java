@@ -21,10 +21,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +46,10 @@ import com.findtech.threePomelos.activity.BabyInfoActivity;
 import com.findtech.threePomelos.activity.TagImageEditActivity;
 import com.findtech.threePomelos.base.BaseActivity;
 import com.findtech.threePomelos.base.BaseLazyFragment;
-import com.findtech.threePomelos.bluetooth.AppManager;
 import com.findtech.threePomelos.database.OperateDBUtils;
 import com.findtech.threePomelos.entity.BabyInfoEntity;
 import com.findtech.threePomelos.home.MainHomeActivity;
-import com.findtech.threePomelos.home.musicbean.DeviceCarBean;
+import com.findtech.threePomelos.mydevices.bean.DeviceCarBean;
 import com.findtech.threePomelos.login.ThirdPartyController;
 import com.findtech.threePomelos.music.model.ItemClickListtener;
 import com.findtech.threePomelos.music.utils.L;
@@ -282,14 +279,15 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
                 MyCalendar myCalendar = new MyCalendar(birthday, currentDate, getActivity());
                 babyAge.setText(myCalendar.getDate());
                 babyTotalMonth = myCalendar.getStandardDate();
-                L.e("==============getHealth", babyInfoEntity.getBirthday() + "============" + babyTotalMonth);
+
                 String heightHealthStateSp = RequestUtils.getSharepreference(mContext).getString(RequestUtils.HEIGHT_HEALTH_STATE, "0~0");
                 String weightHealthStateSp = RequestUtils.getSharepreference(mContext).getString(RequestUtils.WEIGHT_HEALTH_STATE, "0~0");
                 nowBabySex = babyInfoEntity.getBabySex();
-                if (!oldBabyTotalMonth.equals(babyTotalMonth) ||
+                boolean b = !oldBabyTotalMonth.equals(babyTotalMonth) ||
                         (oldBabySex != null && !oldBabySex.equals(nowBabySex)) ||
                         "0~0".equals(heightHealthStateSp) ||
-                        "0~0".equals(weightHealthStateSp)) {
+                        "0~0".equals(weightHealthStateSp);
+                if (b) {
                     getHealthStateDataUpdateView(babyTotalMonth);
                     RequestUtils.getSharepreferenceEditor(mContext).putString(RequestUtils.BABY_TOTAL_MONTH, babyTotalMonth).commit();
                     if (oldBabySex != null && !oldBabySex.equals(nowBabySex)) {
@@ -372,26 +370,7 @@ public class PageFragment extends BaseLazyFragment implements View.OnClickListen
     protected void onUserVisible() {
     }
 
-//    private void gotoBabyInfoViewDialog() {
-//        final CustomDialog.Builder builder = new CustomDialog.Builder(mContext);
-//        builder.setTitle(getString(R.string.notice));
-//        builder.setNotifyInfo(getString(R.string.input_baby_info));
-//        builder.setShowButton(true);
-//        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                startActivity(new Intent(mContext, BabyInfoActivity.class));
-//            }
-//        });
-//        builder.setNegativeButton(getString(R.string.cancle), new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        builder.create().show();
-//    }
+
 
     ContentObserver contentObserver = new ContentObserver(new Handler()) {
         @Override
